@@ -1,0 +1,12 @@
+export { default as AdHome } from './admin/AdHome';
+export { default as Employees } from './admin/Employees';
+export { default as Towers } from './admin/Towers';
+export { default as UnitTypes } from './admin/UnitTypes';
+export { default as Amounts } from './admin/Amounts';
+export { default as UnitOwners } from './admin/UnitOwners';
+export { default as Amenities } from './admin/Amenities';
+export { default as Computations } from './admin/Computations';
+export { default as AuditLogs } from './admin/AuditLogs';
+export { default as Reports } from './admin/Reports';
+export { default as SmHome } from './salesmanagement/SmHome';
+export { default as Agents } from './salesmanagement/Agents';

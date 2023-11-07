@@ -1,0 +1,57 @@
+.parent {
+	width: '100%';
+	margin: auto 0;
+	padding-top: 0.5rem;
+	background: #ffffff;
+	border-radius: 25px;
+	text-align: center;
+	align-items: center;
+}
+.file-upload {
+	border: 2px solid rgb(210, 227, 244);
+	padding: 0.3rem;
+	position: relative;
+	cursor: pointer;
+	border-radius: 8px;
+}
+
+.file-upload p {
+	font-size: 0.7rem;
+	color: #bbcada;
+}
+.file-upload input {
+	display: block;
+	height: 100%;
+	width: 100%;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	opacity: 0;
+	cursor: pointer;
+}
+.file-upload-error {
+	border: 2px solid #e53e3e;
+	padding: 0.3rem;
+	position: relative;
+	cursor: pointer;
+	border-radius: 8px;
+}
+
+.file-upload-error p {
+	font-size: 0.7rem;
+	color: #bbcada;
+}
+.file-upload-error input {
+	display: block;
+	height: 100%;
+	width: 100%;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	opacity: 0;
+	cursor: pointer;
+}
