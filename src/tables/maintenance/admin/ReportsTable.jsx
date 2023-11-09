@@ -2,17 +2,16 @@ import { CusTitle, CusTD } from '../../../customs';
 import { DateChecker } from '../../../utilities';
 import { Tr } from '@chakra-ui/react';
 import React from 'react';
-import moment from 'moment';
+
 const ReportsTable = ({ data, search, all }) => {
 	const ret = search ? all : data;
 	return ret
 		.filter((item) => {
 			return search.toLowerCase() === ''
 				? item
-				: item.Name.includes(search);
+				: item.UserID.toString().includes(search);
 		})
 		.map((data, id) => {
-			console.log(data);
 			if (data.CreatedDate) {
 				return (
 					<Tr

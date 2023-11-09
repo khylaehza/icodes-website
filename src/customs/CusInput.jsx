@@ -103,9 +103,10 @@ export const CusInputLeftAdd = ({
 	onBlur,
 	touch,
 	add,
-	disabled,
+
 	isRequired,
 	maxLength,
+	disabled = false,
 }) => {
 	return (
 		<FormControl

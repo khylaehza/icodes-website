@@ -1,18 +1,15 @@
 import React, { useState } from 'react';
 import { Flex, Text, Heading, ScaleFade } from '@chakra-ui/react';
 import { Body } from '../../../sections/maintenance';
-
+import { ProspectiveBuyersTable } from '../../../tables';
 import {
 	CusTable,
 	CusSearch,
 	CusFilter,
 	CusPagination,
 } from '../../../customs';
-import { ReportsTable } from '../../../tables';
 import { useData } from '../../../../DataContext';
-import moment from 'moment';
-
-const Reports = () => {
+const ProspectiveBuyers = () => {
 	return (
 		<Flex
 			w='full'
@@ -26,7 +23,7 @@ const Reports = () => {
 };
 
 const Item = () => {
-	const { curUser, reports } = useData();
+	const { buyers, curUser } = useData();
 
 	const [currentPage, setCurrentPage] = useState(1);
 
@@ -38,35 +35,40 @@ const Item = () => {
 
 	const header = [
 		'Created At',
-		'Report ID',
-		'Report',
-		'Reported by',
-		"Unit Owner's ID",
+		"PB's ID",
+		'Name',
+		'Contact Number',
+		'Email',
+		'Inquiry',
+		'Preference',
+		'Type',
+		'Agent',
+		'Actions',
 	];
-	const filter = ['T1', 'T2', 'T3'];
+
+	const filter = ['From Online', 'From Agent'];
+
 	const [filterOnChange, setFilterOnChange] = useState(false);
 	const filterPos = [];
-	const [fil, setFilter] = useState(filter);
+	const [fil, setFilter] = useState([filter]);
 
-	if (reports) {
-		fil.forEach((element) => {
-			reports.filter((data) => {
-				if (data.Tower) {
-					if (data.Tower == element) {
-						filterPos.push(data);
-					}
-				}
-			});
+	fil.forEach((element) => {
+		buyers.filter((data) => {
+			if (element == data.Type) {
+				filterPos.push(data);
+			}
 		});
+	});
 
-		const [sortType, setSortType] = useState('asc');
+	const list = filterOnChange ? filterPos : buyers;
+	const records = list.slice(firstIndex, lastIndex);
+	const numPage = Math.ceil(list.length / recordsPerPage);
+	const pages = [...Array(numPage + 1).keys()].slice(1);
 
-		const list = filterOnChange ? filterPos : reports;
-		const records = list.slice(firstIndex, lastIndex);
-		const numPage = Math.ceil(list.length / recordsPerPage);
-		const pages = [...Array(numPage + 1).keys()].slice(1);
+	const [sortType, setSortType] = useState('asc');
 
-		records.sort((a, b) => {
+	if (buyers) {
+		list.sort((a, b) => {
 			if (a.CreatedDate && b.CreatedDate) {
 				return (
 					moment(
@@ -107,7 +109,7 @@ const Item = () => {
 							Hi, {curUser.FName}!
 						</Heading>
 						<Text color={'b.300'}>
-							View the reports and feedbacks here.
+							View the prospective buyers' list here.
 						</Text>
 						<Flex
 							display='flex'
@@ -121,7 +123,7 @@ const Item = () => {
 						>
 							<Flex gap={5}>
 								<CusSearch
-									placeholder={'Search by ID'}
+									placeholder={"Search by Buyers' ID"}
 									onChange={(e) => setSearch(e.target.value)}
 								/>
 								<CusFilter
@@ -129,9 +131,10 @@ const Item = () => {
 									setFilter={setFilter}
 									setFilterOnChange={setFilterOnChange}
 									setSortType={setSortType}
-									titleLbl='Reports & Feedbacks'
 								/>
 							</Flex>
+
+							{/* <AddEmployee employees={employees} /> */}
 						</Flex>
 
 						<Flex
@@ -141,10 +144,10 @@ const Item = () => {
 							<CusTable
 								header={header}
 								children={
-									<ReportsTable
+									<ProspectiveBuyersTable
 										data={records}
 										search={search}
-										all={reports}
+										all={buyers}
 									/>
 								}
 							/>
@@ -164,4 +167,4 @@ const Item = () => {
 	}
 };
 
-export default Reports;
+export default ProspectiveBuyers;

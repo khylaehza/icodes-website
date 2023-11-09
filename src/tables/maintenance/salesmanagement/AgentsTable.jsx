@@ -1,19 +1,20 @@
 import { CusTitle, CusTD } from '../../../customs';
-import { DateChecker, NameFormat } from '../../../utilities';
-import { Image, Tr, Td, ButtonGroup, useToast } from '@chakra-ui/react';
+import { NameFormat } from '../../../utilities';
+import { Image, Tr, Td, ButtonGroup, Text } from '@chakra-ui/react';
 import React from 'react';
 import moment from 'moment';
-// import { EditEmployee } from '../../../modals';
+import { EditTeam } from '../../../modals';
 
 const AgentsTable = ({ data, search, all }) => {
-	const toast = useToast();
 	const ret = search ? all : data;
 
 	return ret
 		.filter((item) => {
-			return search.toLowerCase() === ''
-				? item
-				: item.EmpId.includes(search);
+			if (item.EmpId) {
+				return search.toLowerCase() === ''
+					? item
+					: item.EmpId.toString().includes(search);
+			}
 		})
 		.map((data, id) => {
 			if (data.CreatedDate) {
@@ -35,20 +36,6 @@ const AgentsTable = ({ data, search, all }) => {
 							}}
 						>
 							<React.Fragment>
-								<CusTitle component={'Created At'} />
-								<CusTD
-									component={
-										<DateChecker
-											dateToCheck={
-												new Date(
-													data.CreatedDate.seconds *
-														1000
-												)
-											}
-										/>
-									}
-								/>
-
 								<CusTitle component={'Image'} />
 								<Td width={{ base: '', xl: '100px' }}>
 									<Image
@@ -83,6 +70,17 @@ const AgentsTable = ({ data, search, all }) => {
 									)}
 								/>
 								<CusTitle component={'Status'} />
+								<CusTD
+									component={
+										<Text>
+											{data.Status
+												? 'Active'
+												: 'Disabled'}
+										</Text>
+									}
+								/>
+								<CusTitle component={'Team'} />
+								<CusTD component={data.Team} />
 							</React.Fragment>
 							<CusTitle component={'Actions'} />
 							<CusTD
@@ -92,15 +90,15 @@ const AgentsTable = ({ data, search, all }) => {
 										size='sm'
 										spacing={3}
 									>
-										{/* {data.id && (
-											<EditEmployee
+										{data.id && (
+											<EditTeam
 												data={data}
 												id={data.id}
 												mainCollection='maintenance'
 												tblDocUser='admin'
 												tblUserCol='tbl_employees'
 											/>
-										)} */}
+										)}
 									</ButtonGroup>
 								}
 							/>

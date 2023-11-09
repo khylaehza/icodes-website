@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { db } from './firebase-config';
 import { collection, query, onSnapshot } from 'firebase/firestore';
-import { getStorage } from 'firebase/storage';
+
 const DataContext = createContext();
 
 export function useData() {
@@ -89,6 +89,8 @@ export function DataProvider({ children }) {
 						navigate('adHome');
 					} else if (username.includes('SM')) {
 						navigate('/smHome');
+					} else if (username.includes('AM')) {
+						navigate('/amHome');
 					}
 					// else if (username.includes('FD')) {
 					// 	navigate('/FDHome');
@@ -397,6 +399,70 @@ export function DataProvider({ children }) {
 		return () => unsubscribe();
 	}, []);
 
+	const [buyers, setBuyers] = useState([{}]);
+	useEffect(() => {
+		const q = query(
+			collection(db, 'maintenance', 'salesmanagement', 'tbl_prosBuyers')
+		);
+		const unsubscribe = onSnapshot(q, (querySnapshot) => {
+			const buyers = [];
+			querySnapshot.forEach(
+				(doc) => {
+					buyers.push({ ...doc.data(), id: doc.id });
+				},
+				(error) => {
+					console.log(error);
+				}
+			);
+			setBuyers(buyers);
+		});
+		return () => unsubscribe();
+	}, []);
+
+	const [manningSched, setManningSched] = useState([{}]);
+	useEffect(() => {
+		const q = query(
+			collection(
+				db,
+				'maintenance',
+				'salesmanagement',
+				'tbl_manningSchedule'
+			)
+		);
+		const unsubscribe = onSnapshot(q, (querySnapshot) => {
+			const schedule = [];
+			querySnapshot.forEach(
+				(doc) => {
+					schedule.push({ ...doc.data(), id: doc.id });
+				},
+				(error) => {
+					console.log(error);
+				}
+			);
+			setManningSched(schedule);
+		});
+		return () => unsubscribe();
+	}, []);
+
+	const [soa, setSOA] = useState([{}]);
+	useEffect(() => {
+		const q = query(
+			collection(db, 'maintenance', 'accountingmanagement', 'tbl_soa')
+		);
+		const unsubscribe = onSnapshot(q, (querySnapshot) => {
+			const soa = [];
+			querySnapshot.forEach(
+				(doc) => {
+					soa.push({ ...doc.data(), id: doc.id });
+				},
+				(error) => {
+					console.log(error);
+				}
+			);
+			setSOA(soa);
+		});
+		return () => unsubscribe();
+	}, []);
 	const value = {
 		logout,
 		login,
@@ -418,6 +484,9 @@ export function DataProvider({ children }) {
 		loans,
 		logs,
 		reports,
+		buyers,
+		manningSched,
+		soa,
 	};
 
 	return (

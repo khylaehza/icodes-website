@@ -13,39 +13,39 @@ import {
 } from '@chakra-ui/react';
 import React from 'react';
 import moment from 'moment';
-import { EditEmployee } from '../../../modals';
+// import { EditEmployee } from '../../../modals';
 import { boolean } from 'yup';
 import { useState } from 'react';
 
 import { db } from '../../../../firebase-config';
 import { updateDoc, serverTimestamp, doc } from 'firebase/firestore';
-const EmployeesTable = ({ data, search, all }) => {
+
+const StatementOfAccTable = ({ data, search, all }) => {
 	const toast = useToast();
 	const ret = search ? all : data;
 	const { isOpen, onOpen, onClose } = useDisclosure();
 	const [Id, setId] = useState('');
-	const [employeeState, setEmployeeState] = useState({
+	const [soaStatus, setSoaStatus] = useState({
 		fName: '',
 		statusLabel: '',
-		empId: '',
+		id: '',
 		currentStatus: boolean,
 		status: boolean,
 	});
-
 	return ret
 		.filter((item) => {
 			return search.toLowerCase() === ''
 				? item
-				: item.EmpId.toString().includes(search);
+				: item.SOAID.toString().includes(search);
 		})
 		.map((data, id) => {
 			const statusConfirmation = (value, data) => {
 				onOpen();
-				setEmployeeState({
-					...employeeState,
+				setSoaStatus({
+					...soaStatus,
 					fName: data.FName,
 					statusLabel: value === true ? 'Enable' : 'Disable',
-					empId: data.EmpId,
+					id: data.SOAID,
 					status: value,
 					currentStatus: data.Status,
 				});
@@ -57,18 +57,18 @@ const EmployeesTable = ({ data, search, all }) => {
 						db,
 						'maintenance',
 						'admin',
-						'tbl_employees',
+						'tbl_soa',
 						Id
 					);
 
 					await updateDoc(docRef, {
 						EditedDate: serverTimestamp(),
-						Status: employeeState.status,
+						Status: soaStatus.status,
 					});
 
 					toast({
-						title: `${employeeState.fName}'s Status ${
-							employeeState.currentStatus ? 'Disabled' : 'Enabled'
+						title: `${soaStatus.fName}'s Status ${
+							soaStatus.currentStatus ? 'Disabled' : 'Enabled'
 						}!`,
 						status: 'success',
 						duration: 3000,
@@ -119,15 +119,10 @@ const EmployeesTable = ({ data, search, all }) => {
 									}
 								/>
 
-								<CusTitle component={'Image'} />
-								<Td width={{ base: '', xl: '100px' }}>
-									<Image
-										src={data.Image}
-										width={{ base: '100px', xl: '100px' }}
-									/>
-								</Td>
-								<CusTitle component={'Employee ID'} />
-								<CusTD component={data.EmpId} />
+								<CusTitle component={'SOA ID'} />
+								<CusTD component={data.SOAID} />
+								<CusTitle component={"Unit Owner's ID"} />
+								<CusTD component={data.BuyersId} />
 								<CusTitle component={'Name'} />
 								<CusTD
 									component={
@@ -138,18 +133,20 @@ const EmployeesTable = ({ data, search, all }) => {
 										/>
 									}
 								/>
-								<CusTitle component={'Contact Number'} />
-								<CusTD component={'09' + data.CNum} />
-								<CusTitle component={'Email'} />
-								<CusTD component={data.Email + '.com'} />
-								<CusTitle component={'Position'} />
-								<CusTD component={data.EmpPos} />
-								<CusTitle component={'Employment Start'} />
+								<CusTitle component={'Unit Name'} />
+								<CusTD component={data.Unit} />
+								<CusTitle component={'Total Contract Price'} />
 								<CusTD
-									component={moment(data.DStart).format(
-										'MM/DD/YYYY'
-									)}
+									component={`₱ ${
+										data.Amount.includes('.')
+											? data.Amount
+											: `${data.Amount}.00`
+									}`}
 								/>
+								<CusTitle component={'Number of Months'} />
+								<CusTD component={data.NoOfMonths} />
+								<CusTitle component={'File'} />
+								<CusTD component={'file'} />
 								<CusTitle component={'Status'} />
 								<CusTD
 									component={
@@ -178,23 +175,22 @@ const EmployeesTable = ({ data, search, all }) => {
 										size='sm'
 										spacing={3}
 									>
-										{data.id && (
+										{/* {data.id && (
 											<EditEmployee
 												data={data}
 												id={data.id}
 												mainCollection='maintenance'
-												tblDocUser='admin'
-												tblUserCol='tbl_employees'
+												tblDocUser='accountingmanagement'
+												tblUserCol='tbl_soa'
 											/>
-										)}
+										)} */}
 
 										<CusDelete
 											id={data.id}
-											stor={`admin/employees/${data.EmpId}/profile.png`}
 											label={` ${data.FName}'s Data`}
 											mainCollection='maintenance'
-											tblDocUser='admin'
-											tblUserCol='tbl_employees'
+											tblDocUser='accountingmanagement'
+											tblUserCol='tbl_soa'
 											onUpdate={() => {}}
 										/>
 									</ButtonGroup>
@@ -213,19 +209,18 @@ const EmployeesTable = ({ data, search, all }) => {
 									<Text
 										as='b'
 										color={
-											employeeState.statusLabel ===
-											'Disable'
+											soaStatus.statusLabel === 'Disable'
 												? 'r.100'
 												: 'green'
 										}
 									>
-										{employeeState.statusLabel}
+										{soaStatus.statusLabel}
 									</Text>{' '}
 									<Text
 										as='b'
 										color='b.300'
 									>
-										{employeeState.fName}
+										{soaStatus.fName}
 									</Text>
 									's account?
 								</Text>
@@ -237,4 +232,4 @@ const EmployeesTable = ({ data, search, all }) => {
 		});
 };
 
-export default EmployeesTable;
+export default StatementOfAccTable;

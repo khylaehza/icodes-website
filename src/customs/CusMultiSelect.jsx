@@ -199,3 +199,42 @@ export const CusMultiSelectUnitAvail = ({
 		</FormControl>
 	);
 };
+
+export const CusMultiSelectDiscount = ({
+	value,
+	onChange,
+	error,
+	touch,
+	label,
+	onBlur,
+	isRequired,
+	disabled = false,
+}) => {
+	const { discounts } = useData();
+
+	const disc = [];
+	discounts.map((dsc, key) => {
+		disc.push({ label: dsc.DscName, value: dsc.DscName });
+	});
+
+	return (
+		<FormControl
+			isInvalid={error && touch}
+			fontSize={'xs'}
+			isRequired={isRequired}
+		>
+			<FormLabel fontSize={'xs'}>{label}</FormLabel>
+
+			<MultiSelect
+				options={disc}
+				value={value}
+				onChange={onChange}
+				labelledBy='Select'
+				onBlur={onBlur}
+				className='multi-select'
+				disabled={disabled}
+			/>
+			<FormErrorMessage fontSize={'xs'}>{error}</FormErrorMessage>
+		</FormControl>
+	);
+};

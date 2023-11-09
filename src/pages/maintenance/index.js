@@ -10,3 +10,7 @@ export { default as AuditLogs } from './admin/AuditLogs';
 export { default as Reports } from './admin/Reports';
 export { default as SmHome } from './salesmanagement/SmHome';
 export { default as Agents } from './salesmanagement/Agents';
+export { default as ProspectiveBuyers } from './salesmanagement/ProspectiveBuyers';
+export { default as ManningSchedule } from './salesmanagement/ManningSchedule';
+export { default as AmHome } from './accountmanagement/AmHome';
+export { default as StatementOfAccounts } from './accountmanagement/StatementOfAccounts';

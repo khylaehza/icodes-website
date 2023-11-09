@@ -1,18 +1,18 @@
 import React, { useState } from 'react';
 import { Flex, Text, Heading, ScaleFade } from '@chakra-ui/react';
 import { Body } from '../../../sections/maintenance';
-
+import { StatementOfAccTable } from '../../../tables';
 import {
 	CusTable,
 	CusSearch,
 	CusFilter,
 	CusPagination,
 } from '../../../customs';
-import { ReportsTable } from '../../../tables';
+import { AddStatementOfAcc } from '../../../modals';
 import { useData } from '../../../../DataContext';
 import moment from 'moment';
 
-const Reports = () => {
+const StatementOfAccounts = () => {
 	return (
 		<Flex
 			w='full'
@@ -26,8 +26,8 @@ const Reports = () => {
 };
 
 const Item = () => {
-	const { curUser, reports } = useData();
-
+	const { soa, curUser } = useData();
+	console.log(soa);
 	const [currentPage, setCurrentPage] = useState(1);
 
 	const recordsPerPage = 4;
@@ -38,35 +38,38 @@ const Item = () => {
 
 	const header = [
 		'Created At',
-		'Report ID',
-		'Report',
-		'Reported by',
-		"Unit Owner's ID",
+		'SOA ID',
+		'Unit Owners ID',
+		'Name',
+		'Unit Name',
+		'Total Contract Price',
+		'Number of Months',
+		'File',
+		'Status',
+		'Actions',
 	];
-	const filter = ['T1', 'T2', 'T3'];
+	const filter = ['Ready for Occupation (RFO)', 'Pre-Selling'];
 	const [filterOnChange, setFilterOnChange] = useState(false);
 	const filterPos = [];
-	const [fil, setFilter] = useState(filter);
+	const [fil, setFilter] = useState([filter]);
 
-	if (reports) {
-		fil.forEach((element) => {
-			reports.filter((data) => {
-				if (data.Tower) {
-					if (data.Tower == element) {
-						filterPos.push(data);
-					}
-				}
-			});
+	fil.forEach((element) => {
+		soa.filter((data) => {
+			if (element == data.PaymentTypeFor) {
+				filterPos.push(data);
+			}
 		});
+	});
 
-		const [sortType, setSortType] = useState('asc');
+	const list = filterOnChange ? filterPos : soa;
+	const records = list.slice(firstIndex, lastIndex);
+	const numPage = Math.ceil(list.length / recordsPerPage);
+	const pages = [...Array(numPage + 1).keys()].slice(1);
 
-		const list = filterOnChange ? filterPos : reports;
-		const records = list.slice(firstIndex, lastIndex);
-		const numPage = Math.ceil(list.length / recordsPerPage);
-		const pages = [...Array(numPage + 1).keys()].slice(1);
+	const [sortType, setSortType] = useState('asc');
 
-		records.sort((a, b) => {
+	if (soa) {
+		list.sort((a, b) => {
 			if (a.CreatedDate && b.CreatedDate) {
 				return (
 					moment(
@@ -107,7 +110,7 @@ const Item = () => {
 							Hi, {curUser.FName}!
 						</Heading>
 						<Text color={'b.300'}>
-							View the reports and feedbacks here.
+							Manage the statement of accounts here.
 						</Text>
 						<Flex
 							display='flex'
@@ -129,9 +132,10 @@ const Item = () => {
 									setFilter={setFilter}
 									setFilterOnChange={setFilterOnChange}
 									setSortType={setSortType}
-									titleLbl='Reports & Feedbacks'
 								/>
 							</Flex>
+
+							<AddStatementOfAcc />
 						</Flex>
 
 						<Flex
@@ -141,10 +145,10 @@ const Item = () => {
 							<CusTable
 								header={header}
 								children={
-									<ReportsTable
+									<StatementOfAccTable
 										data={records}
 										search={search}
-										all={reports}
+										all={soa}
 									/>
 								}
 							/>
@@ -163,5 +167,4 @@ const Item = () => {
 		);
 	}
 };
-
-export default Reports;
+export default StatementOfAccounts;

@@ -17,6 +17,10 @@ import {
 	Reports,
 	SmHome,
 	Agents,
+	ProspectiveBuyers,
+	ManningSchedule,
+	AmHome,
+	StatementOfAccounts,
 } from '../pages/maintenance';
 
 const RoutesNav = () => {
@@ -75,17 +79,35 @@ const RoutesNav = () => {
 							path={'/reports'}
 							element={<Reports />}
 						/>
-
 						<Route
 							exact
 							path={'/smHome'}
 							element={<SmHome />}
 						/>
-
 						<Route
 							exact
 							path={'/agents'}
 							element={<Agents />}
+						/>
+						<Route
+							exact
+							path={'/pbuyers'}
+							element={<ProspectiveBuyers />}
+						/>
+						<Route
+							exact
+							path={'/manningSched'}
+							element={<ManningSchedule />}
+						/>
+						<Route
+							exact
+							path={'/amHome'}
+							element={<AmHome />}
+						/>
+						<Route
+							exact
+							path={'/soa'}
+							element={<StatementOfAccounts />}
 						/>
 					</Route>
 

@@ -8,7 +8,7 @@ import {
 	CusFilter,
 	CusPagination,
 } from '../../../customs';
-// import { AddEmployee } from '../../../modals';
+
 import { useData } from '../../../../DataContext';
 import moment from 'moment';
 const Agents = () => {
@@ -36,27 +36,18 @@ const Item = () => {
 	const [search, setSearch] = useState('');
 
 	const header = [
-		'Created At',
 		'Image',
-		'Employee ID',
+		"Agent's ID",
 		'Name',
 		'Contact Number',
 		'Email',
-
 		'Employment Start',
 		'Status',
+		'Team',
 		'Actions',
 	];
 
-	const filter = [
-		'Rising Phoenix',
-		'Eagles',
-		'Soaring',
-		'Blazing',
-		'Golden Snake',
-		'Black Panther',
-		'King Scorpions',
-	];
+	const filter = ['Eagles', 'Soaring', 'Blazing'];
 
 	const agents = employees.filter((item) => item.EmpPos === 'Agent');
 	const [filterOnChange, setFilterOnChange] = useState(false);
@@ -132,7 +123,7 @@ const Item = () => {
 						>
 							<Flex gap={5}>
 								<CusSearch
-									placeholder={'Search by ID'}
+									placeholder={"Search by Agent's ID"}
 									onChange={(e) => setSearch(e.target.value)}
 								/>
 								<CusFilter
@@ -142,8 +133,6 @@ const Item = () => {
 									setSortType={setSortType}
 								/>
 							</Flex>
-
-							{/* <AddEmployee employees={employees} /> */}
 						</Flex>
 
 						<Flex

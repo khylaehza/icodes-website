@@ -14,3 +14,6 @@ export { default as LoanTable } from './maintenance/admin/computations/LoanTable
 export { default as AuditLogsTable } from './maintenance/admin/AuditLogsTable';
 export { default as ReportsTable } from './maintenance/admin/ReportsTable';
 export { default as AgentsTable } from './maintenance/salesmanagement/AgentsTable';
+export { default as ProspectiveBuyersTable } from './maintenance/salesmanagement/ProspectiveBuyersTable';
+export { default as ManningSchedTable } from './maintenance/salesmanagement/ManningSchedTable';
+export { default as StatementOfAccTable } from './maintenance/salesmanagement/StatementOfAccTable';

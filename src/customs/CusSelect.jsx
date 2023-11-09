@@ -62,6 +62,7 @@ export const CusSelectUnTypes = ({
 	onBlur,
 	touch,
 	isRequired,
+	disabled = false,
 }) => {
 	let currentValue = value || 'Select';
 	const { unitTypes } = useData();
@@ -81,6 +82,7 @@ export const CusSelectUnTypes = ({
 				onBlur={onBlur}
 				value={currentValue}
 				fontSize={'xs'}
+				disabled={disabled}
 			>
 				<option
 					value='Select'
@@ -114,6 +116,7 @@ export const CusSelectSize = ({
 	onBlur,
 	touch,
 	isRequired,
+	disabled = false,
 }) => {
 	let currentValue = value || 'Select';
 	const { unitSize } = useData();
@@ -132,6 +135,7 @@ export const CusSelectSize = ({
 				onBlur={onBlur}
 				value={currentValue}
 				fontSize={'xs'}
+				disabled={disabled}
 			>
 				<option
 					value='Select'
@@ -206,6 +210,7 @@ export const CusSelectPayTerm = ({
 	onBlur,
 	touch,
 	isRequired,
+	disabled = false,
 }) => {
 	return (
 		<FormControl
@@ -221,6 +226,7 @@ export const CusSelectPayTerm = ({
 				onBlur={onBlur}
 				value={value ? value : 'Select'}
 				fontSize={'xs'}
+				disabled={disabled}
 			>
 				<option
 					value='Select'
@@ -245,11 +251,11 @@ export const CusSelectUnit = ({
 	name,
 	onChange,
 	value,
-	placeholder,
 	error,
 	onBlur,
 	touch,
 	isRequired,
+	disabled = false,
 }) => {
 	const { units } = useData();
 
@@ -302,6 +308,7 @@ export const CusSelectUnit = ({
 				onBlur={onBlur}
 				value={currentValue}
 				fontSize={'xs'}
+				disabled={disabled}
 				// defaultValue={'Select'}
 			>
 				<option
@@ -332,12 +339,10 @@ export const CusSelectTower = ({
 	name,
 	onChange,
 	value,
-	placeholder,
 	error,
 	onBlur,
 	touch,
 	variant = 'outline',
-	bg,
 	icon,
 	bgColor = 'w.300',
 	isRequired,
@@ -388,6 +393,228 @@ export const CusSelectTower = ({
 							{item.TowerName}
 						</option>
 					);
+				})}
+			</Select>
+			<FormErrorMessage fontSize={'xs'}>{error}</FormErrorMessage>
+		</FormControl>
+	);
+};
+
+export const CusSelectTeams = ({
+	label,
+	name,
+	onChange,
+	value,
+	error,
+	onBlur,
+	touch,
+	isRequired,
+}) => {
+	return (
+		<FormControl
+			isInvalid={error && touch}
+			isRequired={isRequired}
+		>
+			<FormLabel fontSize={'xs'}>{label}</FormLabel>
+
+			<Select
+				name={name}
+				variant={'filled'}
+				onChange={onChange}
+				onBlur={onBlur}
+				value={value ? value : 'Select'}
+				fontSize={'xs'}
+			>
+				<option
+					value='Select'
+					disabled
+				>
+					Select
+				</option>
+
+				<option value='Eagles'>Eagles</option>
+				<option value='Soaring'>Soaring</option>
+				<option value='Blazing'>Blazing</option>
+			</Select>
+
+			<FormErrorMessage fontSize={'xs'}>{error}</FormErrorMessage>
+		</FormControl>
+	);
+};
+
+export const CusSelectLocation = ({
+	label,
+	name,
+	onChange,
+	value,
+	error,
+	onBlur,
+	touch,
+	isRequired,
+}) => {
+	return (
+		<FormControl
+			isInvalid={error && touch}
+			isRequired={isRequired}
+		>
+			<FormLabel fontSize={'xs'}>{label}</FormLabel>
+
+			<Select
+				name={name}
+				variant={'filled'}
+				onChange={onChange}
+				onBlur={onBlur}
+				value={value ? value : 'Select'}
+				fontSize={'xs'}
+			>
+				<option
+					value='Select'
+					disabled
+				>
+					Select
+				</option>
+
+				<option value='Trinoma, Quezon City'>
+					Trinoma, Quezon City
+				</option>
+				<option value='SM North, Quezon City'>
+					SM North, Quezon City
+				</option>
+				<option value='Wilcon, Visayas Ave'>Wilcon, Visayas Ave</option>
+				<option value='Showroom, Quezon City'>
+					Showroom, Quezon City
+				</option>
+				<option value='EastWest Bank, Congressional Avenue'>
+					EastWest Bank, Congressional Avenue
+				</option>
+			</Select>
+
+			<FormErrorMessage fontSize={'xs'}>{error}</FormErrorMessage>
+		</FormControl>
+	);
+};
+
+export const CusSelectPBuyers = ({
+	label,
+	name,
+	onChange,
+	value,
+	error,
+	onBlur,
+	touch,
+	variant = 'outline',
+	icon,
+	bgColor = 'w.300',
+	isRequired,
+}) => {
+	const { buyers } = useData();
+
+	var byName = buyers.slice(0);
+
+	if (byName) {
+		byName.sort(function (a, b) {
+			var x = a.FName.toLowerCase();
+			var y = b.FName.toLowerCase();
+			return x < y ? -1 : x > y ? 1 : 0;
+		});
+	}
+
+	let currentValue = value || 'Select';
+	return (
+		<FormControl
+			isInvalid={error && touch}
+			isRequired={isRequired}
+		>
+			<FormLabel fontSize={'xs'}>{label}</FormLabel>
+
+			<Select
+				name={name}
+				variant={variant}
+				bgColor={bgColor}
+				onChange={onChange}
+				onBlur={onBlur}
+				value={currentValue}
+				fontSize={'xs'}
+				icon={icon}
+			>
+				<option
+					value='Select'
+					disabled
+				>
+					Select
+				</option>
+
+				{byName.map((item, key) => {
+					if (item.Status == 'On Hold') {
+						return (
+							<option
+								key={key}
+								value={`${item.FName} ${item.LName}`}
+							>
+								{`${item.FName} ${item.LName}`}
+							</option>
+						);
+					}
+				})}
+			</Select>
+			<FormErrorMessage fontSize={'xs'}>{error}</FormErrorMessage>
+		</FormControl>
+	);
+};
+
+export const CusSelectPreSellTerm = ({
+	label,
+	name,
+	onChange,
+	value,
+	error,
+	onBlur,
+	touch,
+	variant = 'outline',
+	icon,
+	bgColor = 'w.300',
+	isRequired,
+}) => {
+	const { payterm } = useData();
+
+	var type = payterm.slice(0);
+
+	let currentValue = value || 'Select';
+	return (
+		<FormControl
+			isInvalid={error && touch}
+			isRequired={isRequired}
+		>
+			<FormLabel fontSize={'xs'}>{label}</FormLabel>
+
+			<Select
+				name={name}
+				variant={variant}
+				bgColor={bgColor}
+				onChange={onChange}
+				onBlur={onBlur}
+				value={currentValue}
+				fontSize={'xs'}
+				icon={icon}
+			>
+				<option
+					value='Select'
+					disabled
+				>
+					Select
+				</option>
+
+				{type.map((item, key) => {
+					if (item.PaymentTypeFor == 'Pre-Selling') {
+						return (
+							<option
+								key={key}
+								value={item.PaymentTermName}
+							>
+								{item.PaymentTermName}
+							</option>
+						);
+					}
 				})}
 			</Select>
 			<FormErrorMessage fontSize={'xs'}>{error}</FormErrorMessage>

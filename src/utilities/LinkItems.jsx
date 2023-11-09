@@ -66,7 +66,7 @@ export const sm = [
 	{
 		name: 'Manning Schedule',
 		icon: AiOutlineSchedule,
-		nav: '/manningschedule',
+		nav: '/manningSched',
 	},
-	{ name: 'Reports', icon: ImStatsBars, nav: '/reports' },
+	// { name: 'Reports', icon: ImStatsBars, nav: '/reports' },
 ];

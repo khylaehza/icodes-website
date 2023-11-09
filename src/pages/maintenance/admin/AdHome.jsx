@@ -225,7 +225,6 @@ const Item = () => {
 								}}
 								gap={3}
 								textAlign={'center'}
-								// h={'50%'}
 							>
 								<GridItem
 									colSpan={2}

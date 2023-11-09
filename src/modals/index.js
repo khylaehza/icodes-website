@@ -20,3 +20,8 @@ export { default as AddUnitValue } from './maintenance/admin/computations/AddUni
 export { default as AddLoan } from './maintenance/admin/computations/AddLoan';
 export { default as EditLoan } from './maintenance/admin/computations/EditLoan';
 export { default as EditUnitValue } from './maintenance/admin/computations/EditUnitValue';
+export { default as EditTeam } from './maintenance/salesmanagement/EditTeam';
+export { default as AddManningSched } from './maintenance/salesmanagement/AddManningSched';
+export { default as EditManningSched } from './maintenance/salesmanagement/EditManningSched';
+export { default as EditProspectiveBuyer } from './maintenance/salesmanagement/EditProspectiveBuyer';
+export { default as AddStatementOfAcc } from './maintenance/salesmanagement/AddStatementOfAcc';
