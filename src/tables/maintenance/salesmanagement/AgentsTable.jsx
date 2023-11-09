@@ -1,12 +1,22 @@
 import { CusTitle, CusTD } from '../../../customs';
 import { NameFormat } from '../../../utilities';
-import { Image, Tr, Td, ButtonGroup, Text } from '@chakra-ui/react';
-import React from 'react';
+import { Image, Tr, Td, ButtonGroup, Text, useDisclosure } from '@chakra-ui/react';
+import React,{useState} from 'react';
 import moment from 'moment';
 import { EditTeam } from '../../../modals';
+import { CusEnlargeImage } from '../../../customs/index'
 
 const AgentsTable = ({ data, search, all }) => {
 	const ret = search ? all : data;
+	const { isOpen, onOpen, onClose } = useDisclosure();
+	const [nameLabel, setNameLabel] = useState('')
+	const [selectedImage, setSelectedImage] = useState(null);
+
+	const handleImageClick = (item) => {
+		setSelectedImage(item.Image);
+		setNameLabel(item)
+		onOpen();
+	};
 
 	return ret
 		.filter((item) => {
@@ -44,6 +54,9 @@ const AgentsTable = ({ data, search, all }) => {
 											base: '100px',
 											xl: '100px',
 										}}
+										onClick={ () => 
+											handleImageClick(data)
+										}
 									/>
 								</Td>
 								<CusTitle component={'Employee ID'} />
@@ -103,6 +116,24 @@ const AgentsTable = ({ data, search, all }) => {
 								}
 							/>
 						</Tr>
+						<CusEnlargeImage
+                            isOpen={isOpen}
+                            onClose={onClose}
+                            label={
+								<NameFormat
+									fName={nameLabel.FName}
+									mName={nameLabel.MName}
+									lName={nameLabel.LName}
+								/>
+							}
+                            body={
+                                <Image
+									src={selectedImage}
+									width={'680px'}
+									height={'500px'}
+								/>
+                            }
+                        />
 					</React.Fragment>
 				);
 			}

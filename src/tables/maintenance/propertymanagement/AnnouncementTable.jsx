@@ -10,6 +10,7 @@ import {
 	Text,
 	useToast,
     Box,
+	Flex,
 } from '@chakra-ui/react';
 import React from 'react';
 import { EditAnncmnts } from '../../../modals';
@@ -152,7 +153,7 @@ const AnnouncementTable = ({ data, search, all }) => {
 							    <CusTD
 									component={
                                         <>
-                                            <Box display={'flex'} flexDir={'column'} textAlign={'center'}>
+                                            <Flex direction={'column'}>
                                                 {status}
                                                 <Switch
                                                     id='isChecked'
@@ -165,7 +166,7 @@ const AnnouncementTable = ({ data, search, all }) => {
                                                         setId(data.id);
                                                     }}
                                                 />
-                                            </Box>
+                                            </Flex>
                                         </>
 									}
 								/>

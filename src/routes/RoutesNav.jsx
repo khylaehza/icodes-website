@@ -107,10 +107,14 @@ const RoutesNav = () => {
 							path={'/amHome'}
 							element={<AmHome />}
 						/>
+
 						<Route
 							exact
 							path={'/soa'}
 							element={<StatementOfAccounts />}
+						/>
+						<Route
+							exact
 							path={'/pmHome'}
 							element={<PmHome />}
 						/>
