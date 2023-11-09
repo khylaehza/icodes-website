@@ -21,6 +21,9 @@ import {
 	ManningSchedule,
 	AmHome,
 	StatementOfAccounts,
+	PmHome,
+	Announcements,
+	MRequest,
 } from '../pages/maintenance';
 
 const RoutesNav = () => {
@@ -108,6 +111,20 @@ const RoutesNav = () => {
 							exact
 							path={'/soa'}
 							element={<StatementOfAccounts />}
+							path={'/pmHome'}
+							element={<PmHome />}
+						/>
+
+						<Route
+							exact
+							path={'/announcements'}
+							element={<Announcements />}
+						/>
+
+						<Route
+							exact
+							path={'/maintenance'}
+							element={<MRequest />}
 						/>
 					</Route>
 

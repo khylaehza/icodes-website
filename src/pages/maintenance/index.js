@@ -14,3 +14,6 @@ export { default as ProspectiveBuyers } from './salesmanagement/ProspectiveBuyer
 export { default as ManningSchedule } from './salesmanagement/ManningSchedule';
 export { default as AmHome } from './accountmanagement/AmHome';
 export { default as StatementOfAccounts } from './accountmanagement/StatementOfAccounts';
+export { default as PmHome } from './propertymanagement/PmHome';
+export { default as Announcements } from './propertymanagement/Announcements';
+export { default as MRequest } from './propertymanagement/MRequest';

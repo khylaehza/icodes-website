@@ -94,8 +94,8 @@ export function DataProvider({ children }) {
 					}
 					// else if (username.includes('FD')) {
 					// 	navigate('/FDHome');
-					// } else if (username.includes('PM')) {
-					// 	navigate('/PMHome');
+				} else if (username.includes('PM')) {
+					navigate('/pmHome');
 					// } else if (username.includes('AM')) {
 					// 	navigate('/AMHome');
 					// } else if (username.includes('SM')) {
@@ -399,26 +399,6 @@ export function DataProvider({ children }) {
 		return () => unsubscribe();
 	}, []);
 
-	const [buyers, setBuyers] = useState([{}]);
-	useEffect(() => {
-		const q = query(
-			collection(db, 'maintenance', 'salesmanagement', 'tbl_prosBuyers')
-		);
-		const unsubscribe = onSnapshot(q, (querySnapshot) => {
-			const buyers = [];
-			querySnapshot.forEach(
-				(doc) => {
-					buyers.push({ ...doc.data(), id: doc.id });
-				},
-				(error) => {
-					console.log(error);
-				}
-			);
-			setBuyers(buyers);
-		});
-		return () => unsubscribe();
-	}, []);
-
 	const [manningSched, setManningSched] = useState([{}]);
 	useEffect(() => {
 		const q = query(
@@ -444,7 +424,27 @@ export function DataProvider({ children }) {
 		return () => unsubscribe();
 	}, []);
 
-	const [soa, setSOA] = useState([{}]);
+	const [buyers, setBuyers] = useState([{}]);
+	useEffect(() => {
+		const q = query(
+			collection(db, 'maintenance', 'salesmanagement', 'tbl_prosBuyers')
+		);
+		const unsubscribe = onSnapshot(q, (querySnapshot) => {
+			const buyers = [];
+			querySnapshot.forEach(
+				(doc) => {
+					buyers.push({ ...doc.data(), id: doc.id });
+				},
+				(error) => {
+					console.log(error);
+				}
+			);
+			setBuyers(buyers);
+		});
+		return () => unsubscribe();
+	}, []);
+
+	const [soa, setSOA] = useState();
 	useEffect(() => {
 		const q = query(
 			collection(db, 'maintenance', 'accountingmanagement', 'tbl_soa')
@@ -463,6 +463,52 @@ export function DataProvider({ children }) {
 		});
 		return () => unsubscribe();
 	}, []);
+
+	const [anncmnts, setAnncmnts] = useState([{}]);
+	useEffect(() => {
+		const q = query(
+			collection(
+				db,
+				'maintenance',
+				'propertymanagement',
+				'tbl_Announcements'
+			)
+		);
+		const unsubscribe = onSnapshot(q, (querySnapshot) => {
+			const anncmnts = [];
+			querySnapshot.forEach(
+				(doc) => {
+					anncmnts.push({ ...doc.data(), id: doc.id });
+				},
+				(error) => {
+					console.log(error);
+				}
+			);
+			setAnncmnts(anncmnts);
+		});
+		return () => unsubscribe();
+	}, []);
+
+	const [mrequest, setMRequest] = useState([{}]);
+	useEffect(() => {
+		const q = query(
+			collection(db, 'maintenance', 'propertymanagement', 'tbl_MRequest')
+		);
+		const unsubscribe = onSnapshot(q, (querySnapshot) => {
+			const mrequest = [];
+			querySnapshot.forEach(
+				(doc) => {
+					mrequest.push({ ...doc.data(), id: doc.id });
+				},
+				(error) => {
+					console.log(error);
+				}
+			);
+			setMRequest(mrequest);
+		});
+		return () => unsubscribe();
+	}, []);
+
 	const value = {
 		logout,
 		login,
@@ -487,6 +533,8 @@ export function DataProvider({ children }) {
 		buyers,
 		manningSched,
 		soa,
+		anncmnts,
+		mrequest,
 	};
 
 	return (

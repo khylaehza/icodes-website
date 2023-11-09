@@ -19,11 +19,14 @@ import { useState } from 'react';
 
 import { db } from '../../../../firebase-config';
 import { updateDoc, serverTimestamp, doc } from 'firebase/firestore';
+import { CusEnlargeImage } from '../../../customs/index'
 const EmployeesTable = ({ data, search, all }) => {
 	const toast = useToast();
 	const ret = search ? all : data;
 	const { isOpen, onOpen, onClose } = useDisclosure();
 	const [Id, setId] = useState('');
+	const [selectedImage, setSelectedImage] = useState(null);
+	const [nameLabel, setNameLabel] = useState('')
 	const [employeeState, setEmployeeState] = useState({
 		fName: '',
 		statusLabel: '',
@@ -31,6 +34,12 @@ const EmployeesTable = ({ data, search, all }) => {
 		currentStatus: boolean,
 		status: boolean,
 	});
+
+	const handleImageClick = (item) => {
+		setSelectedImage(item.Image);
+		setNameLabel(item)
+		onOpen();
+	};
 
 	return ret
 		.filter((item) => {
@@ -124,6 +133,9 @@ const EmployeesTable = ({ data, search, all }) => {
 									<Image
 										src={data.Image}
 										width={{ base: '100px', xl: '100px' }}
+										onClick={() =>
+											handleImageClick(data)
+										}
 									/>
 								</Td>
 								<CusTitle component={'Employee ID'} />
@@ -231,6 +243,24 @@ const EmployeesTable = ({ data, search, all }) => {
 								</Text>
 							}
 						/>
+
+						<CusEnlargeImage
+                            isOpen={isOpen}
+                            onClose={onClose}
+                            label={<NameFormat
+								fName={nameLabel.FName}
+								mName={nameLabel.MName}
+								lName={nameLabel.LName}
+							/>}
+				
+                            body={
+                                <Image
+									src={selectedImage}
+									width={'680px'}
+									height={'500px'}
+								/>
+                            }
+                        />
 					</React.Fragment>
 				);
 			}

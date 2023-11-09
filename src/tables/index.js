@@ -17,3 +17,5 @@ export { default as AgentsTable } from './maintenance/salesmanagement/AgentsTabl
 export { default as ProspectiveBuyersTable } from './maintenance/salesmanagement/ProspectiveBuyersTable';
 export { default as ManningSchedTable } from './maintenance/salesmanagement/ManningSchedTable';
 export { default as StatementOfAccTable } from './maintenance/salesmanagement/StatementOfAccTable';
+export { default as AnnouncementTable } from './maintenance/propertymanagement/AnnouncementTable';
+export { default as MRequestTable } from './maintenance/propertymanagement/MRequestTable';
