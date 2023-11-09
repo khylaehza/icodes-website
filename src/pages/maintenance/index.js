@@ -10,3 +10,7 @@ export { default as AuditLogs } from './admin/AuditLogs';
 export { default as Reports } from './admin/Reports';
 export { default as SmHome } from './salesmanagement/SmHome';
 export { default as Agents } from './salesmanagement/Agents';
+export { default as PmHome} from './propertymanagement/PmHome'
+export { default as Announcements} from './propertymanagement/Announcements'
+export { default as MRequest } from './propertymanagement/MRequest'
+

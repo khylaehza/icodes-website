@@ -20,3 +20,7 @@ export { default as AddUnitValue } from './maintenance/admin/computations/AddUni
 export { default as AddLoan } from './maintenance/admin/computations/AddLoan';
 export { default as EditLoan } from './maintenance/admin/computations/EditLoan';
 export { default as EditUnitValue } from './maintenance/admin/computations/EditUnitValue';
+export { default as AddAnncmnts } from './maintenance/propertymanagement/AddAnncmnts';
+export { default as EditAnncmnts } from './maintenance/propertymanagement/EditAnncmnts';
+export { default as AddMRequest } from './maintenance/propertymanagement/AddMRequest'
+export { default as EditMRequest } from './maintenance/propertymanagement/EditMRequest'

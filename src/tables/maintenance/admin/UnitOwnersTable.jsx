@@ -19,6 +19,7 @@ import { useState } from 'react';
 
 import { db } from '../../../../firebase-config';
 import { updateDoc, serverTimestamp, doc } from 'firebase/firestore';
+import { CusEnlargeImage } from '../../../customs/index'
 
 const UnitOwnersTable = ({ data, search, all, units, unitTowerID }) => {
 	const toast = useToast();
@@ -26,6 +27,8 @@ const UnitOwnersTable = ({ data, search, all, units, unitTowerID }) => {
 
 	const { isOpen, onOpen, onClose } = useDisclosure();
 	const [Id, setId] = useState('');
+	const [nameLabel, setNameLabel] = useState('')
+	const [selectedImage, setSelectedImage] = useState(null);
 	const [unitOwnerState, setUnitOwnerState] = useState({
 		fName: '',
 		statusLabel: '',
@@ -33,6 +36,12 @@ const UnitOwnersTable = ({ data, search, all, units, unitTowerID }) => {
 		currentStatus: boolean,
 		status: boolean,
 	});
+
+	const handleImageClick = (item) => {
+		setSelectedImage(item.UnOwnerImg);
+		setNameLabel(item)
+		onOpen();
+	};
 
 	return ret
 		.filter((item) => {
@@ -128,6 +137,9 @@ const UnitOwnersTable = ({ data, search, all, units, unitTowerID }) => {
 									<Image
 										src={data.UnOwnerImg}
 										width={{ base: '100px', xl: '100px' }}
+										onClick={() =>
+											handleImageClick(data)
+										}
 									/>
 								</Td>
 								<CusTitle component={'Unit Owner ID'} />
@@ -232,6 +244,25 @@ const UnitOwnersTable = ({ data, search, all, units, unitTowerID }) => {
 								</Text>
 							}
 						/>
+
+						<CusEnlargeImage
+                            isOpen={isOpen}
+                            onClose={onClose}
+                            label={
+								<NameFormat
+									fName={nameLabel.FName}
+									mName={nameLabel.MName}
+									lName={nameLabel.LName}
+								/>
+							}
+                            body={
+                                <Image
+									src={selectedImage}
+									width={'680px'}
+									height={'500px'}
+								/>
+                            }
+                        />
 					</React.Fragment>
 				);
 			}

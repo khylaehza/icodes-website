@@ -14,3 +14,5 @@ export { default as OwnerInfoForm } from './maintenance/admin/unitowner/OwnerInf
 export { default as AmenitiesForm } from './maintenance/admin/AmenitiesForm';
 export { default as UnitValueForm } from './maintenance/admin/computations/UnitValueForm';
 export { default as LoanForm } from './maintenance/admin/computations/LoanForm';
+export { default as AnnouncementForm} from './maintenance/propertymanagement/AccouncementForm'
+export { default as MaintenanceForm} from './maintenance/propertymanagement/MaintenanceForm'

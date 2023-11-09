@@ -92,8 +92,8 @@ export function DataProvider({ children }) {
 					}
 					// else if (username.includes('FD')) {
 					// 	navigate('/FDHome');
-					// } else if (username.includes('PM')) {
-					// 	navigate('/PMHome');
+					} else if (username.includes('PM')) {
+						navigate('/pmHome');
 					// } else if (username.includes('AM')) {
 					// 	navigate('/AMHome');
 					// } else if (username.includes('SM')) {
@@ -397,6 +397,51 @@ export function DataProvider({ children }) {
 		return () => unsubscribe();
 	}, []);
 
+	const [anncmnts, setAnncmnts] = useState([{}]);
+	useEffect(() => {
+		const q = query(
+			collection(
+				db,
+				'maintenance',
+				'propertymanagement',
+				'tbl_announcements'
+			)
+		);
+		const unsubscribe = onSnapshot(q, (querySnapshot) => {
+			const anncmnts = [];
+			querySnapshot.forEach(
+				(doc) => {
+					anncmnts.push({ ...doc.data(), id: doc.id });
+				},
+				(error) => {
+					console.log(error);
+				}
+			);
+			setAnncmnts(anncmnts);
+		});
+		return () => unsubscribe();
+	}, []);
+
+	const [mrequest, setMRequest] = useState([{}]);
+	useEffect(() => {
+		const q = query(
+			collection(db, 'maintenance', 'propertymanagement', 'tbl_maintenance')
+		);
+		const unsubscribe = onSnapshot(q, (querySnapshot) => {
+			const mrequest = [];
+			querySnapshot.forEach(
+				(doc) => {
+					mrequest.push({ ...doc.data(), id: doc.id });
+				},
+				(error) => {
+					console.log(error);
+				}
+			);
+			setMRequest(mrequest);
+		});
+		return () => unsubscribe();
+	}, []);
+
 	const value = {
 		logout,
 		login,
@@ -418,6 +463,8 @@ export function DataProvider({ children }) {
 		loans,
 		logs,
 		reports,
+		anncmnts,
+		mrequest
 	};
 
 	return (
