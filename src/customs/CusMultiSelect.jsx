@@ -199,3 +199,48 @@ export const CusMultiSelectUnitAvail = ({
 		</FormControl>
 	);
 };
+
+export const CusMultiSelectTower = ({
+	value,
+	onChange,
+	error,
+	touch,
+	label,
+	onBlur,
+	name,
+}) => {
+	const { towers } = useData();
+
+	const towerList = [];
+
+	var twrSort = towers.slice(0);
+	twrSort.sort(function (a, b) {
+		var x = a.TowerName.toLowerCase();
+		var y = b.TowerName.toLowerCase();
+		return x < y ? -1 : x > y ? 1 : 0;
+	});
+
+	twrSort.map((e) => {
+		towerList.push({ label: e.TowerName, value: e.TowerName });
+	});
+
+	let currentValue = value || 'Select';
+	return (
+		<FormControl
+			isInvalid={error && touch}
+			fontSize={'xs'}
+		>
+			<FormLabel fontSize={'xs'}>{label}</FormLabel>
+
+			<MultiSelect
+				options={towerList}
+				value={value}
+				onChange={onChange}
+				labelledBy='Select'
+				onBlur={onBlur}
+			/>
+			<FormErrorMessage fontSize={'xs'}>{error}</FormErrorMessage>
+		</FormControl>
+	);
+};
+

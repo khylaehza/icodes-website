@@ -17,6 +17,9 @@ import {
 	Reports,
 	SmHome,
 	Agents,
+	PmHome,
+	Announcements,
+	MRequest
 } from '../pages/maintenance';
 
 const RoutesNav = () => {
@@ -86,6 +89,23 @@ const RoutesNav = () => {
 							exact
 							path={'/agents'}
 							element={<Agents />}
+						/>
+						<Route
+							exact
+							path={'/pmHome'}
+							element = {<PmHome/>}
+						/>
+
+						<Route
+							exact
+							path={'/announcements'}
+							element={<Announcements />}
+						/>
+
+						<Route
+							exact
+							path={'/maintenance'}
+							element={<MRequest />}
 						/>
 					</Route>
 

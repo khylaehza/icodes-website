@@ -20,11 +20,14 @@ import { useState } from 'react';
 
 import { db } from '../../../../firebase-config';
 import { updateDoc, serverTimestamp, doc } from 'firebase/firestore';
+import { CusEnlargeImage } from '../../../customs/index'
 const AmenitiesTable = ({ data, search, all }) => {
 	const toast = useToast();
 	const ret = search ? all : data;
 	const { isOpen, onOpen, onClose } = useDisclosure();
 	const [Id, setId] = useState('');
+	const [nameLabel, setNameLabel] = useState('')
+	const [selectedImage, setSelectedImage] = useState(null);
 	const [amenitiesState, setAmenitiesState] = useState({
 		name: '',
 		statusLabel: '',
@@ -32,6 +35,12 @@ const AmenitiesTable = ({ data, search, all }) => {
 		currentStatus: boolean,
 		status: boolean,
 	});
+
+	const handleImageClick = (item) => {
+		setSelectedImage(item.AmenityImg);
+		setNameLabel(item.AmenityName)
+		onOpen();
+	};
 
 	return ret
 		.filter((item) => {
@@ -127,6 +136,9 @@ const AmenitiesTable = ({ data, search, all }) => {
 									<Image
 										src={data.AmenityImg}
 										width={{ base: '100px', xl: '100px' }}
+										onClick={() =>
+											handleImageClick(data)
+										}
 									/>
 								</Td>
 								<CusTitle component={'Amenity ID'} />
@@ -256,10 +268,22 @@ const AmenitiesTable = ({ data, search, all }) => {
 									>
 										{amenitiesState.name}
 									</Text>
-									's account?
+									this amenity?
 								</Text>
 							}
 						/>
+						<CusEnlargeImage
+                            isOpen={isOpen}
+                            onClose={onClose}
+                            label={nameLabel}
+                            body={
+                                <Image
+									src={selectedImage}
+									width={'680px'}
+									height={'500px'}
+								/>
+                            }
+                        />
 					</React.Fragment>
 				);
 			}

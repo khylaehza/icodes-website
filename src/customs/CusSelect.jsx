@@ -327,6 +327,93 @@ export const CusSelectUnit = ({
 	);
 };
 
+export const CusSelectOccupiedUnit = ({
+	label,
+	name,
+	onChange,
+	value,
+	placeholder,
+	error,
+	onBlur,
+	touch,
+	isRequired,
+}) => {
+	const { units } = useData();
+
+	const unitList = [];
+
+	const length = Object.keys(units).length;
+
+	for (let x = 0; x < length; x++) {
+		const i = units[x];
+
+		var sorted = Object.keys(i);
+		sorted.sort();
+
+		sorted.map((item, key) => {
+			const element = i[item];
+
+			if (Object.values(element).length != 0) {
+				const k = Object.values(element);
+
+				if (k) {
+					k.sort(function (a, b) {
+						var x = a.name.toLowerCase();
+						var y = b.name.toLowerCase();
+						return x < y ? -1 : x > y ? 1 : 0;
+					});
+				}
+
+				k.map((e) => {
+					if (e.status === 'Occupied') {
+						unitList.push(e);
+					}
+				});
+			}
+		});
+	}
+
+	let currentValue = value || 'Select';
+	return (
+		<FormControl
+			isInvalid={error && touch}
+			isRequired={isRequired}
+		>
+			<FormLabel fontSize={'xs'}>{label}</FormLabel>
+
+			<Select
+				name={name}
+				variant={'outline'}
+				bgColor={'w.300'}
+				onChange={onChange}
+				onBlur={onBlur}
+				value={currentValue}
+				fontSize={'xs'}
+				// defaultValue={'Select'}
+			>
+				<option
+					value='Select'
+					disabled
+				>
+					Select
+				</option>
+				{unitList.map((item, key) => {
+					return (
+						<option
+							key={key}
+							value={item.name}
+						>
+							{item.name}
+						</option>
+					);
+				})}
+			</Select>
+
+			<FormErrorMessage fontSize={'xs'}>{error}</FormErrorMessage>
+		</FormControl>
+	);
+};
+
 export const CusSelectTower = ({
 	label,
 	name,
@@ -389,6 +476,179 @@ export const CusSelectTower = ({
 						</option>
 					);
 				})}
+			</Select>
+			<FormErrorMessage fontSize={'xs'}>{error}</FormErrorMessage>
+		</FormControl>
+	);
+};
+export const CusAnnouncementType = ({
+	label,
+	name,
+	onChange,
+	value,
+	placeholder,
+	error,
+	onBlur,
+	touch,
+	isRequired,
+}) => {
+	let currentValue = value || 'Select';
+	return (
+		<FormControl
+			isInvalid={error && touch}
+			isRequired={isRequired}
+		>
+			<FormLabel fontSize={'xs'}>{label}</FormLabel>
+
+			<Select
+				name={name}
+				variant={'filled'}
+				onChange={onChange}
+				onBlur={onBlur}
+				value={currentValue}
+				fontSize={'xs'}
+				// defaultValue={'Select'}
+			>
+				<option
+					value='Select'
+					disabled
+				>
+					Select
+				</option>
+				<option value='Events'>Events</option>
+				<option value='Maintenance'>Maintenance</option>
+
+				<option value='News'>News</option>
+				<option value='Others'>Others</option>
+			</Select>
+			<FormErrorMessage fontSize={'xs'}>{error}</FormErrorMessage>
+		</FormControl>
+	);
+};
+
+export const CusSelectStatus = ({
+	label,
+	name,
+	onChange,
+	value,
+	placeholder,
+	error,
+	onBlur,
+	touch,
+	isRequired,
+}) => {
+	let currentValue = value || 'Select';
+	return (
+		<FormControl
+			isInvalid={error && touch}
+			isRequired={isRequired}
+		>
+			<FormLabel fontSize={'xs'}>{label}</FormLabel>
+
+			<Select
+				name={name}
+				variant={'filled'}
+				onChange={onChange}
+				onBlur={onBlur}
+				value={currentValue}
+				fontSize={'xs'}
+				// defaultValue={'Select'}
+			>
+				<option
+					value='Select'
+					disabled
+				>
+					Select
+				</option>
+				<option value='Active'>Active</option>
+				<option value='Disabled'>Disabled</option>
+			</Select>
+			<FormErrorMessage fontSize={'xs'}>{error}</FormErrorMessage>
+		</FormControl>
+	);
+};
+
+export const CusMaintenanceItem = ({
+	label,
+	name,
+	onChange,
+	value,
+	placeholder,
+	error,
+	onBlur,
+	touch,
+	isRequired,
+}) => {
+	let currentValue = value || 'Select';
+	return (
+		<FormControl
+			isInvalid={error && touch}
+			isRequired={isRequired}
+		>
+			<FormLabel fontSize={'xs'}>{label}</FormLabel>
+
+			<Select
+				name={name}
+				variant={'filled'}
+				onChange={onChange}
+				onBlur={onBlur}
+				value={currentValue}
+				fontSize={'xs'}
+				// defaultValue={'Select'}
+			>
+				<option
+					value='Select'
+					disabled
+				>
+					Select
+				</option>
+				<option value='Fixtures'>Fixtures</option>
+				<option value='Lavatories'>Lavatories</option>
+				<option value='Structures'>Structures</option>
+				<option value='Others'>Others</option>
+			</Select>
+			<FormErrorMessage fontSize={'xs'}>{error}</FormErrorMessage>
+		</FormControl>
+	);
+};
+
+export const CusMaintenanceStatus = ({
+	label,
+	name,
+	onChange,
+	value,
+	placeholder,
+	error,
+	onBlur,
+	touch,
+	isRequired,
+}) => {
+	let currentValue = value || 'Select';
+	return (
+		<FormControl
+			isInvalid={error && touch}
+			isRequired={isRequired}
+		>
+			<FormLabel fontSize={'xs'}>{label}</FormLabel>
+
+			<Select
+				name={name}
+				variant={'filled'}
+				onChange={onChange}
+				onBlur={onBlur}
+				value={currentValue}
+				fontSize={'xs'}
+				// defaultValue={'Select'}
+			>
+				<option
+					value='Select'
+					disabled
+				>
+					Select
+				</option>
+				<option value='Pending'>Pending</option>
+				<option value='Active'>Active</option>
+				<option value='Completed'>Completed</option>
 			</Select>
 			<FormErrorMessage fontSize={'xs'}>{error}</FormErrorMessage>
 		</FormControl>

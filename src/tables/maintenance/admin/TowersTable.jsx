@@ -1,7 +1,7 @@
 import { CusTitle, CusTD, CusDelete, CusAlert } from '../../../customs';
 import { DateChecker, NameFormat } from '../../../utilities';
-import { Image, Tr, Td, ButtonGroup } from '@chakra-ui/react';
-import React from 'react';
+import { Image, Tr, Td, ButtonGroup,useDisclosure } from '@chakra-ui/react';
+import React,{useState} from 'react';
 import moment from 'moment';
 
 import { EditTower } from '../../../modals';
@@ -9,10 +9,14 @@ import { EditTower } from '../../../modals';
 import { db } from '../../../../firebase-config';
 import { deleteDoc, doc } from 'firebase/firestore';
 import { getStorage, ref, deleteObject, listAll } from 'firebase/storage';
+import {CusEnlargeImage} from '../../../customs/index'
 
 const TowersTable = ({ data, search, all, unitData, amounts }) => {
 	const storage = getStorage();
 	const ret = search ? data : all;
+	const { isOpen, onOpen, onClose } = useDisclosure();
+	const [towerLable, setTowerLabel] = useState('')
+	const [selectedImage, setSelectedImage] = useState(null);
 	// const toast = useToast();
 	// const { isOpen, onOpen, onClose } = useDisclosure();
 	// const [Id, setId] = useState('');
@@ -23,6 +27,12 @@ const TowersTable = ({ data, search, all, unitData, amounts }) => {
 	// 	currentStatus: boolean,
 	// 	status: boolean,
 	// });
+
+	const handleImageClick = (item) => {
+		setSelectedImage(item.TowerImg);
+		setTowerLabel(item.TowerName)
+		onOpen();
+	};
 
 	return ret
 		.filter((item) => {
@@ -144,6 +154,9 @@ const TowersTable = ({ data, search, all, unitData, amounts }) => {
 								<Image
 									src={data.TowerImg}
 									width={{ base: '100px', xl: '100px' }}
+									onClick={() =>
+										handleImageClick(data)
+									}
 								/>
 							</Td>
 							<CusTitle component={'Tower ID'} />
@@ -193,7 +206,21 @@ const TowersTable = ({ data, search, all, unitData, amounts }) => {
 								</ButtonGroup>
 							}
 						/>
+						<CusEnlargeImage
+                            isOpen={isOpen}
+                            onClose={onClose}
+                            label={towerLable}
+				
+                            body={
+                                <Image
+									src={selectedImage}
+									width={'680px'}
+									height={'500px'}
+								/>
+                            }
+                        />
 					</Tr>
+					
 				);
 			}
 		});

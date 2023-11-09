@@ -1,11 +1,25 @@
 import { CusTitle, CusTD, CusDeleteTypes } from '../../../../customs';
 import { DateChecker } from '../../../../utilities';
-import React from 'react';
+import React,{useState} from 'react';
 import { EditUnitSet } from '../../../../modals';
-import { Image, Tr, Td, ButtonGroup } from '@chakra-ui/react';
+import { Image, Tr, Td, ButtonGroup, useDisclosure } from '@chakra-ui/react';
+import { CusEnlargeImage, CusCarousel} from '../../../../customs/index'
 
 const UnitsSetTable = ({ data, search, all, units, unitTowerID }) => {
 	const ret = search ? all : data;
+	const [selectedImage1, setSelectedImage1] = useState(null);
+	const [selectedImage2, setSelectedImage2] = useState(null);
+	const { isOpen: isImage1Open, onOpen: onImage1Open, onClose: onImage1Close } = useDisclosure();
+    const { isOpen: isImage2Open, onOpen: onImage2Open, onClose: onImage2Close } = useDisclosure();
+
+	const handleImageClick1 = (src) => {
+		setSelectedImage1(src);
+		onImage1Open();
+	};
+	const handleImageClick2 = (src) => {
+		setSelectedImage2(src);
+		onImage2Open();
+	};
 
 	return ret
 		.filter((item) => {
@@ -50,6 +64,9 @@ const UnitsSetTable = ({ data, search, all, units, unitTowerID }) => {
 								<Image
 									src={data.LayoutImage}
 									w='45px'
+									onClick={ () =>
+										handleImageClick1(data.LayoutImage)
+									}
 								/>
 							</Td>
 							<CusTitle component={'Unit Image'} />
@@ -57,6 +74,9 @@ const UnitsSetTable = ({ data, search, all, units, unitTowerID }) => {
 								<Image
 									src={data.TypeImage[0]}
 									w='45px'
+									onClick={ () =>
+										handleImageClick2(data.TypeImage)
+									}
 								/>
 							</Td>
 							<CusTitle component={'Type Name'} />
@@ -109,6 +129,27 @@ const UnitsSetTable = ({ data, search, all, units, unitTowerID }) => {
 									</ButtonGroup>
 								}
 							></CusTD>
+
+							<CusEnlargeImage
+								isOpen={isImage1Open}
+								onClose={onImage1Close}
+								label={'Floor Layout Preview'}
+								body={
+									<Image
+										src={selectedImage1}
+										width={'680px'}
+										height={'500px'}
+									/>
+								}
+							/>
+							<CusEnlargeImage
+								isOpen={isImage2Open}
+								onClose={onImage2Close}
+								label={'Unit Image/s'}
+								body={
+									<CusCarousel slides={selectedImage2}/>
+								}
+							/>
 						</React.Fragment>
 					</Tr>
 				);
