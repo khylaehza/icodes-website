@@ -263,7 +263,6 @@ export const CusMultiSelectTower = ({
 		towerList.push({ label: e.TowerName, value: e.TowerName });
 	});
 
-	let currentValue = value || 'Select';
 	return (
 		<FormControl
 			isInvalid={error && touch}
