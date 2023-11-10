@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Stack, Button, Heading, HStack, Box } from '@chakra-ui/react';
+import { Stack, Button, Box } from '@chakra-ui/react';
 import {
     CusMaintenanceStatus,
     CusMaintenanceItem,
@@ -8,7 +8,7 @@ import {
 	CusUpload,
 } from '../../../customs';
 
-const MaintenanceForm = ({ form, units, setUnits,repair,imageFiles}) => {
+const MaintenanceForm = ({ form, imageFiles }) => {
     const [requestImg, setRequestImg] = useState(form.values.requestImg);
 
     const imageNames = [];
@@ -53,7 +53,7 @@ const MaintenanceForm = ({ form, units, setUnits,repair,imageFiles}) => {
 
 							})}
 							onBlur={form.handleBlur}
-							value={repair || form.values.repairType}
+							value={form.values.repairType}
 							error={form.errors.repairType}
 							touch={form.touched.repairType}
 						/>
