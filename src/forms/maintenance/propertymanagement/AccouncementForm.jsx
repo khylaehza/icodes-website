@@ -2,8 +2,7 @@ import React, { useState } from 'react';
 import { Stack, Button, Heading, HStack, Box } from '@chakra-ui/react';
 import {
 	CusMultiSelectTower,
-    CusAnnouncementType,
-    CusSelectStatus,
+    CusSelectAnnouncement,
 	CusInputRegular,
 	CusUpload,
 } from '../../../customs';
@@ -35,7 +34,7 @@ const AnnouncementForm = ({ form, options, setOptions,imgFileName }) => {
 							error={form.errors.towers}
 							touch={form.touched.towers}
 						/>
-						<CusAnnouncementType
+						<CusSelectAnnouncement
 							label={'Type'}
 							name='purpose'
 							id='purpose'
