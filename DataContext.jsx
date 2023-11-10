@@ -471,7 +471,7 @@ export function DataProvider({ children }) {
 				db,
 				'maintenance',
 				'propertymanagement',
-				'tbl_Announcements'
+				'tbl_announcements'
 			)
 		);
 		const unsubscribe = onSnapshot(q, (querySnapshot) => {
@@ -492,7 +492,7 @@ export function DataProvider({ children }) {
 	const [mrequest, setMRequest] = useState([{}]);
 	useEffect(() => {
 		const q = query(
-			collection(db, 'maintenance', 'propertymanagement', 'tbl_MRequest')
+			collection(db, 'maintenance', 'propertymanagement', 'tbl_maintenance')
 		);
 		const unsubscribe = onSnapshot(q, (querySnapshot) => {
 			const mrequest = [];

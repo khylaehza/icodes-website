@@ -23,7 +23,8 @@ import { CusEnlargeImage } from '../../../customs/index'
 const EmployeesTable = ({ data, search, all }) => {
 	const toast = useToast();
 	const ret = search ? all : data;
-	const { isOpen, onOpen, onClose } = useDisclosure();
+	const { isOpen: isImageModalOpen, onOpen: onImageModalOpen, onClose: onImageModalClose } = useDisclosure();
+    const { isOpen: isStatusModalOpen, onOpen: onStatusModalOpen, onClose: onStatusModalClose } = useDisclosure();
 	const [Id, setId] = useState('');
 	const [selectedImage, setSelectedImage] = useState(null);
 	const [nameLabel, setNameLabel] = useState('')
@@ -38,7 +39,7 @@ const EmployeesTable = ({ data, search, all }) => {
 	const handleImageClick = (item) => {
 		setSelectedImage(item.Image);
 		setNameLabel(item)
-		onOpen();
+		onImageModalOpen();
 	};
 
 	return ret
@@ -48,8 +49,9 @@ const EmployeesTable = ({ data, search, all }) => {
 				: item.EmpId.toString().includes(search);
 		})
 		.map((data, id) => {
+			const status = data.Status ? 'Enabled' : 'Disabled'
 			const statusConfirmation = (value, data) => {
-				onOpen();
+				onStatusModalOpen();
 				setEmployeeState({
 					...employeeState,
 					fName: data.FName,
@@ -84,7 +86,7 @@ const EmployeesTable = ({ data, search, all }) => {
 						isClosable: true,
 					});
 
-					onClose();
+					onStatusModalClose();
 				} catch (error) {
 					toast({
 						title: 'Edit Status Failed!',
@@ -166,7 +168,7 @@ const EmployeesTable = ({ data, search, all }) => {
 								<CusTD
 									component={
 										<Flex direction={'column'}>
-											{data.Status}
+											{status}
 											<Switch
 												id='isChecked'
 												isChecked={data.Status}
@@ -214,8 +216,8 @@ const EmployeesTable = ({ data, search, all }) => {
 							/>
 						</Tr>
 						<CusAlert
-							isOpen={isOpen}
-							onClose={onClose}
+							isOpen={isStatusModalOpen}
+							onClose={onStatusModalClose}
 							header={'Status Confirmation'}
 							action={handleConfirmStatusChange}
 							actionLabel={'Confirm'}
@@ -245,8 +247,8 @@ const EmployeesTable = ({ data, search, all }) => {
 						/>
 
 						<CusEnlargeImage
-                            isOpen={isOpen}
-                            onClose={onClose}
+                            isOpen={isImageModalOpen}
+                            onClose={onImageModalClose}
                             label={<NameFormat
 								fName={nameLabel.FName}
 								mName={nameLabel.MName}
