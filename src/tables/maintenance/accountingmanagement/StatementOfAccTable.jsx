@@ -1,4 +1,10 @@
-import { CusTitle, CusTD, CusDelete, CusAlert } from '../../../customs';
+import {
+	CusTitle,
+	CusTD,
+	CusDelete,
+	CusAlert,
+	CusSOAModal,
+} from '../../../customs';
 import { DateChecker, NameFormat } from '../../../utilities';
 import {
 	Image,
@@ -145,8 +151,10 @@ const StatementOfAccTable = ({ data, search, all }) => {
 								/>
 								<CusTitle component={'Number of Months'} />
 								<CusTD component={data.NoOfMonths} />
-								<CusTitle component={'File'} />
-								<CusTD component={'file'} />
+								<CusTitle component={'SOA'} />
+								<CusTD
+									component={<CusSOAModal data={data} />}
+								/>
 								<CusTitle component={'Status'} />
 								<CusTD
 									component={
@@ -192,6 +200,7 @@ const StatementOfAccTable = ({ data, search, all }) => {
 											tblDocUser='accountingmanagement'
 											tblUserCol='tbl_soa'
 											onUpdate={() => {}}
+											hasFile={false}
 										/>
 									</ButtonGroup>
 								}

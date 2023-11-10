@@ -20,17 +20,8 @@ const CusPagination = ({
 }) => {
 	return (
 		<Flex
-			// d='flex'
-			// maxWidth='7xl'
-			// w='full'
-			// // h='218px'
-			// justify='space-between'
-			// alignItems='center'
-			p={{ base: 5, sm: 10 }}
-			// display={{ base: 'none', sm: 'block' }}
-			// bg='#edf3f8'
-			// p={40}
-			w='full'
+			p={{ base: 1, sm: 2 }}
+			w={'full'}
 			alignItems='center'
 			justifyContent='center'
 			h={'10%	'}
@@ -144,7 +135,7 @@ const PaginationButton = ({ children, isDisabled, isActive, p, ...props }) => {
 				p &&
 				!isActive && {
 					base: 'none',
-					md: 'block',
+					'2xl': 'block',
 				}
 			}
 		>

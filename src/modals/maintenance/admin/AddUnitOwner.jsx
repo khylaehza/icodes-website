@@ -24,17 +24,58 @@ import {
 
 import { useData } from '../../../../DataContext';
 const AddUnitOwner = () => {
-	const { curUser, unitTowerID, units } = useData();
+	const { curUser, unitTowerID, units, buyers } = useData();
 	const { isOpen, onOpen, onClose } = useDisclosure();
 	const toast = useToast();
 	const storage = getStorage();
 	const fileData = '';
 
+	const [owner, setOwner] = useState();
+
 	const [unit, setUnit] = useState([]);
-	const acqUnit = [];
-	unit.map((e) => {
-		acqUnit.push(e.value);
+
+	const filteredOwner = buyers.filter((buy) => {
+		if (buy.Status == 'Reserved') {
+			const name = `${buy.FName} ${buy.LName}`;
+			return name == owner ? buy : '';
+		}
 	});
+
+	let u = [];
+	const length = Object.keys(units).length;
+
+	for (let x = 0; x < length; x++) {
+		const i = units[x];
+
+		var sorted = Object.keys(i);
+
+		sorted.map((item, key) => {
+			const element = i[item];
+
+			if (Object.values(element).length != 0) {
+				const k = Object.values(element);
+
+				if (k) {
+					k.sort(function (a, b) {
+						var x = a.name.toLowerCase();
+						var y = b.name.toLowerCase();
+						return x < y ? -1 : x > y ? 1 : 0;
+					});
+				}
+
+				k.map((e) => {
+					u.push(e);
+				});
+			}
+		});
+	}
+
+	let filteredUnit = [];
+	if (filteredOwner[0]) {
+		filteredUnit = u.filter((i) => {
+			return i.name == filteredOwner[0].Units.toString() ? i : '';
+		});
+	}
 
 	const t = [];
 	function TowerIdentifier(towers) {
@@ -63,9 +104,9 @@ const AddUnitOwner = () => {
 	const [showImage, setShowImage] = useState('');
 	const reqForm = useFormik({
 		initialValues: {
-			lName: '',
-			fName: '',
-			mName: '',
+			fullName: filteredOwner[0]
+				? `${filteredOwner[0].FName} ${filteredOwner[0].MName} ${filteredOwner[0].LName}`
+				: '',
 			unOwnerImg: '',
 			dp: '',
 			cert: '',
@@ -75,6 +116,7 @@ const AddUnitOwner = () => {
 			id1: '',
 			id2: '',
 		},
+		// enableReinitialize: true,
 		validationSchema: Yup.object({
 			unOwnerImg: Yup.mixed()
 				.required("Unit Owner's Image is required.")
@@ -92,9 +134,7 @@ const AddUnitOwner = () => {
 							value.type
 						)
 				),
-			lName: Yup.string().required('Last Name is required.'),
-			fName: Yup.string().required('First Name is required.'),
-
+			fullName: Yup.string().required('Reserved Unit Owner is required.'),
 			cert: Yup.mixed().required(
 				'Birth/Marriage Certificate is required.'
 			),
@@ -105,6 +145,7 @@ const AddUnitOwner = () => {
 			id2: Yup.mixed().required('Valid ID is required.'),
 		}),
 		onSubmit: (values, actions) => {
+			console.log('filteredUnit');
 			handleNext();
 		},
 	});
@@ -113,10 +154,11 @@ const AddUnitOwner = () => {
 
 	const ownerInfoForm = useFormik({
 		initialValues: {
-			units: '',
-			email: '',
-			cNum: '',
+			unit: filteredUnit[0] ? filteredUnit[0].name : '',
+			email: filteredOwner[0] ? filteredOwner[0].Email.slice(0, -4) : '',
+			cNum: filteredOwner[0] ? filteredOwner[0].CNum.substring(2) : '  ',
 		},
+		enableReinitialize: true,
 		validationSchema: Yup.object({
 			cNum: Yup.string()
 				.required('Contact Number is required.')
@@ -127,7 +169,7 @@ const AddUnitOwner = () => {
 					/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])$/,
 					'Invalid Email.'
 				),
-			units: Yup.mixed().required('Unit is required.'),
+			unit: Yup.string().required('Unit is required.'),
 		}),
 		onSubmit: (values, actions) => {
 			actions.resetForm();
@@ -138,11 +180,10 @@ const AddUnitOwner = () => {
 	const [activeStep, setActiveStep] = useState(0);
 
 	const handleFormSubmit = async () => {
-		onClose();
-		const uid = IdGenerator();
+		const uid = filteredOwner[0] ? filteredOwner[0].BuyersID : '';
+
 		const pw = PasswordGenerator(6);
 		const uName = `Owner_${uid}`;
-		const fName = reqForm.values.fName;
 
 		const folderPath = `admin/unitOwners/${uid}`;
 		const storageRef = (imageName) =>
@@ -206,9 +247,16 @@ const AddUnitOwner = () => {
 					CreatedDate: serverTimestamp(),
 					UID: uid,
 					Email: ownerInfoForm.values.email,
-					LName: reqForm.values.lName,
-					FName: reqForm.values.fName,
-					MName: reqForm.values.mName,
+					FullName: filteredOwner[0]
+						? `${
+								filteredOwner[0].FName
+						  } ${filteredOwner[0].MName.charAt(0).toUpperCase()} ${
+								filteredOwner[0].LName
+						  }`
+						: '',
+					FName: filteredOwner[0] ? `${filteredOwner[0].FName}` : '',
+					MName: filteredOwner[0] ? `${filteredOwner[0].MName}` : '',
+					LName: filteredOwner[0] ? `${filteredOwner[0].LName}` : '',
 					Password: pw,
 					UName: uName,
 					UnOwnerImg: downloadURLs[0],
@@ -220,28 +268,27 @@ const AddUnitOwner = () => {
 					Id2: downloadURLs[6],
 					CNum: ownerInfoForm.values.cNum,
 					Status: 'Active',
-					Units: acqUnit,
+					Units: ownerInfoForm.values.unit,
 				}
 			);
 
-			unit.map((e) => {
-				const tower = e.value.substring(0, 2);
+			if (filteredUnit[0]) {
+				const tower = filteredUnit[0].name.substring(0, 2);
 
 				const length = Object.keys(units).length;
-
 				for (let x = 0; x < length; x++) {
 					const i = units[x];
 
 					var sorted = Object.keys(i);
 
-					sorted.map((item, key) => {
+					sorted.map((item) => {
 						const element = i[item];
 
 						if (Object.values(element).length != 0) {
 							const k = Object.values(element);
 
 							k.map((x) => {
-								if (x.name === e.value) {
+								if (x.name === filteredUnit[0].name) {
 									const collectionRef = doc(
 										db,
 										'maintenance',
@@ -260,7 +307,19 @@ const AddUnitOwner = () => {
 						}
 					});
 				}
-			});
+
+				const docRef = doc(
+					db,
+					'maintenance',
+					'salesmanagement',
+					'tbl_prosBuyers',
+					filteredOwner[0].id
+				);
+				updateDoc(docRef, {
+					EditedDate: serverTimestamp(),
+					Status: 'Occupied',
+				});
+			}
 
 			if (curUser) {
 				await addDoc(
@@ -272,9 +331,12 @@ const AddUnitOwner = () => {
 					}
 				);
 			}
+
 			toast({
 				title: 'New Unit Owner Added!',
-				description: `${fName}'s username is ${uName}. Password is ${pw}. `,
+				description: `${
+					filteredOwner[0] ? `${filteredOwner[0].FName}` : ''
+				}'s username is ${uName}. Password is ${pw}. `,
 				status: 'success',
 				duration: 9000,
 				isClosable: true,
@@ -288,8 +350,7 @@ const AddUnitOwner = () => {
 				isClosable: true,
 			});
 		}
-
-		setUnit([]);
+		onClose();
 		setShowImage('');
 		reqForm.resetForm();
 		setActiveStep(0);
@@ -303,6 +364,14 @@ const AddUnitOwner = () => {
 		setActiveStep((prevActiveStep) => prevActiveStep - 1);
 	};
 
+	const onCloseModal = () => {
+		onClose();
+		ownerInfoForm.resetForm();
+		reqForm.resetForm();
+		setShowImage('');
+		setActiveStep(0);
+	};
+
 	return (
 		<Flex>
 			<CusModal
@@ -312,8 +381,6 @@ const AddUnitOwner = () => {
 						onClose={onClose}
 						reqForm={reqForm}
 						ownerInfoForm={ownerInfoForm}
-						units={unit}
-						setUnit={setUnit}
 						setShowImage={setShowImage}
 						showImage={showImage}
 						activeStep={activeStep}
@@ -321,11 +388,12 @@ const AddUnitOwner = () => {
 						handleBack={handleBack}
 						handleNext={handleNext}
 						disable={false}
+						setOwner={setOwner}
 					/>
 				}
 				action={'+ Add Unit Owner'}
 				isOpen={isOpen}
-				onClose={onClose}
+				onClose={onCloseModal}
 				onOpen={onOpen}
 			/>
 		</Flex>

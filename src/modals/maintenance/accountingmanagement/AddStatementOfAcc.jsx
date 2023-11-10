@@ -1,6 +1,6 @@
 import { CusModal } from '../../../customs';
 import { Flex, useDisclosure, useToast } from '@chakra-ui/react';
-import { IdGenerator } from '../../../utilities';
+import { IdGenerator, OrdinalSuffix } from '../../../utilities';
 import { useData } from '../../../../DataContext';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
@@ -14,7 +14,7 @@ import {
 	doc,
 } from 'firebase/firestore';
 import { useState } from 'react';
-
+import moment from 'moment';
 const AddStatementOfAcc = () => {
 	const { isOpen, onOpen, onClose } = useDisclosure();
 	const { curUser, buyers, units, payterm, amounts, discounts, unitTowerID } =
@@ -178,7 +178,68 @@ const AddStatementOfAcc = () => {
 			tcp: Yup.string().required('Amount is required.'),
 		}),
 		onSubmit: async (value, actions) => {
+			const totalTCP =
+				parseFloat(value.tcp.replace(/,/g, '')) +
+				computeVat -
+				totalDisc;
+			console.log(
+				computeVat,
+				totalDisc,
+				value.tcp.replace(/,/g, ''),
+				totalTCP
+			);
+			const totalPayInMon =
+				parseFloat(value.monthlyPercent / 100) * totalTCP -
+				parseFloat(value.reservationFee.replace(/,/g, ''));
+
+			console.log(
+				value.monthlyPercent / 100,
+				totalTCP,
+				parseFloat(value.monthlyPercent / 100) * totalTCP,
+				parseFloat(value.reservationFee.replace(/,/g, ''))
+			);
+			const perWithOthers =
+				parseFloat(value.monthlyPercent / 100) *
+				((parseFloat(value.otherChargePercent) / 100) *
+					parseFloat(value.tcp.replace(/,/g, '')));
+			const total =
+				parseFloat(totalPayInMon) / Number(value.noOfMonths) +
+				parseFloat(perWithOthers) / Number(value.noOfMonths);
 			try {
+				let table = [];
+				let count = 1;
+
+				while (count <= Number(value.noOfMonths)) {
+					var currentDate = moment();
+					var futureMonth = moment(currentDate).add(count, 'M');
+					var futureMonthEnd = moment(futureMonth).endOf('month');
+
+					if (
+						currentDate.date() != futureMonth.date() &&
+						futureMonth.isSame(futureMonthEnd.format('YYYY-MM-DD'))
+					) {
+						futureMonth = futureMonth.add(count, 'd');
+					}
+					table.push({
+						num: OrdinalSuffix(count),
+						month: futureMonth.format('DD-MMM-YYYY'),
+						unit: `₱${new Intl.NumberFormat('en-US', {
+							maximumFractionDigits: 2,
+							minimumFractionDigits: 2,
+						}).format(totalPayInMon / Number(value.noOfMonths))}`,
+						others: `₱${new Intl.NumberFormat('en-US', {
+							maximumFractionDigits: 2,
+							minimumFractionDigits: 2,
+						}).format(perWithOthers / Number(value.noOfMonths))}`,
+						total: `₱${new Intl.NumberFormat('en-US', {
+							maximumFractionDigits: 2,
+							minimumFractionDigits: 2,
+						}).format(total)}`,
+					});
+
+					count++;
+				}
+
 				await addDoc(
 					collection(
 						db,
@@ -207,6 +268,11 @@ const AddStatementOfAcc = () => {
 						BuyersId: filteredBuyer[0]
 							? filteredBuyer[0].BuyersID
 							: '',
+						Tower: filteredUnit[0]
+							? filteredUnit[0].tower.charAt(1)
+							: '',
+						UnitNo: filteredUnit[0] ? filteredUnit[0].no : '',
+						Floor: filteredUnit[0] ? filteredUnit[0].floor : '',
 						Unit: value.unit,
 						UnitSize: value.unitSize,
 						TypeName: value.typeName,
@@ -225,6 +291,17 @@ const AddStatementOfAcc = () => {
 						TotalDiscount: totalDisc,
 						SOAID: soaID,
 						Status: true,
+						TotalTCP: totalTCP,
+						TotalCharge:
+							(parseFloat(value.otherChargePercent) / 100) *
+							parseFloat(value.tcp.replace(/,/g, '')),
+						PerWithTCP:
+							parseFloat(value.monthlyPercent / 100) * totalTCP,
+						PercentUnitMonth:
+							parseFloat(value.monthlyPercent / 100) * totalTCP,
+						TotalPayInMon: totalPayInMon,
+						PerWithOthers: perWithOthers,
+						SOA: table,
 					}
 				);
 

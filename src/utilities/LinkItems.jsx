@@ -54,7 +54,7 @@ export const pm = [
 export const am = [
 	{ name: 'Home', icon: MdSpaceDashboard, nav: '/AmHome' },
 	{ name: 'Statement of Accounts', icon: RiBillLine, nav: '/soa' },
-	{ name: 'Transaction List', icon: FaExchangeAlt, nav: '/transactionList' },
+	{ name: 'Transactions', icon: FaExchangeAlt, nav: '/transactions' },
 	{ name: 'Unit Amount', icon: FaMoneyBill, nav: '/condoAmount' },
 ];
 

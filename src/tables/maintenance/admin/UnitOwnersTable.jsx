@@ -1,4 +1,9 @@
-import { CusTitle, CusTD, CusDeleteUnits, CusAlert } from '../../../customs';
+import {
+	CusTitle,
+	CusTD,
+	CusDeleteSingleUnit,
+	CusAlert,
+} from '../../../customs';
 import { DateChecker, NameFormat } from '../../../utilities';
 import {
 	Image,
@@ -19,7 +24,7 @@ import { useState } from 'react';
 
 import { db } from '../../../../firebase-config';
 import { updateDoc, serverTimestamp, doc } from 'firebase/firestore';
-import { CusEnlargeImage } from '../../../customs/index'
+import { CusEnlargeImage } from '../../../customs/index';
 
 const UnitOwnersTable = ({ data, search, all, units, unitTowerID }) => {
 	const toast = useToast();
@@ -27,7 +32,7 @@ const UnitOwnersTable = ({ data, search, all, units, unitTowerID }) => {
 
 	const { isOpen, onOpen, onClose } = useDisclosure();
 	const [Id, setId] = useState('');
-	const [nameLabel, setNameLabel] = useState('')
+	const [nameLabel, setNameLabel] = useState('');
 	const [selectedImage, setSelectedImage] = useState(null);
 	const [unitOwnerState, setUnitOwnerState] = useState({
 		fName: '',
@@ -39,7 +44,7 @@ const UnitOwnersTable = ({ data, search, all, units, unitTowerID }) => {
 
 	const handleImageClick = (item) => {
 		setSelectedImage(item.UnOwnerImg);
-		setNameLabel(item)
+		setNameLabel(item);
 		onOpen();
 	};
 
@@ -137,9 +142,7 @@ const UnitOwnersTable = ({ data, search, all, units, unitTowerID }) => {
 									<Image
 										src={data.UnOwnerImg}
 										width={{ base: '100px', xl: '100px' }}
-										onClick={() =>
-											handleImageClick(data)
-										}
+										onClick={() => handleImageClick(data)}
 									/>
 								</Td>
 								<CusTitle component={'Unit Owner ID'} />
@@ -159,7 +162,7 @@ const UnitOwnersTable = ({ data, search, all, units, unitTowerID }) => {
 								<CusTitle component={'Email'} />
 								<CusTD component={data.Email + '.com'} />
 								<CusTitle component={'Unit/s'} />
-								<CusTD component={data.Units.join(', ')} />
+								<CusTD component={data.Units} />
 
 								<CusTitle component={'Status'} />
 								<CusTD
@@ -199,7 +202,7 @@ const UnitOwnersTable = ({ data, search, all, units, unitTowerID }) => {
 											/>
 										)}
 
-										<CusDeleteUnits
+										<CusDeleteSingleUnit
 											id={data.id}
 											stor={`admin/unitOwners/${data.UID}/profile.png`}
 											label={` ${data.FName}'s Data`}
@@ -246,23 +249,23 @@ const UnitOwnersTable = ({ data, search, all, units, unitTowerID }) => {
 						/>
 
 						<CusEnlargeImage
-                            isOpen={isOpen}
-                            onClose={onClose}
-                            label={
+							isOpen={isOpen}
+							onClose={onClose}
+							label={
 								<NameFormat
 									fName={nameLabel.FName}
 									mName={nameLabel.MName}
 									lName={nameLabel.LName}
 								/>
 							}
-                            body={
-                                <Image
+							body={
+								<Image
 									src={selectedImage}
 									width={'680px'}
 									height={'500px'}
 								/>
-                            }
-                        />
+							}
+						/>
 					</React.Fragment>
 				);
 			}

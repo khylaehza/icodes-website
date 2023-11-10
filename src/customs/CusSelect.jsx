@@ -801,7 +801,6 @@ export const CusMaintenanceStatus = ({
 	name,
 	onChange,
 	value,
-
 	error,
 	onBlur,
 	touch,
@@ -832,6 +831,74 @@ export const CusMaintenanceStatus = ({
 				<option value='Pending'>Pending</option>
 				<option value='Active'>Active</option>
 				<option value='Completed'>Completed</option>
+			</Select>
+			<FormErrorMessage fontSize={'xs'}>{error}</FormErrorMessage>
+		</FormControl>
+	);
+};
+
+export const CusSelectReservedOwner = ({
+	label,
+	name,
+	onChange,
+	value,
+	error,
+	onBlur,
+	touch,
+	variant = 'outline',
+	icon,
+	bgColor = 'w.300',
+	isRequired,
+}) => {
+	const { buyers } = useData();
+
+	var byName = buyers.slice(0);
+
+	if (byName) {
+		byName.sort(function (a, b) {
+			var x = a.FName.toLowerCase();
+			var y = b.FName.toLowerCase();
+			return x < y ? -1 : x > y ? 1 : 0;
+		});
+	}
+
+	let currentValue = value || 'Select';
+	return (
+		<FormControl
+			isInvalid={error && touch}
+			isRequired={isRequired}
+		>
+			<FormLabel fontSize={'xs'}>{label}</FormLabel>
+
+			<Select
+				name={name}
+				variant={variant}
+				bgColor={bgColor}
+				onChange={onChange}
+				onBlur={onBlur}
+				value={currentValue}
+				fontSize={'xs'}
+				icon={icon}
+			>
+				<option
+					value='Select'
+					disabled
+				>
+					Select
+				</option>
+
+				{byName.map((item, key) => {
+					if (item.Status == 'Reserved') {
+						return (
+							<option
+								key={key}
+								value={`${item.FName} ${item.LName}`}
+							>
+								{`${item.FName} ${item.LName}`}
+							</option>
+						);
+					}
+				})}
 			</Select>
 			<FormErrorMessage fontSize={'xs'}>{error}</FormErrorMessage>
 		</FormControl>

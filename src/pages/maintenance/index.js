@@ -17,3 +17,4 @@ export { default as StatementOfAccounts } from './accountmanagement/StatementOfA
 export { default as PmHome } from './propertymanagement/PmHome';
 export { default as Announcements } from './propertymanagement/Announcements';
 export { default as MRequest } from './propertymanagement/MRequest';
+export { default as Transactions } from './accountmanagement/Transactions';

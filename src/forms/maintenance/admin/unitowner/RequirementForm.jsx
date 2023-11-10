@@ -9,10 +9,16 @@ import {
 	Flex,
 } from '@chakra-ui/react';
 import { MdClose } from 'react-icons/md';
-import { CusInputFloat } from '../../../../customs';
+import { CusSelectReservedOwner } from '../../../../customs';
 import { CusUpload } from '../../../../customs';
 
-function RequirementForm({ form, setShowImage, showImage, fileData }) {
+function RequirementForm({
+	form,
+	setShowImage,
+	showImage,
+	fileData,
+	setOwner,
+}) {
 	const [img, setImg] = useState('');
 	const [cert, setCert] = useState('');
 	const [income, setIncome] = useState('');
@@ -110,7 +116,7 @@ function RequirementForm({ form, setShowImage, showImage, fileData }) {
 						pt={4}
 						direction={['column', 'row']}
 					>
-						<CusInputFloat
+						{/* <CusInputFloat
 							name='lName'
 							variant='floating'
 							label={'Last Name'}
@@ -142,6 +148,22 @@ function RequirementForm({ form, setShowImage, showImage, fileData }) {
 							value={form.values.mName}
 							onChange={form.handleChange}
 							onBlur={form.handleBlur}
+						/> */}
+
+						<CusSelectReservedOwner
+							label={'Reserved Owner'}
+							name='fullName'
+							id='fullName'
+							placeholder={'Select Reserved Owner'}
+							onChange={(e) => {
+								form.setFieldValue('fullName', e.target.value);
+								setOwner(e.target.value);
+							}}
+							onBlur={form.handleBlur}
+							value={form.values.fullName}
+							error={form.errors.fullName}
+							touch={form.touched.fullName}
+							isRequired
 						/>
 					</Stack>
 					<Stack

@@ -4,9 +4,9 @@ import { Stack } from '@chakra-ui/react';
 import {
 	CusInputRightAdd,
 	CusInputLeftAdd,
-	CusMultiSelectUnitAvail,
+	CusSelectUnit,
 } from '../../../../customs';
-const OwnerInfoForm = ({ form, units, setUnit, disabled }) => {
+const OwnerInfoForm = ({ form }) => {
 	return (
 		<Stack w={'100%'}>
 			<form id='formDiv'>
@@ -50,21 +50,17 @@ const OwnerInfoForm = ({ form, units, setUnit, disabled }) => {
 						direction={['column', 'row']}
 						spacing={6}
 					>
-						<CusMultiSelectUnitAvail
+						<CusSelectUnit
 							isRequired
-							label={'Unit'}
-							name='units'
-							id={'units'}
-							placeholder={'Select Unit Name'}
-							value={units}
-							onChange={(e) => {
-								form.setFieldValue('units', e);
-								setUnit(e);
-							}}
+							name='unit'
+							label='Unit'
+							onChange={form.handleChange}
 							onBlur={form.handleBlur}
-							error={form.errors.units}
-							touch={form.touched.units}
-							disabled={disabled}
+							placeholder='Select'
+							error={form.errors.unit}
+							touch={form.touched.unit}
+							value={form.values.unit}
+							disabled={true}
 						/>
 					</Stack>
 				</Stack>

@@ -1,18 +1,18 @@
 import React, { useState } from 'react';
 import { Flex, Text, Heading, ScaleFade } from '@chakra-ui/react';
 import { Body } from '../../../sections/maintenance';
-import { StatementOfAccTable } from '../../../tables';
+// import { StatementOfAccTable } from '../../../tables';
 import {
 	CusTable,
 	CusSearch,
 	CusFilter,
 	CusPagination,
 } from '../../../customs';
-import { AddStatementOfAcc } from '../../../modals';
+// import { AddStatementOfAcc } from '../../../modals';
 import { useData } from '../../../../DataContext';
 import moment from 'moment';
 
-const StatementOfAccounts = () => {
+const Transactions = () => {
 	return (
 		<Flex
 			w='full'
@@ -38,17 +38,18 @@ const Item = () => {
 
 	const header = [
 		'Created At',
-		'SOA ID',
+		'Transaction ID',
 		'Unit Owners ID',
 		'Name',
 		'Unit Name',
-		'Total Contract Price',
-		'Number of Months',
+		'Amount Paid',
+		'Date Paid',
+		'Mode of Payment',
 		'SOA',
 		'Status',
 		'Actions',
 	];
-	const filter = ['Ready for Occupation (RFO)', 'Pre-Selling'];
+	const filter = ['Tower 1', 'Tower 2', 'Tower 3'];
 	const [filterOnChange, setFilterOnChange] = useState(false);
 	const filterPos = [];
 	const [fil, setFilter] = useState([filter]);
@@ -135,14 +136,14 @@ const Item = () => {
 								/>
 							</Flex>
 
-							<AddStatementOfAcc />
+							{/* <AddStatementOfAcc /> */}
 						</Flex>
 
 						<Flex
 							justifyContent={'space-between'}
 							flexDir={'column'}
 						>
-							<CusTable
+							{/* <CusTable
 								header={header}
 								children={
 									<StatementOfAccTable
@@ -151,7 +152,7 @@ const Item = () => {
 										all={soa}
 									/>
 								}
-							/>
+							/> */}
 						</Flex>
 					</Flex>
 				</ScaleFade>
@@ -167,4 +168,5 @@ const Item = () => {
 		);
 	}
 };
-export default StatementOfAccounts;
+
+export default Transactions;

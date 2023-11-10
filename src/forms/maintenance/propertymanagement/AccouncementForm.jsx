@@ -2,14 +2,12 @@ import React, { useState } from 'react';
 import { Stack, Button, Heading, HStack, Box } from '@chakra-ui/react';
 import {
 	CusMultiSelectTower,
-    CusAnnouncementType,
-    CusSelectStatus,
+	CusSelectAnnouncement,
 	CusInputRegular,
 	CusUpload,
 } from '../../../customs';
 
-
-const AnnouncementForm = ({ form, options, setOptions,imgFileName }) => {
+const AnnouncementForm = ({ form, options, setOptions, imgFileName }) => {
 	const [anncmntImg, setanncmntImg] = useState('');
 	return (
 		<Stack w={'100%'}>
@@ -20,7 +18,7 @@ const AnnouncementForm = ({ form, options, setOptions,imgFileName }) => {
 						spacing={6}
 						mb={3}
 					>
-                        <CusMultiSelectTower
+						<CusMultiSelectTower
 							label={'For'}
 							name='towers'
 							id={'towers'}
@@ -35,7 +33,7 @@ const AnnouncementForm = ({ form, options, setOptions,imgFileName }) => {
 							error={form.errors.towers}
 							touch={form.touched.towers}
 						/>
-						<CusAnnouncementType
+						<CusSelectAnnouncement
 							label={'Type'}
 							name='purpose'
 							id='purpose'
@@ -156,8 +154,9 @@ const AnnouncementForm = ({ form, options, setOptions,imgFileName }) => {
 							fileName={
 								anncmntImg
 									? `Image Chosen: ${anncmntImg.name}`
-									: (imgFileName && `Image: ${imgFileName}`)
-									|| 'Click to Upload Photo/File for Announcement'
+									: (imgFileName &&
+											`Image: ${imgFileName}`) ||
+									  'Click to Upload Photo/File for Announcement'
 							}
 							onBlur={form.handleBlur}
 							error={form.errors.anncmntImg}

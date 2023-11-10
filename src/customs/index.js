@@ -21,11 +21,11 @@ export {
 	CusSelectLocation,
 	CusSelectPBuyers,
 	CusSelectPreSellTerm,
-	CusAnnouncementType,
-	CusSelectStatus,
+	CusSelectAnnouncement,
 	CusSelectOccupiedUnit,
 	CusMaintenanceItem,
 	CusMaintenanceStatus,
+	CusSelectReservedOwner,
 } from './CusSelect';
 export { default as CusUpload } from './CusUpload';
 export { default as CusSearch } from './CusSearch';
@@ -46,3 +46,5 @@ export { default as CusDeleteTypes } from './CusDeleteTypes';
 export { default as CusDeleteUnits } from './CusDeleteUnits';
 export { default as CusCarousel } from './CusCarousel';
 export { default as CusEnlargeImage } from './CusEnlargeImage';
+export { default as CusSOAModal } from './CusSOAModal';
+export { default as CusDeleteSingleUnit } from './CusDeleteSingleUnit';

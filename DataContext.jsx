@@ -444,7 +444,7 @@ export function DataProvider({ children }) {
 		return () => unsubscribe();
 	}, []);
 
-	const [soa, setSOA] = useState();
+	const [soa, setSOA] = useState([{}]);
 	useEffect(() => {
 		const q = query(
 			collection(db, 'maintenance', 'accountingmanagement', 'tbl_soa')

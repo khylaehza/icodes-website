@@ -11,10 +11,9 @@ const UnitOwnerForm = ({
 	setShowImage,
 	activeStep,
 	handleBack,
-	units,
-	setUnit,
 	fileData,
 	disabled,
+	setOwner,
 }) => {
 	function getSteps() {
 		return ['Requirements'];
@@ -30,6 +29,7 @@ const UnitOwnerForm = ({
 						showImage={showImage}
 						setShowImage={setShowImage}
 						fileData={fileData}
+						setOwner={setOwner}
 					/>
 				);
 
@@ -37,8 +37,6 @@ const UnitOwnerForm = ({
 				return (
 					<OwnerInfoForm
 						form={ownerInfoForm}
-						units={units}
-						setUnit={setUnit}
 						disabled={disabled}
 					/>
 				);
