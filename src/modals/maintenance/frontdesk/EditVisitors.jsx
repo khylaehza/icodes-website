@@ -30,13 +30,7 @@ const EditVisitors = ({
     const newVisitor = [];
 
 
-    const [units, setUnits] = useState([
-		{ label: data.Unit.toString(), value: data.Unit.toString() },
-	]);
 
-    units.map((e) => {
-		acqUnit.push(e.value);
-	});
     visitors.forEach(visitors => {
 		newVisitor.push(visitors.replace(/\n/g, ''));
 	})
@@ -55,6 +49,7 @@ const EditVisitors = ({
 			const visitors = newVisitor !== '' ? value.visitors : newVisitor
 			try {
                  
+                acqUnit.push(value.units);
 				const filteredOwners = unitOwners.filter((owner) => {
 					return acqUnit.some((unit) => owner.Units.includes(unit));
 				});
