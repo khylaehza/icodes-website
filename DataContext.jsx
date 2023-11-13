@@ -539,7 +539,12 @@ export function DataProvider({ children }) {
 	const [visitors, setVisitors] = useState([{}]);
 	useEffect(() => {
 		const q = query(
-			collection(db, 'maintenance', 'frontdesk', 'tbl_visitors')
+			collection(
+				db,
+				'maintenance',
+				'frontdesk',
+				'tbl_visitors'
+			)
 		);
 		const unsubscribe = onSnapshot(q, (querySnapshot) => {
 			const visitors = [];
@@ -551,7 +556,6 @@ export function DataProvider({ children }) {
 					console.log(error);
 				}
 			);
-
 			setVisitors(visitors);
 		});
 		return () => unsubscribe();
