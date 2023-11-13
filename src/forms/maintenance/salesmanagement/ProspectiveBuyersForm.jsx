@@ -44,7 +44,7 @@ const ProspectiveBuyersForm = ({ form, units, setUnit, disabled }) => {
 										'paymentTypeFor',
 										e.target.value
 									);
-									setShowType(e.target.value);
+									// setShowType(e.target.value);
 								}}
 								onBlur={form.handleBlur}
 								error={form.errors.paymentTypeFor}

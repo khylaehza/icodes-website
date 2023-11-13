@@ -93,41 +93,6 @@ function CusModal({ data }) {
 		data.TotalDiscount
 	);
 
-	// const totalTCP = new Intl.NumberFormat('en-US').format(
-	// 	parseFloat(data.Amount.replace(/,/g, '')) +
-	// 		data.ComputedVat -
-	// 		data.TotalDiscount
-	// );
-
-	// const totalCharge = new Intl.NumberFormat('en-US').format(
-	// 	(data.OtherChargePercent / 100) *
-	// 		parseFloat(data.Amount.replace(/,/g, ''))
-	// );
-
-	// const perWithTCP = new Intl.NumberFormat('en-US', {
-	// 	maximumFractionDigits: 2,
-	// 	minimumFractionDigits: 2,
-	// }).format(
-	// 	(parseFloat(data.MonthlyPercent) / 100) *
-	// 		parseFloat(totalTCP.replace(/,/g, ''))
-	// );
-
-	// const totalPayInMon = new Intl.NumberFormat('en-US', {
-	// 	maximumFractionDigits: 2,
-	// 	minimumFractionDigits: 2,
-	// }).format(
-	// 	parseFloat(perWithTCP.replace(/,/g, '')) -
-	// 		parseFloat(data.ReservationFee.replace(/,/g, ''))
-	// );
-
-	// const perWithOthers = new Intl.NumberFormat('en-US', {
-	// 	maximumFractionDigits: 2,
-	// 	minimumFractionDigits: 2,
-	// }).format(
-	// 	(parseFloat(data.MonthlyPercent) / 100) *
-	// 		parseFloat(totalCharge.replace(/,/g, ''))
-	// );
-
 	const remainPer = 100 - data.MonthlyPercent;
 	const remainUnit = new Intl.NumberFormat('en-US', {
 		maximumFractionDigits: 2,
@@ -146,8 +111,8 @@ function CusModal({ data }) {
 			(parseFloat(remainPer) / 100) * data.TotalCharge
 	);
 
-	const table = data.SOA;
-
+	const table = Object.values(data.SOA);
+	console.log(table);
 	return (
 		<>
 			<Button
@@ -259,58 +224,6 @@ function CusModal({ data }) {
 										child={
 											<>
 												<Text fontWeight={'bold'}>
-													ADDITION/S:
-												</Text>
-												<HStack
-													ml={3}
-													justifyContent={
-														'space-between'
-													}
-													align={'flex-start'}
-												>
-													<Text fontWeight={'bold'}>
-														VAT ({data.Vat}%):
-													</Text>
-													<Text>
-														+{' '}
-														{`₱ ${
-															compVat.includes(
-																'.'
-															)
-																? compVat
-																: `${compVat}.00`
-														}`}
-													</Text>
-												</HStack>
-
-												<HStack
-													justifyContent={
-														'space-between'
-													}
-													align={'flex-start'}
-												>
-													<Text fontWeight={'bold'}>
-														TOTAL ADDITION/S:
-													</Text>
-													<Text>
-														{' '}
-														{`₱ ${
-															compVat.includes(
-																'.'
-															)
-																? compVat
-																: `${compVat}.00`
-														}`}
-													</Text>
-												</HStack>
-											</>
-										}
-									/>
-
-									<FlexStyle
-										child={
-											<>
-												<Text fontWeight={'bold'}>
 													DEDUCTION/S:
 												</Text>
 												{data.Discounts.map(
@@ -370,6 +283,58 @@ function CusModal({ data }) {
 															)
 																? compDeduct
 																: `${compDeduct}.00`
+														}`}
+													</Text>
+												</HStack>
+											</>
+										}
+									/>
+
+									<FlexStyle
+										child={
+											<>
+												<Text fontWeight={'bold'}>
+													ADDITION/S:
+												</Text>
+												<HStack
+													ml={3}
+													justifyContent={
+														'space-between'
+													}
+													align={'flex-start'}
+												>
+													<Text fontWeight={'bold'}>
+														VAT ({data.Vat}%):
+													</Text>
+													<Text>
+														+{' '}
+														{`₱ ${
+															compVat.includes(
+																'.'
+															)
+																? compVat
+																: `${compVat}.00`
+														}`}
+													</Text>
+												</HStack>
+
+												<HStack
+													justifyContent={
+														'space-between'
+													}
+													align={'flex-start'}
+												>
+													<Text fontWeight={'bold'}>
+														TOTAL ADDITION/S:
+													</Text>
+													<Text>
+														{' '}
+														{`₱ ${
+															compVat.includes(
+																'.'
+															)
+																? compVat
+																: `${compVat}.00`
 														}`}
 													</Text>
 												</HStack>

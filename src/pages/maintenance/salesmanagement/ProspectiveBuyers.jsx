@@ -9,6 +9,7 @@ import {
 	CusPagination,
 } from '../../../customs';
 import { useData } from '../../../../DataContext';
+import moment from 'moment';
 const ProspectiveBuyers = () => {
 	return (
 		<Flex

@@ -284,7 +284,7 @@ export const CusSelectUnit = ({
 				}
 
 				k.map((e) => {
-					if (e.status === 'Available') {
+					if (e.status === 'Reserved') {
 						unitList.push(e);
 					}
 				});
@@ -339,7 +339,6 @@ export const CusSelectOccupiedUnit = ({
 	name,
 	onChange,
 	value,
-	placeholder,
 	error,
 	onBlur,
 	touch,
@@ -899,6 +898,178 @@ export const CusSelectReservedOwner = ({
 						);
 					}
 				})}
+			</Select>
+			<FormErrorMessage fontSize={'xs'}>{error}</FormErrorMessage>
+		</FormControl>
+	);
+};
+
+export const CusSelectOccOwner = ({
+	label,
+	name,
+	onChange,
+	value,
+	error,
+	onBlur,
+	touch,
+	variant = 'outline',
+	icon,
+	bgColor = 'w.300',
+	isRequired,
+	owner,
+	disabled,
+}) => {
+	const { unitOwners } = useData();
+
+	var byName = unitOwners.slice(0);
+
+	if (byName) {
+		byName.sort(function (a, b) {
+			var x = a.FName.toLowerCase();
+			var y = b.FName.toLowerCase();
+			return x < y ? -1 : x > y ? 1 : 0;
+		});
+	}
+
+	let currentValue = value || 'Select';
+	return (
+		<FormControl
+			isInvalid={error && touch}
+			isRequired={isRequired}
+		>
+			<FormLabel fontSize={'xs'}>{label}</FormLabel>
+
+			<Select
+				name={name}
+				variant={variant}
+				bgColor={bgColor}
+				onChange={onChange}
+				onBlur={onBlur}
+				value={currentValue}
+				fontSize={'xs'}
+				icon={icon}
+				disabled={disabled}
+			>
+				<option
+					value='Select'
+					disabled
+				>
+					Select
+				</option>
+
+				{byName.map((item, key) => {
+					if (item.Status == 'Active') {
+						return (
+							<option
+								key={key}
+								value={`${item.FName} ${item.LName}`}
+							>
+								{`${item.FName} ${item.LName}`}
+							</option>
+						);
+					}
+				})}
+			</Select>
+			<FormErrorMessage fontSize={'xs'}>{error}</FormErrorMessage>
+		</FormControl>
+	);
+};
+
+export const CusSelectTransactMonth = ({
+	label,
+	name,
+	onChange,
+	value,
+	error,
+	onBlur,
+	touch,
+	variant = 'outline',
+	icon,
+	bgColor = 'w.300',
+	isRequired,
+	disabled,
+	choice,
+}) => {
+	let currentValue = value || 'Select';
+	return (
+		<FormControl
+			isInvalid={error && touch}
+			isRequired={isRequired}
+		>
+			<FormLabel fontSize={'xs'}>{label}</FormLabel>
+
+			<Select
+				name={name}
+				variant={variant}
+				bgColor={bgColor}
+				onChange={onChange}
+				onBlur={onBlur}
+				value={currentValue}
+				fontSize={'xs'}
+				icon={icon}
+				disabled={disabled}
+			>
+				<option
+					value='Select'
+					disabled
+				>
+					Select
+				</option>
+
+				{choice.map((item, key) => {
+					if (item.status != 'Paid') {
+						return (
+							<option
+								key={key}
+								value={item.month}
+							>
+								{item.month}
+							</option>
+						);
+					}
+				})}
+			</Select>
+			<FormErrorMessage fontSize={'xs'}>{error}</FormErrorMessage>
+		</FormControl>
+	);
+};
+
+export const CusPaymentMode = ({
+	label,
+	name,
+	onChange,
+	value,
+	error,
+	onBlur,
+	touch,
+	isRequired,
+}) => {
+	let currentValue = value || 'Select';
+	return (
+		<FormControl
+			isInvalid={error && touch}
+			isRequired={isRequired}
+		>
+			<FormLabel fontSize={'xs'}>{label}</FormLabel>
+
+			<Select
+				name={name}
+				variant={'filled'}
+				onChange={onChange}
+				onBlur={onBlur}
+				value={currentValue}
+				fontSize={'xs'}
+			>
+				<option
+					value='Select'
+					disabled
+				>
+					Select
+				</option>
+				<option value='Cash'>Cash</option>
+				<option value='Check'>Check</option>
+				<option value='Cash Deposit'>Cash Deposit</option>
+				<option value='Others'>Others</option>
 			</Select>
 			<FormErrorMessage fontSize={'xs'}>{error}</FormErrorMessage>
 		</FormControl>

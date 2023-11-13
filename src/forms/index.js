@@ -17,6 +17,7 @@ export { default as LoanForm } from './maintenance/admin/computations/LoanForm';
 export { default as TeamsForm } from './maintenance/salesmanagement/TeamsForm';
 export { default as ManningSchedForm } from './maintenance/salesmanagement/ManningSchedForm';
 export { default as ProspectiveBuyersForm } from './maintenance/salesmanagement/ProspectiveBuyersForm';
-export { default as StatementOfAccForm } from './maintenance/salesmanagement/StatementOfAccForm';
 export { default as AnnouncementForm } from './maintenance/propertymanagement/AccouncementForm';
 export { default as MaintenanceForm } from './maintenance/propertymanagement/MaintenanceForm';
+export { default as TransactionsForm } from './maintenance/accountingmanagement/TransactionsForm';
+export { default as StatementOfAccForm } from './maintenance/accountingmanagement/StatementOfAccForm';

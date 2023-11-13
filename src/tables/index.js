@@ -19,3 +19,4 @@ export { default as ManningSchedTable } from './maintenance/salesmanagement/Mann
 export { default as AnnouncementTable } from './maintenance/propertymanagement/AnnouncementTable';
 export { default as MRequestTable } from './maintenance/propertymanagement/MRequestTable';
 export { default as StatementOfAccTable } from './maintenance/accountingmanagement/StatementOfAccTable';
+export { default as TransactionsTable } from './maintenance/accountingmanagement/TransactionsTable';

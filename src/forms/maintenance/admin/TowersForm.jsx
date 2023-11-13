@@ -48,7 +48,6 @@ const TowersForm = ({
 	};
 
 	const handleSubmit = () => {
-		console.log(activeStep);
 		switch (activeStep) {
 			case 0:
 				infoForm.handleSubmit();

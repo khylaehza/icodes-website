@@ -284,7 +284,7 @@ const Item = () => {
 									<Image
 										objectFit={'cover'}
 										w={'100%'}
-										h={{ base: '50%', lg: '80%' }}
+										h={{ base: '250px', lg: '380px' }}
 										src={item.TowerImg}
 										rounded={5}
 									/>

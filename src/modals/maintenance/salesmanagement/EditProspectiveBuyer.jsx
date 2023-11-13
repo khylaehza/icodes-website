@@ -77,7 +77,7 @@ const EditProspectiveBuyer = ({
 					EditedDate: serverTimestamp(),
 					Units: acqUnit,
 					Status: 'On Hold',
-					PaymentTypeFor: paymentTypeFor,
+					PaymentTypeFor: value.paymentTypeFor,
 				});
 
 				unit.map((e) => {
@@ -137,6 +137,7 @@ const EditProspectiveBuyer = ({
 					isClosable: true,
 				});
 			} catch (e) {
+				console.log(e);
 				toast({
 					title: 'Error editing prospective buyer',
 					status: 'error',

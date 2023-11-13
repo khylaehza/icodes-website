@@ -73,8 +73,8 @@ const EditUnitOwner = ({
 			lName: data.LName,
 			fName: data.FName,
 			mName: data.MName,
-			unOwnerImg: '',
-			cert: '',
+			unOwnerImg: data.UnOwnerImg,
+			cert: data.Cert,
 			income: '',
 			billing: '',
 			tin: '',
@@ -112,20 +112,20 @@ const EditUnitOwner = ({
 	const [activeStep, setActiveStep] = useState(0);
 
 	const handleFormSubmit = async () => {
-		const folderPath = `images/unitOwners/${data.uid}`;
+		const folderPath = `images/unitOwners/${data.UID}`;
 		const storageRef = (imageName) =>
 			ref(storage, `${folderPath}/${imageName}.jpg`);
 
 		const docRef = doc(db, mainCollection, tblDocUser, tblUserCol, id);
 
 		const filesToUpload = [
-			{ field: 'unOwnerImg', dataValue: editReqForm.values.unOwnerImg },
-			{ field: 'cert', dataValue: editReqForm.values.cert },
-			{ field: 'billing', dataValue: editReqForm.values.billing },
-			{ field: 'income', dataValue: editReqForm.values.income },
-			{ field: 'tin', dataValue: editReqForm.values.tin },
-			{ field: 'id1', dataValue: editReqForm.values.id1 },
-			{ field: 'id2', dataValue: editReqForm.values.id2 },
+			{ field: 'UnOwnerImg', dataValue: editReqForm.values.unOwnerImg },
+			{ field: 'Cert', dataValue: editReqForm.values.cert },
+			{ field: 'Billing', dataValue: editReqForm.values.billing },
+			{ field: 'Income', dataValue: editReqForm.values.income },
+			{ field: 'Tin', dataValue: editReqForm.values.tin },
+			{ field: 'Id1', dataValue: editReqForm.values.id1 },
+			{ field: 'Id2', dataValue: editReqForm.values.id2 },
 		];
 
 		try {
@@ -135,7 +135,7 @@ const EditUnitOwner = ({
 				LName: editReqForm.values.lName,
 				FName: editReqForm.values.fName,
 				MName: editReqForm.values.mName,
-				UName: `Owner_${data.uid}`,
+				UName: `Owner_${data.UID}`,
 				CNum: editOwnerInfoForm.values.cNum,
 				Units: acqUnit,
 			});

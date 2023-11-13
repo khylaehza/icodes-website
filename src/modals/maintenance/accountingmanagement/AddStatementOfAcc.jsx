@@ -98,11 +98,6 @@ const AddStatementOfAcc = () => {
 		}
 	});
 
-	const vatConvert = filteredAmount[0] ? filteredAmount[0].Vat / 100 : 0;
-	const computeVat = filteredAmount[0]
-		? parseFloat(filteredAmount[0].TCP.replace(/,/g, '')) * vatConvert
-		: 0;
-
 	const filteredPayTerm = payterm.filter((term) => {
 		return term.PaymentTermName == pTermName ? term : '';
 	});
@@ -138,7 +133,7 @@ const AddStatementOfAcc = () => {
 		}
 	});
 	const totalDisc = amtDisc.reduce((x, y) => x + y, 0);
-
+	const vatConvert = filteredAmount[0] ? filteredAmount[0].Vat / 100 : 0;
 	const form = useFormik({
 		initialValues: {
 			pbName: filteredBuyer[0]
@@ -178,35 +173,23 @@ const AddStatementOfAcc = () => {
 			tcp: Yup.string().required('Amount is required.'),
 		}),
 		onSubmit: async (value, actions) => {
-			const totalTCP =
-				parseFloat(value.tcp.replace(/,/g, '')) +
-				computeVat -
-				totalDisc;
-			console.log(
-				computeVat,
-				totalDisc,
-				value.tcp.replace(/,/g, ''),
-				totalTCP
-			);
+			const tcpLessDisc =
+				parseFloat(value.tcp.replace(/,/g, '')) - totalDisc;
+
+			const computeVat = tcpLessDisc * vatConvert;
+			const totalTCP = computeVat + tcpLessDisc;
 			const totalPayInMon =
 				parseFloat(value.monthlyPercent / 100) * totalTCP -
 				parseFloat(value.reservationFee.replace(/,/g, ''));
 
-			console.log(
-				value.monthlyPercent / 100,
-				totalTCP,
-				parseFloat(value.monthlyPercent / 100) * totalTCP,
-				parseFloat(value.reservationFee.replace(/,/g, ''))
-			);
 			const perWithOthers =
 				parseFloat(value.monthlyPercent / 100) *
-				((parseFloat(value.otherChargePercent) / 100) *
-					parseFloat(value.tcp.replace(/,/g, '')));
+				((parseFloat(value.otherChargePercent) / 100) * totalTCP);
 			const total =
 				parseFloat(totalPayInMon) / Number(value.noOfMonths) +
 				parseFloat(perWithOthers) / Number(value.noOfMonths);
 			try {
-				let table = [];
+				let table = {};
 				let count = 1;
 
 				while (count <= Number(value.noOfMonths)) {
@@ -220,7 +203,8 @@ const AddStatementOfAcc = () => {
 					) {
 						futureMonth = futureMonth.add(count, 'd');
 					}
-					table.push({
+
+					table[count] = {
 						num: OrdinalSuffix(count),
 						month: futureMonth.format('DD-MMM-YYYY'),
 						unit: `₱${new Intl.NumberFormat('en-US', {
@@ -235,8 +219,7 @@ const AddStatementOfAcc = () => {
 							maximumFractionDigits: 2,
 							minimumFractionDigits: 2,
 						}).format(total)}`,
-					});
-
+					};
 					count++;
 				}
 
@@ -294,7 +277,7 @@ const AddStatementOfAcc = () => {
 						TotalTCP: totalTCP,
 						TotalCharge:
 							(parseFloat(value.otherChargePercent) / 100) *
-							parseFloat(value.tcp.replace(/,/g, '')),
+							totalTCP,
 						PerWithTCP:
 							parseFloat(value.monthlyPercent / 100) * totalTCP,
 						PercentUnitMonth:

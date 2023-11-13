@@ -1,27 +1,27 @@
 import React, { useState } from 'react';
 import { Stack, Button, Heading, HStack, Box } from '@chakra-ui/react';
 import {
-    CusMaintenanceStatus,
-    CusMaintenanceItem,
-    CusSelectOccupiedUnit,
+	CusMaintenanceStatus,
+	CusMaintenanceItem,
+	CusSelectOccupiedUnit,
 	CusInputRegular,
 	CusUpload,
 } from '../../../customs';
 
-const MaintenanceForm = ({ form, units, setUnits,repair,imageFiles}) => {
-    const [requestImg, setRequestImg] = useState(form.values.requestImg);
+const MaintenanceForm = ({ form, units, setUnits, repair, imageFiles }) => {
+	const [requestImg, setRequestImg] = useState(form.values.requestImg);
 
-    const imageNames = [];
-    
-    Object.keys(requestImg).map((s) => {
+	const imageNames = [];
+
+	Object.keys(requestImg).map((s) => {
 		imageNames.push(requestImg[s].name);
 	});
-    return (
+	return (
 		<Stack w={'100%'}>
-			<form 
-                id='formDiv'
-                encType='multipart/form-data'
-            >
+			<form
+				id='formDiv'
+				encType='multipart/form-data'
+			>
 				<Stack>
 					<Stack
 						spacing={6}
@@ -45,13 +45,10 @@ const MaintenanceForm = ({ form, units, setUnits,repair,imageFiles}) => {
 							label={'Type of Repair'}
 							name='repairType'
 							id='repairType'
-							onChange={(e=>{
-								const value = e.target.value
-								form.setFieldValue('repairType',value)
-								//setRepair(value)
-								//setOthers(repair === 'Others' ? true : false);
-
-							})}
+							onChange={(e) => {
+								const value = e.target.value;
+								form.setFieldValue('repairType', value);
+							}}
 							onBlur={form.handleBlur}
 							value={repair || form.values.repairType}
 							error={form.errors.repairType}
@@ -75,7 +72,7 @@ const MaintenanceForm = ({ form, units, setUnits,repair,imageFiles}) => {
 							</Box>
 						)
 					} */}
-					
+
 					<Stack
 						direction={['column', 'row']}
 						spacing={6}
@@ -92,7 +89,7 @@ const MaintenanceForm = ({ form, units, setUnits,repair,imageFiles}) => {
 							touch={form.touched.dateRequested}
 						/> */}
 						<CusInputRegular
-							label={"Request Description (Please be specific)"}
+							label={'Request Description (Please be specific)'}
 							name='details'
 							id='details'
 							placeholder={
@@ -127,15 +124,15 @@ const MaintenanceForm = ({ form, units, setUnits,repair,imageFiles}) => {
 							fileName={
 								requestImg && imageNames.length != imageFiles
 									? `Image Chosen: ${imageNames.join(', ')}`
-									: (imageFiles && `Image : ${imageFiles}`)
-									|| 'Click to Upload Photo/s for Maintenance'
+									: (imageFiles && `Image : ${imageFiles}`) ||
+									  'Click to Upload Photo/s for Maintenance'
 							}
 							onBlur={form.handleBlur}
 							error={form.errors.requestImg}
 							touched={form.touched.requestImg}
-                            multiple={true}
-                            isRequired={true}
-                            showImage={requestImg}
+							multiple={true}
+							isRequired={true}
+							showImage={requestImg}
 						/>
 					</Box>
 					{/* <Stack
@@ -182,6 +179,6 @@ const MaintenanceForm = ({ form, units, setUnits,repair,imageFiles}) => {
 			</form>
 		</Stack>
 	);
-}
+};
 
 export default MaintenanceForm;

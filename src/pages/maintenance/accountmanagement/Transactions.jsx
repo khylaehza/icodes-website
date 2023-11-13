@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import { Flex, Text, Heading, ScaleFade } from '@chakra-ui/react';
 import { Body } from '../../../sections/maintenance';
-// import { StatementOfAccTable } from '../../../tables';
+import { TransactionsTable } from '../../../tables';
 import {
 	CusTable,
 	CusSearch,
 	CusFilter,
 	CusPagination,
 } from '../../../customs';
-// import { AddStatementOfAcc } from '../../../modals';
+import { AddTransactions } from '../../../modals';
 import { useData } from '../../../../DataContext';
 import moment from 'moment';
 
@@ -26,7 +26,7 @@ const Transactions = () => {
 };
 
 const Item = () => {
-	const { soa, curUser } = useData();
+	const { soa, curUser, transactions } = useData();
 
 	const [currentPage, setCurrentPage] = useState(1);
 
@@ -39,37 +39,37 @@ const Item = () => {
 	const header = [
 		'Created At',
 		'Transaction ID',
-		'Unit Owners ID',
 		'Name',
 		'Unit Name',
 		'Amount Paid',
 		'Date Paid',
 		'Mode of Payment',
-		'SOA',
-		'Status',
+		'Receipt',
+		'Receipt No.',
+		'Transactions',
 		'Actions',
 	];
-	const filter = ['Tower 1', 'Tower 2', 'Tower 3'];
+	const filter = ['Cash', 'Cash Deposit', 'Check', 'Others'];
 	const [filterOnChange, setFilterOnChange] = useState(false);
 	const filterPos = [];
 	const [fil, setFilter] = useState([filter]);
 
 	fil.forEach((element) => {
-		soa.filter((data) => {
-			if (element == data.PaymentTypeFor) {
+		transactions.filter((data) => {
+			if (element == data.PayMode) {
 				filterPos.push(data);
 			}
 		});
 	});
 
-	const list = filterOnChange ? filterPos : soa;
+	const list = filterOnChange ? filterPos : transactions;
 	const records = list.slice(firstIndex, lastIndex);
 	const numPage = Math.ceil(list.length / recordsPerPage);
 	const pages = [...Array(numPage + 1).keys()].slice(1);
 
 	const [sortType, setSortType] = useState('asc');
 
-	if (soa) {
+	if (transactions) {
 		list.sort((a, b) => {
 			if (a.CreatedDate && b.CreatedDate) {
 				return (
@@ -125,7 +125,7 @@ const Item = () => {
 						>
 							<Flex gap={5}>
 								<CusSearch
-									placeholder={'Search by SOA ID'}
+									placeholder={'Search by transactions ID'}
 									onChange={(e) => setSearch(e.target.value)}
 								/>
 								<CusFilter
@@ -136,23 +136,23 @@ const Item = () => {
 								/>
 							</Flex>
 
-							{/* <AddStatementOfAcc /> */}
+							<AddTransactions />
 						</Flex>
 
 						<Flex
 							justifyContent={'space-between'}
 							flexDir={'column'}
 						>
-							{/* <CusTable
+							<CusTable
 								header={header}
 								children={
-									<StatementOfAccTable
+									<TransactionsTable
 										data={records}
 										search={search}
-										all={soa}
+										all={transactions}
 									/>
 								}
-							/> */}
+							/>
 						</Flex>
 					</Flex>
 				</ScaleFade>

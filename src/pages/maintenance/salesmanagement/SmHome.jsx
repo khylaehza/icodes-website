@@ -38,16 +38,21 @@ const Item = () => {
 	const { curUser, employees, buyers } = useData();
 	const agents = employees.filter((item) => item.EmpPos === 'Agent');
 
-	const data = ['October 19'];
+	const data = ['October 19', 'October 20', 'October 21'];
 	const values = [
-		{ name: 'Zoom', values: [0] },
-		{ name: 'Tripping', values: [1] },
-		{ name: 'Walk-Ins', values: [0] },
-		{ name: 'Pull-Ins', values: [0] },
+		{ name: 'Zoom', values: [1, 3, 2] },
+		{ name: 'Tripping', values: [4] },
+		{ name: 'Walk-Ins', values: [2, 2, 1] },
+		{ name: 'Pull-Ins', values: [7, 3, 9] },
 	];
 
-	const values2 = [1];
-	const data2 = ['October 15 - 21'];
+	const values2 = [2, 4, 8, 1, 5];
+	const data2 = [
+		'October 15 - 21',
+		'October 22 - 28',
+		'October 28 - November 6',
+		'November 7 - November 14',
+	];
 	// if (item) {
 
 	return (
@@ -104,7 +109,7 @@ const Item = () => {
 						borderRadius={15}
 						p={10}
 					>
-						<Heading size={'md'}>Unit Owners</Heading>
+						<Heading size={'md'}>Agents</Heading>
 						<Divider
 							w='100%'
 							mt={3}
@@ -160,7 +165,7 @@ const Item = () => {
 							alignItems={'center'}
 							textAlign={'center'}
 						>
-							{agents.length}
+							{buyers.length}
 						</Heading>
 					</GridItem>
 				</Grid>

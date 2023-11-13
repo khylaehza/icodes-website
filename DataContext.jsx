@@ -44,7 +44,6 @@ export function DataProvider({ children }) {
 
 	useEffect(() => {
 		localStorage.setItem('user', JSON.stringify(curUser));
-		// setLoading(true);
 	}, [curUser]);
 
 	const login = async (username, password) => {
@@ -492,7 +491,12 @@ export function DataProvider({ children }) {
 	const [mrequest, setMRequest] = useState([{}]);
 	useEffect(() => {
 		const q = query(
-			collection(db, 'maintenance', 'propertymanagement', 'tbl_maintenance')
+			collection(
+				db,
+				'maintenance',
+				'propertymanagement',
+				'tbl_maintenance'
+			)
 		);
 		const unsubscribe = onSnapshot(q, (querySnapshot) => {
 			const mrequest = [];
@@ -505,6 +509,31 @@ export function DataProvider({ children }) {
 				}
 			);
 			setMRequest(mrequest);
+		});
+		return () => unsubscribe();
+	}, []);
+
+	const [transactions, setTransactions] = useState([{}]);
+	useEffect(() => {
+		const q = query(
+			collection(
+				db,
+				'maintenance',
+				'accountingmanagement',
+				'tbl_transactions'
+			)
+		);
+		const unsubscribe = onSnapshot(q, (querySnapshot) => {
+			const transactions = [];
+			querySnapshot.forEach(
+				(doc) => {
+					transactions.push({ ...doc.data(), id: doc.id });
+				},
+				(error) => {
+					console.log(error);
+				}
+			);
+			setTransactions(transactions);
 		});
 		return () => unsubscribe();
 	}, []);
@@ -535,6 +564,7 @@ export function DataProvider({ children }) {
 		soa,
 		anncmnts,
 		mrequest,
+		transactions,
 	};
 
 	return (
