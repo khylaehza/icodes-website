@@ -25,6 +25,8 @@ import {
 	Announcements,
 	MRequest,
 	Transactions,
+	FdHome,
+	Visitors
 } from '../pages/maintenance';
 
 const RoutesNav = () => {
@@ -134,6 +136,16 @@ const RoutesNav = () => {
 							exact
 							path={'/transactions'}
 							element={<Transactions />}
+						/>
+						<Route
+							exact
+							path={'/fdHome'}
+							element={<FdHome />}
+						/>
+						<Route
+							exact
+							path={'/visitors'}
+							element={<Visitors />}
 						/>
 					</Route>
 

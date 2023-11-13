@@ -1,18 +1,18 @@
 import React, { useState } from 'react';
 import { Flex, Text, Heading, ScaleFade } from '@chakra-ui/react';
 import { Body } from '../../../sections/maintenance';
-import { MRequestTable } from '../../../tables';
+import { VisitorTable } from '../../../tables';
 import {
 	CusTable,
 	CusSearch,
 	CusFilter,
 	CusPagination,
 } from '../../../customs';
-import { AddMRequest } from '../../../modals';
+import { AddVisitors } from '../../../modals';
 import { useData } from '../../../../DataContext';
 import moment from 'moment';
 
-const MRequest = () =>{
+const Visitors = () =>{
     return (
         <Flex
 			w='full'
@@ -29,7 +29,7 @@ const MRequest = () =>{
 }
 
 const Item = () => {
-    const { curUser , mrequest } = useData();
+    const { curUser, visitors  } = useData();
     const [currentPage, setCurrentPage] = useState(1);
 
 	const recordsPerPage = 4;
@@ -39,24 +39,24 @@ const Item = () => {
     const [search, setSearch] = useState('');
 
     const header = [
-		'Request ID',
+		'Visitor ID',
 		'Unit',
-		'Date Request',
-		'Type of Repair',
-		'File',
-		'Details',
+		'Visitor/s of:',
+		"Visitor/s Name/s",
+		'Date',
+		'Purpose of Visit',
 		'Status',
 		'Modify',
 	];
 
     const [sortType, setSortType] = useState('asc');
 
-    const records = mrequest.slice(firstIndex, lastIndex);
-    const numPage = Math.ceil(mrequest.length / recordsPerPage);
+    const records = visitors.slice(firstIndex, lastIndex);
+    const numPage = Math.ceil(visitors.length / recordsPerPage);
     const pages = [...Array(numPage + 1).keys()].slice(1);
 
-    if(mrequest){
-        mrequest.sort((a, b) => {
+    if(visitors){
+        visitors.sort((a, b) => {
 			if (a.CreatedDate && b.CreatedDate) {
 				return (
 					moment(
@@ -96,7 +96,7 @@ const Item = () => {
                         >
                             Hi, {curUser.FName}!
                         </Heading>
-                        <Text color={'b.300'}>Manage the maintenance here.</Text>
+                        <Text color={'b.300'}>Manage the Visitors here.</Text>
                         <Flex
                             display='flex'
                             justifyContent='flex-end'
@@ -112,10 +112,10 @@ const Item = () => {
                                     placeholder={'Search by ID'}
                                     onChange={(e) => setSearch(e.target.value)}
                                 />
-                            <CusFilter setSortType={setSortType} />
+                                <CusFilter setSortType={setSortType} />
                             </Flex>
 
-                            <AddMRequest />
+                            <AddVisitors />
                         </Flex>
 
                         <Flex
@@ -125,10 +125,10 @@ const Item = () => {
                             <CusTable
                                 header={header}
                                 children={
-                                    <MRequestTable
+                                    <VisitorTable
                                         data={records}
                                         search={search}
-                                        all={mrequest}
+                                        all={visitors}
                                     />
                                 }
                             />
@@ -148,4 +148,4 @@ const Item = () => {
     }
 }
 
-export default MRequest;
+export default Visitors;

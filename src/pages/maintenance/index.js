@@ -18,3 +18,5 @@ export { default as PmHome } from './propertymanagement/PmHome';
 export { default as Announcements } from './propertymanagement/Announcements';
 export { default as MRequest } from './propertymanagement/MRequest';
 export { default as Transactions } from './accountmanagement/Transactions';
+export { default as FdHome } from './frontdesk/FdHome'
+export { default as Visitors} from './frontdesk/Visitors'

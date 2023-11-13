@@ -20,3 +20,4 @@ export { default as ProspectiveBuyersForm } from './maintenance/salesmanagement/
 export { default as StatementOfAccForm } from './maintenance/salesmanagement/StatementOfAccForm';
 export { default as AnnouncementForm } from './maintenance/propertymanagement/AccouncementForm';
 export { default as MaintenanceForm } from './maintenance/propertymanagement/MaintenanceForm';
+export { default as VisitorsForm } from './maintenance/frontdesk/VisitorsForm';
