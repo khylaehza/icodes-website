@@ -21,3 +21,4 @@ export { default as AnnouncementForm } from './maintenance/propertymanagement/Ac
 export { default as MaintenanceForm } from './maintenance/propertymanagement/MaintenanceForm';
 export { default as TransactionsForm } from './maintenance/accountingmanagement/TransactionsForm';
 export { default as StatementOfAccForm } from './maintenance/accountingmanagement/StatementOfAccForm';
+export { default as VisitorsForm } from './maintenance/frontdesk/VisitorsForm';

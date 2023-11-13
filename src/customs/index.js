@@ -29,6 +29,7 @@ export {
 	CusSelectOccOwner,
 	CusSelectTransactMonth,
 	CusPaymentMode,
+	CusBookingStatus,
 } from './CusSelect';
 export { default as CusUpload } from './CusUpload';
 export { default as CusSearch } from './CusSearch';

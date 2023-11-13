@@ -20,3 +20,4 @@ export { default as AnnouncementTable } from './maintenance/propertymanagement/A
 export { default as MRequestTable } from './maintenance/propertymanagement/MRequestTable';
 export { default as StatementOfAccTable } from './maintenance/accountingmanagement/StatementOfAccTable';
 export { default as TransactionsTable } from './maintenance/accountingmanagement/TransactionsTable';
+export { default as VisitorTable } from './maintenance/frontdesk/VisitorsTable';

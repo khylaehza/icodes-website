@@ -90,11 +90,9 @@ export function DataProvider({ children }) {
 						navigate('/smHome');
 					} else if (username.includes('AM')) {
 						navigate('/amHome');
-					}
-					// else if (username.includes('FD')) {
-					// 	navigate('/FDHome');
-				} else if (username.includes('PM')) {
-					navigate('/pmHome');
+					} else if (username.includes('FD')) {
+						navigate('/FDHome');
+					} else if (username.includes('PM')) navigate('/pmHome');
 					// } else if (username.includes('AM')) {
 					// 	navigate('/AMHome');
 					// } else if (username.includes('SM')) {
@@ -538,6 +536,26 @@ export function DataProvider({ children }) {
 		return () => unsubscribe();
 	}, []);
 
+	const [visitors, setVisitors] = useState([{}]);
+	useEffect(() => {
+		const q = query(
+			collection(db, 'maintenance', 'frontdesk', 'tbl_visitors')
+		);
+		const unsubscribe = onSnapshot(q, (querySnapshot) => {
+			const visitors = [];
+			querySnapshot.forEach(
+				(doc) => {
+					visitors.push({ ...doc.data(), id: doc.id });
+				},
+				(error) => {
+					console.log(error);
+				}
+			);
+
+			setVisitors(visitors);
+		});
+		return () => unsubscribe();
+	}, []);
 	const value = {
 		logout,
 		login,
@@ -565,6 +583,7 @@ export function DataProvider({ children }) {
 		anncmnts,
 		mrequest,
 		transactions,
+		visitors,
 	};
 
 	return (
