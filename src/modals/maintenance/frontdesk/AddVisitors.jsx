@@ -67,7 +67,7 @@ const AddVisitors = () => {
 					{
 						VisitorID: visitorID,
 						For: unitOwner,
-						Unit: acqUnit,
+						Unit: value.units,
 						Visitor: newVisitor,
 						DateStart: value.dateStart,
 						DateEnd: value.dateEnd,
