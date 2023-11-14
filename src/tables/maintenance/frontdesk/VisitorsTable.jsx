@@ -49,18 +49,18 @@ const VisitorTable = ({ data, search, all }) =>{
                             <CusTitle component={"Visitor/s Name/s"} />
                             <CusTD 
                                 component={
-                                    <>
+                                
                                         <UnorderedList
 												ml={'5'}
 												mr={'5'}
 										>
                                             {data.Visitor.map((item, index) => (
-                                                    <ListItem key={index} textAlign={'start'}>
+                                                    <ListItem key={index} textAlign={'center'}>
                                                     {item}
                                                     </ListItem>
                                                 ))}
                                         </UnorderedList>
-                                    </>
+                                
                                }/>
                             <CusTitle component={'Date'} />
                             <CusTD component={`${data.DateStart} - ${data.DateEnd}`}/>

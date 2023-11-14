@@ -51,11 +51,28 @@ const Item = () => {
 
     const [sortType, setSortType] = useState('asc');
 
-    const records = visitors.slice(firstIndex, lastIndex);
-    const numPage = Math.ceil(visitors.length / recordsPerPage);
-    const pages = [...Array(numPage + 1).keys()].slice(1);
+    const filter = ['T1', 'T2', 'T3'];
+
+    const [filterOnChange, setFilterOnChange] = useState(false);
+	const filterPos = [];
+	const [fil, setFilter] = useState(filter);
 
     if(visitors){
+        fil.forEach((element) => {
+            visitors.filter((data) => {
+                if (data.Unit) {
+					if (data.Unit.toString().includes(element)) {
+						filterPos.push(data);
+					}
+				}
+            });
+        });
+
+        const list = filterOnChange ? filterPos : visitors;
+        const records = list.slice(firstIndex, lastIndex);
+        const numPage = Math.ceil(list.length / recordsPerPage);
+        const pages = [...Array(numPage + 1).keys()].slice(1);
+
         visitors.sort((a, b) => {
 			if (a.CreatedDate && b.CreatedDate) {
 				return (
@@ -112,7 +129,13 @@ const Item = () => {
                                     placeholder={'Search by ID'}
                                     onChange={(e) => setSearch(e.target.value)}
                                 />
-                                <CusFilter setSortType={setSortType} />
+                                <CusFilter 
+                                    filter={filter}
+                                    setFilter={setFilter}
+                                    setFilterOnChange={setFilterOnChange}
+                                    setSortType={setSortType}
+                                    titleLbl='Tower'
+                                />
                             </Flex>
 
                             <AddVisitors />

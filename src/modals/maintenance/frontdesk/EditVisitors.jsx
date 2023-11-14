@@ -35,9 +35,10 @@ const EditVisitors = ({
 		newVisitor.push(visitors.replace(/\n/g, ''));
 	})
 
+
     const editForm = useFormik({
 		initialValues: {
-			units: data.Unit[0].toString(),
+			units: data.Unit,
 			visitors: data.Visitor,
 			dateStart: data.DateStart,
 			dateEnd: data.DateEnd,
@@ -72,7 +73,7 @@ const EditVisitors = ({
 				updateDoc(docRef, {
 					editedDate: serverTimestamp(),
 
-					Unit: acqUnit,
+					Unit: value.units,
 					For: unitOwner,
 					Visitor: visitors,
 					DateStart: value.dateStart,

@@ -52,12 +52,32 @@ const Item = () => {
 
     const [sortType, setSortType] = useState('asc');
 
-    const records = anncmnts.slice(firstIndex, lastIndex);
-    const numPage = Math.ceil(anncmnts.length / recordsPerPage);
-    const pages = [...Array(numPage + 1).keys()].slice(1);
+
+
+    const filter = ['T1', 'T2', 'T3'];
+
+    const [filterOnChange, setFilterOnChange] = useState(false);
+	const filterPos = [];
+	const [fil, setFilter] = useState(filter);
+
+	
 
     
     if(anncmnts){
+        fil.forEach((element) => {
+            anncmnts.filter((data) => {
+                if (data.For) {
+					if (data.For.toString().includes(element)) {
+						filterPos.push(data);
+					}
+				}
+            });
+        });
+    
+        const list = filterOnChange ? filterPos : anncmnts;
+        const records = list.slice(firstIndex, lastIndex);
+        const numPage = Math.ceil(list.length / recordsPerPage);
+        const pages = [...Array(numPage + 1).keys()].slice(1);
         anncmnts.sort((a, b) => {
 			if (a.CreatedDate && b.CreatedDate) {
 				return (
@@ -114,7 +134,13 @@ const Item = () => {
                                     placeholder={'Search by ID'}
                                     onChange={(e) => setSearch(e.target.value)}
                                 />
-                               <CusFilter setSortType={setSortType} />
+                               <CusFilter 
+                                    filter={filter}
+                                    setFilter={setFilter}
+                                    setFilterOnChange={setFilterOnChange}
+                                    setSortType={setSortType}
+                                    titleLbl='Tower'
+                                 />
                             </Flex>
     
                             <AddAnncmnts />
