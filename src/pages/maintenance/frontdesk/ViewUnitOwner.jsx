@@ -36,6 +36,7 @@ const Item = () => {
 	const [search, setSearch] = useState('');
 
 	const header = [
+		'Date Acquired',
 		'Image',
 		'Unit Owner ID',
 		'Name',

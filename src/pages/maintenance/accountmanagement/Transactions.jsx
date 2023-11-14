@@ -26,7 +26,7 @@ const Transactions = () => {
 };
 
 const Item = () => {
-	const { curUser, transactions } = useData();
+	const { curUser, transactions, soa } = useData();
 
 	const [currentPage, setCurrentPage] = useState(1);
 
@@ -150,6 +150,7 @@ const Item = () => {
 										data={records}
 										search={search}
 										all={transactions}
+										soa={soa}
 									/>
 								}
 							/>

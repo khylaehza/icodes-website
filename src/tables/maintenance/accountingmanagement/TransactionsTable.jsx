@@ -19,7 +19,7 @@ import { DateChecker } from '../../../utilities';
 import { db } from '../../../../firebase-config';
 import { updateDoc, serverTimestamp, doc } from 'firebase/firestore';
 
-const TransactionsTable = ({ data, search, all }) => {
+const TransactionsTable = ({ data, search, all, soa }) => {
 	const toast = useToast();
 	const ret = search ? all : data;
 	const [selectedImage1, setSelectedImage1] = useState(null);
@@ -32,6 +32,7 @@ const TransactionsTable = ({ data, search, all }) => {
 		setSelectedImage1(src);
 		onImage1Open();
 	};
+
 	return ret
 		.filter((item) => {
 			return search.toLowerCase() === ''
@@ -39,6 +40,42 @@ const TransactionsTable = ({ data, search, all }) => {
 				: item.ReceiptNo.toString().includes(search);
 		})
 		.map((data, id) => {
+			//
+			// const onUpdate() => {
+			// //ung soa
+			// const collectionRef = doc(
+			// 	db,
+			// 	'maintenance',
+			// 	'accountingmanagement',
+			// 	'tbl_soa',
+			// 	`${data.id}`
+			// );
+
+			// let status = {};
+			// let amountPaid = {};
+			// let forMonth = {};
+			// let datePaid = {};
+			// let id = {};
+			// let paymentMode = {};
+			// let receiptNo = {};
+
+			// status[`SOA.${filteredMonth().key + 1}.status`] = '';
+			// amountPaid[`SOA.${filteredMonth().key + 1}.amountPaid`] = ';
+			// forMonth[`SOA.${filteredMonth().key + 1}.forMonth`] = value.forMonth;
+			// datePaid[`SOA.${filteredMonth().key + 1}.datePaid`] = value.datePaid;
+			// id[`SOA.${filteredMonth().key + 1}.transactId`] = transactId;
+			// paymentMode[`SOA.${filteredMonth().key + 1}.paymentMode`] =
+			// 	value.paymentMode;
+			// receiptNo[`SOA.${filteredMonth().key + 1}.receiptNo`] = value.receiptNo;
+			// updateDoc(collectionRef, amountPaid);
+			// updateDoc(collectionRef, receiptNo);
+			// updateDoc(collectionRef, status);
+			// updateDoc(collectionRef, forMonth);
+			// updateDoc(collectionRef, datePaid);
+			// updateDoc(collectionRef, id);
+			// updateDoc(collectionRef, paymentMode);
+			// }
+
 			if (data.CreatedDate) {
 				return (
 					<React.Fragment key={id}>
