@@ -59,7 +59,7 @@ const Pagination = ({
 			setCurrentPage(currentPage + 1);
 		}
 	};
-
+	console.log(numPage);
 	return (
 		<Flex
 			as='nav'
@@ -101,6 +101,7 @@ const Pagination = ({
 				borderBottomRightRadius='md'
 				onClick={nextPage}
 				isDisabled={currentPage == numPage}
+				numPage={numPage}
 			>
 				<Icon
 					as={FaChevronRight}
@@ -112,7 +113,14 @@ const Pagination = ({
 	);
 };
 
-const PaginationButton = ({ children, isDisabled, isActive, p, ...props }) => {
+const PaginationButton = ({
+	children,
+	isDisabled,
+	isActive,
+	p,
+	numPage,
+	...props
+}) => {
 	const activeStyle = {
 		bg: useColorModeValue('gray.300', 'gray.700'),
 	};
@@ -131,13 +139,7 @@ const PaginationButton = ({ children, isDisabled, isActive, p, ...props }) => {
 			cursor={isDisabled ? 'not-allowed' : 'pointer'}
 			{...(isActive && activeStyle)}
 			{...props}
-			display={
-				p &&
-				!isActive && {
-					base: 'none',
-					'2xl': 'block',
-				}
-			}
+			display={p && !isActive && 'none'}
 		>
 			{children}
 		</Flex>

@@ -25,6 +25,7 @@ export const CusNumInput = ({
 	placeholder = 0,
 	isRequired,
 	disabled = false,
+	type = 'number',
 }) => {
 	return (
 		<FormControl
@@ -54,6 +55,7 @@ export const CusNumInput = ({
 					min={min}
 					max={max}
 					disabled={disabled}
+					type={type}
 				/>
 				<NumberInputStepper>
 					<NumberIncrementStepper />

@@ -46,7 +46,7 @@ export function DataProvider({ children }) {
 		localStorage.setItem('user', JSON.stringify(curUser));
 	}, [curUser]);
 
-	const login = debounce(async (username, password) => {
+	const login = async (username, password) => {
 		setLoading(true);
 
 		var hasMatch =
@@ -114,7 +114,7 @@ export function DataProvider({ children }) {
 		});
 
 		setLoading(false);
-	}, 1000);
+	};
 
 	const logout = () => {
 		localStorage.clear();
@@ -612,13 +612,4 @@ export function DataProvider({ children }) {
 			)}
 		</DataContext.Provider>
 	);
-}
-
-function debounce(func, delay) {
-	let timeout;
-	return function (...args) {
-		const context = this;
-		clearTimeout(timeout);
-		timeout = setTimeout(() => func.apply(context, args), delay);
-	};
 }

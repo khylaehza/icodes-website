@@ -150,6 +150,12 @@ const AddAmountSet = () => {
 			onClose();
 		},
 	});
+
+	const onCloseModal = () => {
+		setUnit([]);
+		form.resetForm();
+		onClose();
+	};
 	return (
 		<Flex>
 			<CusModal
@@ -163,7 +169,7 @@ const AddAmountSet = () => {
 				}
 				action={'+ Amount'}
 				isOpen={isOpen}
-				onClose={onClose}
+				onClose={onCloseModal}
 				onOpen={onOpen}
 				variant={'ghost'}
 				color={'b.200'}

@@ -370,6 +370,14 @@ const AddStatementOfAcc = () => {
 		},
 	});
 
+	const onCloseModal = () => {
+		onClose();
+		form.resetForm();
+		setBuyer();
+		setPayTermName();
+		setDiscounts([]);
+	};
+
 	return (
 		<Flex>
 			<CusModal
@@ -386,7 +394,7 @@ const AddStatementOfAcc = () => {
 				}
 				action={`+ Add SOA`}
 				isOpen={isOpen}
-				onClose={onClose}
+				onClose={onCloseModal}
 				onOpen={onOpen}
 				justifyContent={'flex-start'}
 				form={form}

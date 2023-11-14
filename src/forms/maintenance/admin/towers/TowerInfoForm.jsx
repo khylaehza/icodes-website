@@ -105,6 +105,7 @@ const TowerInfoForm = ({
 							onBlur={form.handleBlur}
 							error={form.errors.tower}
 							touch={form.touched.tower}
+							type={'number'}
 						/>
 
 						<CusInputRegular

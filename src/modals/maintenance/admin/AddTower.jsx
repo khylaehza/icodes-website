@@ -254,6 +254,7 @@ const AddTower = ({ towers }) => {
 		setShowImage('');
 		setActiveStep(0);
 	};
+
 	return (
 		<Flex>
 			<CusModal

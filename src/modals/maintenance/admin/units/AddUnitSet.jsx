@@ -303,6 +303,11 @@ const AddUnitSet = () => {
 		},
 	});
 
+	const onCloseModal = () => {
+		setUnit([]);
+		form.resetForm();
+		onClose();
+	};
 	return (
 		<Flex>
 			<CusModal
@@ -316,7 +321,7 @@ const AddUnitSet = () => {
 				}
 				action={'+  Unit'}
 				isOpen={isOpen}
-				onClose={onClose}
+				onClose={onCloseModal}
 				onOpen={onOpen}
 				variant={'ghost'}
 				color={'b.200'}

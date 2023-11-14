@@ -76,7 +76,7 @@ const EditTower = ({ data, id, mainCollection, tblDocUser, tblUserCol }) => {
 				});
 
 				toast({
-					title: `${data.Tower}'s Details Edited!`,
+					title: `${data.TowerName}'s Details Edited!`,
 					status: 'success',
 					duration: 3000,
 					isClosable: true,
@@ -159,7 +159,7 @@ const EditTower = ({ data, id, mainCollection, tblDocUser, tblUserCol }) => {
 
 	return (
 		<CusEdit
-			header={`Edit ${data.TowerName}'s details.`}
+			header={`Edit Tower ${infoForm.values.tower}'s details.`}
 			isOpen={isOpen}
 			onClose={onClose}
 			onOpen={onOpen}
