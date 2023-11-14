@@ -3,7 +3,7 @@ import { DateChecker } from '../../../../utilities';
 import { Tr, ButtonGroup } from '@chakra-ui/react';
 import React from 'react';
 import { EditDiscount } from '../../../../modals';
-const DiscountTable = ({ all }) => {
+const DiscountTable = ({ all, allowActions = true }) => {
 	return all.map((data, id) => {
 		if (data.CreatedDate) {
 			return (
@@ -53,36 +53,40 @@ const DiscountTable = ({ all }) => {
 							}
 						/>
 
-						<CusTitle component={'Actions'} />
-						<CusTD
-							component={
-								<ButtonGroup
-									variant='solid'
-									size='sm'
-									spacing={3}
-								>
-									{data.id && (
-										<EditDiscount
-											data={data}
-											id={data.id}
-											mainCollection='maintenance'
-											tblDocUser='admin'
-											tblUserCol='tbl_discounts'
-										/>
-									)}
+						{allowActions && (
+							<>
+								<CusTitle component={'Actions'} />
+								<CusTD
+									component={
+										<ButtonGroup
+											variant='solid'
+											size='sm'
+											spacing={3}
+										>
+											{data.id && (
+												<EditDiscount
+													data={data}
+													id={data.id}
+													mainCollection='maintenance'
+													tblDocUser='admin'
+													tblUserCol='tbl_discounts'
+												/>
+											)}
 
-									<CusDelete
-										id={data.id}
-										label={'data.Dsc'}
-										mainCollection='maintenance'
-										tblDocUser='admin'
-										tblUserCol='tbl_discounts'
-										hasFile={false}
-										onUpdate={() => {}}
-									/>
-								</ButtonGroup>
-							}
-						></CusTD>
+											<CusDelete
+												id={data.id}
+												label={'data.Dsc'}
+												mainCollection='maintenance'
+												tblDocUser='admin'
+												tblUserCol='tbl_discounts'
+												hasFile={false}
+												onUpdate={() => {}}
+											/>
+										</ButtonGroup>
+									}
+								/>
+							</>
+						)}
 					</React.Fragment>
 				</Tr>
 			);

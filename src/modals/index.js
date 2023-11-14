@@ -30,5 +30,6 @@ export { default as AddMRequest } from './maintenance/propertymanagement/AddMReq
 export { default as EditMRequest } from './maintenance/propertymanagement/EditMRequest';
 export { default as AddStatementOfAcc } from './maintenance/accountingmanagement/AddStatementOfAcc';
 export { default as AddTransactions } from './maintenance/accountingmanagement/AddTransactions';
-export { default as AddVisitors } from './maintenance/frontdesk/AddVisitors'
-export { default as EditVisitors } from './maintenance/frontdesk/EditVisitors'
+export { default as AddVisitors } from './maintenance/frontdesk/AddVisitors';
+export { default as EditVisitors } from './maintenance/frontdesk/EditVisitors';
+export { default as AddBookings } from './maintenance/frontdesk/AddBookings';

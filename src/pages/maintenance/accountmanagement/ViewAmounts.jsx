@@ -22,7 +22,8 @@ import moment from 'moment';
 import { RiArrowDownSFill } from 'react-icons/ri';
 import { AddAmountSet, AddDiscount, AddPaymentTerms } from '../../../modals';
 import { AmountSetTable, DiscountTable, PayTermTable } from '../../../tables';
-const Amounts = () => {
+
+const ViewAmounts = () => {
 	return (
 		<Flex
 			w='full'
@@ -46,7 +47,6 @@ const Item = () => {
 		'Units',
 		'Total Contract Price',
 		'VAT',
-		'Actions',
 	];
 
 	const discountHeader = [
@@ -54,7 +54,6 @@ const Item = () => {
 		'Discount ID',
 		'Discount Name',
 		'Discount',
-		'Action',
 	];
 
 	const payTermHeader = [
@@ -67,7 +66,6 @@ const Item = () => {
 		'No. of Months',
 		'Move in Fees',
 		'DP %',
-		'Action',
 	];
 
 	const recordsPerPage = 4;
@@ -175,6 +173,7 @@ const Item = () => {
 										data={records}
 										search={search}
 										all={amounts}
+										allowActions={false}
 									/>
 								}
 							/>
@@ -213,7 +212,12 @@ const Item = () => {
 							</Heading>
 							<CusTable
 								header={discountHeader}
-								children={<DiscountTable all={discounts} />}
+								children={
+									<DiscountTable
+										all={discounts}
+										allowActions={false}
+									/>
+								}
 							/>
 						</Flex>
 
@@ -231,7 +235,12 @@ const Item = () => {
 							</Heading>
 							<CusTable
 								header={payTermHeader}
-								children={<PayTermTable all={payterm} />}
+								children={
+									<PayTermTable
+										all={payterm}
+										allowActions={false}
+									/>
+								}
 							/>
 						</Flex>
 					</Flex>
@@ -240,4 +249,4 @@ const Item = () => {
 		);
 	}
 };
-export default Amounts;
+export default ViewAmounts;

@@ -7,3 +7,4 @@ export { default as PieGraph } from './graphs/PieGraph';
 export { default as LineGraph } from './graphs/LineGraph';
 export { default as StackBarGraph } from './graphs/StackBarGraph';
 export { default as OrdinalSuffix } from './OrdinalSuffix';
+export { default as WeekGenerator } from './WeekGenerator';

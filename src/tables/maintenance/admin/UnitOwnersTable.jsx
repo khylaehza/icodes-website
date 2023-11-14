@@ -26,7 +26,14 @@ import { db } from '../../../../firebase-config';
 import { updateDoc, serverTimestamp, doc } from 'firebase/firestore';
 import { CusEnlargeImage } from '../../../customs/index';
 
-const UnitOwnersTable = ({ data, search, all, units, unitTowerID }) => {
+const UnitOwnersTable = ({
+	data,
+	search,
+	all,
+	units,
+	unitTowerID,
+	allowActions = true,
+}) => {
 	const toast = useToast();
 	const ret = search ? all : data;
 
@@ -164,58 +171,67 @@ const UnitOwnersTable = ({ data, search, all, units, unitTowerID }) => {
 								<CusTitle component={'Unit/s'} />
 								<CusTD component={data.Units} />
 
-								<CusTitle component={'Status'} />
-								<CusTD
-									component={
-										<Flex direction={'column'}>
-											{data.Status}
-											<Switch
-												id='isChecked'
-												isChecked={data.Status}
-												onChange={(e) => {
-													statusConfirmation(
-														e.target.checked,
-														data
-													);
-													setId(data.id);
-												}}
-											/>
-										</Flex>
-									}
-								/>
-							</React.Fragment>
-							<CusTitle component={'Actions'} />
-							<CusTD
-								component={
-									<ButtonGroup
-										variant='solid'
-										size='sm'
-										spacing={3}
-									>
-										{data.id && (
-											<EditUnitOwner
-												data={data}
-												id={data.id}
-												mainCollection='maintenance'
-												tblDocUser='admin'
-												tblUserCol='tbl_unitOwners'
-											/>
-										)}
-
-										<CusDeleteSingleUnit
-											id={data.id}
-											stor={`admin/unitOwners/${data.UID}/profile.png`}
-											label={` ${data.FName}'s Data`}
-											mainCollection='maintenance'
-											tblDocUser='admin'
-											tblUserCol='tbl_unitOwners'
-											data={data}
-											units={units}
-											unitTowerID={unitTowerID}
+								{allowActions && (
+									<>
+										<CusTitle component={'Status'} />
+										<CusTD
+											component={
+												<Flex direction={'column'}>
+													{data.Status}
+													<Switch
+														id='isChecked'
+														isChecked={data.Status}
+														onChange={(e) => {
+															statusConfirmation(
+																e.target
+																	.checked,
+																data
+															);
+															setId(data.id);
+														}}
+													/>
+												</Flex>
+											}
 										/>
-									</ButtonGroup>
-								}
-							/>
+									</>
+								)}
+							</React.Fragment>
+							{allowActions && (
+								<>
+									<CusTitle component={'Actions'} />
+									<CusTD
+										component={
+											<ButtonGroup
+												variant='solid'
+												size='sm'
+												spacing={3}
+											>
+												{data.id && (
+													<EditUnitOwner
+														data={data}
+														id={data.id}
+														mainCollection='maintenance'
+														tblDocUser='admin'
+														tblUserCol='tbl_unitOwners'
+													/>
+												)}
+
+												<CusDeleteSingleUnit
+													id={data.id}
+													stor={`admin/unitOwners/${data.UID}/profile.png`}
+													label={` ${data.FName}'s Data`}
+													mainCollection='maintenance'
+													tblDocUser='admin'
+													tblUserCol='tbl_unitOwners'
+													data={data}
+													units={units}
+													unitTowerID={unitTowerID}
+												/>
+											</ButtonGroup>
+										}
+									/>
+								</>
+							)}
 						</Tr>
 						<CusAlert
 							isOpen={isOpen}

@@ -26,7 +26,7 @@ const Transactions = () => {
 };
 
 const Item = () => {
-	const { soa, curUser, transactions } = useData();
+	const { curUser, transactions } = useData();
 
 	const [currentPage, setCurrentPage] = useState(1);
 
@@ -125,7 +125,7 @@ const Item = () => {
 						>
 							<Flex gap={5}>
 								<CusSearch
-									placeholder={'Search by transactions ID'}
+									placeholder={'Search by Receipt No.'}
 									onChange={(e) => setSearch(e.target.value)}
 								/>
 								<CusFilter

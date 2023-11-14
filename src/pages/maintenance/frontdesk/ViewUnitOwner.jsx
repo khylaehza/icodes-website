@@ -11,7 +11,7 @@ import { AddUnitOwner } from '../../../modals';
 import { useData } from '../../../../DataContext';
 import moment from 'moment';
 import { UnitOwnersTable } from '../../../tables';
-const UnitOwners = () => {
+const ViewUnitOwner = () => {
 	return (
 		<Flex
 			w='full'
@@ -36,15 +36,12 @@ const Item = () => {
 	const [search, setSearch] = useState('');
 
 	const header = [
-		'Created At',
 		'Image',
 		'Unit Owner ID',
 		'Name',
 		'Contact Number',
 		'Email',
 		'Unit/s',
-		'Status',
-		'Modify',
 	];
 
 	const filter = ['T1', 'T2', 'T3'];
@@ -153,6 +150,7 @@ const Item = () => {
 										search={search}
 										all={unitOwners}
 										units={units}
+										allowActions={false}
 										unitTowerID={unitTowerID}
 									/>
 								}
@@ -173,4 +171,4 @@ const Item = () => {
 	}
 };
 
-export default UnitOwners;
+export default ViewUnitOwner;

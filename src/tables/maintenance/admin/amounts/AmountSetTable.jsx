@@ -3,7 +3,7 @@ import { DateChecker } from '../../../../utilities';
 import { Tr, ButtonGroup } from '@chakra-ui/react';
 import React from 'react';
 import { EditAmountSet } from '../../../../modals';
-const AmountSetTable = ({ data, search, all }) => {
+const AmountSetTable = ({ data, search, all, allowActions = true }) => {
 	const ret = search ? all : data;
 
 	return ret
@@ -61,43 +61,49 @@ const AmountSetTable = ({ data, search, all }) => {
 							<CusTitle component={'Vat'} />
 							<CusTD component={`${data.Vat}%`} />
 
-							<CusTitle component={'Actions'} />
-							<CusTD
-								component={
-									<ButtonGroup
-										variant='solid'
-										size='sm'
-										spacing={3}
-									>
-										{data.id && (
-											<EditAmountSet
-												data={data}
-												id={data.id}
-												mainCollection='maintenance'
-												tblDocUser='admin'
-												tblUserCol='tbl_setAmount'
-											/>
-										)}
+							{allowActions && (
+								<>
+									<CusTitle component={'Actions'} />
+									<CusTD
+										component={
+											<ButtonGroup
+												variant='solid'
+												size='sm'
+												spacing={3}
+											>
+												{data.id && (
+													<EditAmountSet
+														data={data}
+														id={data.id}
+														mainCollection='maintenance'
+														tblDocUser='admin'
+														tblUserCol='tbl_setAmount'
+													/>
+												)}
 
-										<CusDelete
-											id={data.id}
-											label={
-												data.Units.length > 3
-													? `${
-															(data.Units[0],
-															data.Units[1])
-													  }...'s Data`
-													: `${data.Units}'s Amount`
-											}
-											mainCollection='maintenance'
-											tblDocUser='admin'
-											tblUserCol='tbl_setAmount'
-											hasFile={false}
-											onUpdate={() => {}}
-										/>
-									</ButtonGroup>
-								}
-							></CusTD>
+												<CusDelete
+													id={data.id}
+													label={
+														data.Units.length > 3
+															? `${
+																	(data
+																		.Units[0],
+																	data
+																		.Units[1])
+															  }...'s Data`
+															: `${data.Units}'s Amount`
+													}
+													mainCollection='maintenance'
+													tblDocUser='admin'
+													tblUserCol='tbl_setAmount'
+													hasFile={false}
+													onUpdate={() => {}}
+												/>
+											</ButtonGroup>
+										}
+									/>
+								</>
+							)}
 						</React.Fragment>
 					</Tr>
 				);

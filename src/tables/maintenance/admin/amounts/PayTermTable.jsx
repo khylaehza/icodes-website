@@ -3,7 +3,7 @@ import { DateChecker } from '../../../../utilities';
 import { Tr, ButtonGroup } from '@chakra-ui/react';
 import React from 'react';
 import { EditPayTerms } from '../../../../modals';
-const PayTermTable = ({ all }) => {
+const PayTermTable = ({ all, allowActions = true }) => {
 	return all.map((data, id) => {
 		if (data.CreatedDate) {
 			return (
@@ -38,9 +38,9 @@ const PayTermTable = ({ all }) => {
 
 						<CusTitle component={'Payment Term ID'} />
 						<CusTD component={data.PayTermId} />
-						{/* <CusTitle component={'Type'} /> */}
-						{/* <CusTD component={data.PaymentTypeFor} />
-						<CusTitle component={'Payment Term Name'} /> */}
+						<CusTitle component={'Type'} />
+						<CusTD component={data.PaymentTypeFor} />
+						<CusTitle component={'Payment Term Name'} />
 						<CusTD component={data.PaymentTermName} />
 
 						<CusTitle component={'Reservation Fee'} />
@@ -67,36 +67,40 @@ const PayTermTable = ({ all }) => {
 								data.DPPercent ? `${data.DPPercent}%` : 'N/A'
 							}
 						/>
-						<CusTitle component={'Actions'} />
-						<CusTD
-							component={
-								<ButtonGroup
-									variant='solid'
-									size='sm'
-									spacing={3}
-								>
-									{data.id && (
-										<EditPayTerms
-											data={data}
-											id={data.id}
-											mainCollection='maintenance'
-											tblDocUser='admin'
-											tblUserCol='tbl_payTerms'
-										/>
-									)}
+						{allowActions && (
+							<>
+								<CusTitle component={'Actions'} />
+								<CusTD
+									component={
+										<ButtonGroup
+											variant='solid'
+											size='sm'
+											spacing={3}
+										>
+											{data.id && (
+												<EditPayTerms
+													data={data}
+													id={data.id}
+													mainCollection='maintenance'
+													tblDocUser='admin'
+													tblUserCol='tbl_payTerms'
+												/>
+											)}
 
-									<CusDelete
-										id={data.id}
-										label={`${data.Dsc}`}
-										mainCollection='maintenance'
-										tblDocUser='admin'
-										tblUserCol='tbl_payTerms'
-										hasFile={false}
-										onUpdate={() => {}}
-									/>
-								</ButtonGroup>
-							}
-						></CusTD>
+											<CusDelete
+												id={data.id}
+												label={`${data.Dsc}`}
+												mainCollection='maintenance'
+												tblDocUser='admin'
+												tblUserCol='tbl_payTerms'
+												hasFile={false}
+												onUpdate={() => {}}
+											/>
+										</ButtonGroup>
+									}
+								/>
+							</>
+						)}
 					</React.Fragment>
 				</Tr>
 			);

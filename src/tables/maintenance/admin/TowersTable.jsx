@@ -1,7 +1,7 @@
 import { CusTitle, CusTD, CusDelete, CusAlert } from '../../../customs';
 import { DateChecker, NameFormat } from '../../../utilities';
-import { Image, Tr, Td, ButtonGroup,useDisclosure } from '@chakra-ui/react';
-import React,{useState} from 'react';
+import { Image, Tr, Td, ButtonGroup, useDisclosure } from '@chakra-ui/react';
+import React, { useState } from 'react';
 import moment from 'moment';
 
 import { EditTower } from '../../../modals';
@@ -9,13 +9,13 @@ import { EditTower } from '../../../modals';
 import { db } from '../../../../firebase-config';
 import { deleteDoc, doc } from 'firebase/firestore';
 import { getStorage, ref, deleteObject, listAll } from 'firebase/storage';
-import {CusEnlargeImage} from '../../../customs/index'
+import { CusEnlargeImage } from '../../../customs/index';
 
 const TowersTable = ({ data, search, all, unitData, amounts }) => {
 	const storage = getStorage();
 	const ret = search ? data : all;
 	const { isOpen, onOpen, onClose } = useDisclosure();
-	const [towerLable, setTowerLabel] = useState('')
+	const [towerLable, setTowerLabel] = useState('');
 	const [selectedImage, setSelectedImage] = useState(null);
 	// const toast = useToast();
 	// const { isOpen, onOpen, onClose } = useDisclosure();
@@ -30,7 +30,7 @@ const TowersTable = ({ data, search, all, unitData, amounts }) => {
 
 	const handleImageClick = (item) => {
 		setSelectedImage(item.TowerImg);
-		setTowerLabel(item.TowerName)
+		setTowerLabel(item.TowerName);
 		onOpen();
 	};
 
@@ -53,8 +53,6 @@ const TowersTable = ({ data, search, all, unitData, amounts }) => {
 			}
 
 			if (data.CreatedDate) {
-				console.log('dsd', amounts);
-
 				const onUpdate = async () => {
 					const matched = unitData.filter((item) => {
 						return `T${data.TowerNum}` == item.Tower ? item.id : '';
@@ -63,7 +61,7 @@ const TowersTable = ({ data, search, all, unitData, amounts }) => {
 					const matchedAmt = amounts.filter((item) => {
 						return `T${data.TowerNum}` == item.Tower ? item.id : '';
 					});
-					console.log(matchedAmt);
+
 					try {
 						matched.map(async (uid) => {
 							const storageRef = ref(
@@ -154,9 +152,7 @@ const TowersTable = ({ data, search, all, unitData, amounts }) => {
 								<Image
 									src={data.TowerImg}
 									width={{ base: '100px', xl: '100px' }}
-									onClick={() =>
-										handleImageClick(data)
-									}
+									onClick={() => handleImageClick(data)}
 								/>
 							</Td>
 							<CusTitle component={'Tower ID'} />
@@ -207,20 +203,18 @@ const TowersTable = ({ data, search, all, unitData, amounts }) => {
 							}
 						/>
 						<CusEnlargeImage
-                            isOpen={isOpen}
-                            onClose={onClose}
-                            label={towerLable}
-				
-                            body={
-                                <Image
+							isOpen={isOpen}
+							onClose={onClose}
+							label={towerLable}
+							body={
+								<Image
 									src={selectedImage}
 									width={'680px'}
 									height={'500px'}
 								/>
-                            }
-                        />
+							}
+						/>
 					</Tr>
-					
 				);
 			}
 		});

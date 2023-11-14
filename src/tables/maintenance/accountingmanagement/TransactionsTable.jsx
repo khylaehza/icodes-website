@@ -22,7 +22,6 @@ import { updateDoc, serverTimestamp, doc } from 'firebase/firestore';
 const TransactionsTable = ({ data, search, all }) => {
 	const toast = useToast();
 	const ret = search ? all : data;
-	const { isOpen, onOpen, onClose } = useDisclosure();
 	const [selectedImage1, setSelectedImage1] = useState(null);
 	const {
 		isOpen: isImage1Open,
@@ -37,7 +36,7 @@ const TransactionsTable = ({ data, search, all }) => {
 		.filter((item) => {
 			return search.toLowerCase() === ''
 				? item
-				: item.SOAID.toString().includes(search);
+				: item.ReceiptNo.toString().includes(search);
 		})
 		.map((data, id) => {
 			if (data.CreatedDate) {
@@ -89,7 +88,7 @@ const TransactionsTable = ({ data, search, all }) => {
 									}`}
 								/>
 								<CusTitle component={'Month Paid'} />
-								<CusTD component={data.ForMonth} />
+								<CusTD component={data.DatePaid} />
 								<CusTitle component={'Mode of Payment'} />
 								<CusTD component={data.PayMode} />
 								<CusTitle component={'Receipt'} />

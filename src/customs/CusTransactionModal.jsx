@@ -71,7 +71,7 @@ const FlexStyle = ({ child }) => {
 	);
 };
 
-const CusTransactionModal = ({ data, all }) => {
+const CusTransactionModal = ({ data }) => {
 	const { isOpen, onOpen, onClose } = useDisclosure();
 	const { soa } = useData();
 
@@ -98,7 +98,6 @@ const CusTransactionModal = ({ data, all }) => {
 
 	const table = Object.values(soaGroup[0].soa);
 
-	console.log(table);
 	const personalDet = [
 		{ Name: soaGroup[0].name },
 		{ Unit: soaGroup[0].unitName },
@@ -116,101 +115,17 @@ const CusTransactionModal = ({ data, all }) => {
 		});
 	});
 
-	console.log(details);
-
-	// console.log(soaGroup);
-	// // rest of soa kapag madmaing transaction ung isang user
-	// let restOfSoa = [];
-
-	// soaGroup.filter((a) => {
-	// 	all.find((s) => {
-	// 		if (a.name == s.UnitOwner) {
-	// 			// if (s.TransactionID != a.transId) {
-	// 			console.log(s);
-	// 			Object.values(a.soa).filter((item) => {
-	// 				// console.log(item);
-	// 				if (item.status == 'Paid') {
-	// 					if (item.month == s.ForMonth) {
-	// 						restOfSoa.push({
-	// 							// ...item,
-	// 							num: item.num,
-	// 							month: s.ForMonth,
-
-	// 							name: s.UnitOwner,
-	// 							amtPaid: s.AmountPaid,
-	// 							transId: s.TransactionID,
-	// 							datePaid: s.DatePaid,
-	// 							payMode: s.PayMode,
-	// 							receiptNo: s.ReceiptNo,
-	// 						});
-	// 					}
-	// 				}
-	// 			});
-	// 			// }
-	// 		}
-	// 	});
-	// });
-
-	// // console.log(restOfSoa);
-
-	// let finalDetails = [];
-	// let sum = 0;
-
-	// if (details.length > 1) {
-	// 	restOfSoa.filter((find) => {
-	// 		soaGroup.filter((s) => {
-	// 			if (find.name == s.name) {
-	// 				// if (find.month != s.month) {
-	// 				sum += parseFloat(s.amtPaid.replace(/,/g, ''));
-
-	// 				finalDetails.push({
-	// 					...find,
-	// 					DatePaid: moment(find.datePaid).format('DD-MMM-YYYY'),
-	// 					Transaction: find.transId,
-	// 					PayMode: find.payMode,
-	// 					ReceiptNo: find.receiptNo,
-	// 					AmountPaid: find.amtPaid,
-	// 					Remain: new Intl.NumberFormat('en-US', {
-	// 						maximumFractionDigits: 2,
-	// 						minimumFractionDigits: 2,
-	// 					}).format(s.unitAmt - sum),
-	// 					// Current: true,
-	// 				});
-	// 				// }
-	// 			}
-	// 		});
-	// 	});
-	// } else {
-	// 	details.filter((find) => {
-	// 		soaGroup.filter((s) => {
-	// 			if (find.name == s.name) {
-	// 				if (find.month == s.month) {
-	// 					sum += parseFloat(s.amtPaid.replace(/,/g, ''));
-
-	// 					finalDetails.push({
-	// 						...find,
-	// 						DatePaid: moment(s.datePaid).format('DD-MMM-YYYY'),
-	// 						Transaction: s.transId,
-	// 						PayMode: s.payMode,
-	// 						ReceiptNo: s.receiptNo,
-	// 						AmountPaid: s.amtPaid,
-	// 						Remain: new Intl.NumberFormat('en-US', {
-	// 							maximumFractionDigits: 2,
-	// 							minimumFractionDigits: 2,
-	// 						}).format(s.unitAmt - sum),
-	// 						// Current: true,
-	// 					});
-	// 				}
-	// 			}
-	// 		});
-	// 	});
-	// }
-
-	// console.log(finalDetails);
-	console.log(amountDet[2].Total);
-
 	let deduct = 0;
-
+	const header = [
+		'No.',
+		'Transaction No.',
+		'Due Date',
+		'Date Paid',
+		'Mode of Payment',
+		'Amount',
+		'Receipt No.',
+		'Remaining Balance',
+	];
 	return (
 		<>
 			<Button
@@ -285,86 +200,6 @@ const CusTransactionModal = ({ data, all }) => {
 										</Flex>
 									}
 								/>
-
-								{/* <BoxStyle
-									bgColor={'b.100'}
-									child={
-										<>
-											{unitDet.map((item, key) => (
-												<Flex
-													flexDir={'row'}
-													key={key}
-												>
-													<Text fontWeight={'bold'}>
-														{Object.keys(item)
-															.toString()
-															.toUpperCase()}
-													</Text>
-													:{' '}
-													{Object.values(
-														item
-													).toString()}
-												</Flex>
-											))}
-										</>
-									}
-								/> */}
-
-								{/* <VStack
-									p={3}
-									bgColor={'w.100'}
-									w={'100%'}
-									rounded={5}
-									fontSize={12}
-								>
-									
-									<BoxStyle
-										bgColor={'w.200'}
-										border={'1px'}
-										borderColor={'w.200'}
-										child={
-											<>
-												<Text fontWeight={'bold'}>
-													TOTAL CONTRACT PRICE:
-												</Text>
-												<Text>
-													₱ {''}
-													{new Intl.NumberFormat(
-														'en-US',
-														{
-															maximumFractionDigits: 2,
-															minimumFractionDigits: 2,
-														}
-													).format(data.TotalTCP)}
-												</Text>
-											</>
-										}
-									/>
-
-									<BoxStyle
-										bgColor={'w.200'}
-										border={'1px'}
-										borderColor={'w.200'}
-										child={
-											<>
-												<Text fontWeight={'bold'}>
-													TOTAL OTHER CHARGES:
-												</Text>
-												<Text>
-													₱ {''}
-													{new Intl.NumberFormat(
-														'en-US',
-														{
-															maximumFractionDigits: 2,
-															minimumFractionDigits: 2,
-														}
-													).format(data.TotalCharge)}
-												</Text>
-											</>
-										}
-									/>
-								</VStack> */}
-
 								<Flex
 									border={'1px'}
 									borderColor={'w.100'}
@@ -379,31 +214,14 @@ const CusTransactionModal = ({ data, all }) => {
 									>
 										<Thead alignSelf='center'>
 											<Tr>
-												<Th textAlign={'center'}>
-													No.
-												</Th>
-												<Th textAlign={'center'}>
-													Transaction No.
-												</Th>
-
-												<Th textAlign={'center'}>
-													Due Date
-												</Th>
-												<Th textAlign={'center'}>
-													Date Paid
-												</Th>
-												<Th textAlign={'center'}>
-													Mode of Payment
-												</Th>
-												<Th textAlign={'center'}>
-													Amount
-												</Th>
-												<Th textAlign={'center'}>
-													Receipt No.
-												</Th>
-												<Th textAlign={'center'}>
-													Remaining Balance
-												</Th>
+												{header.map((head, key) => (
+													<Th
+														textAlign={'center'}
+														key={key}
+													>
+														{head}
+													</Th>
+												))}
 											</Tr>
 										</Thead>
 										<Tbody>

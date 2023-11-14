@@ -26,7 +26,10 @@ import {
 	MRequest,
 	Transactions,
 	FdHome,
-	Visitors
+	Visitors,
+	ViewAmounts,
+	ViewUnitOwner,
+	BookAmenities,
 } from '../pages/maintenance';
 
 const RoutesNav = () => {
@@ -139,6 +142,11 @@ const RoutesNav = () => {
 						/>
 						<Route
 							exact
+							path={'/viewAmounts'}
+							element={<ViewAmounts />}
+						/>
+						<Route
+							exact
 							path={'/fdHome'}
 							element={<FdHome />}
 						/>
@@ -146,6 +154,16 @@ const RoutesNav = () => {
 							exact
 							path={'/visitors'}
 							element={<Visitors />}
+						/>
+						<Route
+							exact
+							path={'/viewUnitOwner'}
+							element={<ViewUnitOwner />}
+						/>
+						<Route
+							exact
+							path={'/bookings'}
+							element={<BookAmenities />}
 						/>
 					</Route>
 
@@ -155,6 +173,11 @@ const RoutesNav = () => {
 						element={<LoginPage />}
 					/>
 
+					<Route
+						exact
+						path={'/forgotpass'}
+						element={<ForgotPassPage />}
+					/>
 					<Route
 						exact
 						path={'/forgotpass'}

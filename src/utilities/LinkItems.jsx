@@ -37,7 +37,7 @@ export const ad = [
 ];
 export const fd = [
 	{ name: 'Home', icon: MdSpaceDashboard, nav: '/fdHome' },
-	{ name: 'Unit Owner List', icon: FaList, nav: '/ownerlist' },
+	{ name: 'Unit Owner List', icon: FaList, nav: '/viewUnitOwner' },
 	{ name: 'Visitors', icon: BsFilePerson, nav: '/visitors' },
 	{
 		name: 'Booking Amenities',
@@ -46,20 +46,20 @@ export const fd = [
 	},
 ];
 export const pm = [
-	{ name: 'Home', icon: MdSpaceDashboard, nav: '/PmHome' },
+	{ name: 'Home', icon: MdSpaceDashboard, nav: '/pmHome' },
 	{ name: 'Announcement', icon: BsMegaphoneFill, nav: '/announcements' },
 	{ name: 'Maintenance Request', icon: FiTool, nav: '/maintenance' },
 ];
 
 export const am = [
-	{ name: 'Home', icon: MdSpaceDashboard, nav: '/AmHome' },
+	{ name: 'Home', icon: MdSpaceDashboard, nav: '/amHome' },
 	{ name: 'Statement of Accounts', icon: RiBillLine, nav: '/soa' },
 	{ name: 'Transactions', icon: FaExchangeAlt, nav: '/transactions' },
-	{ name: 'Unit Amount', icon: FaMoneyBill, nav: '/condoAmount' },
+	{ name: 'Unit Amounts', icon: FaMoneyBill, nav: '/viewAmounts' },
 ];
 
 export const sm = [
-	{ name: 'Home', icon: MdSpaceDashboard, nav: '/SmHome' },
+	{ name: 'Home', icon: MdSpaceDashboard, nav: '/smHome' },
 	{ name: 'Agents', icon: IoIosPerson, nav: '/agents' },
 	{ name: 'Prospective Buyers', icon: BsPersonLinesFill, nav: '/pbuyers' },
 	// { name: 'Boosting Reports', icon: GiUpgrade, nav: '/boostreports' },

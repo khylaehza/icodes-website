@@ -91,7 +91,7 @@ export function DataProvider({ children }) {
 					} else if (username.includes('AM')) {
 						navigate('/amHome');
 					} else if (username.includes('FD')) {
-						navigate('/FDHome');
+						navigate('/fdHome');
 					} else if (username.includes('PM')) navigate('/pmHome');
 					// } else if (username.includes('AM')) {
 					// 	navigate('/AMHome');

@@ -1,7 +1,7 @@
 import React from 'react';
 import EChartsReact from 'echarts-for-react';
 
-function LineGraph({ data, orientation, values }) {
+function LineGraph({ data, orientation, values, name }) {
 	const option = {
 		tooltip: {
 			trigger: 'item',
@@ -10,19 +10,19 @@ function LineGraph({ data, orientation, values }) {
 			top: 'top',
 			center: 'center',
 			orient: orientation,
-			data: ['Sales'],
+			data: [`${name}`],
 			textStyle: {
 				fontSize: 14,
 			},
 		},
 		xAxis: {
-			type: 'category',
+			// type: 'category',
 			data: data,
 		},
 		yAxis: {},
 		series: [
 			{
-				name: 'Sales',
+				name: name,
 				type: 'line',
 				data: values,
 				itemStyle: {
