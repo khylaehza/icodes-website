@@ -19,7 +19,7 @@ import { NameFormat } from '../../utilities';
 import { useData } from '../../../DataContext';
 const Header = ({ onOpen, ...rest }) => {
 	const navigate = useNavigate();
-	const { setLoading, logout, curUser } = useData();
+	const {  logout, curUser } = useData();
 	const handleLogout = () => {
 		try {
 			logout();
@@ -28,6 +28,14 @@ const Header = ({ onOpen, ...rest }) => {
 			console.log(error);
 		}
 	};
+
+	const handleCP = () =>{
+		try {
+			navigate('/forgotpass');
+		} catch (error) {
+			console.log(error);
+		}
+	}
 	return (
 		<Flex
 			px={{ base: 4, md: 4 }}
@@ -100,6 +108,14 @@ const Header = ({ onOpen, ...rest }) => {
 							</HStack>
 						</MenuButton>
 						<MenuList>
+							<MenuItem
+								onClick={handleCP}
+								fontSize={'sm'}
+								_focus={{ boxShadow: 'none', bg: 'none' }}
+								_hover={{ bg: 'w.100' }}
+							>
+								Change Password
+							</MenuItem>
 							<MenuItem
 								onClick={handleLogout}
 								fontSize={'sm'}

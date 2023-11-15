@@ -92,12 +92,10 @@ export function DataProvider({ children }) {
 						navigate('/amHome');
 					} else if (username.includes('FD')) {
 						navigate('/fdHome');
-					} else if (username.includes('PM')) navigate('/pmHome');
-					// } else if (username.includes('AM')) {
-					// 	navigate('/AMHome');
-					// } else if (username.includes('SM')) {
-					// 	navigate('/SMHome');
-					// }
+					} else if (username.includes('PM')) {
+						navigate('/pmHome');
+					} 
+	
 				} else if (
 					username === data.UName &&
 					password != data.Password
@@ -117,6 +115,7 @@ export function DataProvider({ children }) {
 	};
 
 	const logout = () => {
+		setCurUser([]);
 		localStorage.clear();
 		navigate('/login');
 	};
