@@ -36,6 +36,7 @@ const Item = () => {
 	const [search, setSearch] = useState('');
 
 	const header = [
+		'Created At',
 		'Visitor ID',
 		'Unit',
 		'Visitor/s of:',

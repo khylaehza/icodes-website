@@ -555,6 +555,26 @@ export function DataProvider({ children }) {
 		});
 		return () => unsubscribe();
 	}, []);
+
+	const [bookings, setBookings] = useState([{}]);
+	useEffect(() => {
+		const q = query(
+			collection(db, 'maintenance', 'frontdesk', 'tbl_bookings')
+		);
+		const unsubscribe = onSnapshot(q, (querySnapshot) => {
+			const bookings = [];
+			querySnapshot.forEach(
+				(doc) => {
+					bookings.push({ ...doc.data(), id: doc.id });
+				},
+				(error) => {
+					console.log(error);
+				}
+			);
+			setBookings(bookings);
+		});
+		return () => unsubscribe();
+	}, []);
 	const value = {
 		logout,
 		login,
@@ -583,6 +603,7 @@ export function DataProvider({ children }) {
 		mrequest,
 		transactions,
 		visitors,
+		bookings,
 	};
 
 	return (

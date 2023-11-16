@@ -2,15 +2,15 @@ import { CusTitle, CusTD, CusDelete, CusAlert } from '../../../customs';
 import { DateChecker } from '../../../utilities';
 import { Tr, Td, ButtonGroup, UnorderedList, ListItem } from '@chakra-ui/react';
 import React from 'react';
-import { EditVisitors } from '../../../modals';
+import { EditBookings } from '../../../modals';
 import moment from 'moment';
-const VisitorTable = ({ data, search, all }) => {
+const BookingsTable = ({ data, search, all }) => {
 	const ret = search ? all : data;
 	return ret
 		.filter((item) => {
 			return search.toLowerCase() === ''
 				? item
-				: item.VisitorID.toString().toLowerCase().includes(search);
+				: item.BookingID.toString().toLowerCase().includes(search);
 		})
 		.map((data, id) => {
 			if (data.CreatedDate) {
@@ -46,44 +46,22 @@ const VisitorTable = ({ data, search, all }) => {
 									}
 								/>
 
-								<CusTitle component={'Visitor ID'} />
-								<CusTD component={data.VisitorID} />
-								<CusTitle component={'Unit'} />
-								<CusTD component={data.Unit} />
-								<CusTitle component={'Unit owner'} />
-								<CusTD component={data.For} />
-								<CusTitle component={'Visitor/s Name/s'} />
-								<CusTD
-									component={
-										<>
-											<UnorderedList
-												ml={'45'}
-												mr={'5'}
-											>
-												{data.Visitor.map(
-													(item, index) => (
-														<ListItem
-															key={index}
-															textAlign={'start'}
-														>
-															{item}
-														</ListItem>
-													)
-												)}
-											</UnorderedList>
-										</>
-									}
-								/>
+								<CusTitle component={'Booking ID'} />
+								<CusTD component={data.BookingID} />
+								<CusTitle component={'Name'} />
+								<CusTD component={data.UnitOwner} />
+								<CusTitle component={'Tower'} />
+								<CusTD component={data.TNum} />
+								<CusTitle component={'Amenity'} />
+								<CusTD component={data.AmenityType} />
 								<CusTitle component={'Date'} />
 								<CusTD
-									component={`${moment(data.DateStart).format(
-										'MM/DD/YYYY hh:mm A'
-									)} - ${moment(data.DateEnd).format(
-										'MM/DD/YYYY hh:mm A'
-									)}`}
+									component={moment(data.Date).format(
+										'MM/DD/YYYY'
+									)}
 								/>
-								<CusTitle component={'Purpose'} />
-								<CusTD component={data.Purpose} />
+								<CusTitle component={'No. of Persons'} />
+								<CusTD component={data.NumPerson} />
 								<CusTitle component={'Status'} />
 								<CusTD component={data.Status} />
 								<CusTitle component={'Actions'} />
@@ -95,21 +73,21 @@ const VisitorTable = ({ data, search, all }) => {
 											spacing={3}
 										>
 											{data.id && (
-												<EditVisitors
+												<EditBookings
 													data={data}
 													id={data.id}
 													mainCollection='maintenance'
 													tblDocUser='frontdesk'
-													tblUserCol='tbl_visitors'
+													tblUserCol='tbl_bookings'
 												/>
 											)}
 
 											<CusDelete
 												id={data.id}
-												label={` ${data.VisitorID}'s Data`}
+												label={` ${data.BookingID}'s Data`}
 												mainCollection='maintenance'
 												tblDocUser='frontdesk'
-												tblUserCol='tbl_visitors'
+												tblUserCol='tbl_bookings'
 												hasFile={false}
 												onUpdate={() => {}}
 											/>
@@ -123,4 +101,4 @@ const VisitorTable = ({ data, search, all }) => {
 			}
 		});
 };
-export default VisitorTable;
+export default BookingsTable;

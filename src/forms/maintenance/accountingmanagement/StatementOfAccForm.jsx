@@ -9,6 +9,7 @@ import {
 	CusNumInputLeftAdd,
 	CusNumInput,
 	CusMultiSelectDiscount,
+	CusSelectOnHoldUnit,
 } from '../../../customs';
 import { Stack, Button } from '@chakra-ui/react';
 import { useState } from 'react';
@@ -59,7 +60,7 @@ const StatementOfAccForm = ({
 								direction={['column', 'row']}
 								spacing={6}
 							>
-								<CusSelectUnit
+								<CusSelectOnHoldUnit
 									isRequired
 									name='unit'
 									label='Unit'

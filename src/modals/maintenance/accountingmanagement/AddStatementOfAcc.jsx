@@ -85,12 +85,13 @@ const AddStatementOfAcc = () => {
 		});
 	}
 
-	let filteredUnit = [];
-	if (filteredBuyer[0]) {
-		filteredUnit = u.filter((i) => {
-			return i.name == filteredBuyer[0].Units.toString() ? i : '';
-		});
-	}
+	const filteredUnit = u.filter((i) => {
+		if (filteredBuyer[0]) {
+			if (i.name == filteredBuyer[0].Units.toString()) {
+				return i;
+			}
+		}
+	});
 
 	const filteredAmount = amounts.filter((amt) => {
 		if (amt.Units && filteredUnit[0]) {

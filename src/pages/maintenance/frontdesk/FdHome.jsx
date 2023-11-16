@@ -21,15 +21,15 @@ import {
 	Step,
 	StepIndicator,
 	StepStatus,
-	StepNumber
+	StepNumber,
 } from '@chakra-ui/react';
 import { Body } from '../../../sections/maintenance';
 import { RiArrowDownSFill } from 'react-icons/ri';
 import { useData } from '../../../../DataContext';
-import{IoPeople} from 'react-icons/io5'
-import {AiOutlineSchedule} from 'react-icons/ai'
+import { IoPeople } from 'react-icons/io5';
+import { AiOutlineSchedule } from 'react-icons/ai';
 import { DateChecker } from '../../../utilities';
-import moment from 'moment'
+import moment from 'moment';
 
 const FdHome = () => {
 	return (
@@ -45,7 +45,7 @@ const FdHome = () => {
 };
 
 const Item = () => {
-	const { mrequest, towers, visitors } = useData();
+	const { mrequest, towers, visitors, bookings } = useData();
 
 	const towerOption = [];
 	if (towers && towers[0]) {
@@ -74,17 +74,18 @@ const Item = () => {
 
 		const item = list[0];
 
-		
-		
-		if( visitors){
-
+		if (visitors) {
 			const [sortType, setSortType] = useState('asc');
-			const totalVisitors = []
-			const totalActiveVisitors = visitors.filter((items)=>(items.Status == 'Confirmed' && items.Unit.includes(item.TowerNum)))
-			
-			totalActiveVisitors.forEach((v)=>{
-				totalVisitors.push(v.Visitor)
-			})
+			const totalVisitors = [];
+			const totalActiveVisitors = visitors.filter(
+				(items) =>
+					items.Status == 'Confirmed' &&
+					items.Unit.includes(item.TowerNum)
+			);
+
+			totalActiveVisitors.forEach((v) => {
+				totalVisitors.push(v.Visitor);
+			});
 
 			const flattenedVisitors = totalVisitors.flat();
 
@@ -92,25 +93,17 @@ const Item = () => {
 
 			const totalNumberOfVisitors = newVisitors.length;
 
-
-
-			if (totalActiveVisitors){
-
-				totalActiveVisitors.sort((a)=>{
-
-					return(
-						moment(
-							new Date(
-								sortType == 'asc'
-									? a.CreatedDate.seconds * 1000
-									: b.CreatedDate.seconds * 1000
-							)
+			if (totalActiveVisitors) {
+				totalActiveVisitors.sort((a) => {
+					return moment(
+						new Date(
+							sortType == 'asc'
+								? a.CreatedDate.seconds * 1000
+								: b.CreatedDate.seconds * 1000
 						)
-					)
-				})
-
+					);
+				});
 			}
-
 
 			return (
 				<Flex
@@ -139,7 +132,7 @@ const Item = () => {
 							>
 								Tower {fil ? fil : item.TowerNum}
 							</MenuButton>
-	
+
 							<MenuList w='110px'>
 								<MenuOptionGroup
 									defaultValue='Tower 1'
@@ -189,26 +182,32 @@ const Item = () => {
 								w={'100%'}
 							>
 								<HStack alignContent={'center'}>
-									<Flex boxSize={'50%'} justifyContent={'center'}>
+									<Flex
+										boxSize={'50%'}
+										justifyContent={'center'}
+									>
 										<IoPeople
-											size={"70%"}
+											size={'70%'}
 											color={'green'}
 										/>
 									</Flex>
-									<Box boxSize={'60%'} justifyContent={'center'}>
+									<Box
+										boxSize={'60%'}
+										justifyContent={'center'}
+									>
 										<Heading
 											fontSize={'105px'}
 											alignItems={'center'}
 											textAlign={'center'}
 											p={3}
 										>
-										
-										{totalNumberOfVisitors}
-										
+											{totalNumberOfVisitors}
 										</Heading>
-										<Heading size={'md'}>Total number of Visitors</Heading>
+										<Heading size={'md'}>
+											Total number of Visitors
+										</Heading>
 									</Box>
-								</HStack>							
+								</HStack>
 							</GridItem>
 							<GridItem
 								bgColor={'w.300'}
@@ -217,69 +216,102 @@ const Item = () => {
 								p={5}
 								rowSpan={{ base: 5, xl: 2 }}
 								colSpan={3}
-								
 							>
-								<VStack boxSize={'100%'} p={3} >
+								<VStack
+									boxSize={'100%'}
+									p={3}
+								>
 									<Box w={'100%'}>
-										<Heading size={'md'}>Visitors for Today</Heading>
+										<Heading size={'md'}>
+											Visitors for Today
+										</Heading>
 										<Divider
 											w='100%'
 											mt={3}
 											mb={3}
-										/>	
+										/>
 
-										<Card size={'100%'} p={5} borderRadius={15}>
-											
-											<Stepper orientation='vertical'  gap='3'>
-												{totalActiveVisitors.slice(0,2).map((item, index) => (
-													<Step key={index}>
-													<StepIndicator>
-														<StepStatus
-															active={<StepNumber />}
-														/>
-													</StepIndicator>
+										<Card
+											size={'100%'}
+											p={5}
+											borderRadius={15}
+										>
+											<Stepper
+												orientation='vertical'
+												gap='3'
+											>
+												{totalActiveVisitors
+													.slice(0, 2)
+													.map((item, index) => (
+														<Step key={index}>
+															<StepIndicator>
+																<StepStatus
+																	active={
+																		<StepNumber />
+																	}
+																/>
+															</StepIndicator>
 
-														<Text>
-															{item.Visitor.join(', ')} ( {item.Unit} )
-														</Text>
-														
-													</Step>
-						
-												))}
+															<Text>
+																{item.Visitor.join(
+																	', '
+																)}{' '}
+																( {item.Unit} )
+															</Text>
+														</Step>
+													))}
 											</Stepper>
-											{totalActiveVisitors.length !== 2 ? `${totalActiveVisitors.length - 2}  more`: null}
-												
+											{totalActiveVisitors.length !== 2
+												? `${
+														totalActiveVisitors.length -
+														2
+												  }  more`
+												: null}
 										</Card>
 									</Box>
 									<Box w={'100%'}>
-									<Heading size={'md'}>Bookings for Today</Heading>
+										<Heading size={'md'}>
+											Bookings for Today
+										</Heading>
 										<Divider
 											w='100%'
 											mt={3}
 											mb={3}
-										/>	
+										/>
 
-										<Card size={'100%'} p={5} borderRadius={15}>
-											
-											<Stepper orientation='vertical'  gap='3'>
-													<Step>
-														<StepIndicator>
-															<StepStatus
-																active={<StepNumber />}
-															/>
-														</StepIndicator>
-														<Text> (3) Swimming Pool</Text>
-													</Step>
-													
-													<Step>
-														<StepIndicator>
-															<StepStatus
-																active={<StepNumber />}
-															/>
-														</StepIndicator>
-														<Text>(2) Gym</Text>
-													</Step>
-											
+										<Card
+											size={'100%'}
+											p={5}
+											borderRadius={15}
+										>
+											<Stepper
+												orientation='vertical'
+												gap='3'
+											>
+												<Step>
+													<StepIndicator>
+														<StepStatus
+															active={
+																<StepNumber />
+															}
+														/>
+													</StepIndicator>
+													<Text>
+														{' '}
+														(3) Swimming Pool
+													</Text>
+												</Step>
+
+												<Step>
+													<StepIndicator>
+														<StepStatus
+															active={
+																<StepNumber />
+															}
+														/>
+													</StepIndicator>
+													<Text>(2) Gym</Text>
+												</Step>
 											</Stepper>
 										</Card>
 									</Box>
@@ -296,35 +328,38 @@ const Item = () => {
 								w={'100%'}
 							>
 								<HStack>
-									<Flex boxSize={'50%'} justifyContent={'center'}>
+									<Flex
+										boxSize={'50%'}
+										justifyContent={'center'}
+									>
 										<AiOutlineSchedule
 											size={'65%'}
 											color={'0D2B4D'}
 										/>
 									</Flex>
-									<Box boxSize={'60%'} justifyContent={'center'}>
+									<Box
+										boxSize={'60%'}
+										justifyContent={'center'}
+									>
 										<Heading
 											fontSize={'105px'}
 											alignItems={'center'}
 											textAlign={'center'}
 											p={3}
 										>
-											{5}
+											{bookings.length}
 										</Heading>
-										<Heading size={'md'}>Total number of Bookings</Heading>	
+										<Heading size={'md'}>
+											Total number of Bookings
+										</Heading>
 									</Box>
-								</HStack>			
+								</HStack>
 							</GridItem>
 						</Grid>
 					</ScaleFade>
 				</Flex>
 			);
 		}
-
-
-
-		
-
 	}
 
 	// if (item) {

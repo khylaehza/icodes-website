@@ -59,7 +59,7 @@ const Pagination = ({
 			setCurrentPage(currentPage + 1);
 		}
 	};
-	console.log(numPage);
+
 	return (
 		<Flex
 			as='nav'

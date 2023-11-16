@@ -1,11 +1,11 @@
-import CusModal from '../../../customs/CusSOAModal';
+import { CusModal } from '../../../customs';
 import { Flex, useDisclosure, useToast } from '@chakra-ui/react';
 import { IdGenerator } from '../../../utilities';
 import { useData } from '../../../../DataContext';
 
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-// import { DiscountForm } from '../../../../forms';
+import { BookingsForm } from '../../../forms';
 import { db } from '../../../../firebase-config';
 import { collection, serverTimestamp, addDoc } from 'firebase/firestore';
 
@@ -18,32 +18,31 @@ const AddBookings = () => {
 	const form = useFormik({
 		initialValues: {
 			tower: '',
-			name: '',
+			unitOwner: '',
 			amenityType: '',
 			date: '',
 			numPerson: '',
-			details: '',
 			status: 'Confirmed',
 		},
 		validationSchema: Yup.object({
-			dscName: Yup.string().required('Discount Name is required.'),
-			discount: Yup.string().required(
-				'Discount Amount/Percent is required. '
-			),
+			tower: Yup.string().required('Tower is required.'),
+			unitOwner: Yup.string().required('Unit Owner is required. '),
+			amenityType: Yup.string().required('Amenity is required. '),
+			date: Yup.string().required('Date is required. '),
+			numPerson: Yup.number().required('Number of Person is required. '),
 		}),
 		onSubmit: async (value, actions) => {
 			try {
 				await addDoc(
-					collection(db, 'maintenance', 'admin', 'tbl_bookings'),
+					collection(db, 'maintenance', 'frontdesk', 'tbl_bookings'),
 					{
 						CreatedDate: serverTimestamp(),
 						BookingID: bookingID,
 						TNum: value.tower,
-						Name: unitOwners,
+						UnitOwner: value.unitOwner,
 						AmenityType: value.amenityType,
 						Date: value.date,
 						NumPerson: value.numPerson,
-
 						Status: value.status,
 					}
 				);
@@ -53,8 +52,8 @@ const AddBookings = () => {
 						collection(db, 'maintenance', 'admin', 'tbl_logs'),
 						{
 							CreatedDate: serverTimestamp(),
-							Msg: `${curUser.EmpPos} ${curUser.FName} ${curUser.LName} (${curUser.EmpId}) added a new discount.`,
-							Module: 'Unit Amounts',
+							Msg: `${curUser.EmpPos} ${curUser.FName} ${curUser.LName} (${curUser.EmpId}) added a new booking.`,
+							Module: 'Booking Amenities',
 						}
 					);
 				}
@@ -72,6 +71,7 @@ const AddBookings = () => {
 					duration: 9000,
 					isClosable: true,
 				});
+				console.log(e);
 			}
 
 			actions.resetForm();
@@ -81,18 +81,16 @@ const AddBookings = () => {
 
 	return (
 		<Flex>
-			{/* <CusModal
-				header={'Fill the bookingd details.'}
-				component={<DiscountForm form={form} />}
-				action={'+ Discounts'}
+			<CusModal
+				header={'Fill the booking details.'}
+				component={<BookingsForm form={form} />}
+				action={'+ Book Amenity'}
 				isOpen={isOpen}
 				onClose={onClose}
 				onOpen={onOpen}
-				variant={'ghost'}
-				color={'b.200'}
 				justifyContent={'flex-start'}
 				form={form}
-			/> */}
+			/>
 		</Flex>
 	);
 };

@@ -471,14 +471,16 @@ export const CusSelectTower = ({
 				</option>
 
 				{byName.map((item, key) => {
-					return (
-						<option
-							key={key}
-							value={item.TowerName}
-						>
-							{item.TowerName}
-						</option>
-					);
+					if (item.Status == 'Ready for Occupancy') {
+						return (
+							<option
+								key={key}
+								value={item.TowerName}
+							>
+								{item.TowerName}
+							</option>
+						);
+					}
 				})}
 			</Select>
 			<FormErrorMessage fontSize={'xs'}>{error}</FormErrorMessage>
@@ -1081,7 +1083,7 @@ export const CusBookingStatus = ({
 	name,
 	onChange,
 	value,
-	placeholder,
+
 	error,
 	onBlur,
 	touch,
@@ -1102,7 +1104,6 @@ export const CusBookingStatus = ({
 				onBlur={onBlur}
 				value={currentValue}
 				fontSize={'xs'}
-				// defaultValue={'Select'}
 			>
 				<option
 					value='Select'
@@ -1114,6 +1115,144 @@ export const CusBookingStatus = ({
 				<option value='Confirmed'>Confirmed</option>
 				<option value='Completed'>Completed</option>
 			</Select>
+			<FormErrorMessage fontSize={'xs'}>{error}</FormErrorMessage>
+		</FormControl>
+	);
+};
+
+export const CusSelectAmenities = ({
+	label,
+	name,
+	onChange,
+	value,
+	placeholder,
+	error,
+	onBlur,
+	touch,
+	isRequired,
+	tower,
+	edit = false,
+}) => {
+	const { amenities } = useData();
+	let currentValue = value || 'Select';
+
+	return (
+		<FormControl
+			isInvalid={error && touch}
+			isRequired={isRequired}
+		>
+			<FormLabel fontSize={'xs'}>{label}</FormLabel>
+
+			<Select
+				name={name}
+				variant={'filled'}
+				onChange={onChange}
+				onBlur={onBlur}
+				value={currentValue}
+				fontSize={'xs'}
+				placeholder={'Select'}
+			>
+				{amenities.map((amenity) => {
+					// if (amenity.TNum == tower) {
+					return (
+						<option
+							key={amenity.AmenityID}
+							value={amenity.AmenityName}
+						>
+							{amenity.AmenityName}
+						</option>
+					);
+					// }
+				})}
+			</Select>
+			<FormErrorMessage fontSize={'xs'}>{error}</FormErrorMessage>
+		</FormControl>
+	);
+};
+
+export const CusSelectOnHoldUnit = ({
+	label,
+	name,
+	onChange,
+	value,
+	error,
+	onBlur,
+	touch,
+	isRequired,
+	disabled = false,
+}) => {
+	const { units } = useData();
+
+	const unitList = [];
+
+	const length = Object.keys(units).length;
+
+	for (let x = 0; x < length; x++) {
+		const i = units[x];
+
+		var sorted = Object.keys(i);
+		sorted.sort();
+
+		sorted.map((item, key) => {
+			const element = i[item];
+
+			if (Object.values(element).length != 0) {
+				const k = Object.values(element);
+
+				if (k) {
+					k.sort(function (a, b) {
+						var x = a.name.toLowerCase();
+						var y = b.name.toLowerCase();
+						return x < y ? -1 : x > y ? 1 : 0;
+					});
+				}
+
+				k.map((e) => {
+					if (e.status === 'On Hold') {
+						unitList.push(e);
+					}
+				});
+			}
+		});
+	}
+
+	let currentValue = value || 'Select';
+	return (
+		<FormControl
+			isInvalid={error && touch}
+			isRequired={isRequired}
+		>
+			<FormLabel fontSize={'xs'}>{label}</FormLabel>
+
+			<Select
+				name={name}
+				variant={'outline'}
+				bgColor={'w.300'}
+				onChange={onChange}
+				onBlur={onBlur}
+				value={currentValue}
+				fontSize={'xs'}
+				disabled={disabled}
+				// defaultValue={'Select'}
+			>
+				<option
+					value='Select'
+					disabled
+				>
+					Select
+				</option>
+				{unitList.map((item, key) => {
+					return (
+						<option
+							key={key}
+							value={item.name}
+						>
+							{item.name}
+						</option>
+					);
+				})}
+			</Select>
+
 			<FormErrorMessage fontSize={'xs'}>{error}</FormErrorMessage>
 		</FormControl>
 	);

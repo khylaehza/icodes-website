@@ -112,7 +112,7 @@ function CusModal({ data }) {
 	);
 
 	const table = Object.values(data.SOA);
-	console.log(table);
+
 	return (
 		<>
 			<Button

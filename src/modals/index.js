@@ -33,3 +33,4 @@ export { default as AddTransactions } from './maintenance/accountingmanagement/A
 export { default as AddVisitors } from './maintenance/frontdesk/AddVisitors';
 export { default as EditVisitors } from './maintenance/frontdesk/EditVisitors';
 export { default as AddBookings } from './maintenance/frontdesk/AddBookings';
+export { default as EditBookings } from './maintenance/frontdesk/EditBookings';

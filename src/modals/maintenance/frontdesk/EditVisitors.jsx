@@ -12,31 +12,20 @@ import {
 } from 'firebase/firestore';
 import { db } from '../../../../firebase-config';
 import { useData } from '../../../../DataContext';
-const EditVisitors = ({
-    data,
-	id,
-	mainCollection,
-	tblDocUser,
-	tblUserCol,
-}) =>{
-
-    const { isOpen, onOpen, onClose } = useDisclosure();
+const EditVisitors = ({ data, id, mainCollection, tblDocUser, tblUserCol }) => {
+	const { isOpen, onOpen, onClose } = useDisclosure();
 	const toast = useToast();
-    const { curUser, unitOwners } = useData();
-    const [visitors, setVisitors] = useState([])
- 
+	const { curUser, unitOwners } = useData();
+	const [visitors, setVisitors] = useState([]);
 
-    const acqUnit = [];
-    const newVisitor = [];
+	const acqUnit = [];
+	const newVisitor = [];
 
-
-
-    visitors.forEach(visitors => {
+	visitors.forEach((visitors) => {
 		newVisitor.push(visitors.replace(/\n/g, ''));
-	})
+	});
 
-
-    const editForm = useFormik({
+	const editForm = useFormik({
 		initialValues: {
 			units: data.Unit,
 			visitors: data.Visitor,
@@ -47,21 +36,23 @@ const EditVisitors = ({
 		},
 		enableReinitialize: true,
 		onSubmit: async (value, actions) => {
-			const visitors = newVisitor !== '' ? value.visitors : newVisitor
+			const visitors = newVisitor !== '' ? value.visitors : newVisitor;
 			try {
-                 
-                acqUnit.push(value.units);
+				acqUnit.push(value.units);
 				const filteredOwners = unitOwners.filter((owner) => {
 					return acqUnit.some((unit) => owner.Units.includes(unit));
 				});
 
 				const unitOwner = filteredOwners.map((owner) => {
-				const formattedFName = owner.FName.charAt(0).toUpperCase() + owner.FName.slice(1);
-				const formattedMName = owner.MName.charAt(0).toUpperCase();
-				const formattedLName =
-					owner.LName.charAt(0).toUpperCase() + owner.LName.slice(1);
+					const formattedFName =
+						owner.FName.charAt(0).toUpperCase() +
+						owner.FName.slice(1);
+					const formattedMName = owner.MName.charAt(0).toUpperCase();
+					const formattedLName =
+						owner.LName.charAt(0).toUpperCase() +
+						owner.LName.slice(1);
 
-				return `${formattedFName} ${formattedMName} ${formattedLName}`;
+					return `${formattedFName} ${formattedMName} ${formattedLName}`;
 				});
 				const docRef = doc(
 					db,
@@ -71,27 +62,27 @@ const EditVisitors = ({
 					id
 				);
 				updateDoc(docRef, {
-					editedDate: serverTimestamp(),
+					EditedDate: serverTimestamp(),
 
 					Unit: value.units,
 					For: unitOwner,
 					Visitor: visitors,
 					DateStart: value.dateStart,
-					DateEnd: value.dateEnd,
+					// DateEnd: value.dateEnd,
 					Purpose: value.purpose,
 					Status: value.status,
 				});
 
-                if (curUser) {
-                    await addDoc(
-                        collection(db, 'maintenance', 'admin', 'tbl_logs'),
-                        {
-                            CreatedDate: serverTimestamp(),
-                            Msg: `${curUser.EmpPos} ${curUser.FName} ${curUser.LName} (${curUser.EmpId}) edited Visitor/s details.`,
-                            Module: 'Visitors',
-                        }
-                    );
-                }
+				if (curUser) {
+					await addDoc(
+						collection(db, 'maintenance', 'admin', 'tbl_logs'),
+						{
+							CreatedDate: serverTimestamp(),
+							Msg: `${curUser.EmpPos} ${curUser.FName} ${curUser.LName} (${curUser.EmpId}) edited Visitor/s details.`,
+							Module: 'Visitors',
+						}
+					);
+				}
 
 				toast({
 					title: `${data.VisitorID}'s Details Edited!`,
@@ -106,21 +97,23 @@ const EditVisitors = ({
 					duration: 9000,
 					isClosable: true,
 				});
+
+				console.log(e);
 			}
 
 			actions.resetForm();
 			onClose();
-            setVisitors([])
+			setVisitors([]);
 		},
 	});
 
-    const onCloseModal = () => {
-        editForm.resetForm();
-        setVisitors([])
-        onClose();
-    };
+	const onCloseModal = () => {
+		editForm.resetForm();
+		setVisitors([]);
+		onClose();
+	};
 
-    return (
+	return (
 		<CusEdit
 			header={`Edit Visitor/s details.`}
 			isOpen={isOpen}
@@ -128,13 +121,13 @@ const EditVisitors = ({
 			onOpen={onOpen}
 			component={
 				<VisitorsForm
-                    form={editForm}
-                    visitors={visitors}
-                    setVisitors={setVisitors}
+					form={editForm}
+					visitors={visitors}
+					setVisitors={setVisitors}
 				/>
 			}
 		/>
 	);
-}
+};
 
-export default EditVisitors
+export default EditVisitors;

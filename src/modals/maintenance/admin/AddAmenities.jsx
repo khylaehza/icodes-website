@@ -155,7 +155,7 @@ const AddAmenities = () => {
 	return (
 		<Flex>
 			<CusModal
-				header={'Fill the employee details.'}
+				header={'Fill the amenities details.'}
 				component={
 					<AmenitiesForm
 						form={form}
