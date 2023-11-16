@@ -77,6 +77,8 @@ export function DataProvider({ children }) {
 					position: 'top',
 					duration: 3000,
 				});
+				setCurUser(savedUser ? JSON.parse(savedUser) : []);
+				navigate('/');
 			} else {
 				if (
 					username === data.UName &&
@@ -85,15 +87,15 @@ export function DataProvider({ children }) {
 				) {
 					setCurUser(data);
 					if (username.includes('AD')) {
-						navigate('adHome');
-					} else if (username.includes('SM')) {
-						navigate('/smHome');
-					} else if (username.includes('AM')) {
-						navigate('/amHome');
+						navigate('/admin');
 					} else if (username.includes('FD')) {
-						navigate('/fdHome');
+						navigate('/frontdesk');
 					} else if (username.includes('PM')) {
-						navigate('/pmHome');
+						navigate('/pm');
+					} else if (username.includes('AM')) {
+						navigate('/am');
+					} else if (username.includes('SM')) {
+						navigate('/sm');
 					}
 				} else if (
 					username === data.UName &&
@@ -116,7 +118,7 @@ export function DataProvider({ children }) {
 	const logout = () => {
 		setCurUser([]);
 		localStorage.clear();
-		navigate('/login');
+		navigate('/login'); // '/' muna since wala lang homepage
 	};
 
 	const [towers, setTowers] = useState([{}]);

@@ -23,7 +23,7 @@ const Header = ({ onOpen, ...rest }) => {
 	const handleLogout = () => {
 		try {
 			logout();
-			navigate('/');
+			//navigate('/login');
 		} catch (error) {
 			console.log(error);
 		}

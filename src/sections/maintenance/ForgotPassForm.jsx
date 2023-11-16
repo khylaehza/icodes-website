@@ -86,7 +86,7 @@ const Form = () => {
             const cpass = values.confirmPassword;
            
             if(npass === cpass){
-                const email  = form.values.email
+                const email  = form.values.email == ''? curUser.Email : form.values.email;
                 const emp = employees.filter((employee)=> employee.Email === email).map((employee)=> employee.id);
                 const docRef = doc(db, 'maintenance', 'admin', 'tbl_employees', emp.toString());
                 try {
@@ -99,7 +99,7 @@ const Form = () => {
                         duration: 3000,
                         isClosable: true,
                     });
-                    navigate('/')
+                    navigate('/login')
                 }catch(e){
                     console.log(e)
                 }
