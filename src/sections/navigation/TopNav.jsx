@@ -106,7 +106,7 @@ const TopNav = () => {
 							<Button
 								variant={'tertiary'}
 								size='sm'
-								//	onClick={toDesigner}
+								onClick={() => navigate('/designer')}
 								color={
 									location.pathname === '/designer'
 										? 'black'
@@ -140,7 +140,7 @@ const TopNav = () => {
 						<Button
 							variant={'primary'}
 							size='sm'
-							onClick={toLogin}
+							onClick={() => navigate('/')}
 						>
 							Login
 						</Button>

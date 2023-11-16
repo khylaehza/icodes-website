@@ -93,7 +93,9 @@ const AddAmenities = () => {
 									{
 										CreatedDate: serverTimestamp(),
 										AmenityID: amntyId,
-										AmenityName: value.ameName,
+										AmenityName: `${
+											value.ameName
+										} (${value.tower.slice(-3, -1)})`,
 										Capacity: value.capacity,
 										Description: value.ameDesc,
 										TNum: value.tower,

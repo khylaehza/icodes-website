@@ -1,17 +1,17 @@
 import { Flex } from '@chakra-ui/react';
 import { TopNav } from '../../sections/navigation';
-import { LogForm } from '../../sections/maintenance';
-
-const LoginPage = () => {
+import { Guide } from '../../sections/interactive';
+const InteractiveGuide = () => {
 	return (
 		<Flex
 			flexDir={'column'}
 			height={'100vh'}
 		>
 			<TopNav />
-			<LogForm />
+
+			<Guide />
 		</Flex>
 	);
 };
 
-export default LoginPage;
+export default InteractiveGuide;

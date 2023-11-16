@@ -1,14 +1,4 @@
-import {
-	Box,
-	Stack,
-	Heading,
-	Text,
-	SimpleGrid,
-	Button,
-	Image,
-	Flex,
-	VStack,
-} from '@chakra-ui/react';
+import { Box, Heading, Text, SimpleGrid, Image, Flex } from '@chakra-ui/react';
 
 const LoginBackground = ({ children }) => {
 	return (

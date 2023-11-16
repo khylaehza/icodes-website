@@ -29,6 +29,12 @@ function CusCapacity({ date, stats }) {
 	const { amenities, bookings } = useData();
 	const [selectedAmenity, setSelectedAmenity] = useState(null);
 
+	const cap = amenities.map((ame) => {
+		if (stats == ame.AmenityName) {
+			return Number(ame.Capacity);
+		}
+	});
+
 	const filteredBookings = bookings.filter((booking) => {
 		if (stats == booking.AmenityType && booking.Status == 'Confirmed') {
 			return booking.Date === date;
@@ -39,132 +45,86 @@ function CusCapacity({ date, stats }) {
 		return <Text>No amenity bookings on this day.</Text>;
 	}
 
+	const totalBookings = filteredBookings.reduce(
+		(acc, booking) => acc + parseInt(booking.NumPerson),
+		0
+	);
+
+	console.log(filteredBookings, totalBookings);
+
+	const percentage = (totalBookings / cap[0]) * 100;
+	let bgColor = 'green';
+	if (percentage >= 75) {
+		bgColor = 'red';
+	} else if (percentage >= 50) {
+		bgColor = 'yellow';
+	}
 	return (
 		<Stack>
 			<Text as={'b'}>{date}</Text>
-			{amenities.map((amenity) => {
-				const amenityBookings = filteredBookings.filter(
-					(booking) => booking.AmenityType === amenity.AmenityName
-				);
 
-				const totalBookings = amenityBookings.reduce(
-					(acc, booking) => acc + parseInt(booking.NumPerson),
-					0
-				);
+			<VStack
+				align='center'
+				w={'100%'}
+			>
+				<Box textAlign='center'>
+					{/* <Text as='b'>{amenity.AmenityName}</Text> */}
+					<Text>
+						Total bookings: {totalBookings} / {cap[0]}
+					</Text>
+				</Box>
+				<Box>
+					<Progress
+						colorScheme={bgColor}
+						size='sm'
+						value={percentage}
+						width='250px'
+					/>
+				</Box>
+			</VStack>
 
-				if (amenityBookings.length > 0) {
-					const percentage =
-						(totalBookings / parseInt(amenity.Capacity)) * 100;
+			{filteredBookings.map((booking, key) => (
+				<Card
+					key={key}
+					boxShadow='lg'
+					p='4'
+					dir={'row'}
+				>
+					<Flex
+						dir={'row'}
+						justifyContent={'space-between'}
+						textAlign={'left'}
+						alignItems={'center'}
+					>
+						<Stepper
+							orientation='vertical'
+							gap={'3'}
+						>
+							<Step>
+								<StepIndicator>
+									<StepStatus active={<StepNumber />} />
+								</StepIndicator>
+							</Step>
+						</Stepper>
 
-					let bgColor = 'green';
-					if (percentage >= 75) {
-						bgColor = 'red';
-					} else if (percentage >= 50) {
-						bgColor = 'yellow';
-					}
+						<Text
+							alignItems={'center'}
+							textAlign={'center'}
+						>
+							{booking.UnitOwner}
+						</Text>
 
-					return (
-						<React.Fragment key={amenity.AmenityID}>
-							{/* <Accordion allowMultiple>
-								<AccordionItem>
-									<h2>
-										<AccordionButton
-											onClick={() =>
-												setSelectedAmenity(amenity)
-											}
-											style={{ height: 'auto' }}
-										> */}
-							<VStack
-								align='center'
-								w={'100%'}
-							>
-								<Box textAlign='center'>
-									{/* <Text as='b'>{amenity.AmenityName}</Text> */}
-									<Text>
-										Total bookings: {totalBookings} /{' '}
-										{amenity.Capacity}
-									</Text>
-								</Box>
-								<Box>
-									<Progress
-										colorScheme={bgColor}
-										size='sm'
-										value={percentage}
-										width='250px'
-									/>
-								</Box>
-							</VStack>
-							{/* <AccordionIcon />
-										</AccordionButton> */}
-							{/* </h2> */}
-							{/* <AccordionPanel pb={4}> */}
-							{/* {selectedAmenity === amenity && ( */}
-							<>
-								{/* <Text as='b'>Booking Details</Text> */}
-								{amenityBookings.map((booking) => (
-									<Card
-										key={booking.BookingID}
-										boxShadow='lg'
-										p='4'
-										dir={'row'}
-									>
-										<Flex
-											dir={'row'}
-											justifyContent={'space-between'}
-											textAlign={'left'}
-											alignItems={'center'}
-										>
-											<Stepper
-												orientation='vertical'
-												gap={'3'}
-											>
-												<Step>
-													<StepIndicator>
-														<StepStatus
-															active={
-																<StepNumber />
-															}
-														/>
-													</StepIndicator>
-												</Step>
-											</Stepper>
+						<Divider orientation='vertical' />
 
-											{/* <Text
-												fontWeight={'bold'}
-												mr={-2}
-											>
-												Unit Owner:
-											</Text> */}
-											<Text
-												alignItems={'center'}
-												textAlign={'center'}
-											>
-												{booking.UnitOwner}
-											</Text>
-
-											<Divider orientation='vertical' />
-
-											<Text
-												alignItems={'center'}
-												textAlign={'center'}
-											>
-												{booking.NumPerson} Persons
-											</Text>
-										</Flex>
-									</Card>
-								))}
-							</>
-							{/* )  */}
-							{/* } */}
-							{/* </AccordionPanel>
-								</AccordionItem>
-							</Accordion> */}
-						</React.Fragment>
-					);
-				}
-
-				return null;
-			})}
+						<Text
+							alignItems={'center'}
+							textAlign={'center'}
+						>
+							{booking.NumPerson} Persons
+						</Text>
+					</Flex>
+				</Card>
+			))}
 		</Stack>
 	);
 }

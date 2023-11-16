@@ -37,7 +37,16 @@ const UnitOwnersTable = ({
 	const toast = useToast();
 	const ret = search ? all : data;
 
-	const { isOpen, onOpen, onClose } = useDisclosure();
+	const {
+		isOpen: isImageModalOpen,
+		onOpen: onImageModalOpen,
+		onClose: onImageModalClose,
+	} = useDisclosure();
+	const {
+		isOpen: isStatusModalOpen,
+		onOpen: onStatusModalOpen,
+		onClose: onStatusModalClose,
+	} = useDisclosure();
 	const [Id, setId] = useState('');
 	const [nameLabel, setNameLabel] = useState('');
 	const [selectedImage, setSelectedImage] = useState(null);
@@ -52,7 +61,7 @@ const UnitOwnersTable = ({
 	const handleImageClick = (item) => {
 		setSelectedImage(item.UnOwnerImg);
 		setNameLabel(item);
-		onOpen();
+		onImageModalOpen();
 	};
 
 	return ret
@@ -62,8 +71,9 @@ const UnitOwnersTable = ({
 				: item.UID.toString().toLowerCase().includes(search);
 		})
 		.map((data, id) => {
+			console.log(data.Status);
 			const statusConfirmation = (value, data) => {
-				onOpen();
+				onStatusModalOpen();
 				setUnitOwnerState({
 					...unitOwnerState,
 					fName: data.FName,
@@ -100,7 +110,7 @@ const UnitOwnersTable = ({
 						isClosable: true,
 					});
 
-					onClose();
+					onStatusModalClose();
 				} catch (error) {
 					toast({
 						title: 'Edit Status Failed!',
@@ -112,6 +122,7 @@ const UnitOwnersTable = ({
 				}
 			};
 			if (data.CreatedDate) {
+				console.log(data.Status);
 				return (
 					<React.Fragment key={id}>
 						<Tr
@@ -177,7 +188,9 @@ const UnitOwnersTable = ({
 										<CusTD
 											component={
 												<Flex direction={'column'}>
-													{data.Status}
+													{data.Status.toString()
+														? 'Enabled'
+														: 'Disabled'}
 													<Switch
 														id='isChecked'
 														isChecked={data.Status}
@@ -234,8 +247,8 @@ const UnitOwnersTable = ({
 							)}
 						</Tr>
 						<CusAlert
-							isOpen={isOpen}
-							onClose={onClose}
+							isOpen={isStatusModalOpen}
+							onClose={onStatusModalClose}
 							header={'Status Confirmation'}
 							action={handleConfirmStatusChange}
 							actionLabel={'Confirm'}
@@ -265,8 +278,8 @@ const UnitOwnersTable = ({
 						/>
 
 						<CusEnlargeImage
-							isOpen={isOpen}
-							onClose={onClose}
+							isOpen={isImageModalOpen}
+							onClose={onImageModalClose}
 							label={
 								<NameFormat
 									fName={nameLabel.FName}

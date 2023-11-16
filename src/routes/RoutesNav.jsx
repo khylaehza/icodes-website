@@ -2,7 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import PrivateRoutes from './PrivateRoutes';
 import { DataProvider } from '../../DataContext';
 // start
-import { LoginPage, ForgotPassPage } from '../pages/start';
+import { LoginPage, ForgotPassPage, InteractiveGuide } from '../pages/';
 //maintenance
 import {
 	AdHome,
@@ -178,10 +178,11 @@ const RoutesNav = () => {
 						path={'/forgotpass'}
 						element={<ForgotPassPage />}
 					/>
+
 					<Route
 						exact
-						path={'/forgotpass'}
-						element={<ForgotPassPage />}
+						path={'/designer'}
+						element={<InteractiveGuide />}
 					/>
 				</Routes>
 			</DataProvider>

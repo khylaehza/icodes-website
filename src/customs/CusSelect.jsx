@@ -960,7 +960,7 @@ export const CusSelectOccOwner = ({
 				</option>
 
 				{byName.map((item, key) => {
-					if (item.Status == 'Active') {
+					if (item.Status == 'Active' || item.Status) {
 						return (
 							<option
 								key={key}

@@ -40,7 +40,8 @@ const AdHome = () => {
 };
 
 const Item = () => {
-	const { curUser, amenities, towers, units, unitOwners } = useData();
+	const { curUser, amenities, towers, units, unitOwners, reports } =
+		useData();
 
 	const towerOption = [];
 	if (towers && towers[0]) {

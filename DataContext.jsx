@@ -94,8 +94,7 @@ export function DataProvider({ children }) {
 						navigate('/fdHome');
 					} else if (username.includes('PM')) {
 						navigate('/pmHome');
-					} 
-	
+					}
 				} else if (
 					username === data.UName &&
 					password != data.Password
