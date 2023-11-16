@@ -6,80 +6,96 @@ const PrivateRoutes = () => {
 	const { curUser } = useData();
 	const location = useLocation();
 
-	
-
-	return curUser.length == 0 ? <Navigate to={'/login'} /> : innerPrivate(curUser);
+	return curUser.length == 0 ? (
+		<Navigate to={'/login'} />
+	) : (
+		innerPrivate(curUser)
+	);
 };
-	
-const innerPrivate = (curUser) =>{
-	switch(curUser.EmpPos) {
-		case "Admin": 
-			return AdminRoutes()
-		case "Front Desk":
-			return FrontDeskRoutes()
-		case "Property Management":
-			return PropertyManagementRoutes()
-		case "Accounting Management":
-			return AccountingManagementRoutes()
-		case "Sales Management":
-			return SalesManagementRoutes()
+
+const innerPrivate = (curUser) => {
+	switch (curUser.EmpPos) {
+		case 'Admin':
+			return AdminRoutes();
+		case 'Front Desk':
+			return FrontDeskRoutes();
+		case 'Property Management':
+			return PropertyManagementRoutes();
+		case 'Accounting Management':
+			return AccountingManagementRoutes();
+		case 'Sales Management':
+			return SalesManagementRoutes();
 		default:
-	  }
-}
-
-const AdminRoutes = () =>{
-	const { curUser } = useData();
-	const location = useLocation();  
-	if (curUser.EmpPos === 'Admin' && location.pathname.startsWith('/admin')) {
-	  	return <Outlet />;
-	} else {
-		console.log(location)
-		return <Navigate to={'/admin'}/>;
 	}
-}
+};
 
-const FrontDeskRoutes = () =>{
+const AdminRoutes = () => {
 	const { curUser } = useData();
-	const location = useLocation();  
-	if (curUser.EmpPos === 'Front Desk' && location.pathname.startsWith('/frontdesk')) {
-	  	return <Outlet />;
+	const location = useLocation();
+	if (curUser.EmpPos === 'Admin' && location.pathname.startsWith('/ad')) {
+		return <Outlet />;
 	} else {
-		console.log(curUser.EmpPos)
-		return <Navigate to={'/frontdesk'}/>;
+		return <Navigate to={'/ad'} />;
 	}
-}
+};
 
-const PropertyManagementRoutes = () =>{
+const FrontDeskRoutes = () => {
 	const { curUser } = useData();
-	const location = useLocation();  
-	if (curUser.EmpPos === 'Property Management' && location.pathname.startsWith('/pm')) {
-	  	return <Outlet />;
+	const location = useLocation();
+	if (
+		curUser.EmpPos === 'Front Desk' &&
+		location.pathname.startsWith('/fd')
+	) {
+		return <Outlet />;
 	} else {
-		console.log(location)
-		return <Navigate to={'/pm'}/>;
+		return <Navigate to={'/fd'} />;
 	}
-}
+};
 
-const AccountingManagementRoutes = () =>{
+const PropertyManagementRoutes = () => {
 	const { curUser } = useData();
-	const location = useLocation();  
-	if (curUser.EmpPos === 'Accounting Management' && location.pathname.startsWith('/am')) {
-	  	return <Outlet />;
+	const location = useLocation();
+	if (
+		curUser.EmpPos === 'Property Management' &&
+		location.pathname.startsWith('/pm')
+	) {
+		return <Outlet />;
 	} else {
-		console.log(location)
-		return <Navigate to={'/am'}/>;
+		return <Navigate to={'/pm'} />;
 	}
-}
+};
+
+const AccountingManagementRoutes = () => {
+	const { curUser } = useData();
+	const location = useLocation();
+	if (
+		curUser.EmpPos === 'Accounting Management' &&
+		location.pathname.startsWith('/am')
+	) {
+		return <Outlet />;
+	} else {
+		return <Navigate to={'/am'} />;
+	}
+};
 
 const SalesManagementRoutes = () => {
 	const { curUser } = useData();
-	const location = useLocation();  
-	if (curUser.EmpPos === 'Sales Management' && location.pathname.startsWith('/sm')) {
-	  	return <Outlet />;
+	const location = useLocation();
+	if (
+		curUser.EmpPos === 'Sales Management' &&
+		location.pathname.startsWith('/sm')
+	) {
+		return <Outlet />;
 	} else {
-		console.log(location)
-		return <Navigate to={'/sm'}/>;
+		return <Navigate to={'/sm'} />;
 	}
 };
 
-export { PrivateRoutes, AdminRoutes, FrontDeskRoutes, PropertyManagementRoutes, AccountingManagementRoutes, SalesManagementRoutes };
+export {
+	PrivateRoutes,
+	AdminRoutes,
+	FrontDeskRoutes,
+	PropertyManagementRoutes,
+	AccountingManagementRoutes,
+	SalesManagementRoutes,
+};

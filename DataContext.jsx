@@ -87,9 +87,9 @@ export function DataProvider({ children }) {
 				) {
 					setCurUser(data);
 					if (username.includes('AD')) {
-						navigate('/admin');
+						navigate('/ad');
 					} else if (username.includes('FD')) {
-						navigate('/frontdesk');
+						navigate('/fd');
 					} else if (username.includes('PM')) {
 						navigate('/pm');
 					} else if (username.includes('AM')) {
