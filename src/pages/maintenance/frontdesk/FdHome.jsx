@@ -261,7 +261,7 @@ const Item = () => {
 														</Step>
 													))}
 											</Stepper>
-											{totalActiveVisitors.length !== 2
+											{totalActiveVisitors.length > 2 //if total is greater than 2, display indicator na meron pa or higit pa sa dalawa, para hindi nag nnegative
 												? `${
 														totalActiveVisitors.length -
 														2

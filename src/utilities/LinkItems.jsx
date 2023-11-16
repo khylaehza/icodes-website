@@ -20,53 +20,53 @@ import { RxActivityLog } from 'react-icons/rx';
 import { VscFeedback } from 'react-icons/vsc';
 
 export const ad = [
-	{ name: 'Home', icon: MdSpaceDashboard, nav: '/adHome' },
-	{ name: 'Employees', icon: FaUserTie, nav: '/employees' },
-	{ name: 'Towers', icon: RiBuilding2Fill, nav: '/towers' },
-	{ name: 'Unit Types', icon: HiOfficeBuilding, nav: '/unitTypes' },
-	{ name: 'Unit Amounts', icon: FaMoneyBill, nav: '/amounts' },
-	{ name: 'Unit Owners', icon: FaHouseUser, nav: '/unitOwners' },
-	{ name: 'Amenities', icon: FaSwimmer, nav: '/amenities' },
-	{ name: 'Computations', icon: AiFillCalculator, nav: '/computations' },
-	{ name: 'Audit Logs', icon: RxActivityLog, nav: '/logs' },
+	{ name: 'Home', icon: MdSpaceDashboard, nav: '/admin' },
+	{ name: 'Employees', icon: FaUserTie, nav: '/admin/employees' },
+	{ name: 'Towers', icon: RiBuilding2Fill, nav: '/admin/towers' },
+	{ name: 'Unit Types', icon: HiOfficeBuilding, nav: '/admin/unitTypes' },
+	{ name: 'Unit Amounts', icon: FaMoneyBill, nav: '/admin/amounts' },
+	{ name: 'Unit Owners', icon: FaHouseUser, nav: '/admin/unitOwners' },
+	{ name: 'Amenities', icon: FaSwimmer, nav: '/admin/amenities' },
+	{ name: 'Computations', icon: AiFillCalculator, nav: '/admin/computations' },
+	{ name: 'Audit Logs', icon: RxActivityLog, nav: '/admin/logs' },
 	{
 		name: 'Reports & Feedback',
 		icon: VscFeedback,
-		nav: '/reports',
+		nav: '/admin/reports',
 	},
 ];
 export const fd = [
-	{ name: 'Home', icon: MdSpaceDashboard, nav: '/fdHome' },
-	{ name: 'Unit Owner List', icon: FaList, nav: '/viewUnitOwner' },
-	{ name: 'Visitors', icon: BsFilePerson, nav: '/visitors' },
+	{ name: 'Home', icon: MdSpaceDashboard, nav: '/frontdesk' },
+	{ name: 'Unit Owner List', icon: FaList, nav: '/frontdesk/viewUnitOwner' },
+	{ name: 'Visitors', icon: BsFilePerson, nav: '/frontdesk/visitors' },
 	{
 		name: 'Booking Amenities',
 		icon: BsFillBookmarkPlusFill,
-		nav: '/bookings',
+		nav: '/frontdesk/bookings',
 	},
 ];
 export const pm = [
-	{ name: 'Home', icon: MdSpaceDashboard, nav: '/pmHome' },
-	{ name: 'Announcement', icon: BsMegaphoneFill, nav: '/announcements' },
-	{ name: 'Maintenance Request', icon: FiTool, nav: '/maintenance' },
+	{ name: 'Home', icon: MdSpaceDashboard, nav: '/pm' },
+	{ name: 'Announcement', icon: BsMegaphoneFill, nav: '/pm/announcements' },
+	{ name: 'Maintenance Request', icon: FiTool, nav: '/pm/maintenance' },
 ];
 
 export const am = [
-	{ name: 'Home', icon: MdSpaceDashboard, nav: '/amHome' },
-	{ name: 'Statement of Accounts', icon: RiBillLine, nav: '/soa' },
-	{ name: 'Transactions', icon: FaExchangeAlt, nav: '/transactions' },
-	{ name: 'Unit Amounts', icon: FaMoneyBill, nav: '/viewAmounts' },
+	{ name: 'Home', icon: MdSpaceDashboard, nav: '/am' },
+	{ name: 'Statement of Accounts', icon: RiBillLine, nav: '/am/soa' },
+	{ name: 'Transactions', icon: FaExchangeAlt, nav: '/am/transactions' },
+	{ name: 'Unit Amounts', icon: FaMoneyBill, nav: '/am/viewAmounts' },
 ];
 
 export const sm = [
-	{ name: 'Home', icon: MdSpaceDashboard, nav: '/smHome' },
-	{ name: 'Agents', icon: IoIosPerson, nav: '/agents' },
-	{ name: 'Prospective Buyers', icon: BsPersonLinesFill, nav: '/pbuyers' },
-	// { name: 'Boosting Reports', icon: GiUpgrade, nav: '/boostreports' },
+	{ name: 'Home', icon: MdSpaceDashboard, nav: '/sm' },
+	{ name: 'Agents', icon: IoIosPerson, nav: '/sm/agents' },
+	{ name: 'Prospective Buyers', icon: BsPersonLinesFill, nav: '/sm/pbuyers' },
+	// { name: 'Boosting Reports', icon: GiUpgrade, nav: '/sm/boostreports' },
 	{
 		name: 'Manning Schedule',
 		icon: AiOutlineSchedule,
-		nav: '/manningSched',
+		nav: '/sm/manningSched',
 	},
-	// { name: 'Reports', icon: ImStatsBars, nav: '/reports' },
+	// { name: 'Reports', icon: ImStatsBars, nav: '/sm/reports' },
 ];
