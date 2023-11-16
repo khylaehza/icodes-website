@@ -12,6 +12,7 @@ import {
 	ButtonGroup,
 	useDisclosure,
 	useToast,
+	Button,
 } from '@chakra-ui/react';
 import React from 'react';
 import { useState } from 'react';
@@ -40,43 +41,80 @@ const TransactionsTable = ({ data, search, all, soa }) => {
 				: item.ReceiptNo.toString().includes(search);
 		})
 		.map((data, id) => {
-			//
-			// const onUpdate() => {
-			// //ung soa
-			// const collectionRef = doc(
-			// 	db,
-			// 	'maintenance',
-			// 	'accountingmanagement',
-			// 	'tbl_soa',
-			// 	`${data.id}`
-			// );
-
-			// let status = {};
-			// let amountPaid = {};
-			// let forMonth = {};
-			// let datePaid = {};
-			// let id = {};
-			// let paymentMode = {};
-			// let receiptNo = {};
-
-			// status[`SOA.${filteredMonth().key + 1}.status`] = '';
-			// amountPaid[`SOA.${filteredMonth().key + 1}.amountPaid`] = ';
-			// forMonth[`SOA.${filteredMonth().key + 1}.forMonth`] = value.forMonth;
-			// datePaid[`SOA.${filteredMonth().key + 1}.datePaid`] = value.datePaid;
-			// id[`SOA.${filteredMonth().key + 1}.transactId`] = transactId;
-			// paymentMode[`SOA.${filteredMonth().key + 1}.paymentMode`] =
-			// 	value.paymentMode;
-			// receiptNo[`SOA.${filteredMonth().key + 1}.receiptNo`] = value.receiptNo;
-			// updateDoc(collectionRef, amountPaid);
-			// updateDoc(collectionRef, receiptNo);
-			// updateDoc(collectionRef, status);
-			// updateDoc(collectionRef, forMonth);
-			// updateDoc(collectionRef, datePaid);
-			// updateDoc(collectionRef, id);
-			// updateDoc(collectionRef, paymentMode);
-			// }
-
+			
 			if (data.CreatedDate) {
+				
+				const onUpdate = async () => {
+
+					const matchKey = soa.filter(item => item.Unit === data.Unit).map(soa => soa.SOA);
+
+					const key = matchKey.map(obj => {
+						console.log(obj[4].status)
+						const keys = Object.keys(obj);
+						const value =  keys.find(key => obj[key].month === data.ForMonth);
+						const keyValue = parseInt(value[0]); 
+
+						return keyValue
+						
+					});
+						console.log(key[0])
+
+						soa.map((data,id) =>{
+							console.log(data.id)
+							const collectionRef = doc(
+								db,
+								'maintenance',
+								'accountingmanagement',
+								'tbl_soa',
+								`${data.id}`
+							);
+		
+								try{
+									let status = {};
+									let amountPaid = {};
+									let forMonth = {};
+									let datePaid = {};
+									let id = {};
+									let paymentMode = {};
+									let receiptNo = {};
+		
+									status[`SOA.${key[0]}.status`] = '';
+									amountPaid[`SOA.${key[0]}.amountPaid`] = '';
+									forMonth[`SOA.${key[0]}.forMonth`] = '';
+									datePaid[`SOA.${key[0]}.datePaid`] = '';
+									id[`SOA.${key[0]}.transactId`] = '';
+									paymentMode[`SOA.${key[0]}.paymentMode`] =
+										'';
+									receiptNo[`SOA.${key[0]}.receiptNo`] = '';
+
+									updateDoc(collectionRef, amountPaid);
+									updateDoc(collectionRef, receiptNo);
+									updateDoc(collectionRef, status);
+									updateDoc(collectionRef, forMonth);
+									updateDoc(collectionRef, datePaid);
+									updateDoc(collectionRef, id);
+									updateDoc(collectionRef, paymentMode);
+		
+								}catch(e){
+									console.log(e);
+								toast({
+									title: 'Deleting transaction details',
+									status: 'error',
+									duration: 9000,
+									isClosable: true,
+								});
+								}
+						});
+						
+					
+					
+						
+
+				}
+					
+			
+
+
 				return (
 					<React.Fragment key={id}>
 						<Tr
@@ -170,11 +208,11 @@ const TransactionsTable = ({ data, search, all, soa }) => {
 
 										<CusDelete
 											id={data.id}
-											label={` ${data.FName}'s Data`}
+											label={` ${data.TransactionID}'s Data`}
 											mainCollection='maintenance'
 											tblDocUser='accountingmanagement'
 											tblUserCol='tbl_transactions'
-											onUpdate={() => {}}
+											onUpdate={onUpdate}
 											hasFile={false}
 										/>
 									</ButtonGroup>

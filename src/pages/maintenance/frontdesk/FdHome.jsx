@@ -247,7 +247,7 @@ const Item = () => {
 						
 												))}
 											</Stepper>
-											{totalActiveVisitors.length !== 2 ? `${totalActiveVisitors.length - 2}  more`: null}
+											{totalActiveVisitors.length > 2 ? `${totalActiveVisitors.length - 2}  more`: null}
 												
 										</Card>
 									</Box>
