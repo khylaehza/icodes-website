@@ -147,7 +147,7 @@ export const CusSelectSize = ({
 					return (
 						<option
 							key={key}
-							value={item.Size}
+							value={item.UnitSize}
 						>
 							{item.UnitSize + ' sq. meter'}
 						</option>

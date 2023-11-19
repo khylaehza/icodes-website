@@ -12,7 +12,7 @@ const NotFoundPage = () => {
       <Box textAlign="center" display={'flex'} flexDir={'column'}>
         <Image
           alignSelf={'center'}
-          src={"../../public/gifs/maintenance/404error.gif"} 
+          src={"/gifs/maintenance/404error.gif"} 
           alt="404 - Not Found GIF"
           style={{ width: '180px', height: '180px', marginBottom: '15px' }}
         />

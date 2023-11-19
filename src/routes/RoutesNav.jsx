@@ -38,6 +38,7 @@ import {
 	ViewUnitOwner,
 	BookAmenities,
 } from '../pages/maintenance';
+import { FinderHome } from '../pages/finder';
 import NotFoundPage from './NotFoundPage';
 
 
@@ -212,6 +213,11 @@ const RoutesNav = () => {
 						exact
 						path={'/forgotpass'}
 						element={<ForgotPassPage />}
+					/>
+					<Route
+						exact
+						path={'/finder'}
+						element={<FinderHome />}
 					/>
 					<Route path="*" element={<NotFoundPage />} />
 				</Routes>

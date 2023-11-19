@@ -40,7 +40,7 @@ export { default as CusDelete } from './CusDelete';
 export { default as CusEdit } from './CusEdit';
 export { default as CusAlert } from './CusAlert';
 export { default as CusPagination } from './CusPagination';
-export { CusNumInput, CusNumInputLeftAdd } from './CusNumInput';
+export { CusNumInput, CusNumInputLeftAdd,CusNumSpinner} from './CusNumInput';
 export {
 	CusMultiSelectUnit,
 	CusMultiSelectUnitAmt,
@@ -57,3 +57,4 @@ export { default as CusDeleteSingleUnit } from './CusDeleteSingleUnit';
 export { default as CusTransactionModal } from './CusTransactionModal';
 export { default as CusCalendar } from './CusCalendar';
 export { default as CusCapacity } from './CusCapacity';
+export { CusSliderCheckbox} from './CusSliderCheckbox';
