@@ -52,52 +52,52 @@ const RoutesNav = () => {
 						<Route element={<AdminRoutes/>}>
 							<Route
 								exact
-								path={'/admin/employees'}
+								path={'/ad/employees'}
 								element={<Employees />}
 							/>
 							<Route
 								exact
-								path={'/admin'}
+								path={'/ad'}
 								element={<AdHome />}
 							/>
 							<Route
 								exact
-								path={'/admin/towers'}
+								path={'/ad/towers'}
 								element={<Towers />}
 							/>
 							<Route
 								exact
-								path={'/admin/unitTypes'}
+								path={'/ad/unitTypes'}
 								element={<UnitTypes />}
 							/>
 							<Route
 								exact
-								path={'/admin/amounts'}
+								path={'/ad/amounts'}
 								element={<Amounts />}
 							/>
 							<Route
 								exact
-								path={'/admin/unitOwners'}
+								path={'/ad/unitOwners'}
 								element={<UnitOwners />}
 							/>
 							<Route
 								exact
-								path={'/admin/amenities'}
+								path={'/ad/amenities'}
 								element={<Amenities />}
 							/>
 							<Route
 								exact
-								path={'/admin/computations'}
+								path={'/ad/computations'}
 								element={<Computations />}
 							/>
 							<Route
 								exact
-								path={'/admin/logs'}
+								path={'/ad/logs'}
 								element={<AuditLogs />}
 							/>
 							<Route
 								exact
-								path={'/admin/reports'}
+								path={'/ad/reports'}
 								element={<Reports />}
 							/>
 						</Route>
@@ -171,22 +171,22 @@ const RoutesNav = () => {
 						<Route element={<FrontDeskRoutes/>}>
 							<Route
 								exact
-								path={'/frontdesk'}
+								path={'/fd'}
 								element={<FdHome />}
 							/>
 							<Route
 								exact
-								path={'/frontdesk/visitors'}
+								path={'/fd/visitors'}
 								element={<Visitors />}
 							/>
 							<Route
 								exact
-								path={'/frontdesk/viewUnitOwner'}
+								path={'/fd/viewUnitOwner'}
 								element={<ViewUnitOwner />}
 							/>
 							<Route
 								exact
-								path={'/frontdesk/bookings'}
+								path={'/fd/bookings'}
 								element={<BookAmenities />}
 							/>
 						</Route>

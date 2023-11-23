@@ -16,6 +16,44 @@ import { useProcessData } from './scripts/useProcessData';
 import styled from '@emotion/styled';
 
 
+const FormBody = styled.div`
+	position: relative; 
+
+	&::before {
+	content: "";
+	background: linear-gradient(
+		145.7deg,
+		#EFF4F7 7.61%,
+		rgba(10, 37, 66, 0) 79.73%
+		),
+		linear-gradient(
+		229.74deg,
+		#E7EEF4 9.39%,
+		rgba(13, 43, 77, 0) 93.29%
+		),
+		linear-gradient(81.06deg, #000 1.35%, #000 30.92%);
+	-webkit-backdrop-filter: blur(5px);
+	backdrop-filter: blur(5px); 
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: -1;
+	}
+
+	height: 100%;
+	scroll-snap-type: y mandatory;
+	scroll-behavior: smooth;
+	scrollbar-width: none;
+	padding: 45px;
+	color: white;
+
+	&::-webkit-scrollbar {
+	display: none;
+	}
+	`;
+
 const Blur = (props) => {
 	return (
 		<Image
@@ -54,44 +92,6 @@ const FinderHome = () => {
 			setText(pd.processedText)
 		},
 	})
-
-
-
-
-	const Body = styled.div`
-	position: relative; 
-
-	&::before {
-	  content: "";
-	  background: linear-gradient(
-		  145.7deg,
-		  #EFF4F7 7.61%,
-		  rgba(10, 37, 66, 0) 79.73%
-		),
-		linear-gradient(
-		  229.74deg,
-		  #E7EEF4 9.39%,
-		  rgba(13, 43, 77, 0) 93.29%
-		),
-		linear-gradient(81.06deg, #000 1.35%, #000 30.92%);
-	  -webkit-backdrop-filter: blur(5px);
-	  backdrop-filter: blur(5px); 
-	  position: absolute;
-	  top: 0;
-	  left: 0;
-	  width: 100%;
-	  height: 100%;
-	  z-index: -1;
-	}
-  
-	height: 100%;
-	
-	padding: 45px;
-	color: white;
-  
-
-	`;
-
 
 
 	const [isStart, setStart] = useState(false)
@@ -158,13 +158,14 @@ const FinderHome = () => {
 									</Stack>
 						</Container>
 			</Box>
-			{/* <Body> */}
-				<Heading color={'b.300'}>Preferences</Heading>
+			<FormBody>
+				<Heading color={'b.300'} pl={8}>Preferences</Heading>
 				<Text
 					fontSize={'xl'}
 					color={'b.400'}
 					py={3}
 					px={3}
+					pl={10}
 				>
 								For less that 5 minutes you can get a condo description that can guide your decision in acquiring suitable units
 								{/* Set your desired floor level, unit face direction, unit types, amenities family size and price. */}
@@ -177,6 +178,7 @@ const FinderHome = () => {
 				<Button onClick={handleClick}>Start Taking Unit Assesment</Button>
 				</Flex>
 			)}
+			</FormBody>
 			{/* </Body> */}
 		</>
 	);

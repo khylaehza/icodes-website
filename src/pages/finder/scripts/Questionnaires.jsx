@@ -1,3 +1,14 @@
+import { 
+    Image,
+    Text,
+    VStack,
+    Box,
+ } from "@chakra-ui/react";
+ import { CusNumSpinner } from "../../../customs";
+ import { CusSliderCheckbox } from "../../../customs";
+ import { CusNumInputLeftAdd } from "../../../customs";
+
+
 const questions = [
 	// space
 	{
@@ -140,6 +151,122 @@ const questions = [
 		],
 		
 	},
+
+	// static questions
+
+	{
+		questionText: 'Amenities',
+		component: (
+			form => (
+				<>
+					<CusSliderCheckbox form={form}/>
+				</>
+			)
+				
+        ),
+		
+	},
+
+	{
+		questionText: 'Family Size',
+		component: (
+			form => (
+				<>
+					<CusNumSpinner
+						name="familySize" 
+						onChange={form.handleChange}
+						onBlur={form.handleBlur}
+						error={form.errors.familySize}
+						touch={form.touched.familySize}
+						value={form.values.familySize}
+					/>
+					<Image
+						alt={'stairs image'}
+						objectFit={'fill'}
+						style={{ aspectRatio: '3/1'}}
+						w={'55%'}
+						h={'5%'}
+						src={'/imgs/dss/famsize.png'}
+						alignSelf={'center'}
+						overflow={'hidden'}
+						my={7}
+					/>
+				</>
+			)
+				
+        ),
+		
+	},
+
+	{
+		questionText: 'Price',
+		component: (
+			form => (
+				<>
+					<Text fontSize={'xs'}>This only shows the total contract price of unit excluding other fees.</Text>
+						<VStack  
+							spacing={1}
+							align={'stretch'}
+						>
+                            <Text as={'b'} fontSize={'sm'}>Minimun</Text>
+							<Box>
+								<CusNumInputLeftAdd 
+									name='minimumPrice'
+									id={'minimumPrice'}
+									add={'₱'}
+									placeholder={'0'}
+									value={form.values.minimumPrice}
+									onChange={(e) => {
+										//let parts = e.target.value.split('.'); weird bug
+										let parts = e.split('.');
+										let v = parts[0].replace(/\D/g, '');
+										let dec = parts[1];
+										Number(dec !== undefined ? v + '.' + dec : v);
+										let n = new Intl.NumberFormat('en-US').format(
+											v
+										);
+										n = dec !== undefined ? n + '.' + dec : n;
+										form.setFieldValue('minimumPrice', n);
+									}}
+									onBlur={form.handleBlur}
+									error={form.errors.minimumPrice}
+									touch={form.touched.minimumPrice}
+								/>
+							</Box>
+							<Text as={'b'} fontSize={'sm'}>Maximum</Text>
+							<Box>
+								<CusNumInputLeftAdd 
+									name='maximumPrice'
+									id={'maximumPrice'}
+									add={'₱'}
+									placeholder={'0'}
+									value={form.values.maximumPrice}
+									onChange={(e) => {
+										//let parts = e.target.value.split('.'); weird bug
+										let parts = e.split('.');
+										let v = parts[0].replace(/\D/g, '');
+										let dec = parts[1];
+										Number(dec !== undefined ? v + '.' + dec : v);
+										let n = new Intl.NumberFormat('en-US').format(
+											v
+										);
+										n = dec !== undefined ? n + '.' + dec : n;
+										form.setFieldValue('maximumPrice', n);
+									}}
+									onBlur={form.handleBlur}
+									error={form.errors.maximumPrice}
+									touch={form.touched.maximumPrice}
+								/>
+							</Box>
+                    	</VStack>
+				</>
+			)
+				
+        ),
+		
+	},
+
+
 
 	/// what is the floor level do you want
 	

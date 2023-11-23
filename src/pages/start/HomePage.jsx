@@ -11,9 +11,9 @@ const Homepage = () => {
 			const jsonData = JSON.parse(storedData);
 			switch(jsonData.EmpPos) {
 				case "Admin": 
-					return <Navigate to={'/admin'}/>
+					return <Navigate to={'/ad'}/>
 				case "Front Desk":
-					return <Navigate to={'/frontdesk'}/>
+					return <Navigate to={'/fd'}/>
 				case "Property Management":
 					return <Navigate to={'/pm'}/>
 				case "Accounting Management":

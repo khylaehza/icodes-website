@@ -47,7 +47,7 @@ const EditMRequest = ({
 		onSubmit: async (value, actions) => {
 			const docRef = doc(db, mainCollection, tblDocUser, tblUserCol, id);
 			const imgs = value.requestImg
-            const folderPath = `pm/maintenance/${data.MRequestID}`;
+            const folderPath = `maintenance/propertymanagement/mrequest/${data.MRequestID}`;
             const storageRef = (imageName, ext) =>
                 ref(storage, `${folderPath}/${imageName}.${ext}`);
 

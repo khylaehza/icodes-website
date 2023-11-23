@@ -20,6 +20,7 @@ import {
 
   } from '@chakra-ui/react'
   import RadarGraph from "../../utilities/graphs/RadarGraph";
+  import { AddInterested } from "./index";
   //import AddGuestForm from "../../modals/finder/AddGuestForm";
   import { useData } from "../../../DataContext";
 
@@ -182,8 +183,9 @@ export const CustomCard = ({ Cardkey,src, floor, name,no, tcp,tower, typeName, t
                     </Box>
                 
                 </HStack>
-                    <Button width={'40%'} alignSelf={'center'} backgroundColor={'b.400'} color={'#ffffff'}>INTERESTED</Button>
+                    {/* <Button width={'40%'} alignSelf={'center'} backgroundColor={'b.400'} color={'#ffffff'}>INTERESTED</Button> */}
                     {/* <AddGuestForm unit={name}/> */}
+                    <AddInterested unit={name}/>
                 </CardBody>
             </Card>
         </>

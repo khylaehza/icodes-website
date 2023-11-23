@@ -20,25 +20,25 @@ import { RxActivityLog } from 'react-icons/rx';
 import { VscFeedback } from 'react-icons/vsc';
 
 export const ad = [
-	{ name: 'Home', icon: MdSpaceDashboard, nav: '/admin' },
-	{ name: 'Employees', icon: FaUserTie, nav: '/admin/employees' },
-	{ name: 'Towers', icon: RiBuilding2Fill, nav: '/admin/towers' },
-	{ name: 'Unit Types', icon: HiOfficeBuilding, nav: '/admin/unitTypes' },
-	{ name: 'Unit Amounts', icon: FaMoneyBill, nav: '/admin/amounts' },
-	{ name: 'Unit Owners', icon: FaHouseUser, nav: '/admin/unitOwners' },
-	{ name: 'Amenities', icon: FaSwimmer, nav: '/admin/amenities' },
-	{ name: 'Computations', icon: AiFillCalculator, nav: '/admin/computations' },
-	{ name: 'Audit Logs', icon: RxActivityLog, nav: '/admin/logs' },
+	{ name: 'Home', icon: MdSpaceDashboard, nav: '/ad' },
+	{ name: 'Employees', icon: FaUserTie, nav: '/ad/employees' },
+	{ name: 'Towers', icon: RiBuilding2Fill, nav: '/ad/towers' },
+	{ name: 'Unit Types', icon: HiOfficeBuilding, nav: '/ad/unitTypes' },
+	{ name: 'Unit Amounts', icon: FaMoneyBill, nav: '/ad/amounts' },
+	{ name: 'Unit Owners', icon: FaHouseUser, nav: '/ad/unitOwners' },
+	{ name: 'Amenities', icon: FaSwimmer, nav: '/ad/amenities' },
+	{ name: 'Computations', icon: AiFillCalculator, nav: '/ad/computations' },
+	{ name: 'Audit Logs', icon: RxActivityLog, nav: '/ad/logs' },
 	{
 		name: 'Reports & Feedback',
 		icon: VscFeedback,
-		nav: '/admin/reports',
+		nav: '/ad/reports',
 	},
 ];
 export const fd = [
-	{ name: 'Home', icon: MdSpaceDashboard, nav: '/frontdesk' },
-	{ name: 'Unit Owner List', icon: FaList, nav: '/frontdesk/viewUnitOwner' },
-	{ name: 'Visitors', icon: BsFilePerson, nav: '/frontdesk/visitors' },
+	{ name: 'Home', icon: MdSpaceDashboard, nav: '/fd' },
+	{ name: 'Unit Owner List', icon: FaList, nav: '/fd/viewUnitOwner' },
+	{ name: 'Visitors', icon: BsFilePerson, nav: '/fd/visitors' },
 	{
 		name: 'Booking Amenities',
 		icon: BsFillBookmarkPlusFill,

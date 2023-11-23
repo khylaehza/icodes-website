@@ -39,33 +39,32 @@ const AddAnncmnts = () =>{
 			anncmntImg: '',
 			author: '',
 		},
-		//validationSchema: Yup.object({
-		// 	towers: Yup.mixed().required(
-		// 		'Subject for announcement is required.'
-		// 	),
-		// 	purpose: Yup.string().required('Type is required.'),
-		// 	description: Yup.string().required('Description is required.'),
-		// 	author: Yup.string().required('Author is required.'),
-		// 	anncmntImg: Yup.mixed()
-		// 		.required('Image/File is required.')
-		// 		.test(
-		// 			'FILE_TYPE',
-		// 			'Invalid File Type.',
-		// 			(value) =>
-		// 				value &&
-		// 				[
-		// 					'image/png',
-		// 					'image/jpeg',
-		// 					'image/jpg',
-		// 					'application/pdf',
-		// 				].includes(value.type)
-		// 		),
-		// 	status: Yup.string().required('Status is required.'),
-		// }),
+		validationSchema: Yup.object({
+			towers: Yup.mixed().required(
+				'Subject for announcement is required.'
+			),
+			purpose: Yup.string().required('Type is required.'),
+			description: Yup.string().required('Description is required.'),
+			author: Yup.string().required('Author is required.'),
+			anncmntImg: Yup.mixed()
+				.required('Image/File is required.')
+				.test(
+					'FILE_TYPE',
+					'Invalid File Type.',
+					(value) =>
+						value &&
+						[
+							'image/png',
+							'image/jpeg',
+							'image/jpg',
+							'application/pdf',
+						].includes(value.type)
+				),
+		}),
 		onSubmit: (value, actions) => {
 			const storageRef = ref(
 				storage,
-				`pm/anncmnts/${anncmntID}/anncmnts.png`
+				`maintenance/propertymanagement/anncmnts/${anncmntID}/anncmnts.png`
 			);
 			const uploadTask = uploadBytesResumable(
 				storageRef,

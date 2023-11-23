@@ -30,22 +30,22 @@ const innerPrivate = (curUser) =>{
 const AdminRoutes = () =>{
 	const { curUser } = useData();
 	const location = useLocation();  
-	if (curUser.EmpPos === 'Admin' && location.pathname.startsWith('/admin')) {
+	if (curUser.EmpPos === 'Admin' && location.pathname.startsWith('/ad')) {
 	  	return <Outlet />;
 	} else {
 		console.log(location)
-		return <Navigate to={'/admin'}/>;
+		return <Navigate to={'/ad'}/>;
 	}
 }
 
 const FrontDeskRoutes = () =>{
 	const { curUser } = useData();
 	const location = useLocation();  
-	if (curUser.EmpPos === 'Front Desk' && location.pathname.startsWith('/frontdesk')) {
+	if (curUser.EmpPos === 'Front Desk' && location.pathname.startsWith('/fd')) {
 	  	return <Outlet />;
 	} else {
 		console.log(curUser.EmpPos)
-		return <Navigate to={'/frontdesk'}/>;
+		return <Navigate to={'/fd'}/>;
 	}
 }
 
