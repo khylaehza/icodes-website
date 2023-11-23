@@ -254,15 +254,13 @@ const AddUnitSet = () => {
 										] = 'Pending Amount';
 
 										if (
-											form.values.unitSize <== aveUnitSize
+											form.values.unitSize <= aveUnitSize
 										) {
 											category[
 												`Units.${x.floor}.${x.no}.category.2`
 											] = 'smaller';
 										} else if (
 											form.values.unitSize > aveUnitSize
-										) if(
-											form.values.unitSize <= aveUnitSize
 										) {
 											category[
 												`Units.${x.floor}.${x.no}.category.2`
