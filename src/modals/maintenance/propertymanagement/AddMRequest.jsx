@@ -36,28 +36,28 @@ const AddMrequest = () =>{
 			//others:'',
 		},
 		validationSchema: Yup.object({
-			// requestImg: Yup.mixed()
-			// 	.required('Proof is required.')
-			// 	.test(
-			// 		'FILE_TYPE',
-			// 		'Invalid File Type.',
-			// 		(value) =>
-			// 			value &&
-			// 			[
-			// 				'image/png',
-			// 				'image/jpeg',
-			// 				'image/jpg',
-			// 				'video/*',
-			// 			].includes(value.type)
-			// 	),
-			// repairType: Yup.string().required('Repair type is required.'),
-			// purpose: Yup.string().required('Description is required.'),
-			// units: Yup.string().required('Unit location is required.'),
-			// status: Yup.string().required('Status is required.'),
+			requestImg: Yup.mixed()
+				.required('Proof is required.')
+				.test(
+					'FILE_TYPE',
+					'Invalid File Type.',
+					(value) =>
+						value &&
+						[
+							'image/png',
+							'image/jpeg',
+							'image/jpg',
+							'video/*',
+						].includes(value.type)
+				),
+			repairType: Yup.string().required('Repair type is required.'),
+			details: Yup.string().required('Description is required.'),
+			units: Yup.string().required('Unit location is required.'),
+			status: Yup.string().required('Status is required.'),
 		}),
 		onSubmit: async (value, actions) => {
             const imgs = value.requestImg;
-            const folderPath = `pm/maintenance/${mrequestID}`;
+            const folderPath = `maintenance/propertymanagement/mrequest/${mrequestID}`;
             const storageRef = (imageName, ext) =>
                 ref(storage, `${folderPath}/${imageName}.${ext}`);
 

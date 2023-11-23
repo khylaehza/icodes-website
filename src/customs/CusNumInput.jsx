@@ -7,8 +7,12 @@ import {
 	FormControl,
 	FormErrorMessage,
 	FormLabel,
+	Input,
 	InputGroup,
 	InputLeftAddon,
+	useNumberInput,
+	HStack,
+	Button,
 } from '@chakra-ui/react';
 
 export const CusNumInput = ({
@@ -118,3 +122,79 @@ export const CusNumInputLeftAdd = ({
 		</FormControl>
 	);
 };
+
+export const CusNumSpinner = ({
+	name,
+	onChange,
+	value,
+	error,
+	onBlur,
+	touch,
+	add,
+	isRequired,
+	id,
+  }) => {
+	const {
+	  getInputProps,
+	  getIncrementButtonProps,
+	  getDecrementButtonProps,
+	} = useNumberInput({
+	  step: 1,
+	  defaultValue: value,
+	  min: 1,
+	});
+  
+	const inc = getIncrementButtonProps();
+	const dec = getDecrementButtonProps();
+	const input = getInputProps();
+
+
+	const handleValueChange = (newValue) => {
+        if (onChange) {
+            onChange({
+                target: {
+                    name: name,
+                    value: newValue,
+                },
+            });
+        }
+
+        if (onBlur) {
+            onBlur({
+                target: {
+                    name: name,
+                    value: newValue,
+                },
+            });
+        }
+    };
+  
+	return (
+	  <FormControl isInvalid={error && touch} isRequired={isRequired} justifyContent={'center'} display={'flex'}>
+		 <HStack maxW="200px">
+                <Button {...dec} onClick={() => handleValueChange(parseInt(value || 0) - 1)}> - </Button>
+                <Input
+                    {...input}
+                    onChange={(e) => {
+                        const newValue = e.target.value;
+
+                        if (!isNaN(newValue) || newValue === '') {
+                            handleValueChange(newValue);
+                        }
+                    }}
+                    onBlur={(e) => {
+                        const newValue = e.target.value;
+                        if (!isNaN(newValue) || newValue === '') {
+                            handleValueChange(newValue);
+                        }
+                    }}
+                    value={value}
+                    name={name}
+                    id={id}
+                />
+                <Button {...inc} onClick={() => handleValueChange(parseInt(value || 0) + 1)}> + </Button>
+            </HStack>
+		<FormErrorMessage fontSize="xs">{error}</FormErrorMessage>
+	  </FormControl>
+	);
+  };

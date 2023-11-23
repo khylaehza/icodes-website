@@ -35,6 +35,7 @@ const AdminRoutes = () => {
 	if (curUser.EmpPos === 'Admin' && location.pathname.startsWith('/ad')) {
 		return <Outlet />;
 	} else {
+		console.log(location);
 		return <Navigate to={'/ad'} />;
 	}
 };

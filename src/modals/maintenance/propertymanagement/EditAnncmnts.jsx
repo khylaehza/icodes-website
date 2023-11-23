@@ -34,7 +34,7 @@ const EditAnncmnts = ({
 	const toast = useToast();
 	const imgName = ref(
 		storage,
-		`pm/anncmnts/${data.AnncmntID}/anncmnts.png`
+		`maintenance/propertymanagement/anncmnts/${data.AnncmntID}/anncmnts.png`
 	);
 
     const ancOption = [];

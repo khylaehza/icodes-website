@@ -7,10 +7,7 @@ const NotFoundPage = () => {
 		window.history.back();
 	};
 	return (
-		<Center
-			h='100vh'
-			bgColor={'w.100'}
-		>
+		<Center h='100vh'>
 			<Box
 				textAlign='center'
 				display={'flex'}

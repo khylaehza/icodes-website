@@ -46,6 +46,7 @@ import {
 	ViewUnitOwner,
 	BookAmenities,
 } from '../pages/maintenance';
+import { FinderHome } from '../pages/finder';
 import NotFoundPage from './NotFoundPage';
 
 const RoutesNav = () => {
@@ -222,6 +223,11 @@ const RoutesNav = () => {
 							exact
 							path={'/unitcanvas'}
 							element={<UnitCanvasPage />}
+						/>
+						<Route
+							exact
+							path={'/finder'}
+							element={<FinderHome />}
 						/>
 						<Route
 							path='*'

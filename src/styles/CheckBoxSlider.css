@@ -1,0 +1,10 @@
+.slick-initialized{
+    width: 74%;
+    align-items: center;
+    align-self: center;
+    display:grid;
+    /* padding-bottom: 10px; */
+}
+.slick-slide{
+    display: flex;
+}
