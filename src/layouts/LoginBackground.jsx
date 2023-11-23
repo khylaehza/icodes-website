@@ -1,4 +1,14 @@
-import { Box, Heading, Text, SimpleGrid, Image, Flex } from '@chakra-ui/react';
+import {
+	Box,
+	Stack,
+	Heading,
+	Text,
+	SimpleGrid,
+	Button,
+	Image,
+	Flex,
+	VStack,
+} from '@chakra-ui/react';
 
 const LoginBackground = ({ children }) => {
 	return (
@@ -14,8 +24,7 @@ const LoginBackground = ({ children }) => {
 					columns={{ base: 1, md: 2 }}
 					spacing={{ base: 10, lg: 32 }}
 					p={15}
-
-					// py={{ base: 10, sm: 20, lg: 32 }}
+					py={{ base: 10, sm: 20, lg: 32 }}
 				>
 					<Heading
 						lineHeight={1.1}

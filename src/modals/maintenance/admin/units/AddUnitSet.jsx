@@ -27,9 +27,11 @@ const AddUnitSet = () => {
 	const toast = useToast();
 	const { isOpen, onOpen, onClose } = useDisclosure();
 	const [img, setImg] = useState();
-	const { curUser, unitTowerID, units } = useData();
+	const { curUser, unitTowerID, units, unitSize } = useData();
+
+	// console.log(unitSize);
 	const storage = getStorage();
-	const aveUnitSize = 52.06;
+	const aveUnitSize = 20;
 	const [unit, setUnit] = useState([]);
 
 	const acqUnit = [];
@@ -231,6 +233,13 @@ const AddUnitSet = () => {
 										let status = {};
 										let category = {};
 
+										console.log(
+											x.floor,
+											x.no,
+											form.values.unitSize,
+											aveUnitSize,
+											form.values.unitSize <= aveUnitSize
+										);
 										type[
 											`Units.${x.floor}.${x.no}.typeName`
 										] = form.values.typeName;
@@ -245,12 +254,14 @@ const AddUnitSet = () => {
 										] = 'Pending Amount';
 
 										if (
-											form.values.unitSize < aveUnitSize
+											form.values.unitSize <= aveUnitSize
 										) {
 											category[
 												`Units.${x.floor}.${x.no}.category.2`
 											] = 'smaller';
-										} else {
+										} else if (
+											form.values.unitSize > aveUnitSize
+										) {
 											category[
 												`Units.${x.floor}.${x.no}.category.2`
 											] = 'larger';

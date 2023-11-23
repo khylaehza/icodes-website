@@ -23,7 +23,7 @@ const TopNav = () => {
 
 	const toLogin = () => {
 		try {
-			navigate('/');
+			navigate('/login');
 		} catch (error) {
 			console.log(error);
 		}
@@ -40,6 +40,8 @@ const TopNav = () => {
 				}}
 				py={4}
 				shadow='md'
+				boxShadow='0px 0px 5px 3px rgba(134,149,166,0.2)'
+				zIndex={10}
 			>
 				<Flex
 					alignItems='center'
@@ -74,7 +76,7 @@ const TopNav = () => {
 							<Button
 								variant={'tertiary'}
 								size='sm'
-								//	onClick={toHome}
+								onClick={() => navigate('/')}
 								color={
 									location.pathname === '/'
 										? 'black'
@@ -140,7 +142,7 @@ const TopNav = () => {
 						<Button
 							variant={'primary'}
 							size='sm'
-							onClick={() => navigate('/')}
+							onClick={() => navigate('/login')}
 						>
 							Login
 						</Button>
@@ -187,6 +189,7 @@ const TopNav = () => {
 								<Button
 									variant={'tertiary'}
 									size='sm'
+									onClick={() => navigate('/')}
 								>
 									Home
 								</Button>
@@ -199,6 +202,7 @@ const TopNav = () => {
 								<Button
 									variant={'tertiary'}
 									size='sm'
+									onClick={() => navigate('/designer')}
 								>
 									Designer
 								</Button>
@@ -212,6 +216,7 @@ const TopNav = () => {
 								<Button
 									variant={'tertiary'}
 									size='sm'
+									onClick={() => navigate('/login')}
 								>
 									Login
 								</Button>

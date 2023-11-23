@@ -45,7 +45,7 @@ const AmHome = () => {
 
 const Item = () => {
 	const { curUser, soa, transactions } = useData();
-	let daily = 0; //if today
+
 	let weekly = 0; // if weekly
 	let monthly = 0; //
 	let yearly = 0; //
@@ -139,7 +139,6 @@ const Item = () => {
 		transactions.filter((amt) => {
 			if (amt.AmountPaid) {
 				if (moment(amt.DatePaid).format('YYYY') == year) {
-					console.log('match');
 					yearly += parseFloat(amt.AmountPaid.replace(/,/g, ''));
 
 					yearObject.push({

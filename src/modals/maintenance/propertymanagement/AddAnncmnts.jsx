@@ -16,13 +16,12 @@ import {
 	getDownloadURL,
 } from 'firebase/storage';
 
-const AddAnncmnts = () =>{
-    const { isOpen, onOpen, onClose } = useDisclosure();
+const AddAnncmnts = () => {
+	const { isOpen, onOpen, onClose } = useDisclosure();
 	const storage = getStorage();
 	const toast = useToast();
 	const anncmntID = IdGenerator(6);
-    const { curUser } = useData();
-
+	const { curUser } = useData();
 
 	const ancOption = [];
 	const [option, setOptions] = useState([]);
@@ -65,7 +64,7 @@ const AddAnncmnts = () =>{
 		onSubmit: (value, actions) => {
 			const storageRef = ref(
 				storage,
-				`pm/anncmnts/${anncmntID}/anncmnts.png`
+				`maintenance/pm/anncmnts/${anncmntID}/anncmnts.png`
 			);
 			const uploadTask = uploadBytesResumable(
 				storageRef,
@@ -113,7 +112,7 @@ const AddAnncmnts = () =>{
 									}
 								);
 
-                                if (curUser) {
+								if (curUser) {
 									await addDoc(
 										collection(
 											db,
@@ -149,19 +148,19 @@ const AddAnncmnts = () =>{
 				console.log(e);
 			}
 			actions.resetForm();
-			setOptions([])
+			setOptions([]);
 			onClose();
 		},
 	});
 
-    const onCloseModal = () => {
+	const onCloseModal = () => {
 		form.resetForm();
-		setOptions([])
+		setOptions([]);
 		onClose();
 	};
 
-    return(
-        <Flex>
+	return (
+		<Flex>
 			<CusModal
 				header={'Fill the Announcement details.'}
 				component={
@@ -178,7 +177,7 @@ const AddAnncmnts = () =>{
 				form={form}
 			/>
 		</Flex>
-    );
-}
+	);
+};
 
-export default AddAnncmnts
+export default AddAnncmnts;

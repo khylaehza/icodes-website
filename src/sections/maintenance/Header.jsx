@@ -19,23 +19,23 @@ import { NameFormat } from '../../utilities';
 import { useData } from '../../../DataContext';
 const Header = ({ onOpen, ...rest }) => {
 	const navigate = useNavigate();
-	const {  logout, curUser } = useData();
+	const { logout, curUser } = useData();
 	const handleLogout = () => {
 		try {
 			logout();
-			//navigate('/login');
+			navigate('/login');
 		} catch (error) {
 			console.log(error);
 		}
 	};
 
-	const handleCP = () =>{
+	const handleCP = () => {
 		try {
 			navigate('/forgotpass');
 		} catch (error) {
 			console.log(error);
 		}
-	}
+	};
 	return (
 		<Flex
 			px={{ base: 4, md: 4 }}

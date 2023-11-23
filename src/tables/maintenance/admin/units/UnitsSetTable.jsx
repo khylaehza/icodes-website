@@ -1,16 +1,24 @@
 import { CusTitle, CusTD, CusDeleteTypes } from '../../../../customs';
 import { DateChecker } from '../../../../utilities';
-import React,{useState} from 'react';
+import React, { useState } from 'react';
 import { EditUnitSet } from '../../../../modals';
 import { Image, Tr, Td, ButtonGroup, useDisclosure } from '@chakra-ui/react';
-import { CusEnlargeImage, CusCarousel} from '../../../../customs/index'
+import { CusEnlargeImage, CusCarousel } from '../../../../customs/index';
 
 const UnitsSetTable = ({ data, search, all, units, unitTowerID }) => {
 	const ret = search ? all : data;
 	const [selectedImage1, setSelectedImage1] = useState(null);
 	const [selectedImage2, setSelectedImage2] = useState(null);
-	const { isOpen: isImage1Open, onOpen: onImage1Open, onClose: onImage1Close } = useDisclosure();
-    const { isOpen: isImage2Open, onOpen: onImage2Open, onClose: onImage2Close } = useDisclosure();
+	const {
+		isOpen: isImage1Open,
+		onOpen: onImage1Open,
+		onClose: onImage1Close,
+	} = useDisclosure();
+	const {
+		isOpen: isImage2Open,
+		onOpen: onImage2Open,
+		onClose: onImage2Close,
+	} = useDisclosure();
 
 	const handleImageClick1 = (src) => {
 		setSelectedImage1(src);
@@ -64,7 +72,7 @@ const UnitsSetTable = ({ data, search, all, units, unitTowerID }) => {
 								<Image
 									src={data.LayoutImage}
 									w='45px'
-									onClick={ () =>
+									onClick={() =>
 										handleImageClick1(data.LayoutImage)
 									}
 								/>
@@ -74,7 +82,7 @@ const UnitsSetTable = ({ data, search, all, units, unitTowerID }) => {
 								<Image
 									src={data.TypeImage[0]}
 									w='45px'
-									onClick={ () =>
+									onClick={() =>
 										handleImageClick2(data.TypeImage)
 									}
 								/>
@@ -146,9 +154,7 @@ const UnitsSetTable = ({ data, search, all, units, unitTowerID }) => {
 								isOpen={isImage2Open}
 								onClose={onImage2Close}
 								label={'Unit Image/s'}
-								body={
-									<CusCarousel slides={selectedImage2}/>
-								}
+								body={<CusCarousel slides={selectedImage2} />}
 							/>
 						</React.Fragment>
 					</Tr>

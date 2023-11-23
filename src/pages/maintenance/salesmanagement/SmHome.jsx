@@ -20,7 +20,8 @@ import {
 import { Body } from '../../../sections/maintenance';
 import { RiArrowDownSFill } from 'react-icons/ri';
 import { useData } from '../../../../DataContext';
-import { LineGraph, StackBarGraph } from '../../../utilities';
+import { LineGraph, StackBarGraph, WeekGenerator } from '../../../utilities';
+import moment from 'moment';
 const SmHome = () => {
 	return (
 		<Flex
@@ -35,8 +36,156 @@ const SmHome = () => {
 };
 
 const Item = () => {
-	const { curUser, employees, buyers } = useData();
+	const { curUser, employees, buyers, soa } = useData();
 	const agents = employees.filter((item) => item.EmpPos === 'Agent');
+
+	// console.log(moment(soa[0].CreatedDate.seconds * 1000).format('MM DD YYYY'));
+
+	let weekly = 0; // if weekly
+	let monthly = 0; //
+	let yearly = 0; //
+
+	let weeklyDates = [];
+	let monthObject = [];
+	let weekObject = [];
+	let yearObject = [];
+	var weekDays = 0;
+
+	WeekGenerator().filter((week, key) => {
+		const weekStart = moment(week.start, 'YYYY-MM-DD');
+		const weekEnd = moment(week.end, 'YYYY-MM-DD');
+		weeklyDates.push(
+			`${moment(weekStart).format('MMM DD')} - ${moment(weekEnd).format(
+				'DD'
+			)}`
+		);
+		soa.filter((amt) => {
+			if (amt.Amount && moment(amt.CreatedDate.seconds * 1000)) {
+				if (
+					moment(amt.CreatedDate.seconds * 1000).isBetween(
+						weekStart,
+						weekEnd
+					) ||
+					moment(amt.CreatedDate.seconds * 1000).isSame(weekStart) ||
+					moment(amt.CreatedDate.seconds * 1000).isSame(weekEnd)
+				) {
+					weekly += parseFloat(amt.Amount.replace(/,/g, ''));
+
+					weekObject.push({
+						amount: parseFloat(amt.Amount.replace(/,/g, '')),
+						date: moment(amt.CreatedDate.seconds * 1000).format(
+							'YYYY-MM-DD'
+						),
+						weekNo: key,
+					});
+
+					weekDays++;
+				}
+			}
+		});
+	});
+
+	let weeklyData = Array(WeekGenerator().length).fill(0);
+
+	weekObject.map((day) => {
+		weeklyData.filter((item, keyD) => {
+			if (keyD == day.weekNo) {
+				weeklyData[keyD] += Number(day.amount);
+			}
+		});
+	});
+
+	const monthlyRange = moment.monthsShort();
+
+	monthlyRange.filter((month, key) => {
+		soa.filter((amt) => {
+			if (amt.Amount && moment(amt.CreatedDate.seconds * 1000)) {
+				if (
+					moment(amt.CreatedDate.seconds * 1000).format('MMM') ==
+					month
+				) {
+					monthly += parseFloat(amt.Amount.replace(/,/g, ''));
+
+					monthObject.push({
+						amount: parseFloat(amt.Amount.replace(/,/g, '')),
+						date: moment(amt.CreatedDate.seconds * 1000).format(
+							'YYYY-MM-DD'
+						),
+						monthNo: key,
+					});
+				}
+			}
+		});
+	});
+
+	let monthlyData = Array(monthlyRange.length).fill(0);
+
+	monthObject.map((day) => {
+		monthlyData.filter((item, keyD) => {
+			if (keyD == day.monthNo) {
+				monthlyData[keyD] += Number(day.amount);
+			}
+		});
+	});
+
+	const yearlyRange = [
+		'2023',
+		'2024',
+		'2025',
+		'2026',
+		'2027',
+		'2028',
+		'2029',
+		'2030',
+	];
+
+	yearlyRange.filter((year, key) => {
+		soa.filter((amt) => {
+			if (amt.Amount && moment(amt.CreatedDate.seconds * 1000)) {
+				if (
+					moment(amt.CreatedDate.seconds * 1000).format('YYYY') ==
+					year
+				) {
+					yearly += parseFloat(amt.Amount.replace(/,/g, ''));
+
+					yearObject.push({
+						amount: parseFloat(amt.Amount.replace(/,/g, '')),
+						date: moment(amt.CreatedDate.seconds * 1000).format(
+							'YYYY-MM-DD'
+						),
+						yearNo: key,
+					});
+				}
+			}
+		});
+	});
+
+	let yearData = Array(yearlyRange.length).fill(0);
+
+	yearObject.map((day) => {
+		yearData.filter((item, keyD) => {
+			if (keyD == day.yearNo) {
+				yearData[keyD] += Number(day.amount);
+			}
+		});
+	});
+
+	const filterOption = ['Weekly', 'Monthly', 'Yearly'];
+
+	const label = [];
+	const value = [];
+	const [fil, setFilter] = useState(filterOption[0]);
+
+	if (fil == 'Weekly') {
+		value.push(weeklyData);
+		label.push(weeklyDates);
+	} else if (fil == 'Monthly') {
+		value.push(monthlyData);
+		label.push(monthlyRange);
+	} else if (fil == 'Yearly') {
+		value.push(yearData);
+		label.push(yearlyRange);
+	}
 
 	const data = ['October 19', 'October 20', 'October 21'];
 	const values = [
@@ -68,29 +217,81 @@ const Item = () => {
 				initialScale={0.9}
 				in='true'
 			>
-				<Grid
-					templateRows={{
-						base: 'repeat(6, 1fr)',
-						xl: 'repeat(2, 1fr)',
-					}}
-					templateColumns={{
-						base: 'repeat(2, 1fr)',
-						xl: 'repeat(5, 1fr)',
-					}}
+				<Flex
+					// templateRows={{
+					// 	base: 'repeat(6, 1fr)',
+					// 	xl: 'repeat(2, 1fr)',
+					// }}
+					// templateColumns={{
+					// 	base: 'repeat(2, 1fr)',
+					// 	xl: 'repeat(5, 1fr)',
+					// }}
 					gap={3}
 					textAlign={'center'}
+					w={'100%'}
 				>
-					<GridItem
-						colSpan={2}
-						rowSpan={{ base: 30, xl: 2 }}
+					<Box
+						// colSpan={2}
+						// rowSpan={{ base: 30, xl: 2 }}
 						bgColor={'w.300'}
 						boxShadow='0 4px 10px 0 rgba(134,149,166,0.3)'
 						borderRadius={15}
 						p={5}
 						pt={7}
-						w={'100%'}
+						w={'30%'}
 					>
-						<Heading size={'md'}>Activities Report</Heading>
+						<Flex
+							justifyContent={'space-between'}
+							textAlign={'center'}
+							alignItems={'flex-end'}
+						>
+							<Heading
+								size={'md'}
+								textAlign={'center'}
+								pl={5}
+							>
+								Activities Report
+							</Heading>
+							<Menu
+								closeOnSe
+								lect={false}
+							>
+								<MenuButton
+									as={IconButton}
+									aria-label='Options'
+									rightIcon={<RiArrowDownSFill />}
+									variant={'primary'}
+									bgColor={'b.300'}
+									boxShadow='0 4px 12px 0 rgba(134,149,166,0.5)'
+									pr={3}
+									pl={5}
+									size={'sm'}
+									// w={{ base: '100%', xl: '10%' }}
+								>
+									{fil}
+								</MenuButton>
+
+								<MenuList>
+									<MenuOptionGroup
+										defaultValue='Tower 1'
+										type='radio'
+										onChange={(e) => {
+											setFilter(e);
+										}}
+									>
+										{filterOption.map((type, key) => (
+											<MenuItemOption
+												value={type}
+												fontSize={'sm'}
+												key={key}
+											>
+												{type}
+											</MenuItemOption>
+										))}
+									</MenuOptionGroup>
+								</MenuList>
+							</Menu>
+						</Flex>
 						<Divider
 							w='100%'
 							mt={3}
@@ -100,75 +301,137 @@ const Item = () => {
 							data={data}
 							values={values}
 						/>
-					</GridItem>
-					<GridItem
-						colSpan={{ base: 2, xl: 1 }}
-						rowSpan={1}
-						bgColor={'w.300'}
-						boxShadow='0 4px 10px 0 rgba(134,149,166,0.3)'
-						borderRadius={15}
-						p={10}
+					</Box>
+					<Flex
+						flexDir={'column'}
+						justifyContent={'space-between'}
 					>
-						<Heading size={'md'}>Agents</Heading>
-						<Divider
-							w='100%'
-							mt={3}
-							mb={3}
-						/>
-
-						<Heading
-							fontSize={'105px'}
-							alignItems={'center'}
-							textAlign={'center'}
+						<Flex
+							// colSpan={{ base: 2, xl: 1 }}
+							// rowSpan={1}
+							bgColor={'w.300'}
+							boxShadow='0 4px 10px 0 rgba(134,149,166,0.3)'
+							borderRadius={15}
+							p={10}
+							flexDir={'column'}
 						>
-							{agents.length}
-						</Heading>
-					</GridItem>
+							<Heading size={'md'}>Agents</Heading>
+							<Divider
+								w='100%'
+								mt={3}
+								mb={3}
+							/>
 
-					<GridItem
+							<Heading
+								fontSize={'105px'}
+								alignItems={'center'}
+								textAlign={'center'}
+							>
+								{agents.length}
+							</Heading>
+						</Flex>
+						<Flex
+							// colSpan={{ base: 2, xl: 1 }}
+							// rowSpan={1}
+							bgColor={'w.300'}
+							boxShadow='0 4px 10px 0 rgba(134,149,166,0.3)'
+							borderRadius={15}
+							p={10}
+							flexDir={'column'}
+						>
+							<Heading size={'md'}>Prospective Buyers</Heading>
+							<Divider
+								w='100%'
+								mt={3}
+								mb={3}
+							/>
+
+							<Heading
+								fontSize={'105px'}
+								alignItems={'center'}
+								textAlign={'center'}
+							>
+								{buyers.length}
+							</Heading>
+						</Flex>
+					</Flex>
+					<Box
 						bgColor={'w.300'}
 						boxShadow='0 4px 10px 0 rgba(134,149,166,0.3)'
 						borderRadius={15}
 						p={5}
-						rowSpan={{ base: 5, xl: 2 }}
-						colSpan={2}
+						w={'60%'}
 					>
-						<Heading size={'md'}>Activities Report</Heading>
-						<Divider
-							w='100%'
-							mt={3}
-							mb={3}
-						/>
-						<LineGraph
-							data={data2}
-							orientation={'horizontal'}
-							values={values2}
-						/>
-					</GridItem>
-					<GridItem
-						colSpan={{ base: 2, xl: 1 }}
-						bgColor={'w.300'}
-						boxShadow='0 4px 10px 0 rgba(134,149,166,0.3)'
-						borderRadius={15}
-						p={10}
-						rowSpan={1}
-					>
-						<Heading size={'md'}>Prospective Buyers</Heading>
-						<Divider
-							w='100%'
-							mt={3}
-							mb={3}
-						/>
-
-						<Heading
-							fontSize={'105px'}
-							alignItems={'center'}
+						<Flex
+							justifyContent={'space-between'}
 							textAlign={'center'}
+							alignItems={'flex-end'}
 						>
-							{buyers.length}
-						</Heading>
-					</GridItem>
-				</Grid>
+							<Heading
+								size={'md'}
+								textAlign={'center'}
+								pl={5}
+							>
+								Sales Report
+							</Heading>
+							<Menu
+								closeOnSe
+								lect={false}
+							>
+								<MenuButton
+									as={IconButton}
+									aria-label='Options'
+									rightIcon={<RiArrowDownSFill />}
+									variant={'primary'}
+									bgColor={'b.300'}
+									boxShadow='0 4px 12px 0 rgba(134,149,166,0.5)'
+									pr={3}
+									pl={5}
+									size={'sm'}
+									// w={{ base: '100%', xl: '10%' }}
+								>
+									{fil}
+								</MenuButton>
+
+								<MenuList>
+									<MenuOptionGroup
+										defaultValue='Tower 1'
+										type='radio'
+										onChange={(e) => {
+											setFilter(e);
+										}}
+									>
+										{filterOption.map((type, key) => (
+											<MenuItemOption
+												value={type}
+												fontSize={'sm'}
+												key={key}
+											>
+												{type}
+											</MenuItemOption>
+										))}
+									</MenuOptionGroup>
+								</MenuList>
+							</Menu>
+						</Flex>
+						<Divider
+							w='100%'
+							mt={3}
+							mb={3}
+						/>
+						{/* <LineGraph
+							data={label[0]}
+							orientation={'horizontal'}
+							values={value[0]}
+						/> */}
+
+						<LineGraph
+							data={label[0]}
+							orientation={'horizontal'}
+							values={value[0]}
+						/>
+					</Box>
+				</Flex>
 			</ScaleFade>
 		</Flex>
 	);

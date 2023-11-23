@@ -53,8 +53,8 @@ const ProspectiveBuyersTable = ({ data, search, all }) => {
 								component={
 									<NameFormat
 										fName={data.FName}
-										mName={data.MName}
-										lName={data.LName}
+										mName={data.MName ? data.MName : ''}
+										lName={data.LName ? data.LName : ''}
 									/>
 								}
 							/>

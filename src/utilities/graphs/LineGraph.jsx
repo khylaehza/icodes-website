@@ -20,6 +20,11 @@ function LineGraph({ data, orientation, values, name }) {
 			data: data,
 		},
 		yAxis: {},
+		grid: {
+			itemStyle: {
+				color: '#FFF', // Set the color to blue
+			},
+		},
 		series: [
 			{
 				name: name,
