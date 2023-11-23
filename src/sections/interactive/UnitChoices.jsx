@@ -43,6 +43,7 @@ const UnitChoices = () => {
 	];
 
 	const [proceed, setProceed] = useState('');
+	const [size, setSize] = useState('');
 
 	return (
 		<Flex
@@ -115,10 +116,8 @@ const UnitChoices = () => {
 							}}
 							p={2}
 							onClick={() => {
-								setProceed({
-									name: unit.name,
-									size: unit.size,
-								});
+								setSize(unit.size);
+								setProceed(unit.name);
 							}}
 							key={key}
 						>
@@ -162,7 +161,7 @@ const UnitChoices = () => {
 					_hover={{ bgColor: '#FFF', color: '#000' }}
 					onClick={() => {
 						navigate('/unitcanvas', {
-							state: { unit: proceed },
+							state: { unit: proceed, size: size },
 						});
 					}}
 				>

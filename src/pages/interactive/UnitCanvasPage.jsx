@@ -117,7 +117,7 @@ const UnitCanvasPage = () => {
 	}
 
 	const UnitType = () => {
-		switch (unit.name) {
+		switch (unit) {
 			case 'Studio':
 				return <UnitStudio />;
 			case '1 Bedroom':
@@ -138,6 +138,7 @@ const UnitCanvasPage = () => {
 		setActiveFurn([]);
 		navigate('/');
 	};
+
 	return (
 		<Flex
 			className='App'
@@ -187,8 +188,8 @@ const UnitCanvasPage = () => {
 						<CusPDF
 							img={img}
 							data={activeFurn}
-							unit={unit.name}
-							size={unit.size}
+							unit={unit}
+							size={size}
 						/>
 					}
 					fileName='CTC_UnitDesign.pdf'

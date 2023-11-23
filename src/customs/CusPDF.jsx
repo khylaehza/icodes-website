@@ -54,49 +54,48 @@ const styles = StyleSheet.create({
 
 const CusPDF = ({ img, data, unit, size }) => {
 	let count = 0;
-	if (img) {
-		return (
-			<Document>
-				<Page
-					size='A4'
-					style={styles.page}
-				>
-					<View style={styles.section}>
-						<Text style={styles.title}>
-							CONGRESSIONAL TOWN CENTER PREFERRED UNIT DESIGN
-						</Text>
-						<Image
-							style={styles.image}
-							source={img}
-						/>
-						<Text>{unit}</Text>
-						<Text>({size})</Text>
-						<Text style={styles.subTitle}>
-							Furnitures and its Measurements
-						</Text>
-						<View style={styles.innerSection}>
-							{data.map((data, key) => {
-								if (data.isShown) {
-									count++;
-									return (
-										<Text
-											style={styles.text}
-											key={key}
-										>
-											{count}. {data.name} - {data.l} in x{' '}
-											{data.w} in (
-											{(data.l * 2.54).toFixed(2)} cm x{' '}
-											{(data.w * 2.54).toFixed(2)} cm)
-										</Text>
-									);
-								}
-							})}
-						</View>
+
+	return (
+		<Document>
+			<Page
+				size='A4'
+				style={styles.page}
+			>
+				<View style={styles.section}>
+					<Text style={styles.title}>
+						CONGRESSIONAL TOWN CENTER PREFERRED UNIT DESIGN
+					</Text>
+					<Image
+						style={unit && styles.image}
+						source={img}
+					/>
+					<Text>{unit}</Text>
+					<Text>{size}</Text>
+					<Text style={styles.subTitle}>
+						Furnitures and its Measurements
+					</Text>
+					<View style={styles.innerSection}>
+						{data.map((data, key) => {
+							if (data.isShown) {
+								count++;
+								return (
+									<Text
+										style={styles.text}
+										key={key}
+									>
+										{count}. {data.name} - {data.l} in x{' '}
+										{data.w} in (
+										{(data.l * 2.54).toFixed(2)} cm x{' '}
+										{(data.w * 2.54).toFixed(2)} cm)
+									</Text>
+								);
+							}
+						})}
 					</View>
-				</Page>
-			</Document>
-		);
-	}
+				</View>
+			</Page>
+		</Document>
+	);
 };
 
 export default CusPDF;
