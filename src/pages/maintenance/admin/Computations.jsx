@@ -57,7 +57,6 @@ const Item = () => {
 	const rentToOwnHeader = [
 		'Created At',
 		'Payment Term ID',
-		'Payment Type',
 		'Name',
 		'Reservation Fee',
 		'Monthly %',
