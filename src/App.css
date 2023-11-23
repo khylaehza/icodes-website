@@ -1,0 +1,62 @@
+.App {
+	text-align: center;
+	width: 100vw;
+	height: 100vh;
+	justify-content: center;
+	align-content: center;
+}
+
+.bg {
+	z-index: 1;
+	position: absolute;
+	width: 100vw;
+	height: 100vh;
+	background-position: center;
+	background-repeat: no-repeat;
+}
+
+.content {
+	padding-top: 10px;
+	transform: translate3d(calc(50% + 40px), 0, 0);
+	text-align: left;
+	background: #202035;
+	color: white;
+	padding: 10px 15px;
+	border-radius: 5px;
+}
+
+.content::before {
+	content: '';
+	position: absolute;
+	top: 25px;
+	left: -40px;
+	height: 1px;
+	width: 40px;
+	background: black;
+}
+
+.info {
+	width: 50%;
+	background-color: #aee;
+}
+
+.colorPicker .react-colorful {
+	width: 80px;
+	height: 80px;
+}
+.colorPicker .react-colorful__hue {
+	height: 8px;
+}
+
+.custom-pointers .react-colorful__saturation-pointer {
+	width: 6px;
+	height: 6px;
+	border-radius: 3px;
+}
+
+.custom-pointers .react-colorful__hue-pointer,
+.custom-pointers .react-colorful__alpha-pointer {
+	width: 8px;
+	height: 15px;
+	border-radius: 3px;
+}
