@@ -37,7 +37,6 @@ const FinderForm = ({setStart, form, results, points,text}) => {
 
     const { isOpen, onOpen, onClose } = useDisclosure()
 
-
     const [currentCard, setCurrentCard] = useState(0);
     const [currentStep, setCurrentStep] = useState(0);
     const [displayResults, setDisplayResults] = useState(false)
