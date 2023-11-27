@@ -9,3 +9,4 @@ export { default as StackBarGraph } from './graphs/StackBarGraph';
 export { default as OrdinalSuffix } from './OrdinalSuffix';
 export { default as WeekGenerator } from './WeekGenerator';
 export { RoomComponents } from './RoomComponents';
+export { default as RadarGraph } from './graphs/RadarGraph';

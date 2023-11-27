@@ -58,7 +58,7 @@ export const FurnitureProvider = (props) => {
 		{
 			key: 0,
 			name: 'Top Freezer Refrigerator',
-			img: 'https://firebasestorage.googleapis.com/v0/b/icodes-ctc-db1.appspot.com/o/interactive%2Fkitchen%2Fkitchen1.png?alt=media&token=1d45249f-5efc-45f1-ad99-b416eac2e48d',
+			img: 'https://i.imgur.com/PsA1PM1.png',
 			model: <Kitchen1 />,
 			w: 30,
 			l: 30,
@@ -76,7 +76,7 @@ export const FurnitureProvider = (props) => {
 		{
 			key: 1,
 			name: 'Double Stove',
-			img: 'https://firebasestorage.googleapis.com/v0/b/icodes-ctc-db1.appspot.com/o/interactive%2Fkitchen%2Fkitchen2.png?alt=media&token=173eb85f-81af-4f10-ad38-5b38ec65a752',
+			img: 'https://i.imgur.com/fG7Wsiq.png',
 			model: <Kitchen2 />,
 			w: 45.2,
 			l: 36.1,
@@ -97,7 +97,7 @@ export const FurnitureProvider = (props) => {
 		{
 			key: 2,
 			name: 'Wall-Mounted Kitchen Storage',
-			img: 'https://firebasestorage.googleapis.com/v0/b/icodes-ctc-db1.appspot.com/o/interactive%2Fkitchen%2Fkitchen3.png?alt=media&token=598dd514-b2e5-411b-bfea-064355db4eca',
+			img: 'https://i.imgur.com/tVQqZJb.png',
 			model: <Kitchen3 />,
 			w: 30.3,
 			l: 21.1,
@@ -117,7 +117,7 @@ export const FurnitureProvider = (props) => {
 		{
 			key: 3,
 			name: 'Tall Kitchen Table',
-			img: 'https://firebasestorage.googleapis.com/v0/b/icodes-ctc-db1.appspot.com/o/interactive%2Fkitchen%2Fkitchen4.png?alt=media&token=f7808ab8-1002-4010-9896-34a645aa496b',
+			img: 'https://i.imgur.com/LXE2I7y.png',
 			model: <Kitchen4 />,
 			w: 19.4,
 			l: 40.3,
@@ -136,7 +136,7 @@ export const FurnitureProvider = (props) => {
 		{
 			key: 4,
 			name: 'Corner Kitchen Sink with Stove',
-			img: 'https://firebasestorage.googleapis.com/v0/b/icodes-ctc-db1.appspot.com/o/interactive%2Fkitchen%2Fkitchen5.png?alt=media&token=230867ed-835b-4180-9726-854871b0e591',
+			img: 'https://i.imgur.com/RFfMvnh.png',
 			model: <Kitchen5 />,
 			w: 90.3,
 			l: 68.5,
@@ -156,7 +156,7 @@ export const FurnitureProvider = (props) => {
 		{
 			key: 5,
 			name: 'Small Kitchen Cabinet',
-			img: 'https://firebasestorage.googleapis.com/v0/b/icodes-ctc-db1.appspot.com/o/interactive%2Fkitchen%2Fkitchen6.png?alt=media&token=83a10837-0448-4409-b136-b9121f0c1bdf',
+			img: 'https://i.imgur.com/UiXyK8A.png',
 			model: <Kitchen6 />,
 			w: 17.6,
 			l: 30,
@@ -175,7 +175,7 @@ export const FurnitureProvider = (props) => {
 		{
 			key: 6,
 			name: 'Long Kitchen Cabinet',
-			img: 'https://firebasestorage.googleapis.com/v0/b/icodes-ctc-db1.appspot.com/o/interactive%2Fkitchen%2Fkitchen7.png?alt=media&token=155a105b-5801-4742-8487-d5c41eee7b6b',
+			img: 'https://i.imgur.com/CKLfgDE.png',
 			model: <Kitchen7 />,
 			w: 82.1,
 			l: 29,
@@ -193,7 +193,7 @@ export const FurnitureProvider = (props) => {
 		{
 			key: 7,
 			name: 'Small Kitchen Sink',
-			img: 'https://firebasestorage.googleapis.com/v0/b/icodes-ctc-db1.appspot.com/o/interactive%2Fkitchen%2Fkitchen8.png?alt=media&token=bb47a7e6-083b-4bc0-a36b-d132551cd78c',
+			img: 'https://i.imgur.com/h1EzWtC.png',
 			model: <Kitchen8 />,
 			w: 39.2,
 			l: 32.6,
@@ -213,7 +213,7 @@ export const FurnitureProvider = (props) => {
 		{
 			key: 8,
 			name: 'Small oven with stove',
-			img: 'https://firebasestorage.googleapis.com/v0/b/icodes-ctc-db1.appspot.com/o/interactive%2Fkitchen%2Fkitchen9.png?alt=media&token=53300698-1475-4ba9-bb14-03797e893f6b',
+			img: 'https://i.imgur.com/yDKHpvX.png',
 			model: <Kitchen9 />,
 			w: 30.4,
 			l: 27.2,
@@ -234,7 +234,7 @@ export const FurnitureProvider = (props) => {
 		{
 			key: 0,
 			name: 'Breakfast Bar',
-			img: 'https://firebasestorage.googleapis.com/v0/b/icodes-ctc-db1.appspot.com/o/interactive%2Fdining%2Fdining1.png?alt=media&token=95df2c39-4531-446a-8a91-ef5b8f2102f0',
+			img: 'https://i.imgur.com/rgiz093.png',
 			model: <Dining1 />,
 			w: 58.2,
 			l: 43.1,
@@ -255,7 +255,7 @@ export const FurnitureProvider = (props) => {
 		{
 			key: 1,
 			name: 'Small Dining Table Set',
-			img: 'https://firebasestorage.googleapis.com/v0/b/icodes-ctc-db1.appspot.com/o/interactive%2Fdining%2Fdining2.png?alt=media&token=f351ae57-b391-4617-ae3a-a9bcc2188f68',
+			img: 'https://i.imgur.com/fNzqKn7.png',
 			model: <Dining2 />,
 			w: 35.5,
 			l: 31.4,
@@ -274,7 +274,7 @@ export const FurnitureProvider = (props) => {
 		{
 			key: 2,
 			name: 'Big Dining Table Set',
-			img: 'https://firebasestorage.googleapis.com/v0/b/icodes-ctc-db1.appspot.com/o/interactive%2Fdining%2Fdining3.png?alt=media&token=5d0afb40-0224-4aef-8e91-17734e054017',
+			img: 'https://i.imgur.com/jpVH2pF.png',
 			model: <Dining3 />,
 			w: 88.2,
 			l: 31,
@@ -294,7 +294,7 @@ export const FurnitureProvider = (props) => {
 		{
 			key: 3,
 			name: 'Dining Cabinet',
-			img: 'https://firebasestorage.googleapis.com/v0/b/icodes-ctc-db1.appspot.com/o/interactive%2Fdining%2Fdining4.png?alt=media&token=5448d9d7-dc9c-47ba-8728-ee0cfbd23944',
+			img: 'https://i.imgur.com/Bx8FAzc.png',
 			model: <Dining4 />,
 			w: 45,
 			l: 33,
@@ -313,7 +313,7 @@ export const FurnitureProvider = (props) => {
 		{
 			key: 4,
 			name: 'Single Dining Chair',
-			img: 'https://firebasestorage.googleapis.com/v0/b/icodes-ctc-db1.appspot.com/o/interactive%2Fdining%2Fdining5.png?alt=media&token=a623e8b1-f503-4792-9044-507b14bcad21',
+			img: 'https://i.imgur.com/9pulonv.png',
 			model: <Dining5 />,
 			w: 15.3,
 			l: 30,
@@ -331,7 +331,7 @@ export const FurnitureProvider = (props) => {
 		{
 			key: 5,
 			name: 'Round Table',
-			img: 'https://firebasestorage.googleapis.com/v0/b/icodes-ctc-db1.appspot.com/o/interactive%2Fdining%2Fdining6.png?alt=media&token=4b5c7a08-d6bf-4ef5-9cf5-92956ac47088',
+			img: 'https://i.imgur.com/W5vyZ3T.png',
 			model: <Dining6 />,
 			w: 28,
 			l: 24,
@@ -349,7 +349,7 @@ export const FurnitureProvider = (props) => {
 		{
 			key: 6,
 			name: 'Marble Table',
-			img: 'https://firebasestorage.googleapis.com/v0/b/icodes-ctc-db1.appspot.com/o/interactive%2Fdining%2Fdining7.png?alt=media&token=614d6336-8b18-42e5-9a8a-538622637e84',
+			img: 'https://i.imgur.com/oEtAJIv.png',
 			model: <Dining7 />,
 			w: 32,
 			l: 28.1,
@@ -369,7 +369,7 @@ export const FurnitureProvider = (props) => {
 		{
 			key: 7,
 			name: 'Single Dining Chair',
-			img: 'https://firebasestorage.googleapis.com/v0/b/icodes-ctc-db1.appspot.com/o/interactive%2Fdining%2Fdining8.png?alt=media&token=0f80380c-b706-4622-bfd0-0193784a0f3a',
+			img: 'https://i.imgur.com/gs9YRgi.png',
 			model: <Dining8 />,
 			w: 15,
 			l: 30.3,
@@ -388,7 +388,7 @@ export const FurnitureProvider = (props) => {
 		{
 			key: 8,
 			name: 'Hutch',
-			img: 'https://firebasestorage.googleapis.com/v0/b/icodes-ctc-db1.appspot.com/o/interactive%2Fdining%2Fdining9.png?alt=media&token=3e95ec8a-9646-4b38-8184-dbc4e0bdf27a',
+			img: 'https://i.imgur.com/zPhFziB.png',
 			model: <Dining9 />,
 			w: 26.5,
 			l: 48.1,
@@ -409,7 +409,7 @@ export const FurnitureProvider = (props) => {
 		{
 			key: 0,
 			name: 'Wooden Bed',
-			img: 'https://firebasestorage.googleapis.com/v0/b/icodes-ctc-db1.appspot.com/o/interactive%2Fbedroom%2Fbed1.png?alt=media&token=d20e6284-2de6-4c72-b168-2ba8259d8330',
+			img: 'https://i.imgur.com/0j6WDfe.png',
 			model: <Bed1 />,
 			w: 60,
 			l: 80,
@@ -430,7 +430,7 @@ export const FurnitureProvider = (props) => {
 		{
 			key: 1,
 			name: 'Bed with Side Table',
-			img: 'https://firebasestorage.googleapis.com/v0/b/icodes-ctc-db1.appspot.com/o/interactive%2Fbedroom%2Fbed2.png?alt=media&token=548b2838-faf4-483e-91d1-816a9aa6bf61',
+			img: 'https://i.imgur.com/974HQQl.png',
 			model: <Bed2 />,
 			w: 80,
 			l: 80,
@@ -449,7 +449,7 @@ export const FurnitureProvider = (props) => {
 		{
 			key: 2,
 			name: 'Bed with Steel Board',
-			img: 'https://firebasestorage.googleapis.com/v0/b/icodes-ctc-db1.appspot.com/o/interactive%2Fbedroom%2Fbed3.png?alt=media&token=7acbbfce-0d0a-44ad-9429-204dbc509af7',
+			img: 'https://i.imgur.com/hV1gQvk.png',
 			model: <Bed3 />,
 			w: 39,
 			l: 80,
@@ -470,7 +470,7 @@ export const FurnitureProvider = (props) => {
 		{
 			key: 3,
 			name: 'Bed with Head Board',
-			img: 'https://firebasestorage.googleapis.com/v0/b/icodes-ctc-db1.appspot.com/o/interactive%2Fbedroom%2Fbed4.png?alt=media&token=f7c375e7-20fa-47e6-aaf9-8b51c8bda9e0',
+			img: 'https://i.imgur.com/R9Eh8Tc.png',
 			model: <Bed4 />,
 			w: 60,
 			l: 80,
@@ -492,7 +492,7 @@ export const FurnitureProvider = (props) => {
 		{
 			key: 4,
 			name: 'Long Bed',
-			img: 'https://firebasestorage.googleapis.com/v0/b/icodes-ctc-db1.appspot.com/o/interactive%2Fbedroom%2Fbed5.png?alt=media&token=be042d71-ad71-48c4-b887-9af1fd3fa68c',
+			img: 'https://i.imgur.com/0dO9jnQ.png',
 			model: <Bed5 />,
 			w: 40,
 			l: 80,
@@ -512,7 +512,7 @@ export const FurnitureProvider = (props) => {
 		{
 			key: 5,
 			name: 'Double Decker Bed',
-			img: 'https://firebasestorage.googleapis.com/v0/b/icodes-ctc-db1.appspot.com/o/interactive%2Fbedroom%2Fbed6.png?alt=media&token=81debdc6-2a15-4c25-bcb0-383010ee7fbe',
+			img: 'https://i.imgur.com/GKu2uak.png',
 			model: <Bed6 />,
 			w: 55,
 			l: 80,
@@ -531,7 +531,7 @@ export const FurnitureProvider = (props) => {
 		{
 			key: 6,
 			name: 'Bed with Two Side Table',
-			img: 'https://firebasestorage.googleapis.com/v0/b/icodes-ctc-db1.appspot.com/o/interactive%2Fbedroom%2Fbed6.png?alt=media&token=81debdc6-2a15-4c25-bcb0-383010ee7fbe',
+			img: 'https://i.imgur.com/J1tKQFy.png',
 			model: <Bed7 />,
 			w: 52,
 			l: 80,
@@ -552,7 +552,7 @@ export const FurnitureProvider = (props) => {
 		{
 			key: 7,
 			name: 'Luxury Bed',
-			img: 'https://firebasestorage.googleapis.com/v0/b/icodes-ctc-db1.appspot.com/o/interactive%2Fbedroom%2Fbed8.png?alt=media&token=1f125ca2-72ae-46ed-bd3c-3034e79db2b1',
+			img: 'https://i.imgur.com/4qHfZFo.png',
 			model: <Bed8 />,
 			w: 60,
 			l: 80,
@@ -573,7 +573,7 @@ export const FurnitureProvider = (props) => {
 		{
 			key: 8,
 			name: 'Round Bed',
-			img: 'https://firebasestorage.googleapis.com/v0/b/icodes-ctc-db1.appspot.com/o/interactive%2Fbedroom%2Fbed9.png?alt=media&token=46977a85-444a-41e7-9c3e-9397ff922f09',
+			img: 'https://i.imgur.com/731sWYO.png',
 			model: <Bed9 />,
 			w: 46,
 			l: 80,
@@ -599,7 +599,7 @@ export const FurnitureProvider = (props) => {
 		{
 			key: 0,
 			name: 'Double seat Couch',
-			img: 'https://firebasestorage.googleapis.com/v0/b/icodes-ctc-db1.appspot.com/o/interactive%2Fliving%2Fliving1.png?alt=media&token=470c2780-354c-4c54-bc90-6a46cb8c0be9',
+			img: 'https://i.imgur.com/CtQb8D0.png',
 			model: <Living1 />,
 			w: 80.2,
 			l: 30.1,
@@ -617,7 +617,7 @@ export const FurnitureProvider = (props) => {
 		{
 			key: 1,
 			name: 'Wood center table',
-			img: 'https://firebasestorage.googleapis.com/v0/b/icodes-ctc-db1.appspot.com/o/interactive%2Fliving%2Fliving2.png?alt=media&token=6d0a71b7-c4e3-4e02-a417-10ab1a31542d',
+			img: 'https://i.imgur.com/yNGxqxr.png',
 			model: <Living2 />,
 			w: 20.2,
 			l: 18,
@@ -635,7 +635,7 @@ export const FurnitureProvider = (props) => {
 		{
 			key: 2,
 			name: 'Single Couch',
-			img: 'https://firebasestorage.googleapis.com/v0/b/icodes-ctc-db1.appspot.com/o/interactive%2Fliving%2Fliving3.png?alt=media&token=345b94a2-fbfc-4208-95a2-daaff7bb7be2',
+			img: 'https://i.imgur.com/XRrcGLb.png',
 			model: <Living3 />,
 			w: 30.4,
 			l: 41,
@@ -656,7 +656,7 @@ export const FurnitureProvider = (props) => {
 		{
 			key: 3,
 			name: 'Corner Sofa',
-			img: 'https://firebasestorage.googleapis.com/v0/b/icodes-ctc-db1.appspot.com/o/interactive%2Fliving%2Fliving4.png?alt=media&token=740ef6ca-9815-4c94-939f-0b6b009e844b',
+			img: 'https://i.imgur.com/XEPh9qa.png',
 			model: <Living4 />,
 			w: 89.6,
 			l: 40.3,
@@ -677,7 +677,7 @@ export const FurnitureProvider = (props) => {
 		{
 			key: 4,
 			name: 'Class coffee table',
-			img: 'https://firebasestorage.googleapis.com/v0/b/icodes-ctc-db1.appspot.com/o/interactive%2Fliving%2Fliving5.png?alt=media&token=d159ea47-90cf-4ed5-adf7-372523020fc5',
+			img: 'https://i.imgur.com/GxK0tdi.png',
 			model: <Living5 />,
 			w: 30.3,
 			l: 20.4,
@@ -697,7 +697,7 @@ export const FurnitureProvider = (props) => {
 		{
 			key: 5,
 			name: 'Small Cabinet',
-			img: 'https://firebasestorage.googleapis.com/v0/b/icodes-ctc-db1.appspot.com/o/interactive%2Fliving%2Fliving6.png?alt=media&token=2e194ba1-91a4-42e0-9308-077d5bc558db',
+			img: 'https://i.imgur.com/F6vygUM.png',
 			model: <Living6 />,
 			w: 28.7,
 			l: 20.2,
@@ -717,7 +717,7 @@ export const FurnitureProvider = (props) => {
 		{
 			key: 6,
 			name: 'Shelves',
-			img: 'https://firebasestorage.googleapis.com/v0/b/icodes-ctc-db1.appspot.com/o/interactive%2Fliving%2Fliving7.png?alt=media&token=5191f784-9e49-4a2c-98b0-ae515eba260b',
+			img: 'https://i.imgur.com/3NTsXPv.png',
 			model: <Living7 />,
 			w: 39.4,
 			l: 60.2,
@@ -737,7 +737,7 @@ export const FurnitureProvider = (props) => {
 		{
 			key: 7,
 			name: 'Big Shelves',
-			img: 'https://firebasestorage.googleapis.com/v0/b/icodes-ctc-db1.appspot.com/o/interactive%2Fliving%2Fliving8.png?alt=media&token=f661d342-703e-4f7d-935a-15a65259650e',
+			img: 'https://i.imgur.com/3rPb2fd.png',
 			model: <Living8 />,
 			w: 77.3,
 			l: 70,
@@ -757,7 +757,7 @@ export const FurnitureProvider = (props) => {
 		{
 			key: 8,
 			name: 'TV',
-			img: 'https://firebasestorage.googleapis.com/v0/b/icodes-ctc-db1.appspot.com/o/interactive%2Fliving%2Fliving9.png?alt=media&token=9568503d-817d-49c3-9f42-dcc159edb938',
+			img: 'https://i.imgur.com/EF8KLLD.png',
 			model: <Living9 />,
 			w: 35.3,
 			l: 32,
@@ -779,7 +779,7 @@ export const FurnitureProvider = (props) => {
 		{
 			key: 0,
 			name: 'Bathub',
-			img: 'https://firebasestorage.googleapis.com/v0/b/icodes-ctc-db1.appspot.com/o/interactive%2Fbathroom%2Fbath1.png?alt=media&token=e435e1bc-8df3-4841-8820-0b76f4186e00',
+			img: 'https://i.imgur.com/yhrYOxx.png',
 			model: <Bath1 />,
 			w: 31,
 			l: 18.5,
@@ -797,7 +797,7 @@ export const FurnitureProvider = (props) => {
 		{
 			key: 1,
 			name: 'Shower Cabin',
-			img: 'https://firebasestorage.googleapis.com/v0/b/icodes-ctc-db1.appspot.com/o/interactive%2Fbathroom%2Fbath2.png?alt=media&token=7bff2961-8e7c-42b1-aa65-669444710418',
+			img: 'https://i.imgur.com/EHbleBt.png',
 			model: <Bath2 />,
 			w: 28,
 			l: 56,
@@ -817,7 +817,7 @@ export const FurnitureProvider = (props) => {
 		{
 			key: 2,
 			name: 'Bathroom Sink',
-			img: 'https://firebasestorage.googleapis.com/v0/b/icodes-ctc-db1.appspot.com/o/interactive%2Fbathroom%2Fbath3.png?alt=media&token=45be97f7-04df-43f7-9012-6a92976bb91d',
+			img: 'https://i.imgur.com/TGPQNnS.png',
 			model: <Bath3 />,
 			w: 18,
 			l: 34,
@@ -835,7 +835,7 @@ export const FurnitureProvider = (props) => {
 		{
 			key: 3,
 			name: 'Bathroom Mirror',
-			img: 'https://firebasestorage.googleapis.com/v0/b/icodes-ctc-db1.appspot.com/o/interactive%2Fbathroom%2Fbath3.png?alt=media&token=45be97f7-04df-43f7-9012-6a92976bb91d',
+			img: 'https://i.imgur.com/LDceuN3.png',
 			model: <Bath4 />,
 			w: 14,
 			l: 20,
@@ -853,7 +853,7 @@ export const FurnitureProvider = (props) => {
 		{
 			key: 4,
 			name: 'Bathroom Bucket',
-			img: 'https://firebasestorage.googleapis.com/v0/b/icodes-ctc-db1.appspot.com/o/interactive%2Fbathroom%2Fbath5.png?alt=media&token=10e4abb5-069e-495d-aa84-da8bfdd1ef3e',
+			img: 'https://i.imgur.com/fwfClvx.png',
 			model: <Bath5 />,
 			w: 31,
 			l: 31,
@@ -871,7 +871,7 @@ export const FurnitureProvider = (props) => {
 		{
 			key: 5,
 			name: 'Sink with cabinet',
-			img: 'https://firebasestorage.googleapis.com/v0/b/icodes-ctc-db1.appspot.com/o/interactive%2Fbathroom%2Fbath6.png?alt=media&token=f67c851e-de03-4285-bba4-dd24a25f34d9',
+			img: 'https://i.imgur.com/nGgJOZ7.png',
 			model: <Bath6 />,
 			w: 30,
 			l: 28,
@@ -892,7 +892,7 @@ export const FurnitureProvider = (props) => {
 		{
 			key: 6,
 			name: 'Toilet',
-			img: 'https://firebasestorage.googleapis.com/v0/b/icodes-ctc-db1.appspot.com/o/interactive%2Fbathroom%2Fbath7.png?alt=media&token=f06d47e7-8854-4225-ab85-f63622bb8404',
+			img: 'https://i.imgur.com/UeeEEfZ.png',
 			model: <Bath7 />,
 			w: 13.5,
 			l: 30,
@@ -910,7 +910,7 @@ export const FurnitureProvider = (props) => {
 		{
 			key: 7,
 			name: 'Shower',
-			img: 'https://firebasestorage.googleapis.com/v0/b/icodes-ctc-db1.appspot.com/o/interactive%2Fbathroom%2Fbath8.png?alt=media&token=d622bd93-5d02-4562-9407-e20d7fa6567c',
+			img: 'https://i.imgur.com/HOjimgW.png',
 			model: <Bath8 />,
 			w: 8,
 			l: 30,
@@ -928,7 +928,7 @@ export const FurnitureProvider = (props) => {
 		{
 			key: 8,
 			name: 'Wall Mounted Bathroom Shelves',
-			img: 'https://firebasestorage.googleapis.com/v0/b/icodes-ctc-db1.appspot.com/o/interactive%2Fbathroom%2Fbath8.png?alt=media&token=d622bd93-5d02-4562-9407-e20d7fa6567c',
+			img: 'https://i.imgur.com/GWwJlif.png',
 			model: <Bath9 />,
 			w: 16,
 			l: 16,

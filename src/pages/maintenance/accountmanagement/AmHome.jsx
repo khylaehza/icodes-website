@@ -86,6 +86,7 @@ const Item = () => {
 		});
 	});
 
+	console.log(weeklyDates);
 	let weeklyData = Array(WeekGenerator().length).fill(0);
 
 	weekObject.map((day) => {

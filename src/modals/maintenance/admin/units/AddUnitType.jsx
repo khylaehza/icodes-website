@@ -18,10 +18,12 @@ const AddUnitType = () => {
 		initialValues: {
 			typeName: '',
 			typeCode: '',
+			maxPeople: '',
 		},
 		validationSchema: Yup.object({
 			typeName: Yup.string().required('Unit Type is required.'),
 			typeCode: Yup.string().required('Unit Code is required.'),
+			maxPeople: Yup.number().required('Maximum Capacity is required.'),
 		}),
 		onSubmit: async (value, actions) => {
 			try {
@@ -31,6 +33,7 @@ const AddUnitType = () => {
 						CreatedDate: serverTimestamp(),
 						TypeName: value.typeName,
 						TypeCode: value.typeCode,
+						TypeMax: value.maxPeople,
 						Status: true,
 					}
 				);

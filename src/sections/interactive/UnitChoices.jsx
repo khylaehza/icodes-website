@@ -16,29 +16,29 @@ const UnitChoices = () => {
 
 	const units = [
 		{
-			name: 'Studio',
+			name: 'Studio (ST)',
 			size: '20 sq. meters',
-			layout: 'https://firebasestorage.googleapis.com/v0/b/icodes-ctc-db1.appspot.com/o/homepage%2Funits%2Flayouts%2Fstudio-layout.jpg?alt=media&token=2d22cc9f-1290-452c-ade6-f5ae1ed1aa5c',
+			layout: 'https://i.imgur.com/HBF8Opw.jpg',
 		},
 		{
-			name: '1 Bedroom',
+			name: '1 Bedroom (1BR)',
 			size: '30 sq. meters',
-			layout: 'https://firebasestorage.googleapis.com/v0/b/icodes-ctc-db1.appspot.com/o/homepage%2Funits%2Flayouts%2F1br-layout.jpg?alt=media&token=60238de1-f858-49ec-be9d-2639ab77e944',
+			layout: 'https://i.imgur.com/Erd4T0x.jpg',
 		},
 		{
-			name: '2 Bedrooms',
+			name: '2 Bedrooms (2BR)',
 			size: '52 sq. meters',
-			layout: 'https://firebasestorage.googleapis.com/v0/b/icodes-ctc-db1.appspot.com/o/homepage%2Funits%2Flayouts%2F2br-layout.jpg?alt=media&token=55c95445-688f-46b6-9706-456b6f22e356',
+			layout: 'https://i.imgur.com/xwU22bs.jpg',
 		},
 		{
-			name: '2 Bedrooms Bigcut',
+			name: '2 Bedrooms Bigcut (2BR)',
 			size: '70 sq. meters',
-			layout: 'https://firebasestorage.googleapis.com/v0/b/icodes-ctc-db1.appspot.com/o/homepage%2Funits%2Flayouts%2F2br-big-layout.jpg?alt=media&token=ce5e31fb-86e3-4110-bc13-6b764646392b',
+			layout: 'https://i.imgur.com/E5J3zmi.jpg',
 		},
 		{
-			name: '3 Bedrooms',
+			name: '3 Bedrooms (3BR)',
 			size: '79 sq. meters',
-			layout: 'https://firebasestorage.googleapis.com/v0/b/icodes-ctc-db1.appspot.com/o/homepage%2Funits%2Flayouts%2F3br-layout.jpg?alt=media&token=e7001a31-bf20-4050-87ac-bea2d374b91b',
+			layout: 'https://i.imgur.com/oqE08wS.jpg',
 		},
 	];
 
@@ -156,9 +156,8 @@ const UnitChoices = () => {
 			{proceed && (
 				<Button
 					bgColor={'b.300'}
-					w={'10%'}
 					color={'w.300'}
-					_hover={{ bgColor: '#FFF', color: '#000' }}
+					_hover={{ bgColor: 'b.400', color: 'w.300' }}
 					onClick={() => {
 						navigate('/unitcanvas', {
 							state: { unit: proceed, size: size },

@@ -13,11 +13,13 @@ import { FurnitureProvider } from '../../FurnitureContext';
 import {
 	LoginPage,
 	ForgotPassPage,
-	InteractiveGuide,
 	DesignerPage,
 	HomePage,
 	UnitCanvasPage,
 	CalculatorPage
+	FinderPage,
+	FinderQuestions,
+	FinderResult,
 } from '../pages/';
 //maintenance
 import {
@@ -227,13 +229,28 @@ const RoutesNav = () => {
 						/>
 						<Route
 							exact
-							path={'/finder'}
+							path={'/finder1'}
 							element={<FinderHome />}
 						/>
 						<Route
 							exact
 							path={'/calculator'}
 							element={<CalculatorPage />}
+						/>
+						<Route
+							exact
+							path={'/finder'}
+							element={<FinderPage />}
+						/>
+						<Route
+							exact
+							path={'/assessment'}
+							element={<FinderQuestions />}
+						/>
+						<Route
+							exact
+							path={'/result'}
+							element={<FinderResult />}
 						/>
 						<Route
 							path='*'

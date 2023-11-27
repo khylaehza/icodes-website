@@ -45,9 +45,12 @@ function Components({ data, index }) {
 						flexDir={['column', 'row']}
 						justifyContent={'center'}
 						p={10}
-						// ref={ref}
+						ref={ref}
 					>
-						<HStack gap={20}>
+						<HStack
+							gap={20}
+							ref={ref}
+						>
 							{index % 2 == 0 ? (
 								<>
 									<Box
@@ -56,6 +59,7 @@ function Components({ data, index }) {
 										display={'flex'}
 										flexDir={'column'}
 										color={'black'}
+										ref={ref}
 									>
 										<ChakraBox style={{ y }}>
 											<Text
@@ -77,7 +81,7 @@ function Components({ data, index }) {
 									<Box
 										w={'40%'}
 										flexDir={'column'}
-										// ref={ref}
+										ref={ref}
 									>
 										<Box
 											shadow={'dark-lg'}
@@ -103,7 +107,7 @@ function Components({ data, index }) {
 									<Box
 										w={'40%'}
 										flexDir={'column'}
-										// ref={ref}
+										ref={ref}
 									>
 										<Box
 											shadow={'dark-lg'}
@@ -129,6 +133,7 @@ function Components({ data, index }) {
 										display={'flex'}
 										flexDir={'column'}
 										color={'black'}
+										ref={ref}
 									>
 										<ChakraBox style={{ y }}>
 											<Text
@@ -163,7 +168,7 @@ const TowerLayout = () => {
 			towerLoc:
 				'Congressional Town Center Tower 1 is the first new high-rise tower in this project. The 37-story tower is designed for the discerning and those who want to leave a lasting impression for friends and family. The tower’s spacious one-bedroom and studio unit entrance flow from its foyer into the unit’s living room and kitchen, providing residents entertainment and relaxation.',
 			towerImg:
-				'https://firebasestorage.googleapis.com/v0/b/icodes-ctc-db1.appspot.com/o/homepage%2Ftowers%2F1.jpg?alt=media&token=33e2a3d2-367c-445c-92bd-9afcc4ff2ae6',
+				'https://i.pinimg.com/736x/34/62/2d/34622d463634cfd4ed0bb3b7223043d9.jpg',
 			color: '#f5f5f5',
 		},
 		{
@@ -171,7 +176,7 @@ const TowerLayout = () => {
 			towerLoc:
 				'Congressional Town Center Tower 1 is the first new high-rise tower in this project. The 37-story tower is designed for the discerning and those who want to leave a lasting impression for friends and family. The tower’s spacious one-bedroom and studio unit entrance flow from its foyer into the unit’s living room and kitchen, providing residents entertainment and relaxation.',
 			towerImg:
-				'https://firebasestorage.googleapis.com/v0/b/icodes-ctc-db1.appspot.com/o/homepage%2Ftowers%2F2.jpg?alt=media&token=b868c38d-9058-479b-901d-131e776bbf06',
+				'https://i.pinimg.com/736x/68/01/7f/68017ff302490318ccbf5a85802d7c56.jpg',
 			color: '#FFFFFF',
 		},
 		{
@@ -179,7 +184,7 @@ const TowerLayout = () => {
 			towerLoc:
 				'Congressional Town Center Tower 1 is the first new high-rise tower in this project. The 37-story tower is designed for the discerning and those who want to leave a lasting impression for friends and family. The tower’s spacious one-bedroom and studio unit entrance flow from its foyer into the unit’s living room and kitchen, providing residents entertainment and relaxation.',
 			towerImg:
-				'https://firebasestorage.googleapis.com/v0/b/icodes-ctc-db1.appspot.com/o/homepage%2Ftowers%2F3.jpg?alt=media&token=09c12349-191f-48ef-a9b8-f8228c034484',
+				'https://i.pinimg.com/736x/69/18/6c/69186c081d8ede3b867bc4ab2fed71af.jpg',
 			color: '#f5f5f5',
 		},
 	];

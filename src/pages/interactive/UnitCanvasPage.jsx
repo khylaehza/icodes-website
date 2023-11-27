@@ -4,7 +4,7 @@ import { Stage, OrbitControls, MeshReflectorMaterial } from '@react-three/drei';
 import { Suspense, useState } from 'react';
 import { Flex, IconButton, useDisclosure } from '@chakra-ui/react';
 import { IoExitOutline } from 'react-icons/io5';
-import { CusPDF, CusExitModal, CusAlert } from '../../customs';
+import { CusPDF, CusAlert } from '../../customs';
 import {
 	Grid,
 	Models,
@@ -118,15 +118,15 @@ const UnitCanvasPage = () => {
 
 	const UnitType = () => {
 		switch (unit) {
-			case 'Studio':
+			case 'Studio (ST)':
 				return <UnitStudio />;
-			case '1 Bedroom':
+			case '1 Bedroom (1BR)':
 				return <Unit1br />;
-			case '2 Bedrooms':
+			case '2 Bedrooms (2BR)':
 				return <Unit2br />;
-			case '3 Bedrooms':
+			case '3 Bedrooms (3BR)':
 				return <Unit3br />;
-			case '2 Bedrooms Bigcut':
+			case '2 Bedrooms Bigcut (2BR)':
 				return <Unit2brBig />;
 		}
 	};

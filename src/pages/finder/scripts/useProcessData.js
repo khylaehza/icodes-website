@@ -1,26 +1,25 @@
-import { useState } from "react";
-import { useData } from "../../../../DataContext";
-import { reconstructed_data } from "./reconstructedData";
-import { pointBasis } from "./pointBasis";
+import { useState } from 'react';
+import { useData } from '../../../../DataContext';
+import { reconstructed_data } from './reconstructedData';
+import { pointBasis } from './pointBasis';
 
 export const useProcessData = () => {
-    const { towers, amenities } = useData();
+	const { towers, amenities } = useData();
 
-    const processData = (data) => {
-        console.log('Values received:', data);
-        const rd = reconstructed_data(towers, amenities);
-        const pb = pointBasis(rd, data);
-        const processedResults = pb.result;
-        const processedPoints = pb.counts;
-        const processedText = pb.textRet;
+	const processData = (data) => {
+		const rd = reconstructed_data(towers, amenities);
+		console.log(rd);
+		// const pb = pointBasis(rd, data);
+		// const processedResults = pb.result;
+		// const processedPoints = pb.counts;
+		// const processedText = pb.textRet;
 
-        
+		// console.log(processData)
+		// return { processedResults, processedPoints, processedText };
+		return { rd };
+	};
 
-        return {processedResults,processedPoints,processedText};
-    };
+	const process_Data = processData;
 
-    const process_Data = processData
-
-    return {process_Data};
+	return { process_Data };
 };
-

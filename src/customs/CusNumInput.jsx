@@ -183,68 +183,96 @@ export const CusNumSpinner = ({
 	add,
 	isRequired,
 	id,
-  }) => {
-	const {
-	  getInputProps,
-	  getIncrementButtonProps,
-	  getDecrementButtonProps,
-	} = useNumberInput({
-	  step: 1,
-	  defaultValue: value,
-	  min: 1,
-	});
-  
+}) => {
+	const { getInputProps, getIncrementButtonProps, getDecrementButtonProps } =
+		useNumberInput({
+			step: 1,
+			defaultValue: value,
+			min: 1,
+		});
+
 	const inc = getIncrementButtonProps();
 	const dec = getDecrementButtonProps();
 	const input = getInputProps();
 
-
 	const handleValueChange = (newValue) => {
-        if (onChange) {
-            onChange({
-                target: {
-                    name: name,
-                    value: newValue,
-                },
-            });
-        }
+		if (onChange) {
+			onChange({
+				target: {
+					name: name,
+					value: newValue,
+				},
+			});
+		}
 
-        if (onBlur) {
-            onBlur({
-                target: {
-                    name: name,
-                    value: newValue,
-                },
-            });
-        }
-    };
-  
+		if (onBlur) {
+			onBlur({
+				target: {
+					name: name,
+					value: newValue,
+				},
+			});
+		}
+	};
+
 	return (
-	  <FormControl isInvalid={error && touch} isRequired={isRequired} justifyContent={'center'} display={'flex'}>
-		 <HStack maxW="200px">
-                <Button {...dec} onClick={() => handleValueChange(parseInt(value || 0) - 1)}> - </Button>
-                <Input
-                    {...input}
-                    onChange={(e) => {
-                        const newValue = e.target.value;
+		<FormControl
+			isInvalid={error && touch}
+			isRequired={isRequired}
+			p={5}
+			w={'100%'}
+		>
+			<HStack w={'100%'}>
+				<Button
+					{...dec}
+					onClick={() => handleValueChange(parseInt(value || 0) - 1)}
+					bgColor={'b.200'}
+					color={'w.300'}
+					fontSize={'2xl'}
+				>
+					-{' '}
+				</Button>
+				<NumberInput
+					min={0}
+					onChange={onChange}
+					value={value}
+				>
+					<NumberInputField
+						{...input}
+						onChange={(e) => {
+							const newValue = e.target.value;
 
-                        if (!isNaN(newValue) || newValue === '') {
-                            handleValueChange(newValue);
-                        }
-                    }}
-                    onBlur={(e) => {
-                        const newValue = e.target.value;
-                        if (!isNaN(newValue) || newValue === '') {
-                            handleValueChange(newValue);
-                        }
-                    }}
-                    value={value}
-                    name={name}
-                    id={id}
-                />
-                <Button {...inc} onClick={() => handleValueChange(parseInt(value || 0) + 1)}> + </Button>
-            </HStack>
-		<FormErrorMessage fontSize="xs">{error}</FormErrorMessage>
-	  </FormControl>
+							if (!isNaN(newValue) || newValue === '') {
+								handleValueChange(newValue);
+							}
+						}}
+						onBlur={(e) => {
+							const newValue = e.target.value;
+							if (!isNaN(newValue) || newValue === '') {
+								handleValueChange(newValue);
+							}
+						}}
+						value={value}
+						name={name}
+						id={id}
+						w={'100%'}
+						borderColor={'b.300'}
+						placeholder='0'
+					/>
+				</NumberInput>
+
+				<Button
+					{...inc}
+					onClick={() => handleValueChange(parseInt(value || 0) + 1)}
+					bgColor={'b.200'}
+					color={'w.300'}
+					fontSize={'2xl'}
+				>
+					{' '}
+					+{' '}
+				</Button>
+			</HStack>
+			<FormErrorMessage fontSize='xs'>{error}</FormErrorMessage>
+		</FormControl>
 	);
-  };
+};

@@ -28,10 +28,18 @@ const AddUnitSet = () => {
 	const { isOpen, onOpen, onClose } = useDisclosure();
 	const [img, setImg] = useState();
 	const { curUser, unitTowerID, units, unitSize } = useData();
+	const [actualImg, setActual] = useState();
+	let sum = 0;
+	let aveUnitSize = 0;
+	unitSize.filter((size) => {
+		if (size) {
+			sum += size.UnitSize;
+		}
+		aveUnitSize = sum / unitSize.length;
+	});
 
-	// console.log(unitSize);
 	const storage = getStorage();
-	const aveUnitSize = 20;
+
 	const [unit, setUnit] = useState([]);
 
 	const acqUnit = [];
@@ -71,6 +79,7 @@ const AddUnitSet = () => {
 			units: '',
 			unitImage: '',
 		},
+
 		validationSchema: Yup.object({
 			units: Yup.mixed().required('Unit is required.'),
 			typeName: Yup.string().required('Unit type name is required.'),
@@ -153,7 +162,7 @@ const AddUnitSet = () => {
 						getDownloadURL(snapshot.ref)
 					)
 				);
-
+				setActual(downloadURLs);
 				uploadTask.on(
 					'state_changed',
 					(snapshot) => {
@@ -227,25 +236,23 @@ const AddUnitSet = () => {
 											`${TowerIdentifier(tower)}`
 										);
 
+										console.log('dsds', actualImg);
 										let type = {};
-										let image = {};
+										// let actual = {};
+										// let layout = {};
 										let size = {};
 										let status = {};
 										let category = {};
 
-										console.log(
-											x.floor,
-											x.no,
-											form.values.unitSize,
-											aveUnitSize,
-											form.values.unitSize <= aveUnitSize
-										);
 										type[
 											`Units.${x.floor}.${x.no}.typeName`
 										] = form.values.typeName;
-										image[
-											`Units.${x.floor}.${x.no}.typeImage`
-										] = img;
+										// layout[
+										// 	`Units.${x.floor}.${x.no}.layoutImage`
+										// ] = img;
+										// actual[
+										// 	`Units.${x.floor}.${x.no}.actualImage`
+										// ] = actualImg;
 										size[
 											`Units.${x.floor}.${x.no}.typeSize`
 										] = form.values.unitSize;
@@ -253,25 +260,36 @@ const AddUnitSet = () => {
 											`Units.${x.floor}.${x.no}.status`
 										] = 'Pending Amount';
 
+										console.log(
+											parseFloat(form.values.unitSize),
+											aveUnitSize
+										);
+
 										if (
-											form.values.unitSize <= aveUnitSize
+											parseFloat(form.values.unitSize) <=
+											aveUnitSize
 										) {
 											category[
 												`Units.${x.floor}.${x.no}.category.2`
-											] = 'smaller';
+											] = 'Small Rooms';
 										} else if (
 											form.values.unitSize > aveUnitSize
 										) {
 											category[
 												`Units.${x.floor}.${x.no}.category.2`
-											] = 'larger';
+											] = 'Large Rooms';
 										}
 
+										// if (img) {
+										// 	console.log('hasimg');
+										// 	updateDoc(collectionRef, layout);
+										// }
+
+										// if (actualImg) {
+										// 	console.log('updaye actual');
+										// 	updateDoc(collectionRef, actual);
+										// }
 										updateDoc(collectionRef, type);
-										if (img) {
-											updateDoc(collectionRef, image);
-										}
-
 										updateDoc(collectionRef, size);
 										updateDoc(collectionRef, status);
 										updateDoc(collectionRef, category);
@@ -300,6 +318,7 @@ const AddUnitSet = () => {
 					isClosable: true,
 				});
 			} catch (e) {
+				console.log(e);
 				toast({
 					title: 'Error adding new unit',
 					status: 'error',

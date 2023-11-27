@@ -39,13 +39,7 @@ const Item = () => {
 	const { curUser, employees, buyers, soa } = useData();
 	const agents = employees.filter((item) => item.EmpPos === 'Agent');
 
-	// console.log(moment(soa[0].CreatedDate.seconds * 1000).format('MM DD YYYY'));
-
-	const tripping = buyers.filter((buyer) => {
-		return buyer.PBType == 'Tripping' ? buyer : '';
-	});
-
-	console.log(tripping.length);
+	// sales
 	let weekly = 0; // if weekly
 	let monthly = 0; //
 	let yearly = 0; //
@@ -56,20 +50,43 @@ const Item = () => {
 	let yearObject = [];
 	var weekDays = 0;
 
+	// tripping
 	let weeklyTripping = 0;
 	let monthlyTripping = 0;
 	let yearlyTripping = 0;
 
 	let trippingWeekObject = [];
+	let pullinsWeekObject = [];
+	let walkinWeekObject = [];
+	let zoomWeekObject = [];
+
 	let trippingMonthObject = [];
+	let pullinsMonthObject = [];
+	let walkinMonthObject = [];
+	let zoomMonthObject = [];
+
+	let trippingYearObject = [];
+	let pullinsYearObject = [];
+	let walkinYearObject = [];
+	let zoomYearObject = [];
+
+	const monthlyRange = moment.monthsShort();
+
+	const yearlyRange = [
+		'2023',
+		'2024',
+		'2025',
+		'2026',
+		'2027',
+		'2028',
+		'2029',
+		'2030',
+	];
+
 	WeekGenerator().filter((week, key) => {
 		const weekStart = moment(week.start, 'YYYY-MM-DD');
 		const weekEnd = moment(week.end, 'YYYY-MM-DD');
-		weeklyDates.push(
-			`${moment(weekStart).format('MMM DD')} - ${moment(weekEnd).format(
-				'DD'
-			)}`
-		);
+
 		buyers.filter((buyer) => {
 			if (buyer.CreatedDate) {
 				if (
@@ -82,8 +99,23 @@ const Item = () => {
 					) ||
 					moment(buyer.CreatedDate.seconds * 1000).isSame(weekEnd)
 				) {
-					if (buyers.PBType == 'Tripping') {
+					if (buyer.PBType == 'Tripping') {
 						trippingWeekObject.push({
+							buyer: buyer,
+							weekNo: key,
+						});
+					} else if (buyer.PBType == 'Pull-ins') {
+						pullinsWeekObject.push({
+							buyer: buyer,
+							weekNo: key,
+						});
+					} else if (buyer.PBType == 'Walk-in') {
+						walkinWeekObject.push({
+							buyer: buyer,
+							weekNo: key,
+						});
+					} else if (buyer.PBType == 'Zoom') {
+						zoomWeekObject.push({
 							buyer: buyer,
 							weekNo: key,
 						});
@@ -95,7 +127,45 @@ const Item = () => {
 		});
 	});
 
-	const monthlyRange = moment.monthsShort();
+	let weeklyTrippingData = Array(WeekGenerator().length).fill(0);
+
+	trippingWeekObject.map((day, key) => {
+		weeklyTrippingData.filter((item, keyD) => {
+			if (keyD == day.weekNo) {
+				weeklyTrippingData[keyD] += 1;
+			}
+		});
+	});
+
+	let weeklyPullData = Array(WeekGenerator().length).fill(0);
+
+	pullinsWeekObject.map((day, key) => {
+		weeklyPullData.filter((item, keyD) => {
+			if (keyD == day.weekNo) {
+				weeklyPullData[keyD] += 1;
+			}
+		});
+	});
+
+	let weeklyWalkData = Array(WeekGenerator().length).fill(0);
+
+	walkinWeekObject.map((day, key) => {
+		weeklyWalkData.filter((item, keyD) => {
+			if (keyD == day.weekNo) {
+				weeklyWalkData[keyD] += 1;
+			}
+		});
+	});
+
+	let weeklyZoomData = Array(WeekGenerator().length).fill(0);
+
+	zoomWeekObject.map((day, key) => {
+		weeklyZoomData.filter((item, keyD) => {
+			if (keyD == day.weekNo) {
+				weeklyZoomData[keyD] += 1;
+			}
+		});
+	});
 
 	monthlyRange.filter((month, key) => {
 		buyers.filter((buyer) => {
@@ -107,7 +177,22 @@ const Item = () => {
 					if (buyer.PBType == 'Tripping') {
 						trippingMonthObject.push({
 							buyer: buyer,
-							weekNo: key,
+							monthNo: key,
+						});
+					} else if (buyer.PBType == 'Pull-ins') {
+						pullinsMonthObject.push({
+							buyer: buyer,
+							monthNo: key,
+						});
+					} else if (buyer.PBType == 'Walk-in') {
+						walkinMonthObject.push({
+							buyer: buyer,
+							monthNo: key,
+						});
+					} else if (buyer.PBType == 'Zoom') {
+						zoomMonthObject.push({
+							buyer: buyer,
+							monthNo: key,
 						});
 					}
 				}
@@ -115,7 +200,111 @@ const Item = () => {
 		});
 	});
 
-	console.log(trippingMonthObject);
+	let trippingMonthlyData = Array(monthlyRange.length).fill(0);
+	trippingMonthObject.map((day) => {
+		trippingMonthlyData.filter((item, keyD) => {
+			if (keyD == day.monthNo) {
+				trippingMonthlyData[keyD] += 1;
+			}
+		});
+	});
+
+	let pullinsMonthlyData = Array(monthlyRange.length).fill(0);
+	pullinsMonthObject.map((day) => {
+		pullinsMonthlyData.filter((item, keyD) => {
+			if (keyD == day.monthNo) {
+				pullinsMonthlyData[keyD] += 1;
+			}
+		});
+	});
+
+	let walkinMonthlyData = Array(monthlyRange.length).fill(0);
+	walkinMonthObject.map((day) => {
+		walkinMonthlyData.filter((item, keyD) => {
+			if (keyD == day.monthNo) {
+				walkinMonthlyData[keyD] += 1;
+			}
+		});
+	});
+
+	let zoomMonthlyData = Array(monthlyRange.length).fill(0);
+	zoomMonthObject.map((day) => {
+		zoomMonthlyData.filter((item, keyD) => {
+			if (keyD == day.monthNo) {
+				zoomMonthlyData[keyD] += 1;
+			}
+		});
+	});
+
+	yearlyRange.filter((year, key) => {
+		buyers.filter((buyer) => {
+			if (buyer.CreatedDate) {
+				if (
+					moment(buyer.CreatedDate.seconds * 1000).format('YYYY') ==
+					year
+				) {
+					if (buyer.PBType == 'Tripping') {
+						trippingYearObject.push({
+							buyer: buyer,
+							yearNo: key,
+						});
+					} else if (buyer.PBType == 'Pull-ins') {
+						pullinsYearObject.push({
+							buyer: buyer,
+							yearNo: key,
+						});
+					} else if (buyer.PBType == 'Walk-in') {
+						walkinYearObject.push({
+							buyer: buyer,
+							yearNo: key,
+						});
+					} else if (buyer.PBType == 'Zoom') {
+						zoomYearObject.push({
+							buyer: buyer,
+							yearNo: key,
+						});
+					}
+				}
+			}
+		});
+	});
+
+	let trippingYearData = Array(monthlyRange.length).fill(0);
+	trippingYearObject.map((day) => {
+		trippingYearData.filter((item, keyD) => {
+			if (keyD == day.yearNo) {
+				trippingYearData[keyD] += 1;
+			}
+		});
+	});
+
+	let pullinsYearData = Array(monthlyRange.length).fill(0);
+	pullinsYearObject.map((day) => {
+		pullinsYearData.filter((item, keyD) => {
+			if (keyD == day.yearNo) {
+				pullinsYearData[keyD] += 1;
+			}
+		});
+	});
+
+	let walkinYearData = Array(monthlyRange.length).fill(0);
+	walkinYearObject.map((day) => {
+		walkinYearData.filter((item, keyD) => {
+			if (keyD == day.yearNo) {
+				walkinYearData[keyD] += 1;
+			}
+		});
+	});
+
+	let zoomYearData = Array(monthlyRange.length).fill(0);
+	zoomYearObject.map((day) => {
+		zoomYearData.filter((item, keyD) => {
+			if (keyD == day.yearNo) {
+				zoomYearData[keyD] += 1;
+			}
+		});
+	});
+
 	WeekGenerator().filter((week, key) => {
 		const weekStart = moment(week.start, 'YYYY-MM-DD');
 		const weekEnd = moment(week.end, 'YYYY-MM-DD');
@@ -124,6 +313,7 @@ const Item = () => {
 				'DD'
 			)}`
 		);
+
 		soa.filter((amt) => {
 			if (amt.Amount && moment(amt.CreatedDate.seconds * 1000)) {
 				if (
@@ -149,7 +339,6 @@ const Item = () => {
 			}
 		});
 	});
-
 	let weeklyData = Array(WeekGenerator().length).fill(0);
 
 	weekObject.map((day) => {
@@ -180,7 +369,6 @@ const Item = () => {
 			}
 		});
 	});
-
 	let monthlyData = Array(monthlyRange.length).fill(0);
 
 	monthObject.map((day) => {
@@ -190,17 +378,6 @@ const Item = () => {
 			}
 		});
 	});
-
-	const yearlyRange = [
-		'2023',
-		'2024',
-		'2025',
-		'2026',
-		'2027',
-		'2028',
-		'2029',
-		'2030',
-	];
 
 	yearlyRange.filter((year, key) => {
 		soa.filter((amt) => {
@@ -222,9 +399,7 @@ const Item = () => {
 			}
 		});
 	});
-
 	let yearData = Array(yearlyRange.length).fill(0);
-
 	yearObject.map((day) => {
 		yearData.filter((item, keyD) => {
 			if (keyD == day.yearNo) {
@@ -250,22 +425,42 @@ const Item = () => {
 		label.push(yearlyRange);
 	}
 
-	const data = ['October 19', 'October 20', 'October 21'];
-	const values = [
-		{ name: 'Zoom', values: [1, 3, 2] },
-		{ name: 'Tripping', values: [4] },
-		{ name: 'Walk-Ins', values: [2, 2, 1] },
-		{ name: 'Pull-Ins', values: [7, 3, 9] },
+	const actWeekValues = [
+		{ name: 'Zoom', values: weeklyZoomData },
+		{ name: 'Tripping', values: weeklyTrippingData },
+		{ name: 'Walk-Ins', values: weeklyWalkData },
+		{ name: 'Pull-Ins', values: weeklyPullData },
 	];
 
-	const values2 = [2, 4, 8, 1, 5];
-	const data2 = [
-		'October 15 - 21',
-		'October 22 - 28',
-		'October 28 - November 6',
-		'November 7 - November 14',
+	const actMonthValues = [
+		{ name: 'Zoom', values: zoomMonthlyData },
+		{ name: 'Tripping', values: trippingMonthlyData },
+		{ name: 'Walk-Ins', values: walkinMonthlyData },
+		{ name: 'Pull-Ins', values: pullinsMonthlyData },
 	];
-	// if (item) {
+
+	console.log(actMonthValues);
+	const actYearValues = [
+		{ name: 'Zoom', values: zoomYearData },
+		{ name: 'Tripping', values: trippingYearData },
+		{ name: 'Walk-Ins', values: walkinYearData },
+		{ name: 'Pull-Ins', values: pullinsYearData },
+	];
+
+	const label1 = [];
+	const value1 = [];
+	const [fil1, setFilter1] = useState(filterOption[0]);
+
+	if (fil1 == 'Weekly') {
+		value1.push(actWeekValues);
+		label1.push(weeklyDates);
+	} else if (fil1 == 'Monthly') {
+		value1.push(actMonthValues);
+		label1.push(monthlyRange);
+	} else if (fil1 == 'Yearly') {
+		value1.push(actYearValues);
+		label1.push(yearlyRange);
+	}
 
 	return (
 		<Flex
@@ -312,7 +507,7 @@ const Item = () => {
 								textAlign={'center'}
 								pl={5}
 							>
-								Activities Report
+								Agent's Report
 							</Heading>
 							<Menu
 								closeOnSe
@@ -330,7 +525,7 @@ const Item = () => {
 									size={'sm'}
 									// w={{ base: '100%', xl: '10%' }}
 								>
-									{fil}
+									{fil1}
 								</MenuButton>
 
 								<MenuList>
@@ -338,7 +533,7 @@ const Item = () => {
 										defaultValue='Tower 1'
 										type='radio'
 										onChange={(e) => {
-											setFilter(e);
+											setFilter1(e);
 										}}
 									>
 										{filterOption.map((type, key) => (
@@ -360,8 +555,8 @@ const Item = () => {
 							mb={3}
 						/>
 						<StackBarGraph
-							data={data}
-							values={values}
+							data={label1[0]}
+							values={value1[0]}
 						/>
 					</GridItem>
 					<GridItem

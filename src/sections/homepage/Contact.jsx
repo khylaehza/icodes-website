@@ -1,5 +1,4 @@
 import {
-	Container,
 	Stack,
 	Flex,
 	Box,
@@ -8,8 +7,6 @@ import {
 	Button,
 	Image,
 	Icon,
-	IconButton,
-	createIcon,
 	useColorModeValue,
 	Divider,
 	FormControl,
@@ -18,12 +15,10 @@ import {
 	Input,
 	Textarea,
 	VStack,
-	AspectRatio,
 	useToast,
 } from '@chakra-ui/react';
 
 import { Fragment } from 'react';
-
 import { GoLocation } from 'react-icons/go';
 import { BsPhone } from 'react-icons/bs';
 import { HiOutlineMail } from 'react-icons/hi';
@@ -131,9 +126,7 @@ export default function Contact() {
 							align={'center'}
 							w={'100%'}
 							h={'100%'}
-							src={
-								'https://firebasestorage.googleapis.com/v0/b/icodes-ctc-db1.appspot.com/o/homepage%2Fctc-map.gif?alt=media&token=b2761220-706a-45e5-aa53-71f135f57154'
-							}
+							src={'https://i.imgur.com/JbwxDa0.gif'}
 						/>
 					</Box>
 				</Flex>
@@ -165,7 +158,9 @@ const ContactForm = () => {
 	const pbID = IdGenerator(6);
 	const form = useFormik({
 		initialValues: {
-			name: '',
+			fName: '',
+			mName: '',
+			lName: '',
 			email: '',
 			subject: '',
 			message: '',
@@ -183,7 +178,9 @@ const ContactForm = () => {
 					{
 						CreatedDate: serverTimestamp(),
 						BuyersID: pbID,
-						FName: value.name,
+						FName: value.fName,
+						LName: value.mName,
+						MName: value.lName,
 						Email: value.email,
 						Subject: value.subject,
 						Inquiry: value.message,
@@ -236,24 +233,77 @@ const ContactForm = () => {
 							<FormControl
 								id='name'
 								isInvalid={
-									form.errors.name && form.touched.name
+									form.errors.fName && form.touched.fName
 								}
 							>
-								<FormLabel fontSize={'sm'}>Name</FormLabel>
+								<FormLabel fontSize={'sm'}>
+									First Name
+								</FormLabel>
 								<Input
 									type='text'
-									placeholder='Full Name'
+									placeholder='First Name'
 									rounded='md'
 									name='name'
 									onChange={form.handleChange}
 									onBlur={form.handleBlur}
-									value={form.values.name}
+									value={form.values.fName}
 									fontSize={'sm'}
 								/>
 								<FormErrorMessage fontSize={'xs'}>
-									{form.errors.name}
+									{form.errors.fName}
 								</FormErrorMessage>
 							</FormControl>
+							<FormControl
+								id='name'
+								isInvalid={
+									form.errors.mName && morm.touched.mName
+								}
+							>
+								<FormLabel fontSize={'sm'}>
+									Middle Name
+								</FormLabel>
+								<Input
+									type='text'
+									placeholder='Middle Name'
+									rounded='md'
+									name='name'
+									onChange={form.handleChange}
+									onBlur={form.handleBlur}
+									value={form.values.mName}
+									fontSize={'sm'}
+								/>
+								<FormErrorMessage fontSize={'xs'}>
+									{form.errors.mName}
+								</FormErrorMessage>
+							</FormControl>
+							<FormControl
+								id='name'
+								isInvalid={
+									form.errors.lName && form.touched.lName
+								}
+							>
+								<FormLabel fontSize={'sm'}>Last Name</FormLabel>
+								<Input
+									type='text'
+									placeholder='Last Name'
+									rounded='md'
+									name='name'
+									onChange={form.handleChange}
+									onBlur={form.handleBlur}
+									value={form.values.lName}
+									fontSize={'sm'}
+								/>
+								<FormErrorMessage fontSize={'xs'}>
+									{form.errors.lName}
+								</FormErrorMessage>
+							</FormControl>
+						</Stack>
+
+						<Stack
+							w='100%'
+							spacing={3}
+							direction={{ base: 'column', md: 'row' }}
+						>
 							<FormControl
 								id='email'
 								isInvalid={
@@ -298,28 +348,30 @@ const ContactForm = () => {
 									{form.errors.contact}
 								</FormErrorMessage>
 							</FormControl>
+							<FormControl
+								id='subject'
+								isInvalid={
+									form.errors.subject && form.touched.subject
+								}
+							>
+								{' '}
+								<FormLabel fontSize={'sm'}>Subject</FormLabel>
+								<Input
+									type='text'
+									placeholder='E.g Purchase Unit'
+									rounded='md'
+									name='subject'
+									onChange={form.handleChange}
+									onBlur={form.handleBlur}
+									value={form.values.subject}
+									fontSize={'sm'}
+								/>
+								<FormErrorMessage fontSize={'xs'}>
+									{form.errors.subject}
+								</FormErrorMessage>
+							</FormControl>
 						</Stack>
-						<FormControl
-							id='subject'
-							isInvalid={
-								form.errors.subject && form.touched.subject
-							}
-						>
-							<FormLabel fontSize={'sm'}>Subject</FormLabel>
-							<Input
-								type='text'
-								placeholder='E.g Purchase Unit'
-								rounded='md'
-								name='subject'
-								onChange={form.handleChange}
-								onBlur={form.handleBlur}
-								value={form.values.subject}
-								fontSize={'sm'}
-							/>
-							<FormErrorMessage fontSize={'xs'}>
-								{form.errors.subject}
-							</FormErrorMessage>
-						</FormControl>
+
 						<FormControl
 							id='message'
 							isInvalid={
