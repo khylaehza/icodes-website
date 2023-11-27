@@ -65,3 +65,5 @@ export { CusSliderCheckbox } from './CusSliderCheckbox';
 export { default as CusPDF } from './CusPDF';
 export { default as CusCapture } from './CusCapture';
 export { default as CusExitModal } from './CusExitModal';
+export { default as CusSoaPDF} from './CusSoaPDF';
+export { default as CusTransactionPDF } from './CusTransactionPDF'
