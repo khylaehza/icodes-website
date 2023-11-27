@@ -90,7 +90,7 @@ const UnitsSetTable = ({ data, search, all, units, unitTowerID }) => {
 							<CusTitle component={'Type Name'} />
 							<CusTD component={data.TypeName} />
 							<CusTitle component={'Size'} />
-							<CusTD component={data.UnitSize} />
+							<CusTD component={`${data.UnitSize} sq. meters`} />
 							<CusTitle component={'Tower/s'} />
 							<CusTD component={data.Tower.join(', ')} />
 							<CusTitle component={'Unit/s'} />

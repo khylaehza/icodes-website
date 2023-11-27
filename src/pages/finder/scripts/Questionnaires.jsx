@@ -1,70 +1,59 @@
-import { 
-    Image,
-    Text,
-    VStack,
-    Box,
- } from "@chakra-ui/react";
- import { CusNumSpinner } from "../../../customs";
- import { CusSliderCheckbox } from "../../../customs";
- import { CusNumInputLeftAdd } from "../../../customs";
-
+import { Image, Text, VStack, Box } from '@chakra-ui/react';
+import { CusNumSpinner } from '../../../customs';
+import { CusSliderCheckbox } from '../../../customs';
+import { CusNumInputLeftAdd } from '../../../customs';
 
 const questions = [
 	// space
 	{
-		
 		questionText: 'What is this unit for?',
-		file: '/imgs/dss/dss-home.jpg',
+		file: 'https://i.imgur.com/krzxKh4.gif',
 		answerOptions: [
 			{ answerText: 'Own Property', category: 'larger' },
 			{ answerText: 'Investment', category: 'smaller' },
 		],
-		
 	},
-	
-	{	
+
+	{
 		questionText: 'Do you want a big Space in your unit?',
-		file: '/imgs/dss/dss-unit.jpg',
+		file: 'https://i.imgur.com/RgP6hhS.gif',
 		answerOptions: [
 			{ answerText: 'Yes', category: 'larger' },
 			{ answerText: 'No', category: 'smaller' },
 		],
 	},
 
-
 	{
 		questionText: 'Are you a minimalist or maximalist person?',
-		file: 'imgs/dss/dss-minimax.jpg',
+		file: 'https://i.imgur.com/PYw7DeR.gif',
 		answerOptions: [
 			{ answerText: 'Minimalist', category: 'smaller' },
 			{ answerText: 'Maximalist', category: 'larger' },
 		],
-		
 	},
 
 	{
 		questionText: 'Do you have a lot of personal things? ',
-		file: '/imgs/dss/dss-personal-things.jpg',
+		file: 'https://i.imgur.com/rWQ5n8j.gif',
 		answerOptions: [
 			{ answerText: 'Yes', category: 'larger' },
 			{ answerText: 'No', category: 'smaller' },
 		],
-		
 	},
 
 	{
-		questionText: 'Do you prefer a modern or traditional interior design style?',
-		file: '/imgs/dss/dss-modern-traditional.png',
+		questionText:
+			'Do you prefer a modern or traditional interior design style?',
+		file: 'https://i.imgur.com/gTwhxL4.gif',
 		answerOptions: [
 			{ answerText: 'Modern', category: 'smaller' },
 			{ answerText: 'Traditional', category: 'larger' },
 		],
-		
 	},
 
 	{
 		questionText: 'Do you want your unit also a work place',
-		file: '/imgs/dss/dss-workplace.jpg',
+		file: 'https://i.imgur.com/NFG4pcC.gif',
 		answerOptions: [
 			{ answerText: 'Yes', category: 'larger' },
 			{ answerText: 'No', category: 'smaller' },
@@ -72,28 +61,27 @@ const questions = [
 	},
 
 	{
-		questionText: 'Is having a smaller utility and maintenance cost a priority for you?',
-		file: '/imgs/dss/dss-save-cost.png',
+		questionText:
+			'Is having a smaller utility and maintenance cost a priority for you?',
+		file: 'https://i.imgur.com/XECVfs1.gif',
 		answerOptions: [
 			{ answerText: 'Yes', category: 'smaller' },
 			{ answerText: "I don't mind", category: 'larger' },
 		],
 	},
 
-
 	{
 		questionText: 'Do you have pet included',
-		file: '/imgs/dss/dss-pet.gif',
+		file: 'https://i.imgur.com/z3Br1WN.gif',
 		answerOptions: [
 			{ answerText: 'Yes', category: 'larger' },
 			{ answerText: 'No', category: 'smaller' },
 		],
-		
 	},
-//level
+	//level
 	{
 		questionText: 'Do you want to have a City view in your unit?',
-		file: '/imgs/dss/dss-cityview.gif',
+		file: 'https://i.imgur.com/oLlxYpM.gif',
 		answerOptions: [
 			{ answerText: 'Yes', category: 'higher' },
 			{ answerText: 'No', category: 'lower' },
@@ -101,10 +89,10 @@ const questions = [
 		],
 	},
 
-	
 	{
-		questionText: 'Do you want a balcony or other outdoor area in your unit?',
-		file: '/imgs/dss/dss-balcony.jpg',
+		questionText:
+			'Do you want a balcony or other outdoor area in your unit?',
+		file: 'https://i.imgur.com/eL3cfwQ.gif',
 		answerOptions: [
 			{ answerText: 'Yes', category: 'higher' },
 			{ answerText: 'No', category: 'lower' },
@@ -112,10 +100,10 @@ const questions = [
 		],
 	},
 
-
 	{
-		questionText: 'Do you want to have a Palm trees and Pools view in your unit?',
-		file: '/imgs/dss/dss-pool-trees.jpg',
+		questionText:
+			'Do you want to have a Palm trees and Pools view in your unit?',
+		file: 'https://i.imgur.com/4BdFYoF.gif',
 		answerOptions: [
 			{ answerText: 'Yes', category: 'lower' },
 			{ answerText: 'No', category: 'higher' },
@@ -125,7 +113,7 @@ const questions = [
 
 	{
 		questionText: 'Do you want your unit is close to parking floor',
-		file: '/imgs/dss/dss-parking.jpg',
+		file: 'https://i.imgur.com/TfCCFfl.gif',
 		answerOptions: [
 			{ answerText: 'Yes', category: 'lower' },
 			{ answerText: 'No', category: 'higher' },
@@ -134,142 +122,123 @@ const questions = [
 	},
 	{
 		questionText: 'Do you want to have easy access on lobby?',
-		file: '/imgs/dss/dss-lobby.jpg',
+		file: 'https://i.imgur.com/UgSyqtL.gif',
 		answerOptions: [
 			{ answerText: 'Yes', category: 'lower' },
 			{ answerText: 'No', category: 'higher' },
 			{ answerText: 'Maybe', category: 'medium' },
 		],
-		
 	},
 	{
-		questionText: 'Do you have a senior citizen or a person with a disabilities in your family?',
-		file: '/imgs/dss/dss-persons-with-disabilities.jpg',
+		questionText:
+			'Do you have a senior citizen or a person with a disabilities in your family?',
+		file: 'https://i.imgur.com/WKdfKi4.gif',
 		answerOptions: [
 			{ answerText: 'Yes', category: 'lower' },
 			{ answerText: 'No', category: 'higher' },
 		],
-		
 	},
 
 	// static questions
 
 	{
-		questionText: 'Amenities',
-		component: (
-			form => (
-				<>
-					<CusSliderCheckbox form={form}/>
-				</>
-			)
-				
-        ),
-		
+		questionText: 'What amenities do you like?',
+		component: (form) => (
+			<>
+				<CusSliderCheckbox form={form} />
+			</>
+		),
+		file: 'https://i.imgur.com/njtHf0q.gif',
 	},
 
 	{
 		questionText: 'Family Size',
-		component: (
-			form => (
-				<>
-					<CusNumSpinner
-						name="familySize" 
-						onChange={form.handleChange}
-						onBlur={form.handleBlur}
-						error={form.errors.familySize}
-						touch={form.touched.familySize}
-						value={form.values.familySize}
-					/>
-					<Image
-						alt={'stairs image'}
-						objectFit={'fill'}
-						style={{ aspectRatio: '3/1'}}
-						w={'55%'}
-						h={'5%'}
-						src={'/imgs/dss/famsize.png'}
-						alignSelf={'center'}
-						overflow={'hidden'}
-						my={7}
-					/>
-				</>
-			)
-				
-        ),
-		
+		component: (form) => (
+			<>
+				<CusNumSpinner
+					name='familySize'
+					onChange={form.handleChange}
+					onBlur={form.handleBlur}
+					error={form.errors.familySize}
+					touch={form.touched.familySize}
+					value={form.values.familySize}
+				/>
+			</>
+		),
+		file: 'https://i.imgur.com/m6sGdjY.gif',
 	},
 
 	{
 		questionText: 'Price',
-		component: (
-			form => (
-				<>
-					<Text fontSize={'xs'}>This only shows the total contract price of unit excluding other fees.</Text>
-						<VStack  
-							spacing={1}
-							align={'stretch'}
-						>
-                            <Text as={'b'} fontSize={'sm'}>Minimun</Text>
-							<Box>
-								<CusNumInputLeftAdd 
-									name='minimumPrice'
-									id={'minimumPrice'}
-									add={'₱'}
-									placeholder={'0'}
-									value={form.values.minimumPrice}
-									onChange={(e) => {
-										//let parts = e.target.value.split('.'); weird bug
-										let parts = e.split('.');
-										let v = parts[0].replace(/\D/g, '');
-										let dec = parts[1];
-										Number(dec !== undefined ? v + '.' + dec : v);
-										let n = new Intl.NumberFormat('en-US').format(
-											v
-										);
-										n = dec !== undefined ? n + '.' + dec : n;
-										form.setFieldValue('minimumPrice', n);
-									}}
-									onBlur={form.handleBlur}
-									error={form.errors.minimumPrice}
-									touch={form.touched.minimumPrice}
-								/>
-							</Box>
-							<Text as={'b'} fontSize={'sm'}>Maximum</Text>
-							<Box>
-								<CusNumInputLeftAdd 
-									name='maximumPrice'
-									id={'maximumPrice'}
-									add={'₱'}
-									placeholder={'0'}
-									value={form.values.maximumPrice}
-									onChange={(e) => {
-										//let parts = e.target.value.split('.'); weird bug
-										let parts = e.split('.');
-										let v = parts[0].replace(/\D/g, '');
-										let dec = parts[1];
-										Number(dec !== undefined ? v + '.' + dec : v);
-										let n = new Intl.NumberFormat('en-US').format(
-											v
-										);
-										n = dec !== undefined ? n + '.' + dec : n;
-										form.setFieldValue('maximumPrice', n);
-									}}
-									onBlur={form.handleBlur}
-									error={form.errors.maximumPrice}
-									touch={form.touched.maximumPrice}
-								/>
-							</Box>
-                    	</VStack>
-				</>
-			)
-				
-        ),
-		
+		component: (form) => (
+			<>
+				<VStack
+					spacing={1}
+					align={'stretch'}
+				>
+					<Text
+						as={'b'}
+						fontSize={'sm'}
+					>
+						Minimum
+					</Text>
+					<Box>
+						<CusNumInputLeftAdd
+							name='minimumPrice'
+							id={'minimumPrice'}
+							add={'₱'}
+							placeholder={'0'}
+							value={form.values.minimumPrice}
+							onChange={(e) => {
+								let parts = e.split('.');
+								let v = parts[0].replace(/\D/g, '');
+								let dec = parts[1];
+								Number(dec !== undefined ? v + '.' + dec : v);
+								let n = new Intl.NumberFormat('en-US').format(
+									v
+								);
+								n = dec !== undefined ? n + '.' + dec : n;
+								form.setFieldValue('minimumPrice', n);
+							}}
+							onBlur={form.handleBlur}
+							error={form.errors.minimumPrice}
+							touch={form.touched.minimumPrice}
+						/>
+					</Box>
+					<Text
+						as={'b'}
+						fontSize={'sm'}
+					>
+						Maximum
+					</Text>
+					<Box>
+						<CusNumInputLeftAdd
+							name='maximumPrice'
+							id={'maximumPrice'}
+							add={'₱'}
+							placeholder={'0'}
+							value={form.values.maximumPrice}
+							onChange={(e) => {
+								let parts = e.split('.');
+								let v = parts[0].replace(/\D/g, '');
+								let dec = parts[1];
+								Number(dec !== undefined ? v + '.' + dec : v);
+								let n = new Intl.NumberFormat('en-US').format(
+									v
+								);
+								n = dec !== undefined ? n + '.' + dec : n;
+								form.setFieldValue('maximumPrice', n);
+							}}
+							onBlur={form.handleBlur}
+							error={form.errors.maximumPrice}
+							touch={form.touched.maximumPrice}
+						/>
+					</Box>
+				</VStack>
+			</>
+		),
+		file: 'https://i.imgur.com/TSPoGjS.gif',
 	},
-
-
-
-	/// what is the floor level do you want
-	
 ];
 
 export default questions;

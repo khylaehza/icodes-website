@@ -7,7 +7,6 @@ import {
 	ModalCloseButton,
 	Button,
 } from '@chakra-ui/react';
-import { useState } from 'react';
 
 function CusModal({
 	header,

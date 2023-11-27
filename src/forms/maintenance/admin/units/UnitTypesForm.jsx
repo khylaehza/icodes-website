@@ -1,5 +1,5 @@
 import { Stack, Button } from '@chakra-ui/react';
-import { CusInputRegular } from '../../../../customs';
+import { CusInputRegular, CusNumInput } from '../../../../customs';
 
 const UnitTypesForm = ({ form }) => {
 	return (
@@ -29,6 +29,19 @@ const UnitTypesForm = ({ form }) => {
 							value={form.values.typeCode}
 							error={form.errors.typeCode}
 							touch={form.touched.typeCode}
+							isRequired
+						/>
+						<CusNumInput
+							label={'Maximum Capacity'}
+							name='maxPeople'
+							id={'maxPeople'}
+							value={form.values.maxPeople}
+							onChange={(e) => {
+								form.setFieldValue('maxPeople', e);
+							}}
+							onBlur={form.handleBlur}
+							error={form.errors.maxPeople}
+							touch={form.touched.maxPeople}
 							isRequired
 						/>
 					</Stack>

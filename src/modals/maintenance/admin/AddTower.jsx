@@ -23,11 +23,12 @@ const AddTower = ({ towers }) => {
 	const storage = getStorage();
 	const { isOpen, onOpen, onClose } = useDisclosure();
 	const [tower, setTower] = useState();
-	const [floorNum, setFloorNum] = useState(0);
+	const [floorNum, setFloorNum] = useState(5);
 	const [showImage, setShowImage] = useState('');
 
 	const newFloor = {};
-	const half = Math.round(floorNum / 2) + 1;
+	const half = Math.round(floorNum / 3) + 1;
+
 	const infoForm = useFormik({
 		initialValues: {
 			towerImg: '',
@@ -87,6 +88,14 @@ const AddTower = ({ towers }) => {
 					for (let x = 1; x <= values[key]; x++) {
 						let unNo = x.toString().length === 1 ? `0${x}` : `${x}`;
 
+						let floorStat = '';
+						if (key <= half) {
+							floorStat = 'Low-Level Floors';
+						} else if (key > half && key < half * 2) {
+							floorStat = 'Mid-Level Floors';
+						} else if (key >= half * 2) {
+							floorStat = 'High-Level Floors';
+						}
 						nx.push({
 							name: `T${tower} - ${flrNo}${unNo}`,
 							floor: flrNo,
@@ -95,8 +104,7 @@ const AddTower = ({ towers }) => {
 							typeSize: '------',
 							tower: `T${tower}`,
 							status: 'Pending Details',
-							category:
-								key < half ? { 1: 'lower' } : { 1: 'higher' },
+							category: { 1: floorStat },
 						});
 					}
 

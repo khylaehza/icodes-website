@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useDisclosure, useToast } from '@chakra-ui/react';
 import { CusEdit } from '../../../../customs';
 import { UnitSetForm } from '../../../../forms';
@@ -27,12 +27,13 @@ const EditUnitSet = ({ data, id, mainCollection, tblDocUser, tblUserCol }) => {
 	const [unit, setUnit] = useState([
 		{ label: data.Units.toString(), value: data.Units.toString() },
 	]);
-
+	let newUrl = [];
 	const { curUser, unitTowerID, units } = useData();
 	const acqUnit = [];
 	const allUnit = [];
 	const [layoutFileName, setLayoutFileName] = useState();
 	const [img, setImg] = useState();
+	const [actualImg, setActual] = useState([]);
 
 	const layoutImage = ref(
 		storage,
@@ -94,7 +95,7 @@ const EditUnitSet = ({ data, id, mainCollection, tblDocUser, tblUserCol }) => {
 			const uploadTasks = [];
 
 			try {
-				updateDoc(docRef, {
+				await updateDoc(docRef, {
 					EditedDate: serverTimestamp(),
 					TypeName: value.typeName,
 					UnitSize: value.unitSize,
@@ -207,13 +208,11 @@ const EditUnitSet = ({ data, id, mainCollection, tblDocUser, tblUserCol }) => {
 								getDownloadURL(snapshot.ref)
 							)
 						);
+						// setActual(downloadURLs);
 
-						updateDoc(docRef, {
+						await updateDoc(docRef, {
 							TypeImage: downloadURLs,
 						});
-
-					
-
 					} catch (e) {
 						toast({
 							title: 'Edited failed!',
@@ -241,8 +240,8 @@ const EditUnitSet = ({ data, id, mainCollection, tblDocUser, tblUserCol }) => {
 							if (Object.values(element).length != 0) {
 								const k = Object.values(element);
 
-								k.map((x) => {
-									if (x.name === e.value) {
+								k.map(async (x) => {
+									if (e.value.includes(x.name)) {
 										const collectionRef = doc(
 											db,
 											'maintenance',
@@ -251,22 +250,25 @@ const EditUnitSet = ({ data, id, mainCollection, tblDocUser, tblUserCol }) => {
 											`${TowerIdentifier(tower)}`
 										);
 										let type = {};
-										let image = {};
+										// let actual = {};
+										// let layout = {};
 										let size = {};
-
 										let category = {};
 
 										type[
 											`Units.${x.floor}.${x.no}.typeName`
-										] = form.values.typeName;
-										image[
-											`Units.${x.floor}.${x.no}.typeImage`
-										] = img;
+										] = editForm.values.typeName;
+										// layout[
+										// 	`Units.${x.floor}.${x.no}.layoutImage`
+										// ] = img;
+										// actual[
+										// 	`Units.${x.floor}.${x.no}.actualImage`
+										// ] = actualImg;
 										size[
 											`Units.${x.floor}.${x.no}.typeSize`
-										] = form.values.unitSize;
+										] = editForm.values.unitSize;
 
-										if (form.values.unitSize < 52.06) {
+										if (editForm.values.unitSize < 52.06) {
 											category[
 												`Units.${x.floor}.${x.no}.category.2`
 											] = 'smaller';
@@ -277,9 +279,25 @@ const EditUnitSet = ({ data, id, mainCollection, tblDocUser, tblUserCol }) => {
 										}
 
 										updateDoc(collectionRef, type);
-										if (img) {
-											updateDoc(collectionRef, image);
-										}
+
+										// if (
+										// 	data.LayoutImage !==
+										// 	value.layoutImage
+										// ) {
+										// 	await updateDoc(
+										// 		collectionRef,
+										// 		layout
+										// 	);
+										// }
+
+										// if (
+										// 	data.TypeImage !== value.unitImage
+										// ) {
+										// 	await updateDoc(
+										// 		collectionRef,
+										// 		actual
+										// 	);
+										// }
 
 										updateDoc(collectionRef, size);
 
@@ -291,16 +309,16 @@ const EditUnitSet = ({ data, id, mainCollection, tblDocUser, tblUserCol }) => {
 					}
 				});
 
-					if (curUser) {
-						await addDoc(
-							collection(db, 'maintenance', 'admin', 'tbl_logs'),
-							{
-								CreatedDate: serverTimestamp(),
-								Msg: `${curUser.EmpPos} ${curUser.FName} ${curUser.LName} (${curUser.EmpId}) edited unit details.`,
-								Module: 'Unit Types',
-							}
-						);
-					}
+				if (curUser) {
+					await addDoc(
+						collection(db, 'maintenance', 'admin', 'tbl_logs'),
+						{
+							CreatedDate: serverTimestamp(),
+							Msg: `${curUser.EmpPos} ${curUser.FName} ${curUser.LName} (${curUser.EmpId}) edited unit details.`,
+							Module: 'Unit Types',
+						}
+					);
+				}
 
 				toast({
 					title: `${
@@ -313,6 +331,7 @@ const EditUnitSet = ({ data, id, mainCollection, tblDocUser, tblUserCol }) => {
 					isClosable: true,
 				});
 			} catch (e) {
+				console.log(e);
 				toast({
 					title: 'Edited failed!',
 					status: 'error',

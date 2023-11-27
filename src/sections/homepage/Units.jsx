@@ -21,38 +21,38 @@ import { useNavigate } from 'react-router-dom';
 
 export default function Units() {
 	const br1 = [
-		'https://firebasestorage.googleapis.com/v0/b/icodes-ctc-db1.appspot.com/o/homepage%2Funits%2F1br%2F1.jpg?alt=media&token=147d63da-34a6-4b3f-8b6c-e18e09915ca8',
-		'https://firebasestorage.googleapis.com/v0/b/icodes-ctc-db1.appspot.com/o/homepage%2Funits%2F1br%2F2.jpg?alt=media&token=bfcd599d-4cc0-4fc9-99c6-a34b27276e3c',
-		'https://firebasestorage.googleapis.com/v0/b/icodes-ctc-db1.appspot.com/o/homepage%2Funits%2F1br%2F3.jpg?alt=media&token=4f7c1b4e-168b-403b-b836-8a64eaef04c1',
-		'https://firebasestorage.googleapis.com/v0/b/icodes-ctc-db1.appspot.com/o/homepage%2Funits%2F1br%2F4.jpg?alt=media&token=e7e7a15c-4acf-4637-8172-e00478a26e41',
+		'https://i.pinimg.com/736x/a5/7e/93/a57e93e0926e5c3708799eb11ce0e1d7.jpg',
+		'https://i.pinimg.com/736x/f7/cb/b7/f7cbb7f616ca7674ecdaff3209d31319.jpg',
+		'https://i.pinimg.com/736x/30/ac/1d/30ac1d7f49e57326d769a72ec8a9f9a2.jpg',
+		'https://i.pinimg.com/736x/93/b4/51/93b451308f11dafd76060bc037d6f736.jpg',
 	];
 
 	const br2 = [
-		'https://firebasestorage.googleapis.com/v0/b/icodes-ctc-db1.appspot.com/o/homepage%2Funits%2F2br%2F1.jpg?alt=media&token=b13fea11-cce2-450a-bfb6-f0894c456cd4',
-		'https://firebasestorage.googleapis.com/v0/b/icodes-ctc-db1.appspot.com/o/homepage%2Funits%2F2br%2F2.jpg?alt=media&token=88f14499-822c-4d5f-aa4a-ffbc6384dfc6',
-		'https://firebasestorage.googleapis.com/v0/b/icodes-ctc-db1.appspot.com/o/homepage%2Funits%2F2br%2F3.jpg?alt=media&token=bbecd5c5-7c40-44c6-957e-5d050c67dddc',
-		'https://firebasestorage.googleapis.com/v0/b/icodes-ctc-db1.appspot.com/o/homepage%2Funits%2F2br%2F4.jpg?alt=media&token=17cbb851-4cc4-4542-b968-4ead6071218a',
+		'https://i.pinimg.com/736x/e7/a5/1b/e7a51bf0fecc06551b19c7ca644bf4b4.jpg',
+		'https://i.pinimg.com/736x/6d/1d/a3/6d1da379c733cde63324adb9b4156325.jpg',
+		'https://i.pinimg.com/736x/ef/e0/c4/efe0c4725dfc223e9289255ed6d4a4b3.jpg',
+		'https://i.pinimg.com/736x/b3/2b/5c/b32b5c5f04816e5b34311863361dc657.jpg',
 	];
 
 	const studio = [
-		'https://firebasestorage.googleapis.com/v0/b/icodes-ctc-db1.appspot.com/o/homepage%2Funits%2Fstudio%2F1.jpg?alt=media&token=0b6f5099-4ff7-4031-bf74-8ec404078975',
-		'https://firebasestorage.googleapis.com/v0/b/icodes-ctc-db1.appspot.com/o/homepage%2Funits%2Fstudio%2F2.jpg?alt=media&token=6c420723-24db-4c7f-b6b3-3f0a349e57b6',
-		'https://firebasestorage.googleapis.com/v0/b/icodes-ctc-db1.appspot.com/o/homepage%2Funits%2Fstudio%2F3.jpg?alt=media&token=d93eccb4-81e7-41ef-800c-846b4c7a709f',
-		'https://firebasestorage.googleapis.com/v0/b/icodes-ctc-db1.appspot.com/o/homepage%2Funits%2Fstudio%2F4.jpg?alt=media&token=f6a44842-401d-483d-85b6-5f012d8b3e19',
+		'https://i.pinimg.com/736x/00/ea/01/00ea012785e201a1c829223cc302a472.jpg',
+		'https://i.pinimg.com/736x/30/0c/4d/300c4db0b8933864e624b23262ce2243.jpg',
+		'https://i.pinimg.com/736x/e0/a6/aa/e0a6aa86184af964d016027834b830d7.jpg',
+		'https://i.pinimg.com/736x/95/cf/c9/95cfc96f059a85228cc5281eedc35a23.jpg',
 	];
 
 	const br2Big = [
-		'https://firebasestorage.googleapis.com/v0/b/icodes-ctc-db1.appspot.com/o/homepage%2Funits%2F2brBig%2F1.jpg?alt=media&token=f8ca0af1-d4e3-4109-94f4-8c1f2426361a',
-		'https://firebasestorage.googleapis.com/v0/b/icodes-ctc-db1.appspot.com/o/homepage%2Funits%2F2brBig%2F2.jpg?alt=media&token=4e374b26-c698-4ee7-a8a8-988f5332b4d7',
-		'https://firebasestorage.googleapis.com/v0/b/icodes-ctc-db1.appspot.com/o/homepage%2Funits%2F2brBig%2F3.jpg?alt=media&token=d5476603-49c7-432e-bf88-47e21da37962',
-		'https://firebasestorage.googleapis.com/v0/b/icodes-ctc-db1.appspot.com/o/homepage%2Funits%2F2brBig%2F4.jpg?alt=media&token=c7ae0eb1-0af4-4b72-b076-87d28a323350',
+		'https://i.pinimg.com/736x/8b/f7/6d/8bf76dac483c0da0ea3a3084a57a199f.jpg',
+		'https://i.pinimg.com/736x/c5/35/1a/c5351a3b9df20ebc9060cb9cc80514c5.jpg',
+		'https://i.pinimg.com/736x/ba/85/2f/ba852fd5326030c1d5bf5cfdda5ac44f.jpg',
+		'https://i.pinimg.com/736x/7d/7a/2e/7d7a2e8852fa8d5d9506d7b817afb244.jpg',
 	];
 
 	const br3 = [
-		'https://firebasestorage.googleapis.com/v0/b/icodes-ctc-db1.appspot.com/o/homepage%2Funits%2F3br%2F1.jpg?alt=media&token=5fe16032-49f1-4ebf-9acd-13f0526ba8f7',
-		'https://firebasestorage.googleapis.com/v0/b/icodes-ctc-db1.appspot.com/o/homepage%2Funits%2F3br%2F2.jpg?alt=media&token=097fe4d1-c7b0-444c-b901-c47e13c22f23',
-		'https://firebasestorage.googleapis.com/v0/b/icodes-ctc-db1.appspot.com/o/homepage%2Funits%2F3br%2F3.jpg?alt=media&token=e42e4388-0c34-4399-bbae-9e31df3f6aae',
-		'https://firebasestorage.googleapis.com/v0/b/icodes-ctc-db1.appspot.com/o/homepage%2Funits%2F3br%2F4.jpg?alt=media&token=98a5e649-f426-4f3e-b86f-d9107a19ee1b',
+		'https://i.pinimg.com/736x/93/b4/51/93b451308f11dafd76060bc037d6f736.jpg',
+		'https://i.pinimg.com/736x/93/b4/51/93b451308f11dafd76060bc037d6f736.jpg',
+		'https://i.pinimg.com/736x/dc/97/bd/dc97bd06e7c61a0b8abe132982318102.jpg',
+		'https://i.pinimg.com/736x/df/c9/fd/dfc9fd41fd60097615911daab466486f.jpg',
 	];
 	let cards = [
 		{

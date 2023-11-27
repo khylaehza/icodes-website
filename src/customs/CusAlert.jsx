@@ -37,7 +37,9 @@ const CusAlert = ({
 							{header}
 						</AlertDialogHeader>
 
-						<AlertDialogBody>{body}</AlertDialogBody>
+						<AlertDialogBody fontWeight={'medium'}>
+							{body}
+						</AlertDialogBody>
 
 						<AlertDialogFooter>
 							<Button

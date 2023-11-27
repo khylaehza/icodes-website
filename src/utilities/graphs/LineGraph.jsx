@@ -41,7 +41,7 @@ function LineGraph({ data, orientation, values, name }) {
 		<div style={{ height: '450px' }}>
 			<EChartsReact
 				option={option}
-				style={{ height: '100%', width: '110%' }}
+				style={{ height: '100%' }}
 			/>
 		</div>
 	);
