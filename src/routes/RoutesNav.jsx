@@ -16,7 +16,7 @@ import {
 	DesignerPage,
 	HomePage,
 	UnitCanvasPage,
-	CalculatorPage
+	CalculatorPage,
 	FinderPage,
 	FinderQuestions,
 	FinderResult,
@@ -227,16 +227,7 @@ const RoutesNav = () => {
 							path={'/unitcanvas'}
 							element={<UnitCanvasPage />}
 						/>
-						<Route
-							exact
-							path={'/finder1'}
-							element={<FinderHome />}
-						/>
-						<Route
-							exact
-							path={'/calculator'}
-							element={<CalculatorPage />}
-						/>
+
 						<Route
 							exact
 							path={'/finder'}
@@ -251,6 +242,11 @@ const RoutesNav = () => {
 							exact
 							path={'/result'}
 							element={<FinderResult />}
+						/>
+						<Route
+							exact
+							path={'/calculator'}
+							element={<CalculatorPage />}
 						/>
 						<Route
 							path='*'

@@ -12,7 +12,7 @@ function LineGraph({ data, orientation, values, name }) {
 			orient: orientation,
 			data: [`${name}`],
 			textStyle: {
-				fontSize: 14,
+				fontSize: 11,
 			},
 		},
 		xAxis: {

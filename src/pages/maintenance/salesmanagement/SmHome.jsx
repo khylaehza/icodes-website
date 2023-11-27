@@ -495,7 +495,7 @@ const Item = () => {
 						borderRadius={15}
 						p={5}
 						pt={7}
-						w={'100%'}
+						w={'95%'}
 					>
 						<Flex
 							justifyContent={'space-between'}
@@ -554,6 +554,7 @@ const Item = () => {
 							mt={3}
 							mb={3}
 						/>
+
 						<StackBarGraph
 							data={label1[0]}
 							values={value1[0]}
@@ -566,6 +567,8 @@ const Item = () => {
 						boxShadow='0 4px 10px 0 rgba(134,149,166,0.3)'
 						borderRadius={15}
 						p={10}
+						ml={-5}
+						w={'100%'}
 					>
 						<Heading size={'md'}>Agents</Heading>
 						<Divider
@@ -587,9 +590,13 @@ const Item = () => {
 						bgColor={'w.300'}
 						boxShadow='0 4px 10px 0 rgba(134,149,166,0.3)'
 						borderRadius={15}
-						p={5}
+						pt={5}
+						pb={5}
 						rowSpan={{ base: 5, xl: 2 }}
 						colSpan={3}
+						ml={-5}
+						pl={4}
+						pr={5}
 					>
 						<Flex
 							justifyContent={'space-between'}
@@ -649,19 +656,23 @@ const Item = () => {
 							mb={3}
 						/>
 
-						<LineGraph
-							data={label[0]}
-							orientation={'horizontal'}
-							values={value[0]}
-						/>
+						<Box w={'110%'}>
+							<LineGraph
+								data={label[0]}
+								orientation={'horizontal'}
+								values={value[0]}
+							/>
+						</Box>
 					</GridItem>
 					<GridItem
 						colSpan={{ base: 2, xl: 1 }}
 						bgColor={'w.300'}
 						boxShadow='0 4px 10px 0 rgba(134,149,166,0.3)'
 						borderRadius={15}
-						p={10}
+						p={5}
 						rowSpan={1}
+						ml={-5}
+						w={'100%'}
 					>
 						<Heading size={'md'}>Prospective Buyers</Heading>
 						<Divider

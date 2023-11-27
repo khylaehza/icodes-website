@@ -162,11 +162,12 @@ const ContactForm = () => {
 			mName: '',
 			lName: '',
 			email: '',
-			subject: '',
+
 			message: '',
 			contact: '',
 		},
 		onSubmit: (value, action) => {
+			console.log(value);
 			try {
 				addDoc(
 					collection(
@@ -182,7 +183,6 @@ const ContactForm = () => {
 						LName: value.mName,
 						MName: value.lName,
 						Email: value.email,
-						Subject: value.subject,
 						Inquiry: value.message,
 						CNum: value.contact,
 						Preference: 'N/A',
@@ -231,11 +231,12 @@ const ContactForm = () => {
 							direction={{ base: 'column', md: 'row' }}
 						>
 							<FormControl
-								id='name'
+								id='fName'
 								isInvalid={
 									form.errors.fName && form.touched.fName
 								}
 							>
+								{' '}
 								<FormLabel fontSize={'sm'}>
 									First Name
 								</FormLabel>
@@ -243,7 +244,7 @@ const ContactForm = () => {
 									type='text'
 									placeholder='First Name'
 									rounded='md'
-									name='name'
+									name='fName'
 									onChange={form.handleChange}
 									onBlur={form.handleBlur}
 									value={form.values.fName}
@@ -253,10 +254,11 @@ const ContactForm = () => {
 									{form.errors.fName}
 								</FormErrorMessage>
 							</FormControl>
+
 							<FormControl
-								id='name'
+								id='mName'
 								isInvalid={
-									form.errors.mName && morm.touched.mName
+									form.errors.mName && form.touched.mName
 								}
 							>
 								<FormLabel fontSize={'sm'}>
@@ -266,18 +268,15 @@ const ContactForm = () => {
 									type='text'
 									placeholder='Middle Name'
 									rounded='md'
-									name='name'
+									name='mName'
 									onChange={form.handleChange}
 									onBlur={form.handleBlur}
 									value={form.values.mName}
 									fontSize={'sm'}
 								/>
-								<FormErrorMessage fontSize={'xs'}>
-									{form.errors.mName}
-								</FormErrorMessage>
 							</FormControl>
 							<FormControl
-								id='name'
+								id='lname'
 								isInvalid={
 									form.errors.lName && form.touched.lName
 								}
@@ -287,7 +286,7 @@ const ContactForm = () => {
 									type='text'
 									placeholder='Last Name'
 									rounded='md'
-									name='name'
+									name='lName'
 									onChange={form.handleChange}
 									onBlur={form.handleBlur}
 									value={form.values.lName}
@@ -346,28 +345,6 @@ const ContactForm = () => {
 								/>
 								<FormErrorMessage fontSize={'xs'}>
 									{form.errors.contact}
-								</FormErrorMessage>
-							</FormControl>
-							<FormControl
-								id='subject'
-								isInvalid={
-									form.errors.subject && form.touched.subject
-								}
-							>
-								{' '}
-								<FormLabel fontSize={'sm'}>Subject</FormLabel>
-								<Input
-									type='text'
-									placeholder='E.g Purchase Unit'
-									rounded='md'
-									name='subject'
-									onChange={form.handleChange}
-									onBlur={form.handleBlur}
-									value={form.values.subject}
-									fontSize={'sm'}
-								/>
-								<FormErrorMessage fontSize={'xs'}>
-									{form.errors.subject}
 								</FormErrorMessage>
 							</FormControl>
 						</Stack>
