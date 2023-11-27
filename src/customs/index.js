@@ -35,7 +35,7 @@ export {
 	CusSelectAmenities,
 	CusSelectOnHoldUnit,
 	CusSelectYearsToCal,
-	CusSelectPayterm
+	CusSelectPayterm,
 } from './CusSelect';
 export { default as CusUpload } from './CusUpload';
 export { default as CusSearch } from './CusSearch';
@@ -44,7 +44,12 @@ export { default as CusDelete } from './CusDelete';
 export { default as CusEdit } from './CusEdit';
 export { default as CusAlert } from './CusAlert';
 export { default as CusPagination } from './CusPagination';
-export { CusNumInput, CusNumInputLeftAdd, CusNumSpinner,CusNumInputRightAdd } from './CusNumInput';
+export {
+	CusNumInput,
+	CusNumInputLeftAdd,
+	CusNumSpinner,
+	CusNumInputRightAdd,
+} from './CusNumInput';
 export {
 	CusMultiSelectUnit,
 	CusMultiSelectUnitAmt,
@@ -64,11 +69,7 @@ export { default as CusCapacity } from './CusCapacity';
 export { CusSliderCheckbox } from './CusSliderCheckbox';
 export { default as CusPDF } from './CusPDF';
 export { default as CusCapture } from './CusCapture';
-
-export { default as CusExitModal } from './CusExitModal';
-export { default as CusSoaPDF} from './CusSoaPDF';
-export { default as CusTransactionPDF } from './CusTransactionPDF'
-
+export { default as CusSoaPDF } from './CusSoaPDF';
+export { default as CusTransactionPDF } from './CusTransactionPDF';
 export { default as CusModalClear } from './CusModalClear';
 export { default as CusStepper } from './CusStepper';
-
