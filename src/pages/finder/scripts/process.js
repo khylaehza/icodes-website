@@ -116,9 +116,6 @@ export const process = (points, data, minn, maxx) => {
             return newObj;
             });
 
-            const userInputMin = '1,000,000';
-            const userInputMax = '7,000,000';
-
             const min = Number(minn.replace(/,/g, ''));
             const max = Number(maxx.replace(/,/g, ''));
 

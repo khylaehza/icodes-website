@@ -16,6 +16,7 @@ import {
 	DesignerPage,
 	HomePage,
 	UnitCanvasPage,
+	CalculatorPage
 	FinderPage,
 	FinderQuestions,
 	FinderResult,
@@ -230,6 +231,11 @@ const RoutesNav = () => {
 							exact
 							path={'/finder1'}
 							element={<FinderHome />}
+						/>
+						<Route
+							exact
+							path={'/calculator'}
+							element={<CalculatorPage />}
 						/>
 						<Route
 							exact
