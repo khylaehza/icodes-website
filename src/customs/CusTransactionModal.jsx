@@ -20,11 +20,11 @@ import {
 	Th,
 } from '@chakra-ui/react';
 import { CusTD, CusTitle } from './CusTableItems';
-
+import { CusTransactionPDF } from './index'
 import moment from 'moment';
 import { OrdinalSuffix } from '../utilities';
 import React, { useState } from 'react';
-
+import { PDFDownloadLink } from '@react-pdf/renderer';
 import { useData } from '../../DataContext';
 
 const BoxStyle = ({
@@ -126,6 +126,186 @@ const CusTransactionModal = ({ data }) => {
 		'Receipt No.',
 		'Remaining Balance',
 	];
+
+	const Transactions = () =>{
+		return(
+			<Flex justify={'center'}>
+			<VStack
+				flexDir={'column'}
+				gap={2}
+				justify={'space-between'}
+			>
+				<Heading size={'md'}>Transactions List</Heading>
+				<BoxStyle
+					gap={20}
+					bgColor={'b.100'}
+					justifyContent={'center'}
+					alignItems={'center'}
+					justifyItems={'center'}
+					alignContent={'center'}
+					child={
+						<Flex
+							flexDir={'row'}
+							gap={70}
+						>
+							{personalDet.map((item, key) => (
+								<Flex key={key}>
+									<Text fontWeight={'bold'}>
+										{Object.keys(item)
+											.toString()
+											.toUpperCase()}
+									</Text>
+									:{' '}
+									{Object.values(
+										item
+									).toString()}
+								</Flex>
+							))}
+							{amountDet.map((item, key) => (
+								<Flex key={key}>
+									<Text fontWeight={'bold'}>
+										{Object.keys(item)
+											.toString()
+											.toUpperCase()}
+									</Text>
+									: ₱ {''}
+									{new Intl.NumberFormat(
+										'en-US',
+										{
+											maximumFractionDigits: 2,
+											minimumFractionDigits: 2,
+										}
+									).format(
+										Object.values(item)
+									)}
+								</Flex>
+							))}
+						</Flex>
+					}
+				/>
+				<Flex
+					border={'1px'}
+					borderColor={'w.100'}
+					bgColor={'w.100'}
+					rounded={5}
+					p={3}
+					w={'100%'}
+				>
+					<Table
+						variant='simple'
+						fontSize={12}
+					>
+						<Thead alignSelf='center'>
+							<Tr>
+								{header.map((head, key) => (
+									<Th
+										textAlign={'center'}
+										key={key}
+									>
+										{head}
+									</Th>
+								))}
+							</Tr>
+						</Thead>
+						<Tbody>
+							{table.map((item, key) => {
+								if (item.status == 'Paid') {
+									deduct += parseFloat(
+										item.amountPaid.replace(
+											/,/g,
+											''
+										)
+									);
+
+									return (
+										<Tr
+											key={key}
+											bgColor={
+												data.TransactionID ==
+													item.transactId &&
+												'w.200'
+											}
+										>
+											<CusTD
+												component={
+													item.num
+												}
+											/>
+											<CusTD
+												component={
+													item.transactId
+												}
+											/>
+											<CusTD
+												component={
+													item.month
+												}
+											/>
+											<CusTD
+												component={moment(
+													item.datePaid
+												).format(
+													'DD-MMM-YYYY'
+												)}
+											/>
+											<CusTD
+												component={
+													item.paymentMode
+												}
+											/>
+											<CusTD
+												component={
+													'₱ ' +
+													item.amountPaid
+												}
+											/>
+											<CusTD
+												component={
+													item.receiptNo
+												}
+											/>
+											<CusTD
+												component={`₱ ${new Intl.NumberFormat(
+													'en-US',
+													{
+														maximumFractionDigits: 2,
+														minimumFractionDigits: 2,
+													}
+												).format(
+													amountDet[2]
+														.Total -
+														deduct
+												)}`}
+											/>
+										</Tr>
+									);
+								}
+							})}
+						</Tbody>
+					</Table>
+				</Flex>
+			</VStack>
+		</Flex>
+		)
+	}
+	const Print = () => {
+		return(
+			<PDFDownloadLink
+				document={
+					<CusTransactionPDF
+						personalDet={personalDet}
+						amountDet={amountDet}
+						table={table}
+						deduct={deduct}
+					/>
+				}
+				fileName={`Transaction${data.TransactionID}.pdf`}
+			>
+				<Button variant={'primary'} onClick={onClose}>Print</Button>
+		</PDFDownloadLink>
+		)
+	}
+
 	return (
 		<>
 			<Button
@@ -146,172 +326,11 @@ const CusTransactionModal = ({ data }) => {
 					<ModalHeader></ModalHeader>
 					<ModalCloseButton />
 					<ModalBody>
-						<Flex justify={'center'}>
-							<VStack
-								flexDir={'column'}
-								gap={2}
-								justify={'space-between'}
-							>
-								<Heading size={'md'}>Transactions List</Heading>
-								<BoxStyle
-									gap={20}
-									bgColor={'b.100'}
-									justifyContent={'center'}
-									alignItems={'center'}
-									justifyItems={'center'}
-									alignContent={'center'}
-									child={
-										<Flex
-											flexDir={'row'}
-											gap={70}
-										>
-											{personalDet.map((item, key) => (
-												<Flex key={key}>
-													<Text fontWeight={'bold'}>
-														{Object.keys(item)
-															.toString()
-															.toUpperCase()}
-													</Text>
-													:{' '}
-													{Object.values(
-														item
-													).toString()}
-												</Flex>
-											))}
-											{amountDet.map((item, key) => (
-												<Flex key={key}>
-													<Text fontWeight={'bold'}>
-														{Object.keys(item)
-															.toString()
-															.toUpperCase()}
-													</Text>
-													: ₱ {''}
-													{new Intl.NumberFormat(
-														'en-US',
-														{
-															maximumFractionDigits: 2,
-															minimumFractionDigits: 2,
-														}
-													).format(
-														Object.values(item)
-													)}
-												</Flex>
-											))}
-										</Flex>
-									}
-								/>
-								<Flex
-									border={'1px'}
-									borderColor={'w.100'}
-									bgColor={'w.100'}
-									rounded={5}
-									p={3}
-									w={'100%'}
-								>
-									<Table
-										variant='simple'
-										fontSize={12}
-									>
-										<Thead alignSelf='center'>
-											<Tr>
-												{header.map((head, key) => (
-													<Th
-														textAlign={'center'}
-														key={key}
-													>
-														{head}
-													</Th>
-												))}
-											</Tr>
-										</Thead>
-										<Tbody>
-											{table.map((item, key) => {
-												if (item.status == 'Paid') {
-													deduct += parseFloat(
-														item.amountPaid.replace(
-															/,/g,
-															''
-														)
-													);
-
-													return (
-														<Tr
-															key={key}
-															bgColor={
-																data.TransactionID ==
-																	item.transactId &&
-																'w.200'
-															}
-														>
-															<CusTD
-																component={
-																	item.num
-																}
-															/>
-															<CusTD
-																component={
-																	item.transactId
-																}
-															/>
-															<CusTD
-																component={
-																	item.month
-																}
-															/>
-															<CusTD
-																component={moment(
-																	item.datePaid
-																).format(
-																	'DD-MMM-YYYY'
-																)}
-															/>
-															<CusTD
-																component={
-																	item.paymentMode
-																}
-															/>
-															<CusTD
-																component={
-																	'₱ ' +
-																	item.amountPaid
-																}
-															/>
-															<CusTD
-																component={
-																	item.receiptNo
-																}
-															/>
-															<CusTD
-																component={`₱ ${new Intl.NumberFormat(
-																	'en-US',
-																	{
-																		maximumFractionDigits: 2,
-																		minimumFractionDigits: 2,
-																	}
-																).format(
-																	amountDet[2]
-																		.Total -
-																		deduct
-																)}`}
-															/>
-														</Tr>
-													);
-												}
-											})}
-										</Tbody>
-									</Table>
-								</Flex>
-							</VStack>
-						</Flex>
+						<Transactions/>
 					</ModalBody>
 
 					<ModalFooter>
-						<Button
-							variant={'primary'}
-							onClick={onClose}
-						>
-							Print
-						</Button>
+						<Print/>
 					</ModalFooter>
 				</ModalContent>
 			</Modal>
