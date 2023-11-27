@@ -10,6 +10,7 @@ import {
 	Input,
 	InputGroup,
 	InputLeftAddon,
+	InputRightAddon,
 	useNumberInput,
 	HStack,
 	Button,
@@ -117,6 +118,55 @@ export const CusNumInputLeftAdd = ({
 						<NumberDecrementStepper />
 					</NumberInputStepper>
 				</NumberInput>
+			</InputGroup>
+			<FormErrorMessage fontSize={'xs'}>{error}</FormErrorMessage>
+		</FormControl>
+	);
+};
+export const CusNumInputRightAdd = ({
+	label,
+	name,
+	onChange,
+	value,
+	error,
+	onBlur,
+	touch,
+	add,
+	isRequired,
+	id,
+	disabled = false,
+}) => {
+	return (
+		<FormControl
+			isInvalid={error && touch}
+			isRequired={isRequired}
+		>
+			<FormLabel fontSize={'xs'}>{label}</FormLabel>
+			<InputGroup>
+				<NumberInput
+					min={0}
+					onChange={onChange}
+					value={value}
+					w={'100%'}
+				>
+					<NumberInputField
+						name={name}
+						variant={'outline'}
+						fontSize={'xs'}
+						id={id}
+						placeholder={0}
+						onBlur={onBlur}
+						disabled={disabled}
+					/>
+					<NumberInputStepper>
+						<NumberIncrementStepper />
+						<NumberDecrementStepper />
+					</NumberInputStepper>
+				</NumberInput>
+				<InputRightAddon
+					children={add}
+					fontSize={'xs'}
+				/>
 			</InputGroup>
 			<FormErrorMessage fontSize={'xs'}>{error}</FormErrorMessage>
 		</FormControl>

@@ -1257,3 +1257,232 @@ export const CusSelectOnHoldUnit = ({
 		</FormControl>
 	);
 };
+
+export const CusSelectTowerToCal = ({
+	label,
+	name,
+	onChange,
+	value,
+	error,
+	onBlur,
+	touch,
+	variant = 'outline',
+	icon,
+	bgColor = 'w.300',
+	isRequired,
+}) => {
+	const { unitValues } = useData();
+
+	let towerMap = new Map();
+
+	unitValues.forEach((item) => {
+		const towerName = item.Tower
+		if (!towerMap.has(towerName)) {
+			towerMap.set(towerName, item.Tower);
+		}
+	});
+
+	let uniqueTowers = Array.from(towerMap.values());
+
+	//uniqueTowers.sort((a, b) => a.toLowerCase().localeCompare(b.toLowerCase()));
+
+	let currentValue = value || 'Select';
+	return (
+		<FormControl isInvalid={error && touch} isRequired={isRequired}>
+			<FormLabel fontSize={'xs'}>{label}</FormLabel>
+
+			<Select
+				name={name}
+				variant={variant}
+				bgColor={bgColor}
+				onChange={onChange}
+				onBlur={onBlur}
+				value={currentValue}
+				fontSize={'xs'}
+				icon={icon}
+			>
+				<option value='Select' disabled>
+					Select
+				</option>
+
+				{uniqueTowers.map((tower, key) => (
+					<option key={key} value={tower}>
+						{tower}
+					</option>
+				))}
+			</Select>
+			<FormErrorMessage fontSize={'xs'}>{error}</FormErrorMessage>
+		</FormControl>
+	);
+};
+
+export const CusSelectTowerLoan = ({
+	label,
+	name,
+	onChange,
+	value,
+	error,
+	onBlur,
+	touch,
+	variant = 'outline',
+	icon,
+	bgColor = 'w.300',
+	isRequired,
+}) => {
+	const { loans } = useData();
+
+	let towerMap = new Map();
+
+	loans.forEach((item) => {
+		const towerName = item.Tower
+		if (!towerMap.has(towerName)) {
+			towerMap.set(towerName, item.Tower);
+		}
+	});
+
+	let uniqueTowers = Array.from(towerMap.values());
+
+	//uniqueTowers.sort((a, b) => a.toLowerCase().localeCompare(b.toLowerCase()));
+
+	let currentValue = value || 'Select';
+	return (
+		<FormControl isInvalid={error && touch} isRequired={isRequired}>
+			<FormLabel fontSize={'xs'}>{label}</FormLabel>
+
+			<Select
+				name={name}
+				variant={variant}
+				bgColor={bgColor}
+				onChange={onChange}
+				onBlur={onBlur}
+				value={currentValue}
+				fontSize={'xs'}
+				icon={icon}
+			>
+				<option value='Select' disabled>
+					Select
+				</option>
+
+				{uniqueTowers.map((tower, key) => (
+					<option key={key} value={tower}>
+						{tower}
+					</option>
+				))}
+			</Select>
+			<FormErrorMessage fontSize={'xs'}>{error}</FormErrorMessage>
+		</FormControl>
+	);
+};
+export const CusSelectPayterm = ({
+	label,
+	name,
+	onChange,
+	value,
+	error,
+	onBlur,
+	touch,
+	variant = 'outline',
+	icon,
+	bgColor = 'w.300',
+	isRequired,
+}) => {
+	const { payterm } = useData();
+
+	let paytermMap = new Map();
+
+	payterm.forEach((item) => {
+		const paytrm = item.PaymentTermName
+		if (!paytermMap.has(paytrm)) {
+			paytermMap.set(paytrm, item.PaymentTermName);
+		}
+	});
+
+	let uniquePayTerm = Array.from(paytermMap.values());
+
+	//uniqueTowers.sort((a, b) => a.toLowerCase().localeCompare(b.toLowerCase()));
+
+	let currentValue = value || 'Select';
+	return (
+		<FormControl isInvalid={error && touch} isRequired={isRequired}>
+			<FormLabel fontSize={'xs'}>{label}</FormLabel>
+
+			<Select
+				name={name}
+				variant={variant}
+				bgColor={bgColor}
+				onChange={onChange}
+				onBlur={onBlur}
+				value={currentValue}
+				fontSize={'xs'}
+				icon={icon}
+			>
+				<option value='Select' disabled>
+					Select
+				</option>
+
+				{uniquePayTerm.map((pt, key) => (
+					<option key={key} value={pt}>
+						{pt}
+					</option>
+				))}
+			</Select>
+			<FormErrorMessage fontSize={'xs'}>{error}</FormErrorMessage>
+		</FormControl>
+	);
+};
+
+export const CusSelectYearsToCal = ({
+	label,
+	name,
+	onChange,
+	value,
+	error,
+	onBlur,
+	touch,
+	variant = 'outline',
+	icon,
+	bgColor = 'w.300',
+	isRequired,
+	tower
+}) => {
+	const { unitValues } = useData();
+
+	if(unitValues && tower){
+	const year = unitValues.filter((item) => item.Tower === tower).map(itm => itm.Years)
+	let currentValue = value || 'Select';
+	return (
+		<FormControl isInvalid={error && touch} isRequired={isRequired}>
+			<FormLabel fontSize={'xs'}>{label}</FormLabel>
+
+			<Select
+				name={name}
+				variant={variant}
+				bgColor={bgColor}
+				onChange={onChange}
+				onBlur={onBlur}
+				value={currentValue}
+				fontSize={'xs'}
+				icon={icon}
+			>
+				<option value='Select' disabled>
+					Select
+				</option>
+
+				{year.map((tower, key) => (
+					<option key={key} value={tower}>
+						{tower}
+					</option>
+				))}
+			</Select>
+			<FormErrorMessage fontSize={'xs'}>{error}</FormErrorMessage>
+		</FormControl>
+	);
+	}
+
+	
+
+	//uniqueTowers.sort((a, b) => a.toLowerCase().localeCompare(b.toLowerCase()));
+
+	
+};
+

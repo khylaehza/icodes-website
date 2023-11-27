@@ -17,6 +17,7 @@ import {
 	DesignerPage,
 	HomePage,
 	UnitCanvasPage,
+	CalculatorPage
 } from '../pages/';
 //maintenance
 import {
@@ -228,6 +229,11 @@ const RoutesNav = () => {
 							exact
 							path={'/finder'}
 							element={<FinderHome />}
+						/>
+						<Route
+							exact
+							path={'/calculator'}
+							element={<CalculatorPage />}
 						/>
 						<Route
 							path='*'

@@ -125,6 +125,7 @@ const TopNav = () => {
 							<Button
 								variant={'tertiary'}
 								size='sm'
+								onClick={()=> navigate('/calculator')}
 								color={
 									location.pathname === '/calculator'
 										? 'black'
