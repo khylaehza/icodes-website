@@ -24,7 +24,6 @@
 		"formik": "^2.4.5",
 		"framer-motion": "^10.16.4",
 		"gltf-pipeline": "^4.1.0",
-		"html2canvas": "^1.4.1",
 		"leva": "^0.9.35",
 		"maath": "^0.10.4",
 		"moment": "^2.29.4",
