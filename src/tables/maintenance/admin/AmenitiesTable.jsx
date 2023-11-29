@@ -11,6 +11,7 @@ import {
 	useToast,
 	UnorderedList,
 	ListItem,
+	Flex
 } from '@chakra-ui/react';
 import React from 'react';
 
@@ -24,7 +25,16 @@ import { CusEnlargeImage } from '../../../customs/index'
 const AmenitiesTable = ({ data, search, all }) => {
 	const toast = useToast();
 	const ret = search ? all : data;
-	const { isOpen, onOpen, onClose } = useDisclosure();
+	const {
+		isOpen: isImageModalOpen,
+		onOpen: onImageModalOpen,
+		onClose: onImageModalClose,
+	} = useDisclosure();
+	const {
+		isOpen: isStatusModalOpen,
+		onOpen: onStatusModalOpen,
+		onClose: onStatusModalClose,
+	} = useDisclosure()
 	const [Id, setId] = useState('');
 	const [nameLabel, setNameLabel] = useState('')
 	const [selectedImage, setSelectedImage] = useState(null);
@@ -39,7 +49,7 @@ const AmenitiesTable = ({ data, search, all }) => {
 	const handleImageClick = (item) => {
 		setSelectedImage(item.AmenityImg);
 		setNameLabel(item.AmenityName)
-		onOpen();
+		onImageModalOpen();
 	};
 
 	return ret
@@ -50,12 +60,12 @@ const AmenitiesTable = ({ data, search, all }) => {
 		})
 		.map((data, id) => {
 			const statusConfirmation = (value, data) => {
-				onOpen();
+				onStatusModalOpen();
 				setAmenitiesState({
 					...amenitiesState,
-					name: data.name,
+					name: data.AmenityName,
 					statusLabel: value === true ? 'Enable' : 'Disable',
-					ameId: data.ameId,
+					ameId: data.AmenityID,
 					status: value,
 					currentStatus: data.Status,
 				});
@@ -87,7 +97,7 @@ const AmenitiesTable = ({ data, search, all }) => {
 						isClosable: true,
 					});
 
-					onClose();
+					onStatusModalClose();
 				} catch (error) {
 					toast({
 						title: 'Edit Status Failed!',
@@ -95,7 +105,7 @@ const AmenitiesTable = ({ data, search, all }) => {
 						duration: 3000,
 						isClosable: true,
 					});
-					onClose();
+					onStatusModalClose();
 				}
 			};
 			if (data.CreatedDate) {
@@ -197,17 +207,23 @@ const AmenitiesTable = ({ data, search, all }) => {
 								<CusTitle component={'Status'} />
 								<CusTD
 									component={
-										<Switch
-											id='isChecked'
-											isChecked={data.Status}
-											onChange={(e) => {
-												statusConfirmation(
-													e.target.checked,
-													data
-												);
-												setId(data.id);
-											}}
-										/>
+										<Flex direction={'column'}>
+											{data.Status.toString()
+												? 'Enabled'
+												: 'Disabled'}
+											<Switch
+												id='isChecked'
+												isChecked={data.Status}
+												onChange={(e) => {
+													statusConfirmation(
+														e.target
+															.checked,
+														data
+													);
+													setId(data.id);
+												}}
+											/>
+										</Flex>
 									}
 								/>
 							</React.Fragment>
@@ -243,8 +259,8 @@ const AmenitiesTable = ({ data, search, all }) => {
 							/>
 						</Tr>
 						<CusAlert
-							isOpen={isOpen}
-							onClose={onClose}
+							isOpen={isStatusModalOpen}
+							onClose={onStatusModalClose}
 							header={'Status Confirmation'}
 							action={handleConfirmStatusChange}
 							actionLabel={'Confirm'}
@@ -262,19 +278,20 @@ const AmenitiesTable = ({ data, search, all }) => {
 									>
 										{amenitiesState.statusLabel}
 									</Text>{' '}
+									
+									this amenity?
 									<Text
 										as='b'
 										color='b.300'
 									>
-										{amenitiesState.name}
+										({amenitiesState.name})
 									</Text>
-									this amenity?
 								</Text>
 							}
 						/>
 						<CusEnlargeImage
-                            isOpen={isOpen}
-                            onClose={onClose}
+                            isOpen={isImageModalOpen}
+                            onClose={onImageModalClose}
                             label={nameLabel}
                             body={
                                 <Image

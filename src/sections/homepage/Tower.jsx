@@ -17,6 +17,7 @@ import {
 	isValidMotionProp,
 } from 'framer-motion';
 import { useRef } from 'react';
+import { useData } from '../../../DataContext';
 import VisibilitySensor from 'react-visibility-sensor';
 
 const ChakraBox = chakra(motion.div, {
@@ -34,7 +35,8 @@ function Components({ data, index }) {
 
 	const y = useParallax(scrollYProgress, 100);
 
-	return (
+	if(data){
+		return (
 		<VisibilitySensor partialVisibility={true}>
 			{({ isVisible }) => {
 				return (
@@ -66,14 +68,14 @@ function Components({ data, index }) {
 												fontSize={'7xl'}
 												fontWeight={'bold'}
 											>
-												{data.towerName.slice(0, -4)}
+												{data.TowerName?data.TowerName.slice(0, -4):''}
 											</Text>
 											<Text
 												fontSize={'md'}
 												fontWeight={'medium'}
 												textAlign={'justify'}
 											>
-												{data.towerLoc}
+												{data.TowerDesc}
 											</Text>
 										</ChakraBox>
 									</Box>
@@ -93,7 +95,7 @@ function Components({ data, index }) {
 												initialScale={1.2}
 											>
 												<Image
-													src={data.towerImg}
+													src={data.TowerImg}
 													objectFit={'cover'}
 													position={'relative'}
 													rounded={'lg'}
@@ -119,7 +121,7 @@ function Components({ data, index }) {
 												initialScale={1.2}
 											>
 												<Image
-													src={data.towerImg}
+													src={data.TowerImg}
 													objectFit={'cover'}
 													position={'relative'}
 													rounded={'lg'}
@@ -140,14 +142,14 @@ function Components({ data, index }) {
 												fontSize={'7xl'}
 												fontWeight={'bold'}
 											>
-												{data.towerName.slice(0, -4)}
+												{data.TowerName.slice(0, -4)}
 											</Text>
 											<Text
 												fontSize={'md'}
 												fontWeight={'medium'}
 												textAlign={'justify'}
 											>
-												{data.towerLoc}
+												{data.TowerDesc}
 											</Text>
 										</ChakraBox>
 									</Box>
@@ -159,60 +161,92 @@ function Components({ data, index }) {
 			}}
 		</VisibilitySensor>
 	);
+	}
+	
 }
 
-const TowerLayout = () => {
-	const text = [
-		{
-			towerName: 'Tower 1 (T1)',
-			towerLoc:
-				'Congressional Town Center Tower 1 is the first new high-rise tower in this project. The 37-story tower is designed for the discerning and those who want to leave a lasting impression for friends and family. The tower’s spacious one-bedroom and studio unit entrance flow from its foyer into the unit’s living room and kitchen, providing residents entertainment and relaxation.',
-			towerImg:
-				'https://i.pinimg.com/736x/34/62/2d/34622d463634cfd4ed0bb3b7223043d9.jpg',
-			color: '#f5f5f5',
-		},
-		{
-			towerName: 'Tower 2  (T2)',
-			towerLoc:
-				'Congressional Town Center Tower 1 is the first new high-rise tower in this project. The 37-story tower is designed for the discerning and those who want to leave a lasting impression for friends and family. The tower’s spacious one-bedroom and studio unit entrance flow from its foyer into the unit’s living room and kitchen, providing residents entertainment and relaxation.',
-			towerImg:
-				'https://i.pinimg.com/736x/68/01/7f/68017ff302490318ccbf5a85802d7c56.jpg',
-			color: '#FFFFFF',
-		},
-		{
-			towerName: 'Tower 3  (T3)',
-			towerLoc:
-				'Congressional Town Center Tower 1 is the first new high-rise tower in this project. The 37-story tower is designed for the discerning and those who want to leave a lasting impression for friends and family. The tower’s spacious one-bedroom and studio unit entrance flow from its foyer into the unit’s living room and kitchen, providing residents entertainment and relaxation.',
-			towerImg:
-				'https://i.pinimg.com/736x/69/18/6c/69186c081d8ede3b867bc4ab2fed71af.jpg',
-			color: '#f5f5f5',
-		},
-	];
+const TowerLayout = ({towers}) => {
 
-	return (
-		<Flex flexDir={'column'}>
-			{text.map((data, index) => (
-				<Flex
-					alignContent={'center'}
-					justifyContent={'center'}
-					mb={10}
-					bg={data.color}
-					key={index}
-				>
+	if(towers){
+		return (
+			<Flex flexDir={'column'}>
+				{towers.map((data, index) => (
 					<Flex
-						w={'50%'}
-						flexDir={'column'}
-						bgColor={data.color}
+						alignContent={'center'}
+						justifyContent={'center'}
+						mb={10}
+						bg={data.color}
+						key={index}
 					>
-						<Components
-							data={data}
-							index={index}
-						/>
+						<Flex
+							w={'50%'}
+							flexDir={'column'}
+							bgColor={data.color}
+						>
+							<Components
+								data={data}
+								index={index}
+							/>
+						</Flex>
 					</Flex>
-				</Flex>
-			))}
-		</Flex>
-	);
+				))}
+			</Flex>
+		);
+
+	}else{
+		const text = [
+			{
+				TowerName: 'Tower 1 (T1)',
+				TowerDesc:
+					'Congressional Town Center Tower 1 is the first new high-rise tower in this project. The 37-story tower is designed for the discerning and those who want to leave a lasting impression for friends and family. The tower’s spacious one-bedroom and studio unit entrance flow from its foyer into the unit’s living room and kitchen, providing residents entertainment and relaxation.',
+				TowerImg:
+					'https://i.pinimg.com/736x/34/62/2d/34622d463634cfd4ed0bb3b7223043d9.jpg',
+				color: '#f5f5f5',
+			},
+			{
+				TowerName: 'Tower 2  (T2)',
+				TowerDesc:
+					'Congressional Town Center Tower 1 is the first new high-rise tower in this project. The 37-story tower is designed for the discerning and those who want to leave a lasting impression for friends and family. The tower’s spacious one-bedroom and studio unit entrance flow from its foyer into the unit’s living room and kitchen, providing residents entertainment and relaxation.',
+				towerImg:
+					'https://i.pinimg.com/736x/68/01/7f/68017ff302490318ccbf5a85802d7c56.jpg',
+				color: '#FFFFFF',
+			},
+			{
+				TowerName: 'Tower 3  (T3)',
+				TowerDesc:
+					'Congressional Town Center Tower 1 is the first new high-rise tower in this project. The 37-story tower is designed for the discerning and those who want to leave a lasting impression for friends and family. The tower’s spacious one-bedroom and studio unit entrance flow from its foyer into the unit’s living room and kitchen, providing residents entertainment and relaxation.',
+				TowerImg:
+					'https://i.pinimg.com/736x/69/18/6c/69186c081d8ede3b867bc4ab2fed71af.jpg',
+				color: '#f5f5f5',
+			},
+		];
+	
+		return (
+			<Flex flexDir={'column'}>
+				{text.map((data, index) => (
+					<Flex
+						alignContent={'center'}
+						justifyContent={'center'}
+						mb={10}
+						bg={data.color}
+						key={index}
+					>
+						<Flex
+							w={'50%'}
+							flexDir={'column'}
+							bgColor={data.color}
+						>
+							<Components
+								data={data}
+								index={index}
+							/>
+						</Flex>
+					</Flex>
+				))}
+			</Flex>
+		);
+	}
+	
 };
 
 export default TowerLayout;

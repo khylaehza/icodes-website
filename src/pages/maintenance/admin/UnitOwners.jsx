@@ -43,6 +43,7 @@ const Item = () => {
 		'Contact Number',
 		'Email',
 		'Unit/s',
+		'Requirements',
 		'Status',
 		'Modify',
 	];

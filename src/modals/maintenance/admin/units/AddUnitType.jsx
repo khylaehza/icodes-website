@@ -19,6 +19,8 @@ const AddUnitType = () => {
 			typeName: '',
 			typeCode: '',
 			maxPeople: '',
+			noBath: '',
+			noBed: '',
 		},
 		validationSchema: Yup.object({
 			typeName: Yup.string().required('Unit Type is required.'),
@@ -34,6 +36,8 @@ const AddUnitType = () => {
 						TypeName: value.typeName,
 						TypeCode: value.typeCode,
 						TypeMax: value.maxPeople,
+						NumOfBath: value.noBath,
+						NumOfBed: value.noBed,
 						Status: true,
 					}
 				);

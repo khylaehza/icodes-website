@@ -24,7 +24,7 @@ import { useState } from 'react';
 
 import { db } from '../../../../firebase-config';
 import { updateDoc, serverTimestamp, doc } from 'firebase/firestore';
-import { CusEnlargeImage } from '../../../customs/index';
+import { CusEnlargeImage,CusReqModal,CusReqCarousel } from '../../../customs/index';
 
 const UnitOwnersTable = ({
 	data,
@@ -123,6 +123,17 @@ const UnitOwnersTable = ({
 			};
 			if (data.CreatedDate) {
 				console.log(data.Status);
+
+				const firstName = data.FName.charAt(0).toUpperCase() + data.FName.slice(1);
+				const middleName = data.MName.charAt(0).toUpperCase();
+				const lastName = data.LName.charAt(0).toUpperCase() + data.LName.slice(1);
+				const fullName =
+					middleName === ''
+						? `${firstName} ${middleName} ${lastName}`
+						: `${firstName} ${middleName}. ${lastName}`;
+			
+		
+				console.log(fullName);
 				return (
 					<React.Fragment key={id}>
 						<Tr
@@ -181,6 +192,15 @@ const UnitOwnersTable = ({
 								<CusTD component={data.Email + '.com'} />
 								<CusTitle component={'Unit/s'} />
 								<CusTD component={data.Units} />
+								<CusTitle component={'Requirments'} />
+								<CusTD 
+									component={
+										<CusReqModal 
+											child={<CusReqCarousel data={data}/>}
+											data={data}
+										/>
+									} 
+								/>
 
 								{allowActions && (
 									<>
