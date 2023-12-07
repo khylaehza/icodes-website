@@ -9,7 +9,7 @@ import {
 	useDisclosure,
 	Text,
 	useToast,
-    Box,
+	Box,
 	Flex,
 } from '@chakra-ui/react';
 import React from 'react';
@@ -19,23 +19,30 @@ import { useState } from 'react';
 
 import { db } from '../../../../firebase-config';
 import { updateDoc, serverTimestamp, doc } from 'firebase/firestore';
-import {CusEnlargeImage} from '../../../customs/index'
+import { CusEnlargeImage } from '../../../customs/index';
 
 const AnnouncementTable = ({ data, search, all }) => {
-    const toast = useToast();
+	const toast = useToast();
 	const ret = search ? all : data;
-	const { isOpen: isImageModalOpen, onOpen: onImageModalOpen, onClose: onImageModalClose } = useDisclosure();
-    const { isOpen: isStatusModalOpen, onOpen: onStatusModalOpen, onClose: onStatusModalClose } = useDisclosure();
+	const {
+		isOpen: isImageModalOpen,
+		onOpen: onImageModalOpen,
+		onClose: onImageModalClose,
+	} = useDisclosure();
+	const {
+		isOpen: isStatusModalOpen,
+		onOpen: onStatusModalOpen,
+		onClose: onStatusModalClose,
+	} = useDisclosure();
 
-    const [Id, setId] = useState('');
-    const [selectedImage, setSelectedImage] = useState(null);
+	const [Id, setId] = useState('');
+	const [selectedImage, setSelectedImage] = useState(null);
 	const [anncmntState, setAnncmntState] = useState({
 		statusLabel: '',
 		anncmntId: '',
 		currentStatus: boolean,
 		status: boolean,
 	});
-
 
 	const handleImageClick = (src) => {
 		setSelectedImage(src);
@@ -48,8 +55,8 @@ const AnnouncementTable = ({ data, search, all }) => {
 				: item.AnncmntID.toString().toLowerCase().includes(search);
 		})
 		.map((data, id) => {
-            const status = data.Status ? 'Enabled' : 'Disabled'
-            const statusConfirmation = (value, data) => {
+			const status = data.Status ? 'Enabled' : 'Disabled';
+			const statusConfirmation = (value, data) => {
 				onStatusModalOpen();
 				setAnncmntState({
 					...anncmntState,
@@ -77,9 +84,7 @@ const AnnouncementTable = ({ data, search, all }) => {
 
 					toast({
 						title: `${anncmntState.anncmntId}'s Status ${
-							anncmntState.currentStatus
-								? 'Disabled'
-								: 'Enabled'
+							anncmntState.currentStatus ? 'Disabled' : 'Enabled'
 						}!`,
 						status: 'success',
 						duration: 3000,
@@ -97,10 +102,10 @@ const AnnouncementTable = ({ data, search, all }) => {
 					onStatusModalClose();
 				}
 			};
-            if (data.CreatedDate){
-                return(
-                    <React.Fragment key={id}>
-                        <Tr
+			if (data.CreatedDate) {
+				return (
+					<React.Fragment key={id}>
+						<Tr
 							key={id}
 							display={{
 								base: 'grid',
@@ -115,15 +120,17 @@ const AnnouncementTable = ({ data, search, all }) => {
 								gridGap: '10px',
 							}}
 						>
-                            <React.Fragment>
-                                <CusTitle component={'Annoucement ID'} />
-                                <CusTD component={data.AnncmntID} />
-                                <CusTitle component={'Purpose'} />
-                                <CusTD component={data.Purpose} />
-                                <CusTitle component={'For'} />
-                                <CusTD component={data.For} />
-                                <CusTitle component={'Date Posted'} />
-                                <CusTD
+							<React.Fragment>
+								<CusTitle component={'Announcement ID'} />
+								<CusTD component={data.AnncmntID} />
+								<CusTitle component={'Subject'} />
+								<CusTD component={data.Subject} />
+								<CusTitle component={'Purpose'} />
+								<CusTD component={data.Purpose} />
+								<CusTitle component={'For'} />
+								<CusTD component={data.For} />
+								<CusTitle component={'Date Posted'} />
+								<CusTD
 									component={
 										<DateChecker
 											dateToCheck={
@@ -135,75 +142,74 @@ const AnnouncementTable = ({ data, search, all }) => {
 										/>
 									}
 								/>
-                                <CusTitle component={'Author'} />
-							    <CusTD component={data.Author} />
-							    <CusTitle component={'File'} />
+								<CusTitle component={'Author'} />
+								<CusTD component={data.Author} />
+								<CusTitle component={'File'} />
 								<Td width={{ base: '', xl: '100px' }}>
 									<Image
 										src={data.AnncmntImg}
 										width={{ base: '100px', xl: '100px' }}
-                                        onClick={() =>
+										onClick={() =>
 											handleImageClick(data.AnncmntImg)
 										}
 									/>
 								</Td>
-                                <CusTitle component={'Description'} />
-							    <CusTD component={data.Description} />
-							    <CusTitle component={'Status'} />
-							    <CusTD
+								<CusTitle component={'Description'} />
+								<CusTD component={data.Description} />
+								<CusTitle component={'Status'} />
+								<CusTD
 									component={
-                                        <>
-                                            <Flex direction={'column'}>
-                                                {status}
-                                                <Switch
-                                                    id='isChecked'
-                                                    isChecked={data.Status}
-                                                    onChange={(e) => {
-                                                        statusConfirmation(
-                                                            e.target.checked,
-                                                            data
-                                                        );
-                                                        setId(data.id);
-                                                    }}
-                                                />
-                                            </Flex>
-                                        </>
+										<>
+											<Flex direction={'column'}>
+												{status}
+												<Switch
+													id='isChecked'
+													isChecked={data.Status}
+													onChange={(e) => {
+														statusConfirmation(
+															e.target.checked,
+															data
+														);
+														setId(data.id);
+													}}
+												/>
+											</Flex>
+										</>
 									}
 								/>
-                                <CusTitle component={'Actions'} />
-                                <CusTD
-                                    component={
-                                        <ButtonGroup
-                                            variant='solid'
-                                            size='sm'
-                                            spacing={3}
-                                        >
-                                            {data.id && (
-                                                <EditAnncmnts
-                                                    data={data}
-                                                    id={data.id}
-                                                    mainCollection='maintenance'
-                                                    tblDocUser='propertymanagement'
-                                                    tblUserCol='tbl_announcements'
-                                                />
-                                            )}
+								<CusTitle component={'Actions'} />
+								<CusTD
+									component={
+										<ButtonGroup
+											variant='solid'
+											size='sm'
+											spacing={3}
+										>
+											{data.id && (
+												<EditAnncmnts
+													data={data}
+													id={data.id}
+													mainCollection='maintenance'
+													tblDocUser='propertymanagement'
+													tblUserCol='tbl_announcements'
+												/>
+											)}
 
-                                            <CusDelete
-                                                id={data.id}
-                                                stor={`pm/anncmnts/${data.AnncmntID}/anncmnts.png`}
-                                                label={` ${data.AnncmntID}'s Data`}
-                                                mainCollection='maintenance'
-                                                tblDocUser='propertymanagement'
-                                                tblUserCol='tbl_announcements'
-                                                onUpdate={() => {}}
-                                            />
-                                        </ButtonGroup>
-                                    }
-                                />
-
-                            </React.Fragment>
-                        </Tr>
-                        <CusAlert
+											<CusDelete
+												id={data.id}
+												stor={`pm/anncmnts/${data.AnncmntID}/anncmnts.png`}
+												label={` ${data.AnncmntID}'s Data`}
+												mainCollection='maintenance'
+												tblDocUser='propertymanagement'
+												tblUserCol='tbl_announcements'
+												onUpdate={() => {}}
+											/>
+										</ButtonGroup>
+									}
+								/>
+							</React.Fragment>
+						</Tr>
+						<CusAlert
 							isOpen={isStatusModalOpen}
 							onClose={onStatusModalClose}
 							header={'Status Confirmation'}
@@ -223,12 +229,12 @@ const AnnouncementTable = ({ data, search, all }) => {
 									>
 										{anncmntState.statusLabel}
 									</Text>{' '}
-									this announcement? {' '}
-                                    <Text
+									this announcement?{' '}
+									<Text
 										as='b'
 										color='b.300'
 									>
-										(  {anncmntState.anncmntId}  )
+										( {anncmntState.anncmntId} )
 									</Text>
 								</Text>
 							}
@@ -246,10 +252,10 @@ const AnnouncementTable = ({ data, search, all }) => {
 								/>
 							}
 						/>
-                    </React.Fragment>
-                )
-            }
-        })
-}
+					</React.Fragment>
+				);
+			}
+		});
+};
 
-export default AnnouncementTable
+export default AnnouncementTable;

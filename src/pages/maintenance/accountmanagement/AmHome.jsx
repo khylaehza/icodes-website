@@ -241,7 +241,7 @@ const Item = () => {
 								textAlign={'center'}
 								pl={5}
 							>
-								Activities Report
+								Transactions Report
 							</Heading>
 							<Menu
 								closeOnSe

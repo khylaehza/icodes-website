@@ -9,7 +9,7 @@ import {
 	Flex,
 } from '@chakra-ui/react';
 import { MdClose } from 'react-icons/md';
-import { CusSelectReservedOwner } from '../../../../customs';
+import { CusSelectReservedOwner, CusInputRegular } from '../../../../customs';
 import { CusUpload } from '../../../../customs';
 
 function RequirementForm({
@@ -18,6 +18,8 @@ function RequirementForm({
 	showImage,
 	fileData,
 	setOwner,
+	disabled,
+	isEdit,
 }) {
 	const [img, setImg] = useState('');
 	const [cert, setCert] = useState('');
@@ -116,55 +118,42 @@ function RequirementForm({
 						pt={4}
 						direction={['column', 'row']}
 					>
-						{/* <CusInputFloat
-							name='lName'
-							variant='floating'
-							label={'Last Name'}
-							id={'lName'}
-							isRequired
-							value={form.values.lName}
-							onChange={form.handleChange}
-							onBlur={form.handleBlur}
-							error={form.errors.lName}
-							touch={form.touched.lName}
-						/>
-						<CusInputFloat
-							name='fName'
-							variant='floating'
-							label={'First Name'}
-							id={'fName'}
-							isRequired
-							value={form.values.fName}
-							onChange={form.handleChange}
-							onBlur={form.handleBlur}
-							error={form.errors.fName}
-							touch={form.touched.fName}
-						/>
-						<CusInputFloat
-							name='mName'
-							variant='floating'
-							label={'Middle Name'}
-							id={'mName'}
-							value={form.values.mName}
-							onChange={form.handleChange}
-							onBlur={form.handleBlur}
-						/> */}
-
-						<CusSelectReservedOwner
-							label={'Reserved Owner'}
-							name='fullName'
-							id='fullName'
-							placeholder={'Select Reserved Owner'}
-							onChange={(e) => {
-								form.setFieldValue('fullName', e.target.value);
-								setOwner(e.target.value);
-							}}
-							onBlur={form.handleBlur}
-							value={form.values.fullName}
-							error={form.errors.fullName}
-							touch={form.touched.fullName}
-							isRequired
-						/>
+						{!isEdit && (
+							<CusSelectReservedOwner
+								label={'Reserved Owner'}
+								name='fullName'
+								id='fullName'
+								placeholder={'Select Reserved Owner'}
+								onChange={(e) => {
+									form.setFieldValue(
+										'fullName',
+										e.target.value
+									);
+									setOwner(e.target.value);
+								}}
+								onBlur={form.handleBlur}
+								value={form.values.fullName}
+								error={form.errors.fullName}
+								touch={form.touched.fullName}
+								isRequired
+							/>
+						)}
+						{isEdit && (
+							<>
+								<CusInputRegular
+									isRequired
+									name='fullName'
+									label='Full Name'
+									onChange={form.handleChange}
+									onBlur={form.handleBlur}
+									placeholder='Select'
+									error={form.errors.fullName}
+									touch={form.touched.fullName}
+									value={form.values.fullName}
+									disabled={disabled}
+								/>
+							</>
+						)}
 					</Stack>
 					<Stack
 						direction={['column', 'row']}

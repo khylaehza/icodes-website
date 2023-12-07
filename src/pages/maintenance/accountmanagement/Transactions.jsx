@@ -47,16 +47,17 @@ const Item = () => {
 		'Receipt',
 		'Receipt No.',
 		'Transactions',
+		'Status',
 		'Actions',
 	];
-	const filter = ['Cash', 'Cash Deposit', 'Check', 'Others'];
+	const filter = ['Confirmed', 'Pending'];
 	const [filterOnChange, setFilterOnChange] = useState(false);
 	const filterPos = [];
 	const [fil, setFilter] = useState([filter]);
 
 	fil.forEach((element) => {
 		transactions.filter((data) => {
-			if (element == data.PayMode) {
+			if (element == data.Status) {
 				filterPos.push(data);
 			}
 		});

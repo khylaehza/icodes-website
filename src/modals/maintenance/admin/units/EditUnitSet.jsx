@@ -158,7 +158,7 @@ const EditUnitSet = ({ data, id, mainCollection, tblDocUser, tblUserCol }) => {
 					}
 				}
 
-				if (data.TypeImage !== value.unitImage) {
+				if (data.TypeImage.toString() !== value.unitImage.toString()) {
 					try {
 						await Promise.all(
 							Object.keys(imgs).map(async (element, key) => {
@@ -208,7 +208,6 @@ const EditUnitSet = ({ data, id, mainCollection, tblDocUser, tblUserCol }) => {
 								getDownloadURL(snapshot.ref)
 							)
 						);
-						// setActual(downloadURLs);
 
 						await updateDoc(docRef, {
 							TypeImage: downloadURLs,

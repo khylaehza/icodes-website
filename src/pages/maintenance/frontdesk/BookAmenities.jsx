@@ -227,7 +227,7 @@ const Item = () => {
 									<Image
 										objectFit={'cover'}
 										w={'100%'}
-										// h={{ base: '250px', lg: '380px' }}
+										h={{ base: '250px', lg: '380px' }}
 										src={item.AmenityImg}
 										rounded={15}
 										onClick={() => handleImageClick(item)}

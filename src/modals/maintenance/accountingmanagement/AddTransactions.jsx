@@ -64,6 +64,7 @@ const AddTransactions = () => {
 			receiptImg: '',
 			interest: '',
 			receiptNo: '',
+			status: '',
 		},
 		enableReinitialize: true,
 		validationSchema: Yup.object({
@@ -143,7 +144,7 @@ const AddTransactions = () => {
 										PayMode: value.paymentMode,
 										Receipt: downloadURL,
 										Interest: value.interest,
-										Status: true,
+										Status: value.status,
 									}
 								);
 							}
@@ -162,41 +163,44 @@ const AddTransactions = () => {
 					);
 				}
 
-				const collectionRef = doc(
-					db,
-					'maintenance',
-					'accountingmanagement',
-					'tbl_soa',
-					`${filteredOwner[0] ? filteredOwner[0].id : ''}`
-				);
+				if (value.status == 'Confirmed') {
+					const collectionRef = doc(
+						db,
+						'maintenance',
+						'accountingmanagement',
+						'tbl_soa',
+						`${filteredOwner[0] ? filteredOwner[0].id : ''}`
+					);
 
-				let status = {};
-				let amountPaid = {};
-				let forMonth = {};
-				let datePaid = {};
-				let id = {};
-				let paymentMode = {};
-				let receiptNo = {};
+					let status = {};
+					let amountPaid = {};
+					let forMonth = {};
+					let datePaid = {};
+					let id = {};
+					let paymentMode = {};
+					let receiptNo = {};
 
-				status[`SOA.${filteredMonth().key + 1}.status`] = 'Paid';
-				amountPaid[`SOA.${filteredMonth().key + 1}.amountPaid`] =
-					value.amountPaid;
-				forMonth[`SOA.${filteredMonth().key + 1}.forMonth`] =
-					value.forMonth;
-				datePaid[`SOA.${filteredMonth().key + 1}.datePaid`] =
-					value.datePaid;
-				id[`SOA.${filteredMonth().key + 1}.transactId`] = transactId;
-				paymentMode[`SOA.${filteredMonth().key + 1}.paymentMode`] =
-					value.paymentMode;
-				receiptNo[`SOA.${filteredMonth().key + 1}.receiptNo`] =
-					value.receiptNo;
-				updateDoc(collectionRef, amountPaid);
-				updateDoc(collectionRef, receiptNo);
-				updateDoc(collectionRef, status);
-				updateDoc(collectionRef, forMonth);
-				updateDoc(collectionRef, datePaid);
-				updateDoc(collectionRef, id);
-				updateDoc(collectionRef, paymentMode);
+					status[`SOA.${filteredMonth().key + 1}.status`] = 'Paid';
+					amountPaid[`SOA.${filteredMonth().key + 1}.amountPaid`] =
+						value.amountPaid;
+					forMonth[`SOA.${filteredMonth().key + 1}.forMonth`] =
+						value.forMonth;
+					datePaid[`SOA.${filteredMonth().key + 1}.datePaid`] =
+						value.datePaid;
+					id[`SOA.${filteredMonth().key + 1}.transactId`] =
+						transactId;
+					paymentMode[`SOA.${filteredMonth().key + 1}.paymentMode`] =
+						value.paymentMode;
+					receiptNo[`SOA.${filteredMonth().key + 1}.receiptNo`] =
+						value.receiptNo;
+					updateDoc(collectionRef, amountPaid);
+					updateDoc(collectionRef, receiptNo);
+					updateDoc(collectionRef, status);
+					updateDoc(collectionRef, forMonth);
+					updateDoc(collectionRef, datePaid);
+					updateDoc(collectionRef, id);
+					updateDoc(collectionRef, paymentMode);
+				}
 
 				toast({
 					title: 'New Transaction Added!',

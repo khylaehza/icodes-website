@@ -14,8 +14,6 @@ const FinderQuestions = () => {
 
 	const [category, setCategory] = useState([]);
 
-	// console.log(category[currentCard]);
-	const [hasAnswer, setAnswer] = useState(false);
 	const form = useFormik({
 		initialValues: {
 			familySize: '',
@@ -92,7 +90,6 @@ const FinderQuestions = () => {
 							form={form}
 							setCategory={setCategory}
 							category={category}
-							setAnswer={setAnswer}
 						/>
 					</Flex>
 
@@ -160,7 +157,7 @@ const FinderQuestions = () => {
 	);
 };
 
-const FinderForm = ({ cardIndex, form, setCategory, category, setAnswer }) => {
+const FinderForm = ({ cardIndex, form, setCategory, category }) => {
 	const question = questions[cardIndex];
 
 	const [item, setItem] = useState([]);

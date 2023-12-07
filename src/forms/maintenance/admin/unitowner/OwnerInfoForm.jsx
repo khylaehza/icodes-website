@@ -5,8 +5,10 @@ import {
 	CusInputRightAdd,
 	CusInputLeftAdd,
 	CusSelectUnit,
+	CusInputRegular,
 } from '../../../../customs';
 const OwnerInfoForm = ({ form }) => {
+	console.log(form.values);
 	return (
 		<Stack w={'100%'}>
 			<form id='formDiv'>
@@ -50,16 +52,16 @@ const OwnerInfoForm = ({ form }) => {
 						direction={['column', 'row']}
 						spacing={6}
 					>
-						<CusSelectUnit
+						<CusInputRegular
 							isRequired
-							name='unit'
+							name='units'
 							label='Unit'
 							onChange={form.handleChange}
 							onBlur={form.handleBlur}
 							placeholder='Select'
-							error={form.errors.unit}
-							touch={form.touched.unit}
-							value={form.values.unit}
+							error={form.errors.units}
+							touch={form.touched.units}
+							value={form.values.units}
 							disabled={true}
 						/>
 					</Stack>

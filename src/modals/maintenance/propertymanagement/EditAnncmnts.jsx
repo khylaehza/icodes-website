@@ -20,14 +20,8 @@ import {
 } from 'firebase/storage';
 import { useData } from '../../../../DataContext';
 
-const EditAnncmnts = ({
-    data,
-	id,
-	mainCollection,
-	tblDocUser,
-	tblUserCol,
-}) =>{
-    const { curUser } = useData();
+const EditAnncmnts = ({ data, id, mainCollection, tblDocUser, tblUserCol }) => {
+	const { curUser } = useData();
 	const { isOpen, onOpen, onClose } = useDisclosure();
 	const [imgFileName, setImgFileName] = useState('');
 	const storage = getStorage();
@@ -37,7 +31,7 @@ const EditAnncmnts = ({
 		`maintenance/propertymanagement/anncmnts/${data.AnncmntID}/anncmnts.png`
 	);
 
-    const ancOption = [];
+	const ancOption = [];
 	const [option, setOptions] = useState([
 		{ label: data.For.toString(), value: data.For.toString() },
 	]);
@@ -45,21 +39,22 @@ const EditAnncmnts = ({
 		ancOption.push(e.value);
 	});
 
-    getMetadata(imgName).then((metadata) => {
+	getMetadata(imgName).then((metadata) => {
 		const fileName = metadata.name;
 		setImgFileName(fileName);
 	});
 
-    const formattedOptions = ancOption.map((option) => `'${option}'`).join(',');
-    const editForm = useFormik({
+	const formattedOptions = ancOption.map((option) => `'${option}'`).join(',');
+	const editForm = useFormik({
 		initialValues: {
 			for: data.For,
 			anncmntImg: data.AnncmntImg,
 			purpose: data.Purpose,
 			description: data.Description,
 			author: data.Author,
+			subject: data.Subject,
 		},
-        enableReinitialize: true,
+		enableReinitialize: true,
 		onSubmit: async (value, actions) => {
 			const docRef = doc(db, mainCollection, tblDocUser, tblUserCol, id);
 			const image = value.anncmntImg;
@@ -71,6 +66,7 @@ const EditAnncmnts = ({
 					Purpose: value.purpose,
 					Description: value.description,
 					Author: value.author,
+					Subject: value.subject,
 				});
 
 				toast({
@@ -144,7 +140,7 @@ const EditAnncmnts = ({
 				}
 			}
 
-            if (curUser) {
+			if (curUser) {
 				await addDoc(
 					collection(db, 'maintenance', 'admin', 'tbl_logs'),
 					{
@@ -160,13 +156,13 @@ const EditAnncmnts = ({
 		},
 	});
 
-    const onCloseModal = () => {
+	const onCloseModal = () => {
 		editForm.resetForm();
-		setOptions([])
+		setOptions([]);
 		onClose();
 	};
 
-    return (
+	return (
 		<CusEdit
 			header={`Edit ${data.AnncmntID}'s details.`}
 			isOpen={isOpen}
@@ -183,6 +179,6 @@ const EditAnncmnts = ({
 			}
 		/>
 	);
-}
+};
 
-export default EditAnncmnts
+export default EditAnncmnts;

@@ -5,6 +5,7 @@ import {
 	CusSelectAnnouncement,
 	CusInputRegular,
 	CusUpload,
+	CusTextArea,
 } from '../../../customs';
 
 const AnnouncementForm = ({ form, options, setOptions, imgFileName }) => {
@@ -88,15 +89,15 @@ const AnnouncementForm = ({ form, options, setOptions, imgFileName }) => {
 						mb={3}
 					>
 						<CusInputRegular
-							label={'Description'}
-							name='description'
-							id='description'
-							placeholder={'Enter Description'}
+							label={'Subject'}
+							name='subject'
+							id='subject'
+							placeholder={'Enter Subject'}
 							onChange={form.handleChange}
 							onBlur={form.handleBlur}
-							value={form.values.description}
-							error={form.errors.description}
-							touch={form.touched.description}
+							value={form.values.subject}
+							error={form.errors.subject}
+							touch={form.touched.subject}
 						/>
 						<CusInputRegular
 							label={'Author'}
@@ -130,19 +131,26 @@ const AnnouncementForm = ({ form, options, setOptions, imgFileName }) => {
 						direction={['column', 'row']}
 						spacing={6}
 					> */}
-					{/* <CusTextArea
+
+					<Stack
+						direction={['column', 'row']}
+						spacing={6}
+						alignItems={'flex-end'}
+					>
+						<CusTextArea
 							label={'Description'}
 							name='description'
 							id={'description'}
-							placeholder={'e.g. Swimming Pool'}
+							placeholder={
+								'Detailed information about the announcement...'
+							}
 							onChange={form.handleChange}
 							onBlur={form.handleBlur}
 							value={form.values.description}
 							error={form.errors.description}
 							touch={form.touched.description}
-						/> */}
+						/>
 
-					<Box>
 						<CusUpload
 							name='anncmntImg'
 							id='anncmntImg'
@@ -162,7 +170,7 @@ const AnnouncementForm = ({ form, options, setOptions, imgFileName }) => {
 							error={form.errors.anncmntImg}
 							touched={form.touched.anncmntImg}
 						/>
-					</Box>
+					</Stack>
 					{/* </Stack> */}
 					<Stack
 						direction={['column', 'row']}

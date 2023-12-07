@@ -25,6 +25,13 @@ const AddManningSched = () => {
 			timeEnd: '',
 			task: '',
 		},
+		validationSchema: Yup.object({
+			team: Yup.string().required('Team is required.'),
+			location: Yup.string().required('Location is required.'),
+			scheddate: Yup.string().required('Schedule date is required.'),
+			timeStart: Yup.string().required('Time start is required.'),
+			timeEnd: Yup.string().required('Time end is required.'),
+		}),
 		onSubmit: (value, actions) => {
 			try {
 				const teams = employees
@@ -39,7 +46,7 @@ const AddManningSched = () => {
 					 ${employee.LName.charAt(0).toUpperCase() + employee.LName.slice(1)}`
 					);
 
-				const docRef = addDoc(
+				addDoc(
 					collection(
 						db,
 						'maintenance',

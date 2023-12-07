@@ -122,7 +122,6 @@ const UnitOwnersTable = ({
 				}
 			};
 			if (data.CreatedDate) {
-				console.log(data.Status);
 				return (
 					<React.Fragment key={id}>
 						<Tr
