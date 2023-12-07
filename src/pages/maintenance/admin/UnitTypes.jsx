@@ -74,6 +74,8 @@ const Item = () => {
 		'Created At',
 		'Type Code',
 		'Type Name',
+		'No. of Bathroom',
+		'No. of Bed',
 		'Status',
 		'Actions',
 	];

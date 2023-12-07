@@ -7,6 +7,7 @@ import {
 	useDisclosure,
 	Text,
 	useToast,
+	Flex,
 } from '@chakra-ui/react';
 import React from 'react';
 import { boolean } from 'yup';
@@ -111,21 +112,31 @@ const UnitTypesTable = ({ all }) => {
 							<CusTD component={data.TypeCode} />
 							<CusTitle component={'Size'} />
 							<CusTD component={data.TypeName} />
+							<CusTitle component={'No. Of Bathroom'} />
+							<CusTD component={data.NumOfBath} />
+							<CusTitle component={'No. Of Bed'} />
+							<CusTD component={data.NumOfBed} />
 
 							<CusTitle component={'Status'} />
 							<CusTD
 								component={
-									<Switch
-										id='isChecked'
-										isChecked={data.Status}
-										onChange={(e) => {
-											statusConfirmation(
-												e.target.checked,
-												data
-											);
-											setId(data.id);
-										}}
-									/>
+									<Flex direction={'column'}>
+										{data.Status.toString()
+											? 'Enabled'
+											: 'Disabled'}
+										<Switch
+											id='isChecked'
+											isChecked={data.Status}
+											onChange={(e) => {
+												statusConfirmation(
+													e.target
+														.checked,
+													data
+												);
+												setId(data.id);
+											}}
+										/>
+									</Flex>
 								}
 							/>
 							<CusTitle component={'Actions'} />
