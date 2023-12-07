@@ -38,7 +38,6 @@ const MRequestTable = ({ data, search, all }) => {
 
             if (data.CreatedDate){
                 return(
-                    <React.Fragment key={id}>
                         <Tr
 							key={id}
 							display={{
@@ -89,8 +88,6 @@ const MRequestTable = ({ data, search, all }) => {
                                 </Td>
                                 <CusTitle component={'Details'} />
                                 <CusTD component={data.Details} />
-                                {/* <CusTitle component={'Purpose'} />
-                                <CusTD component={data.Purpose} /> */}
                                 <CusTitle component={'Status'} />
                                 <CusTD component={data.Status} />
                                 <CusTitle component={'Actions'} />
@@ -123,19 +120,21 @@ const MRequestTable = ({ data, search, all }) => {
                                         </ButtonGroup>
                                     }
                                 />
+                                <CusTD
+                                    component={
+                                        <CusEnlargeImage
+                                            isOpen={isOpen}
+                                            onClose={onClose}
+                                            label={'Image/s Preview'}
+                                            body={
+                                                <CusCarousel slides={selectedImage}/>
+                                            }
+                                        />
+                                    }
+                                />
 
                             </React.Fragment>
                         </Tr>
-
-                        <CusEnlargeImage
-                            isOpen={isOpen}
-                            onClose={onClose}
-                            label={'Image/s Preview'}
-                            body={
-                                <CusCarousel slides={selectedImage}/>
-                            }
-                        />
-                    </React.Fragment>
                 )
             }
         })

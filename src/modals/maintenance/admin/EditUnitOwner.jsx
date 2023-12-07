@@ -73,8 +73,8 @@ const EditUnitOwner = ({
 			lName: data.LName,
 			fName: data.FName,
 			mName: data.MName,
-			unOwnerImg: data.UnOwnerImg,
-			cert: data.Cert,
+			unOwnerImg: '',
+			cert: '',
 			income: '',
 			billing: '',
 			tin: '',
@@ -127,7 +127,7 @@ const EditUnitOwner = ({
 			{ field: 'Id1', dataValue: editReqForm.values.id1 },
 			{ field: 'Id2', dataValue: editReqForm.values.id2 },
 		];
-
+		
 		try {
 			updateDoc(docRef, {
 				EditedDate: serverTimestamp(),

@@ -36,6 +36,10 @@ const Form = () => {
 
 	console.log(curUser.Email)
 
+	const handleCancel = () =>{
+		window.history.back()
+	}
+
 	const form = useFormik({
         initialValues: {
 			email: '',
@@ -114,6 +118,7 @@ const Form = () => {
 			{!emailExists?(
 				<>
 				<Box>
+					<Text color={'gray.500'} as={'u'} fontSize={'sm'} onClick={handleCancel} alignSelf={'end'}>Cancel</Text>
 					<Heading
 						color={'gray.800'}
 						lineHeight={1.5}
@@ -169,6 +174,7 @@ const Form = () => {
 				</>
 			):(
 				<>
+				<Text color={'gray.500'} as={'u'} fontSize={'sm'} onClick={handleCancel}>Cancel</Text>
 				<Stack spacing={3} >
 					<Avatar size='xl' src={employeeProfile} alignSelf={'center'}/>
 					<Text fontSize='sm' textAlign={'center'}>{employeeName}</Text>

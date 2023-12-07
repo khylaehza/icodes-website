@@ -26,7 +26,7 @@ import { db } from '../../../../firebase-config';
 import { updateDoc, serverTimestamp, doc } from 'firebase/firestore';
 import { CusEnlargeImage,CusReqModal,CusReqCarousel } from '../../../customs/index';
 
-const UnitOwnersTable = ({
+const ViewOwnersTable = ({
 	data,
 	search,
 	all,
@@ -192,16 +192,6 @@ const UnitOwnersTable = ({
 								<CusTD component={data.Email + '.com'} />
 								<CusTitle component={'Unit/s'} />
 								<CusTD component={data.Units} />
-								<CusTitle component={'Requirments'} />
-								<CusTD 
-									component={
-										<CusReqModal 
-											child={<CusReqCarousel data={data}/>}
-											data={data}
-										/>
-									} 
-								/>
-
 								{allowActions && (
 									<>
 										<CusTitle component={'Status'} />
@@ -328,4 +318,4 @@ const UnitOwnersTable = ({
 		});
 };
 
-export default UnitOwnersTable;
+export default ViewOwnersTable;

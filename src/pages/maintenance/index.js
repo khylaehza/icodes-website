@@ -23,3 +23,4 @@ export { default as FdHome } from './frontdesk/FdHome';
 export { default as Visitors } from './frontdesk/Visitors';
 export { default as ViewUnitOwner } from './frontdesk/ViewUnitOwner';
 export { default as BookAmenities } from './frontdesk/BookAmenities';
+export { default as TeamsTable } from './salesmanagement/TeamsTable'

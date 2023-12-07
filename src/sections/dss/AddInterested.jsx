@@ -54,6 +54,7 @@ const AddInterested = ({ unit }) => {
 					CNum: value.cNum,
 					Email: value.email,
 					Inquiry: value.inquiry,
+					Preference: unit
 				}
 			);
 

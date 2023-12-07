@@ -10,7 +10,7 @@ import {
 import { AddUnitOwner } from '../../../modals';
 import { useData } from '../../../../DataContext';
 import moment from 'moment';
-import { UnitOwnersTable } from '../../../tables';
+import { ViewOwnersTable } from '../../../tables';
 const ViewUnitOwner = () => {
 	return (
 		<Flex
@@ -146,7 +146,7 @@ const Item = () => {
 							<CusTable
 								header={header}
 								children={
-									<UnitOwnersTable
+									<ViewOwnersTable
 										data={records}
 										search={search}
 										all={unitOwners}

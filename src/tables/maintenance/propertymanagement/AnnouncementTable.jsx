@@ -99,7 +99,6 @@ const AnnouncementTable = ({ data, search, all }) => {
 			};
             if (data.CreatedDate){
                 return(
-                    <React.Fragment key={id}>
                         <Tr
 							key={id}
 							display={{
@@ -200,53 +199,59 @@ const AnnouncementTable = ({ data, search, all }) => {
                                         </ButtonGroup>
                                     }
                                 />
-
+								<CusTD
+									component={
+										<CusAlert
+											isOpen={isStatusModalOpen}
+											onClose={onStatusModalClose}
+											header={'Status Confirmation'}
+											action={handleConfirmStatusChange}
+											actionLabel={'Confirm'}
+											body={
+												<Text fontSize='md'>
+													Are you sure to{' '}
+													<Text
+														as='b'
+														color={
+															anncmntState.statusLabel ===
+															'Disable'
+																? 'r.100'
+																: 'green'
+														}
+													>
+														{anncmntState.statusLabel}
+													</Text>{' '}
+													this announcement? {' '}
+													<Text
+														as='b'
+														color='b.300'
+													>
+														(  {anncmntState.anncmntId}  )
+													</Text>
+												</Text>
+											}
+										/>
+									}
+								/>
+								<CusTD
+									component={
+										<CusEnlargeImage
+											isOpen={isImageModalOpen}
+											onClose={onImageModalClose}
+											label={'Announcement Preview'}
+											body={
+												<Image
+													src={selectedImage}
+													width={'680px'}
+													height={'500px'}
+												/>
+											}
+										/>
+									}
+								/>
                             </React.Fragment>
                         </Tr>
-                        <CusAlert
-							isOpen={isStatusModalOpen}
-							onClose={onStatusModalClose}
-							header={'Status Confirmation'}
-							action={handleConfirmStatusChange}
-							actionLabel={'Confirm'}
-							body={
-								<Text fontSize='md'>
-									Are you sure to{' '}
-									<Text
-										as='b'
-										color={
-											anncmntState.statusLabel ===
-											'Disable'
-												? 'r.100'
-												: 'green'
-										}
-									>
-										{anncmntState.statusLabel}
-									</Text>{' '}
-									this announcement? {' '}
-                                    <Text
-										as='b'
-										color='b.300'
-									>
-										(  {anncmntState.anncmntId}  )
-									</Text>
-								</Text>
-							}
-						/>
 
-						<CusEnlargeImage
-							isOpen={isImageModalOpen}
-							onClose={onImageModalClose}
-							label={'Announcement Preview'}
-							body={
-								<Image
-									src={selectedImage}
-									width={'680px'}
-									height={'500px'}
-								/>
-							}
-						/>
-                    </React.Fragment>
                 )
             }
         })

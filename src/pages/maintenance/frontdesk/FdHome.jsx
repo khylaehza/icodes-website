@@ -74,27 +74,44 @@ const Item = () => {
 
 		const item = list[0];
 
-		if (visitors) {
+		if (visitors,bookings) {
 			const [sortType, setSortType] = useState('asc');
 			const totalVisitors = [];
+			const totalBookings = [];
 			const totalActiveVisitors = visitors.filter(
 				(items) =>
 					items.Status == 'Confirmed' &&
 					items.Unit.includes(item.TowerNum)
 			);
 
+			const totalActiveBookings = bookings.filter(
+				(items) =>
+					items.Status == 'Confirmed' &&
+					items.TNum.includes(item.TowerNum)
+			);
+
 			totalActiveVisitors.forEach((v) => {
 				totalVisitors.push(v.Visitor);
 			});
 
+		
 			const flattenedVisitors = totalVisitors.flat();
 
 			const newVisitors = [...new Set(flattenedVisitors)];
 
 			const totalNumberOfVisitors = newVisitors.length;
 
-			if (totalActiveVisitors) {
+			if (totalActiveVisitors,totalActiveBookings) {
 				totalActiveVisitors.sort((a) => {
+					return moment(
+						new Date(
+							sortType == 'asc'
+								? a.CreatedDate.seconds * 1000
+								: b.CreatedDate.seconds * 1000
+						)
+					);
+				});
+				totalActiveBookings.sort((a) => {
 					return moment(
 						new Date(
 							sortType == 'asc'
@@ -261,12 +278,16 @@ const Item = () => {
 														</Step>
 													))}
 											</Stepper>
-											{totalActiveVisitors.length > 2 //if total is greater than 2, display indicator na meron pa or higit pa sa dalawa, para hindi nag nnegative
+											{totalActiveVisitors.length == 0 
+												? 'No Visitors for today': 
+												totalActiveVisitors.length > 2 
 												? `${
 														totalActiveVisitors.length -
 														2
 												  }  more`
-												: null}
+												: null
+											}
+						
 										</Card>
 									</Box>
 									<Box w={'100%'}>
@@ -288,31 +309,34 @@ const Item = () => {
 												orientation='vertical'
 												gap='3'
 											>
-												<Step>
-													<StepIndicator>
-														<StepStatus
-															active={
-																<StepNumber />
-															}
-														/>
-													</StepIndicator>
-													<Text>
-														{' '}
-														(3) Swimming Pool
-													</Text>
-												</Step>
+												{totalActiveBookings
+													.slice(0, 2)
+													.map((item, index) => (
+														<Step key={index}>
+															<StepIndicator>
+																<StepStatus
+																	active={
+																		<StepNumber />
+																	}
+																/>
+															</StepIndicator>
 
-												<Step>
-													<StepIndicator>
-														<StepStatus
-															active={
-																<StepNumber />
-															}
-														/>
-													</StepIndicator>
-													<Text>(2) Gym</Text>
-												</Step>
+															<Text>
+																{' '}
+																({item.NumPerson}) {item.AmenityType}
+															</Text>
+														</Step>
+													))}
 											</Stepper>
+											{totalActiveBookings.length == 0 
+												? 'No Bookings for today': 
+												totalActiveBookings.length > 2 
+												? `${
+													totalActiveBookings.length -
+														2
+												  }  more`
+												: null
+											}
 										</Card>
 									</Box>
 								</VStack>
@@ -347,7 +371,7 @@ const Item = () => {
 											textAlign={'center'}
 											p={3}
 										>
-											{bookings.length}
+											{totalActiveBookings.length}
 										</Heading>
 										<Heading size={'md'}>
 											Total number of Bookings
