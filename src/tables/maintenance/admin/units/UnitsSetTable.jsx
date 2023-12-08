@@ -54,7 +54,7 @@ const UnitsSetTable = ({ data, search, all, units, unitTowerID }) => {
 							gridGap: '10px',
 						}}
 					>
-						<React.Fragment>
+						<React.Fragment key={id}>
 							<CusTitle component={'Created At'} />
 							<CusTD
 								component={
@@ -124,7 +124,7 @@ const UnitsSetTable = ({ data, search, all, units, unitTowerID }) => {
 													? `${
 															(data.Units[0],
 															data.Units[1])
-													  }...'s Data`
+													}...'s Data`
 													: `${data.Units}'s Data`
 											}
 											mainCollection='maintenance'
@@ -137,28 +137,35 @@ const UnitsSetTable = ({ data, search, all, units, unitTowerID }) => {
 									</ButtonGroup>
 								}
 							></CusTD>
+							<CusTD component={
+								<CusEnlargeImage
+									isOpen={isImage1Open}
+									onClose={onImage1Close}
+									label={'Floor Layout Preview'}
+									body={
+										<Image
+											src={selectedImage1}
+											width={'680px'}
+											height={'500px'}
+										/>
+									}
+								/>
+							}/>
+							<CusTD component={
+								<CusEnlargeImage
+									isOpen={isImage2Open}
+									onClose={onImage2Close}
+									label={'Unit Image/s'}
+									body={<CusCarousel slides={selectedImage2} />}
+								/>
+							}/>
+						
 
-							<CusEnlargeImage
-								isOpen={isImage1Open}
-								onClose={onImage1Close}
-								label={'Floor Layout Preview'}
-								body={
-									<Image
-										src={selectedImage1}
-										width={'680px'}
-										height={'500px'}
-									/>
-								}
-							/>
-							<CusEnlargeImage
-								isOpen={isImage2Open}
-								onClose={onImage2Close}
-								label={'Unit Image/s'}
-								body={<CusCarousel slides={selectedImage2} />}
-							/>
+							
 						</React.Fragment>
 					</Tr>
 				);
+				
 			}
 		});
 };

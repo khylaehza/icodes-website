@@ -202,18 +202,23 @@ const TowersTable = ({ data, search, all, unitData, amounts }) => {
 								</ButtonGroup>
 							}
 						/>
-						<CusEnlargeImage
-							isOpen={isOpen}
-							onClose={onClose}
-							label={towerLable}
-							body={
-								<Image
-									src={selectedImage}
-									width={'680px'}
-									height={'500px'}
+						<CusTD
+							component={
+								<CusEnlargeImage
+									isOpen={isOpen}
+									onClose={onClose}
+									label={towerLable}
+									body={
+										<Image
+											src={selectedImage}
+											width={'680px'}
+											height={'500px'}
+										/>
+									}
 								/>
 							}
 						/>
+
 					</Tr>
 				);
 			}

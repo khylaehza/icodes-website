@@ -24,8 +24,6 @@ import { PDFDownloadLink } from '@react-pdf/renderer';
 
 function CusReqModal({child,data}){
     const { isOpen, onOpen, onClose } = useDisclosure();
-    console.log(data)
-    
 
 	const Print = () => {
         const firstName = data.FName.charAt(0).toUpperCase() + data.FName.slice(1);

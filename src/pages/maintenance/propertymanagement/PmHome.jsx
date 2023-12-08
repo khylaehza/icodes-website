@@ -251,6 +251,15 @@ const Item = () => {
 													</Step>
 												))}
 											</Stepper>
+											{totalActiveAnncmnts.length == 0 
+												? 'No Bookings for today': 
+												totalActiveAnncmnts.length > 2 
+												? `${
+													totalActiveAnncmnts.length -
+														2
+												  }  more`
+												: null
+											}
 										</Card>
 									</Box>
 									<Box w={'100%'}>
@@ -276,6 +285,15 @@ const Item = () => {
 													</Step>
 												))}
 											</Stepper>
+											{totalActiveMaintenance.length == 0 
+												? 'No Bookings for today': 
+												totalActiveMaintenance.length > 2 
+												? `${
+													totalActiveMaintenance.length -
+														2
+												  }  more`
+												: null
+											}
 										</Card>
 									</Box>
 								</VStack>

@@ -11,13 +11,18 @@ import {
 	MenuButton,
 	MenuItem,
 	MenuList,
+	useDisclosure
 } from '@chakra-ui/react';
 import { FiMenu, FiChevronDown } from 'react-icons/fi';
 import { useNavigate } from 'react-router-dom';
 import { Logo } from '../../styles';
 import { NameFormat } from '../../utilities';
 import { useData } from '../../../DataContext';
+import { TermsAndCondition,PrivacyAndPolicy } from './index'
 const Header = ({ onOpen, ...rest }) => {
+
+	const { isOpen:isTAC, onOpen:opTAC, onClose:ocTAC } = useDisclosure()
+	const { isOpen:isPP, onOpen:opPP, onClose:ocPP } = useDisclosure()
 	const navigate = useNavigate();
 	const { logout, curUser } = useData();
 	const handleLogout = () => {
@@ -35,6 +40,13 @@ const Header = ({ onOpen, ...rest }) => {
 		} catch (error) {
 			console.log(error);
 		}
+	};
+
+	const handleTAC = () => {
+		opTAC()
+	};
+	const handlePP = () => {
+		opPP()
 	};
 	return (
 		<Flex
@@ -117,6 +129,24 @@ const Header = ({ onOpen, ...rest }) => {
 								Change Password
 							</MenuItem>
 							<MenuItem
+								onClick={handleTAC} 
+								fontSize={'sm'}
+								_focus={{ boxShadow: 'none', bg: 'none' }}
+								_hover={{ bg: 'w.100' }}
+							>
+								Terms and Conditions
+								<TermsAndCondition  isOpen={isTAC} onclose={ocTAC}/>
+							</MenuItem>
+							<MenuItem
+								onClick={handlePP}
+								fontSize={'sm'}
+								_focus={{ boxShadow: 'none', bg: 'none' }}
+								_hover={{ bg: 'w.100' }}
+							>
+								Privacy Policy
+								<PrivacyAndPolicy isOpen={isPP} onclose={ocPP}/>
+							</MenuItem>
+							<MenuItem
 								onClick={handleLogout}
 								fontSize={'sm'}
 								_focus={{ boxShadow: 'none', bg: 'none' }}
@@ -124,6 +154,7 @@ const Header = ({ onOpen, ...rest }) => {
 							>
 								Sign out
 							</MenuItem>
+							
 						</MenuList>
 					</Menu>
 				</Flex>

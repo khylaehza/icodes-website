@@ -45,6 +45,7 @@ const StatementOfAccTable = ({ data, search, all }) => {
 				: item.SOAID.toString().includes(search);
 		})
 		.map((data, id) => {
+			const status = data.Status ? 'Enabled' : 'Disabled'
 			const statusConfirmation = (value, data) => {
 				onOpen();
 				setSoaStatus({
@@ -159,7 +160,7 @@ const StatementOfAccTable = ({ data, search, all }) => {
 								<CusTD
 									component={
 										<Flex direction={'column'}>
-											{data.Status}
+											{status}
 											<Switch
 												id='isChecked'
 												isChecked={data.Status}

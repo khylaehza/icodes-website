@@ -102,6 +102,7 @@ const AnnouncementTable = ({ data, search, all }) => {
 					onStatusModalClose();
 				}
 			};
+
 			if (data.CreatedDate) {
 				return (
 					<React.Fragment key={id}>
@@ -177,85 +178,94 @@ const AnnouncementTable = ({ data, search, all }) => {
 										</>
 									}
 								/>
-								<CusTitle component={'Actions'} />
+
+                                <CusTitle component={'Actions'} />
+                                <CusTD
+                                    component={
+                                        <ButtonGroup
+                                            variant='solid'
+                                            size='sm'
+                                            spacing={3}
+                                        >
+                                            {data.id && (
+                                                <EditAnncmnts
+                                                    data={data}
+                                                    id={data.id}
+                                                    mainCollection='maintenance'
+                                                    tblDocUser='propertymanagement'
+                                                    tblUserCol='tbl_announcements'
+                                                />
+                                            )}
+
+                                            <CusDelete
+                                                id={data.id}
+                                                stor={`pm/anncmnts/${data.AnncmntID}/anncmnts.png`}
+                                                label={` ${data.AnncmntID}'s Data`}
+                                                mainCollection='maintenance'
+                                                tblDocUser='propertymanagement'
+                                                tblUserCol='tbl_announcements'
+                                                onUpdate={() => {}}
+                                            />
+                                        </ButtonGroup>
+                                    }
+                                />
 								<CusTD
 									component={
-										<ButtonGroup
-											variant='solid'
-											size='sm'
-											spacing={3}
-										>
-											{data.id && (
-												<EditAnncmnts
-													data={data}
-													id={data.id}
-													mainCollection='maintenance'
-													tblDocUser='propertymanagement'
-													tblUserCol='tbl_announcements'
-												/>
-											)}
-
-											<CusDelete
-												id={data.id}
-												stor={`pm/anncmnts/${data.AnncmntID}/anncmnts.png`}
-												label={` ${data.AnncmntID}'s Data`}
-												mainCollection='maintenance'
-												tblDocUser='propertymanagement'
-												tblUserCol='tbl_announcements'
-												onUpdate={() => {}}
-											/>
-										</ButtonGroup>
+										<CusAlert
+											isOpen={isStatusModalOpen}
+											onClose={onStatusModalClose}
+											header={'Status Confirmation'}
+											action={handleConfirmStatusChange}
+											actionLabel={'Confirm'}
+											body={
+												<Text fontSize='md'>
+													Are you sure to{' '}
+													<Text
+														as='b'
+														color={
+															anncmntState.statusLabel ===
+															'Disable'
+																? 'r.100'
+																: 'green'
+														}
+													>
+														{anncmntState.statusLabel}
+													</Text>{' '}
+													this announcement? {' '}
+													<Text
+														as='b'
+														color='b.300'
+													>
+														(  {anncmntState.anncmntId}  )
+													</Text>
+												</Text>
+											}
+										/>
 									}
 								/>
-							</React.Fragment>
-						</Tr>
-						<CusAlert
-							isOpen={isStatusModalOpen}
-							onClose={onStatusModalClose}
-							header={'Status Confirmation'}
-							action={handleConfirmStatusChange}
-							actionLabel={'Confirm'}
-							body={
-								<Text fontSize='md'>
-									Are you sure to{' '}
-									<Text
-										as='b'
-										color={
-											anncmntState.statusLabel ===
-											'Disable'
-												? 'r.100'
-												: 'green'
-										}
-									>
-										{anncmntState.statusLabel}
-									</Text>{' '}
-									this announcement?{' '}
-									<Text
-										as='b'
-										color='b.300'
-									>
-										( {anncmntState.anncmntId} )
-									</Text>
-								</Text>
-							}
-						/>
-
-						<CusEnlargeImage
-							isOpen={isImageModalOpen}
-							onClose={onImageModalClose}
-							label={'Announcement Preview'}
-							body={
-								<Image
-									src={selectedImage}
-									width={'680px'}
-									height={'500px'}
+								<CusTD
+									component={
+										<CusEnlargeImage
+											isOpen={isImageModalOpen}
+											onClose={onImageModalClose}
+											label={'Announcement Preview'}
+											body={
+												<Image
+													src={selectedImage}
+													width={'680px'}
+													height={'500px'}
+												/>
+											}
+										/>
+									}
 								/>
-							}
-						/>
-					</React.Fragment>
-				);
-			}
-		});
+                            </React.Fragment>
+                        </Tr>
+
+                )
+            }
+        });
 };
+
 
 export default AnnouncementTable;

@@ -214,55 +214,66 @@ const EmployeesTable = ({ data, search, all }) => {
 									</ButtonGroup>
 								}
 							/>
-						</Tr>
-						<CusAlert
-							isOpen={isStatusModalOpen}
-							onClose={onStatusModalClose}
-							header={'Status Confirmation'}
-							action={handleConfirmStatusChange}
-							actionLabel={'Confirm'}
-							body={
-								<Text fontSize='md'>
-									Are you sure to{' '}
-									<Text
-										as='b'
-										color={
-											employeeState.statusLabel ===
-											'Disable'
-												? 'r.100'
-												: 'green'
+							<CusTD
+								component={
+									<CusAlert
+										isOpen={isStatusModalOpen}
+										onClose={onStatusModalClose}
+										header={'Status Confirmation'}
+										action={handleConfirmStatusChange}
+										actionLabel={'Confirm'}
+										body={
+											<Text fontSize='md'>
+												Are you sure to{' '}
+												<Text
+													as='b'
+													color={
+														employeeState.statusLabel ===
+														'Disable'
+															? 'r.100'
+															: 'green'
+													}
+												>
+													{employeeState.statusLabel}
+												</Text>{' '}
+												<Text
+													as='b'
+													color='b.300'
+												>
+													{employeeState.fName}
+												</Text>
+												's account?
+											</Text>
 										}
-									>
-										{employeeState.statusLabel}
-									</Text>{' '}
-									<Text
-										as='b'
-										color='b.300'
-									>
-										{employeeState.fName}
-									</Text>
-									's account?
-								</Text>
-							}
-						/>
+									/>
+								}
+							/>
+							<CusTD
+								component={
+									<CusEnlargeImage
+										isOpen={isImageModalOpen}
+										onClose={onImageModalClose}
+										label={<NameFormat
+											fName={nameLabel.FName}
+											mName={nameLabel.MName}
+											lName={nameLabel.LName}
+										/>}
+							
+										body={
+											<Image
+												src={selectedImage}
+												width={'680px'}
+												height={'500px'}
+											/>
+										}
+									/>
+								}
+							/>	
+							
+						</Tr>
 
-						<CusEnlargeImage
-                            isOpen={isImageModalOpen}
-                            onClose={onImageModalClose}
-                            label={<NameFormat
-								fName={nameLabel.FName}
-								mName={nameLabel.MName}
-								lName={nameLabel.LName}
-							/>}
-				
-                            body={
-                                <Image
-									src={selectedImage}
-									width={'680px'}
-									height={'500px'}
-								/>
-                            }
-                        />
+
+
 					</React.Fragment>
 				);
 			}

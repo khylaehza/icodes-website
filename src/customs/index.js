@@ -77,3 +77,4 @@ export { default as CusStepper } from './CusStepper';
 export { default as CusReqModal } from './CusReqModal';
 export { default as CusReqCarousel} from './CusReqCarousel';
 export { default as CusReqPDF } from './CusReqPDF';
+export { default as CusModalTAP } from './CusModalTAP';

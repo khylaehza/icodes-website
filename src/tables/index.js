@@ -22,3 +22,4 @@ export { default as StatementOfAccTable } from './maintenance/accountingmanageme
 export { default as TransactionsTable } from './maintenance/accountingmanagement/TransactionsTable';
 export { default as VisitorTable } from './maintenance/frontdesk/VisitorsTable';
 export { default as BookingsTable } from './maintenance/frontdesk/BookingsTable';
+export { default as ViewOwnersTable } from './maintenance/frontdesk/ViewOwnersTable';

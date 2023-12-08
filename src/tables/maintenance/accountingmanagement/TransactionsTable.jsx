@@ -220,19 +220,23 @@ const TransactionsTable = ({ data, search, all, soa }) => {
 									</ButtonGroup>
 								}
 							/>
+							<CusTD
+								component={
+									<CusEnlargeImage
+										isOpen={isImage1Open}
+										onClose={onImage1Close}
+										label={'Receipt Preview'}
+										body={
+											<Image
+												src={selectedImage1}
+												width={'680px'}
+												height={'500px'}
+											/>
+										}
+									/>
+								}
+							/>
 						</Tr>
-						<CusEnlargeImage
-							isOpen={isImage1Open}
-							onClose={onImage1Close}
-							label={'Receipt Preview'}
-							body={
-								<Image
-									src={selectedImage1}
-									width={'680px'}
-									height={'500px'}
-								/>
-							}
-						/>
 					</React.Fragment>
 				);
 			}
