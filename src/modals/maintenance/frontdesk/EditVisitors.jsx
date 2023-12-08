@@ -33,6 +33,7 @@ const EditVisitors = ({ data, id, mainCollection, tblDocUser, tblUserCol }) => {
 			dateEnd: data.DateEnd,
 			purpose: data.Purpose,
 			status: data.Status,
+			owner: data.For,
 		},
 		enableReinitialize: true,
 		onSubmit: async (value, actions) => {
@@ -40,7 +41,9 @@ const EditVisitors = ({ data, id, mainCollection, tblDocUser, tblUserCol }) => {
 			try {
 				acqUnit.push(value.units);
 				const filteredOwners = unitOwners.filter((owner) => {
-					return acqUnit.some((unit) => owner.Units.includes(unit));
+					return acqUnit.some((unit) => {
+						owner.Units.includes(unit);
+					});
 				});
 
 				const unitOwner = filteredOwners.map((owner) => {
@@ -63,12 +66,11 @@ const EditVisitors = ({ data, id, mainCollection, tblDocUser, tblUserCol }) => {
 				);
 				updateDoc(docRef, {
 					EditedDate: serverTimestamp(),
-
 					Unit: value.units,
-					For: unitOwner,
+					For: data.For,
 					Visitor: visitors,
 					DateStart: value.dateStart,
-					// DateEnd: value.dateEnd,
+					DateEnd: value.dateEnd,
 					Purpose: value.purpose,
 					Status: value.status,
 				});

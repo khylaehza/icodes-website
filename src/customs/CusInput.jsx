@@ -64,6 +64,7 @@ export function CusInputRegular({
 	touch,
 	variant = 'filled',
 	name,
+	disabled,
 }) {
 	return (
 		<Box w={'100%'}>
@@ -84,6 +85,7 @@ export function CusInputRegular({
 					fontSize={'xs'}
 					value={value}
 					onBlur={onBlur}
+					disabled={disabled}
 				/>
 
 				<FormErrorMessage fontSize={'xs'}>{error}</FormErrorMessage>

@@ -20,12 +20,11 @@ import {
 	Th,
 } from '@chakra-ui/react';
 import { CusTD, CusTitle } from './CusTableItems';
-import { CusSoaPDF} from './index'
+import { CusSoaPDF } from './index';
 import moment from 'moment';
 import { OrdinalSuffix } from '../utilities';
 import React from 'react';
 import { PDFDownloadLink } from '@react-pdf/renderer';
-
 
 const BoxStyle = ({
 	gap = 10,
@@ -82,7 +81,6 @@ function CusModal({ data }) {
 		},
 	];
 
-	
 	const unitDet = [
 		{ Tower: OrdinalSuffix(data.Tower) },
 		{ Floor: `${OrdinalSuffix(parseInt(data.Floor))} Floor` },
@@ -118,16 +116,13 @@ function CusModal({ data }) {
 
 	const Soa = () => {
 		return (
-
 			<Flex justify={'center'}>
 				<VStack
 					flexDir={'column'}
 					gap={2}
 					justify={'space-between'}
 				>
-					<Heading size={'md'}>
-						Statement of Account
-					</Heading>
+					<Heading size={'md'}>Statement of Account</Heading>
 					<BoxStyle
 						gap={20}
 						bgColor={'b.100'}
@@ -143,10 +138,7 @@ function CusModal({ data }) {
 												.toString()
 												.toUpperCase()}
 										</Text>
-										:{' '}
-										{Object.values(
-											item
-										).toString()}
+										: {Object.values(item).toString()}
 									</Flex>
 								))}
 							</>
@@ -167,10 +159,7 @@ function CusModal({ data }) {
 												.toString()
 												.toUpperCase()}
 										</Text>
-										:{' '}
-										{Object.values(
-											item
-										).toString()}
+										: {Object.values(item).toString()}
 									</Flex>
 								))}
 							</>
@@ -195,9 +184,7 @@ function CusModal({ data }) {
 									</Text>
 									<Text>
 										{`₱ ${
-											data.Amount.includes(
-												'.'
-											)
+											data.Amount.includes('.')
 												? data.Amount
 												: `${data.Amount}.00`
 										}`}
@@ -212,51 +199,35 @@ function CusModal({ data }) {
 									<Text fontWeight={'bold'}>
 										DEDUCTION/S:
 									</Text>
-									{data.Discounts.map(
-										(item, key) => {
-											return (
-												<React.Fragment
-													key={key}
+									{data.Discounts.map((item, key) => {
+										return (
+											<React.Fragment key={key}>
+												<HStack
+													ml={3}
+													justifyContent={
+														'space-between'
+													}
+													align={'flex-start'}
 												>
-													<HStack
-														ml={3}
-														justifyContent={
-															'space-between'
-														}
-														align={
-															'flex-start'
-														}
-													>
-														<Text
-															fontWeight={
-																'bold'
-															}
-														>
+													<Text fontWeight={'bold'}>
+														{item.name}
+													</Text>
+													<Text>
+														- ₱
+														{new Intl.NumberFormat(
+															'en-US',
 															{
-																item.name
+																maximumFractionDigits: 2,
+																minimumFractionDigits: 2,
 															}
-														</Text>
-														<Text>
-															- ₱
-															{new Intl.NumberFormat(
-																'en-US',
-																{
-																	maximumFractionDigits: 2,
-																	minimumFractionDigits: 2,
-																}
-															).format(
-																item.amount
-															)}
-														</Text>
-													</HStack>
-												</React.Fragment>
-											);
-										}
-									)}
+														).format(item.amount)}
+													</Text>
+												</HStack>
+											</React.Fragment>
+										);
+									})}
 									<HStack
-										justifyContent={
-											'space-between'
-										}
+										justifyContent={'space-between'}
 										align={'flex-start'}
 									>
 										<Text fontWeight={'bold'}>
@@ -264,9 +235,7 @@ function CusModal({ data }) {
 										</Text>
 										<Text>
 											{`₱ ${
-												compDeduct.includes(
-													'.'
-												)
+												compDeduct.includes('.')
 													? compDeduct
 													: `${compDeduct}.00`
 											}`}
@@ -279,14 +248,10 @@ function CusModal({ data }) {
 						<FlexStyle
 							child={
 								<>
-									<Text fontWeight={'bold'}>
-										ADDITION/S:
-									</Text>
+									<Text fontWeight={'bold'}>ADDITION/S:</Text>
 									<HStack
 										ml={3}
-										justifyContent={
-											'space-between'
-										}
+										justifyContent={'space-between'}
 										align={'flex-start'}
 									>
 										<Text fontWeight={'bold'}>
@@ -295,9 +260,7 @@ function CusModal({ data }) {
 										<Text>
 											+{' '}
 											{`₱ ${
-												compVat.includes(
-													'.'
-												)
+												compVat.includes('.')
 													? compVat
 													: `${compVat}.00`
 											}`}
@@ -305,9 +268,7 @@ function CusModal({ data }) {
 									</HStack>
 
 									<HStack
-										justifyContent={
-											'space-between'
-										}
+										justifyContent={'space-between'}
 										align={'flex-start'}
 									>
 										<Text fontWeight={'bold'}>
@@ -316,9 +277,7 @@ function CusModal({ data }) {
 										<Text>
 											{' '}
 											{`₱ ${
-												compVat.includes(
-													'.'
-												)
+												compVat.includes('.')
 													? compVat
 													: `${compVat}.00`
 											}`}
@@ -339,13 +298,10 @@ function CusModal({ data }) {
 									</Text>
 									<Text>
 										₱ {''}
-										{new Intl.NumberFormat(
-											'en-US',
-											{
-												maximumFractionDigits: 2,
-												minimumFractionDigits: 2,
-											}
-										).format(data.TotalTCP)}
+										{new Intl.NumberFormat('en-US', {
+											maximumFractionDigits: 2,
+											minimumFractionDigits: 2,
+										}).format(data.TotalTCP)}
 									</Text>
 								</>
 							}
@@ -358,19 +314,15 @@ function CusModal({ data }) {
 							child={
 								<>
 									<Text fontWeight={'bold'}>
-										OTHER CHARGES (
-										{data.OtherChargePercent}%
-										of CP):
+										OTHER CHARGES ({data.OtherChargePercent}
+										% of CP):
 									</Text>
 									<Text>
 										₱ {''}
-										{new Intl.NumberFormat(
-											'en-US',
-											{
-												maximumFractionDigits: 2,
-												minimumFractionDigits: 2,
-											}
-										).format(data.TotalCharge)}
+										{new Intl.NumberFormat('en-US', {
+											maximumFractionDigits: 2,
+											minimumFractionDigits: 2,
+										}).format(data.TotalCharge)}
 									</Text>
 								</>
 							}
@@ -387,13 +339,10 @@ function CusModal({ data }) {
 									</Text>
 									<Text>
 										₱ {''}
-										{new Intl.NumberFormat(
-											'en-US',
-											{
-												maximumFractionDigits: 2,
-												minimumFractionDigits: 2,
-											}
-										).format(data.TotalCharge)}
+										{new Intl.NumberFormat('en-US', {
+											maximumFractionDigits: 2,
+											minimumFractionDigits: 2,
+										}).format(data.TotalCharge)}
 									</Text>
 								</>
 							}
@@ -411,33 +360,23 @@ function CusModal({ data }) {
 							child={
 								<>
 									<HStack
-										justifyContent={
-											'space-between'
-										}
+										justifyContent={'space-between'}
 										align={'flex-start'}
 									>
 										<Text fontWeight={'bold'}>
 											PAYMENT OF UNIT (
-											{data.MonthlyPercent}%
-											of TCP):
+											{data.MonthlyPercent}% of TCP):
 										</Text>
 										<Text>
 											₱ {''}
-											{new Intl.NumberFormat(
-												'en-US',
-												{
-													maximumFractionDigits: 2,
-													minimumFractionDigits: 2,
-												}
-											).format(
-												data.PerWithTCP
-											)}
+											{new Intl.NumberFormat('en-US', {
+												maximumFractionDigits: 2,
+												minimumFractionDigits: 2,
+											}).format(data.PerWithTCP)}
 										</Text>
 									</HStack>
 									<HStack
-										justifyContent={
-											'space-between'
-										}
+										justifyContent={'space-between'}
 										align={'flex-start'}
 									>
 										<Text fontWeight={'bold'}>
@@ -470,15 +409,10 @@ function CusModal({ data }) {
 									</Text>
 									<Text>
 										₱ {''}
-										{new Intl.NumberFormat(
-											'en-US',
-											{
-												maximumFractionDigits: 2,
-												minimumFractionDigits: 2,
-											}
-										).format(
-											data.TotalPayInMon
-										)}
+										{new Intl.NumberFormat('en-US', {
+											maximumFractionDigits: 2,
+											minimumFractionDigits: 2,
+										}).format(data.TotalPayInMon)}
 									</Text>
 								</>
 							}
@@ -491,20 +425,15 @@ function CusModal({ data }) {
 							child={
 								<>
 									<Text fontWeight={'bold'}>
-										PAYMENT OF OTHER CHARGES
-										(20% of OC):
+										PAYMENT OF OTHER CHARGES (
+										{data.MonthlyPercent}% of OC):
 									</Text>
 									<Text>
 										₱ {''}
-										{new Intl.NumberFormat(
-											'en-US',
-											{
-												maximumFractionDigits: 2,
-												minimumFractionDigits: 2,
-											}
-										).format(
-											data.PerWithOthers
-										)}
+										{new Intl.NumberFormat('en-US', {
+											maximumFractionDigits: 2,
+											minimumFractionDigits: 2,
+										}).format(data.PerWithOthers)}
 									</Text>
 								</>
 							}
@@ -517,20 +446,15 @@ function CusModal({ data }) {
 							child={
 								<>
 									<Text fontWeight={'bold'}>
-										TOTAL PAYMENT OF OTHER
-										CHARGES IN 60 MONTHS:
+										TOTAL PAYMENT OF OTHER CHARGES IN 60
+										MONTHS:
 									</Text>
 									<Text>
 										₱ {''}
-										{new Intl.NumberFormat(
-											'en-US',
-											{
-												maximumFractionDigits: 2,
-												minimumFractionDigits: 2,
-											}
-										).format(
-											data.PerWithOthers
-										)}
+										{new Intl.NumberFormat('en-US', {
+											maximumFractionDigits: 2,
+											minimumFractionDigits: 2,
+										}).format(data.PerWithOthers)}
 									</Text>
 								</>
 							}
@@ -550,41 +474,21 @@ function CusModal({ data }) {
 						>
 							<Thead alignSelf='center'>
 								<Tr>
-									<Th textAlign={'center'}>
-										No.
-									</Th>
-									<Th textAlign={'center'}>
-										Date
-									</Th>
-									<Th textAlign={'center'}>
-										Amount
-									</Th>
-									<Th textAlign={'center'}>
-										Other
-									</Th>
-									<Th textAlign={'center'}>
-										Total
-									</Th>
+									<Th textAlign={'center'}>No.</Th>
+									<Th textAlign={'center'}>Date</Th>
+									<Th textAlign={'center'}>Unit</Th>
+									<Th textAlign={'center'}>Other</Th>
+									<Th textAlign={'center'}>Total</Th>
 								</Tr>
 							</Thead>
 							<Tbody>
 								{table.map((data, key) => (
 									<Tr key={key}>
-										<CusTD
-											component={data.num}
-										/>
-										<CusTD
-											component={data.month}
-										/>
-										<CusTD
-											component={data.unit}
-										/>
-										<CusTD
-											component={data.others}
-										/>
-										<CusTD
-											component={data.total}
-										/>
+										<CusTD component={data.num} />
+										<CusTD component={data.month} />
+										<CusTD component={data.unit} />
+										<CusTD component={data.others} />
+										<CusTD component={data.total} />
 									</Tr>
 								))}
 							</Tbody>
@@ -604,8 +508,8 @@ function CusModal({ data }) {
 							child={
 								<>
 									<Text fontWeight={'bold'}>
-										REMAINING UNIT BALANCE (
-										{remainPer}% of TCP):
+										REMAINING UNIT BALANCE ({remainPer}% of
+										TCP):
 									</Text>
 									<Text>₱ {remainUnit}</Text>
 								</>
@@ -618,8 +522,8 @@ function CusModal({ data }) {
 							child={
 								<>
 									<Text fontWeight={'bold'}>
-										REMAINING OTHER BALANCE (
-										{remainPer}% of OC):
+										REMAINING OTHER BALANCE ({remainPer}% of
+										OC):
 									</Text>
 									<Text>₱ {remainOthers}</Text>
 								</>
@@ -641,11 +545,11 @@ function CusModal({ data }) {
 					</VStack>
 				</VStack>
 			</Flex>
-		)
-	}
+		);
+	};
 
 	const Print = () => {
-		return(
+		return (
 			<PDFDownloadLink
 				document={
 					<CusSoaPDF
@@ -659,10 +563,15 @@ function CusModal({ data }) {
 				}
 				fileName={`SOA${data.BuyersId}.pdf`}
 			>
-				<Button variant={'primary'} onClick={onClose}>Print</Button>
-		</PDFDownloadLink>
-		)
-	}
+				<Button
+					variant={'primary'}
+					onClick={onClose}
+				>
+					Print
+				</Button>
+			</PDFDownloadLink>
+		);
+	};
 	return (
 		<>
 			<Button
@@ -683,11 +592,11 @@ function CusModal({ data }) {
 					<ModalHeader></ModalHeader>
 					<ModalCloseButton />
 					<ModalBody>
-							<Soa/>
+						<Soa />
 					</ModalBody>
 
 					<ModalFooter>
-						<Print/>
+						<Print />
 					</ModalFooter>
 				</ModalContent>
 			</Modal>

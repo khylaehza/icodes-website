@@ -74,6 +74,7 @@ const EditUnitOwner = ({
 			fName: data.FName,
 			mName: data.MName,
 			unOwnerImg: '',
+			fullName: data.FullName,
 			cert: '',
 			income: '',
 			billing: '',
@@ -89,7 +90,7 @@ const EditUnitOwner = ({
 
 	const editOwnerInfoForm = useFormik({
 		initialValues: {
-			units: data.Units,
+			units: data.Units ? data.Units.toString() : '',
 			email: data.Email,
 			cNum: data.CNum,
 		},
@@ -221,8 +222,8 @@ const EditUnitOwner = ({
 					onClose={onClose}
 					reqForm={editReqForm}
 					ownerInfoForm={editOwnerInfoForm}
-					units={unit}
-					setUnit={setUnit}
+					// units={unit}
+					// setUnit={setUnit}
 					setShowImage={setShowImage}
 					showImage={showImage}
 					activeStep={activeStep}
@@ -230,6 +231,7 @@ const EditUnitOwner = ({
 					handleBack={handleBack}
 					handleNext={handleNext}
 					disabled={true}
+					isEdit={true}
 				/>
 			}
 		/>

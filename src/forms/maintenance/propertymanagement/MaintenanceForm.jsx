@@ -39,6 +39,7 @@ const MaintenanceForm = ({ form, imageFiles }) => {
 							onChange={form.handleChange}
 							error={form.errors.units}
 							touch={form.touched.units}
+							isRequired
 						/>
 
 						<CusMaintenanceItem
@@ -53,6 +54,7 @@ const MaintenanceForm = ({ form, imageFiles }) => {
 							value={form.values.repairType}
 							error={form.errors.repairType}
 							touch={form.touched.repairType}
+							isRequired
 						/>
 					</Stack>
 					{/* {
@@ -100,6 +102,7 @@ const MaintenanceForm = ({ form, imageFiles }) => {
 							value={form.values.details}
 							error={form.errors.details}
 							touch={form.touched.details}
+							isRequired
 						/>
 						<CusMaintenanceStatus
 							label={'Status'}

@@ -112,11 +112,12 @@ const CusTransactionPDF = ({
 	personalDet,
 	amountDet,
 	table,
-	deduct,
+
 	remainUnit,
 	remainOthers,
 	totalRemain,
 }) => {
+	let deduct = 0;
 	return (
 		<Document>
 			<Page

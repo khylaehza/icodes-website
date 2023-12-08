@@ -293,6 +293,7 @@ export const CusSelectUnit = ({
 	}
 
 	let currentValue = value || 'Select';
+
 	return (
 		<FormControl
 			isInvalid={error && touch}
@@ -759,7 +760,6 @@ export const CusMaintenanceItem = ({
 	name,
 	onChange,
 	value,
-
 	error,
 	onBlur,
 	touch,
@@ -850,6 +850,7 @@ export const CusSelectReservedOwner = ({
 	icon,
 	bgColor = 'w.300',
 	isRequired,
+	disabled,
 }) => {
 	const { buyers } = useData();
 
@@ -880,6 +881,7 @@ export const CusSelectReservedOwner = ({
 				value={currentValue}
 				fontSize={'xs'}
 				icon={icon}
+				disabled={disabled}
 			>
 				<option
 					value='Select'
@@ -1071,7 +1073,6 @@ export const CusPaymentMode = ({
 				<option value='Cash'>Cash</option>
 				<option value='Check'>Check</option>
 				<option value='Cash Deposit'>Cash Deposit</option>
-				<option value='Others'>Others</option>
 			</Select>
 			<FormErrorMessage fontSize={'xs'}>{error}</FormErrorMessage>
 		</FormControl>
@@ -1083,7 +1084,6 @@ export const CusBookingStatus = ({
 	name,
 	onChange,
 	value,
-
 	error,
 	onBlur,
 	touch,
@@ -1276,7 +1276,7 @@ export const CusSelectTowerToCal = ({
 	let towerMap = new Map();
 
 	unitValues.forEach((item) => {
-		const towerName = item.Tower
+		const towerName = item.Tower;
 		if (!towerMap.has(towerName)) {
 			towerMap.set(towerName, item.Tower);
 		}
@@ -1288,7 +1288,10 @@ export const CusSelectTowerToCal = ({
 
 	let currentValue = value || 'Select';
 	return (
-		<FormControl isInvalid={error && touch} isRequired={isRequired}>
+		<FormControl
+			isInvalid={error && touch}
+			isRequired={isRequired}
+		>
 			<FormLabel fontSize={'xs'}>{label}</FormLabel>
 
 			<Select
@@ -1301,12 +1304,18 @@ export const CusSelectTowerToCal = ({
 				fontSize={'xs'}
 				icon={icon}
 			>
-				<option value='Select' disabled>
+				<option
+					value='Select'
+					disabled
+				>
 					Select
 				</option>
 
 				{uniqueTowers.map((tower, key) => (
-					<option key={key} value={tower}>
+					<option
+						key={key}
+						value={tower}
+					>
 						{tower}
 					</option>
 				))}
@@ -1334,7 +1343,7 @@ export const CusSelectTowerLoan = ({
 	let towerMap = new Map();
 
 	loans.forEach((item) => {
-		const towerName = item.Tower
+		const towerName = item.Tower;
 		if (!towerMap.has(towerName)) {
 			towerMap.set(towerName, item.Tower);
 		}
@@ -1346,7 +1355,10 @@ export const CusSelectTowerLoan = ({
 
 	let currentValue = value || 'Select';
 	return (
-		<FormControl isInvalid={error && touch} isRequired={isRequired}>
+		<FormControl
+			isInvalid={error && touch}
+			isRequired={isRequired}
+		>
 			<FormLabel fontSize={'xs'}>{label}</FormLabel>
 
 			<Select
@@ -1359,12 +1371,18 @@ export const CusSelectTowerLoan = ({
 				fontSize={'xs'}
 				icon={icon}
 			>
-				<option value='Select' disabled>
+				<option
+					value='Select'
+					disabled
+				>
 					Select
 				</option>
 
 				{uniqueTowers.map((tower, key) => (
-					<option key={key} value={tower}>
+					<option
+						key={key}
+						value={tower}
+					>
 						{tower}
 					</option>
 				))}
@@ -1391,7 +1409,7 @@ export const CusSelectPayterm = ({
 	let paytermMap = new Map();
 
 	payterm.forEach((item) => {
-		const paytrm = item.PaymentTermName
+		const paytrm = item.PaymentTermName;
 		if (!paytermMap.has(paytrm)) {
 			paytermMap.set(paytrm, item.PaymentTermName);
 		}
@@ -1399,11 +1417,12 @@ export const CusSelectPayterm = ({
 
 	let uniquePayTerm = Array.from(paytermMap.values());
 
-	//uniqueTowers.sort((a, b) => a.toLowerCase().localeCompare(b.toLowerCase()));
-
 	let currentValue = value || 'Select';
 	return (
-		<FormControl isInvalid={error && touch} isRequired={isRequired}>
+		<FormControl
+			isInvalid={error && touch}
+			isRequired={isRequired}
+		>
 			<FormLabel fontSize={'xs'}>{label}</FormLabel>
 
 			<Select
@@ -1416,12 +1435,18 @@ export const CusSelectPayterm = ({
 				fontSize={'xs'}
 				icon={icon}
 			>
-				<option value='Select' disabled>
+				<option
+					value='Select'
+					disabled
+				>
 					Select
 				</option>
 
 				{uniquePayTerm.map((pt, key) => (
-					<option key={key} value={pt}>
+					<option
+						key={key}
+						value={pt}
+					>
 						{pt}
 					</option>
 				))}
@@ -1443,46 +1468,91 @@ export const CusSelectYearsToCal = ({
 	icon,
 	bgColor = 'w.300',
 	isRequired,
-	tower
+	tower,
 }) => {
 	const { unitValues } = useData();
 
-	if(unitValues && tower){
-	const year = unitValues.filter((item) => item.Tower === tower).map(itm => itm.Years)
+	if (unitValues && tower) {
+		const year = unitValues
+			.filter((item) => item.Tower === tower)
+			.map((itm) => itm.Years);
+		let currentValue = value || 'Select';
+		return (
+			<FormControl
+				isInvalid={error && touch}
+				isRequired={isRequired}
+			>
+				<FormLabel fontSize={'xs'}>{label}</FormLabel>
+
+				<Select
+					name={name}
+					variant={variant}
+					bgColor={bgColor}
+					onChange={onChange}
+					onBlur={onBlur}
+					value={currentValue}
+					fontSize={'xs'}
+					icon={icon}
+				>
+					<option
+						value='Select'
+						disabled
+					>
+						Select
+					</option>
+
+					{year.map((tower, key) => (
+						<option
+							key={key}
+							value={tower}
+						>
+							{tower}
+						</option>
+					))}
+				</Select>
+				<FormErrorMessage fontSize={'xs'}>{error}</FormErrorMessage>
+			</FormControl>
+		);
+	}
+	//uniqueTowers.sort((a, b) => a.toLowerCase().localeCompare(b.toLowerCase()));
+};
+
+export const CusPaymentStatus = ({
+	label,
+	name,
+	onChange,
+	value,
+	error,
+	onBlur,
+	touch,
+	isRequired,
+}) => {
 	let currentValue = value || 'Select';
 	return (
-		<FormControl isInvalid={error && touch} isRequired={isRequired}>
+		<FormControl
+			isInvalid={error && touch}
+			isRequired={isRequired}
+		>
 			<FormLabel fontSize={'xs'}>{label}</FormLabel>
 
 			<Select
 				name={name}
-				variant={variant}
-				bgColor={bgColor}
+				variant={'filled'}
 				onChange={onChange}
 				onBlur={onBlur}
 				value={currentValue}
 				fontSize={'xs'}
-				icon={icon}
 			>
-				<option value='Select' disabled>
+				<option
+					value='Select'
+					disabled
+				>
 					Select
 				</option>
-
-				{year.map((tower, key) => (
-					<option key={key} value={tower}>
-						{tower}
-					</option>
-				))}
+				<option value='Pending'>Pending</option>
+				<option value='Confirmed'>Confirmed</option>
 			</Select>
 			<FormErrorMessage fontSize={'xs'}>{error}</FormErrorMessage>
 		</FormControl>
 	);
-	}
-
-	
-
-	//uniqueTowers.sort((a, b) => a.toLowerCase().localeCompare(b.toLowerCase()));
-
-	
 };
-

@@ -9,6 +9,7 @@ import {
 	CusInputRegular,
 	CusInputLeftAdd,
 	CusPaymentMode,
+	CusPaymentStatus,
 } from '../../../customs';
 const TransactionsForm = ({ form, setUnit, choice, fileName, setMonth }) => {
 	const [owner, setOwner] = useState(false);
@@ -43,11 +44,11 @@ const TransactionsForm = ({ form, setUnit, choice, fileName, setMonth }) => {
 					</Stack>
 					{owner && (
 						<Stack>
-							<CusSelectOccOwner
+							<CusInputRegular
 								label={'Unit Owner Name'}
 								name='unitOwner'
 								id='unitOwner'
-								placeholder={'Select Unit Owner Names'}
+								placeholder={'Select Unit Owner Name'}
 								onChange={form.handleChange}
 								onBlur={form.handleBlur}
 								value={form.values.unitOwner}
@@ -56,7 +57,6 @@ const TransactionsForm = ({ form, setUnit, choice, fileName, setMonth }) => {
 								isRequired
 								disabled={true}
 							/>
-
 							<Stack
 								direction={['column', 'row']}
 								spacing={6}
@@ -109,6 +109,7 @@ const TransactionsForm = ({ form, setUnit, choice, fileName, setMonth }) => {
 									onBlur={form.handleBlur}
 									error={form.errors.amountPaid}
 									touch={form.touched.amountPaid}
+									disabled={true}
 								/>
 							</Stack>
 
@@ -153,7 +154,10 @@ const TransactionsForm = ({ form, setUnit, choice, fileName, setMonth }) => {
 									value={form.values.paymentMode}
 								/>
 							</Stack>
-							<Stack>
+							<Stack
+								direction={['column', 'row']}
+								spacing={6}
+							>
 								<CusUpload
 									name='receiptImg'
 									id='receiptImg'
@@ -177,6 +181,16 @@ const TransactionsForm = ({ form, setUnit, choice, fileName, setMonth }) => {
 									touch={form.touched.receiptImg}
 									showImage={showReceiptImg}
 									isRequired={true}
+								/>
+								<CusPaymentStatus
+									label={'Status'}
+									name='status'
+									id='status'
+									onChange={form.handleChange}
+									onBlur={form.handleBlur}
+									value={form.values.status}
+									error={form.errors.status}
+									touch={form.touched.status}
 								/>
 							</Stack>
 						</Stack>

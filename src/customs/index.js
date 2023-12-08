@@ -36,6 +36,7 @@ export {
 	CusSelectOnHoldUnit,
 	CusSelectYearsToCal,
 	CusSelectPayterm,
+	CusPaymentStatus,
 } from './CusSelect';
 export { default as CusUpload } from './CusUpload';
 export { default as CusSearch } from './CusSearch';

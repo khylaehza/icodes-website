@@ -14,6 +14,7 @@ const UnitOwnerForm = ({
 	fileData,
 	disabled,
 	setOwner,
+	isEdit,
 }) => {
 	function getSteps() {
 		return ['Requirements'];
@@ -30,6 +31,8 @@ const UnitOwnerForm = ({
 						setShowImage={setShowImage}
 						fileData={fileData}
 						setOwner={setOwner}
+						disabled={disabled}
+						isEdit={isEdit}
 					/>
 				);
 

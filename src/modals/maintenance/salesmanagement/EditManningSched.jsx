@@ -109,7 +109,7 @@ const EditManningSched = ({
 
 	return (
 		<CusEdit
-			header={`Edit ${data.Teams}'s details.`}
+			header={`Edit ${data.Team}'s details.`}
 			isOpen={isOpen}
 			onClose={onClose}
 			onOpen={onOpen}

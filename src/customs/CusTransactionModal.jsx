@@ -20,7 +20,7 @@ import {
 	Th,
 } from '@chakra-ui/react';
 import { CusTD, CusTitle } from './CusTableItems';
-import { CusTransactionPDF } from './index'
+import { CusTransactionPDF } from './index';
 import moment from 'moment';
 import { OrdinalSuffix } from '../utilities';
 import React, { useState } from 'react';
@@ -96,25 +96,6 @@ const CusTransactionModal = ({ data }) => {
 		}
 	});
 
-	const table = Object.values(soaGroup[0].soa);
-
-	const personalDet = [
-		{ Name: soaGroup[0].name },
-		{ Unit: soaGroup[0].unitName },
-	];
-	const amountDet = [
-		{ Name: soaGroup[0].unitAmt },
-		{ Unit: soaGroup[0].othersAmt },
-		{ Total: soaGroup[0].unitAmt + soaGroup[0].othersAmt },
-	];
-	soaGroup.filter((a) => {
-		Object.values(a.soa).filter((item) => {
-			if (item.status == 'Paid') {
-				details.push({ ...item, name: a.name });
-			}
-		});
-	});
-
 	let deduct = 0;
 	const header = [
 		'No.',
@@ -127,184 +108,190 @@ const CusTransactionModal = ({ data }) => {
 		'Remaining Balance',
 	];
 
-	const Transactions = () =>{
-		return(
+	const table = Object.values(soaGroup[0] ? soaGroup[0].soa : '');
+
+	const personalDet = [
+		{ Name: soaGroup[0] ? soaGroup[0].name : '' },
+		{ Unit: soaGroup[0] ? soaGroup[0].unitName : '' },
+	];
+	const amountDet = [
+		{ Unit: soaGroup[0] ? soaGroup[0].unitAmt : '' },
+		{ Others: soaGroup[0] ? soaGroup[0].othersAmt : '' },
+		{
+			Total: soaGroup[0]
+				? soaGroup[0].unitAmt + soaGroup[0].othersAmt
+				: '',
+		},
+	];
+	// soaGroup.filter((a) => {
+	// 	Object.values(a.soa).filter((item) => {
+	// 		if (item.status == 'Paid') {
+	// 			deduct += parseFloat(item.amountPaid.replace(/,/g, ''));
+	// 			console.log(deduct);
+	// 			details.push({ ...item, name: a.name, deduct: deduct });
+	// 		}
+	// 	});
+	// });
+
+	const Transactions = () => {
+		return (
 			<Flex justify={'center'}>
-			<VStack
-				flexDir={'column'}
-				gap={2}
-				justify={'space-between'}
-			>
-				<Heading size={'md'}>Transactions List</Heading>
-				<BoxStyle
-					gap={20}
-					bgColor={'b.100'}
-					justifyContent={'center'}
-					alignItems={'center'}
-					justifyItems={'center'}
-					alignContent={'center'}
-					child={
-						<Flex
-							flexDir={'row'}
-							gap={70}
-						>
-							{personalDet.map((item, key) => (
-								<Flex key={key}>
-									<Text fontWeight={'bold'}>
-										{Object.keys(item)
-											.toString()
-											.toUpperCase()}
-									</Text>
-									:{' '}
-									{Object.values(
-										item
-									).toString()}
-								</Flex>
-							))}
-							{amountDet.map((item, key) => (
-								<Flex key={key}>
-									<Text fontWeight={'bold'}>
-										{Object.keys(item)
-											.toString()
-											.toUpperCase()}
-									</Text>
-									: ₱ {''}
-									{new Intl.NumberFormat(
-										'en-US',
-										{
+				<VStack
+					flexDir={'column'}
+					gap={2}
+					justify={'space-between'}
+				>
+					<Heading size={'md'}>Transactions List</Heading>
+					<BoxStyle
+						gap={20}
+						bgColor={'b.100'}
+						justifyContent={'center'}
+						alignItems={'center'}
+						justifyItems={'center'}
+						alignContent={'center'}
+						child={
+							<Flex
+								flexDir={'row'}
+								gap={70}
+							>
+								{personalDet.map((item, key) => (
+									<Flex key={key}>
+										<Text fontWeight={'bold'}>
+											{Object.keys(item)
+												.toString()
+												.toUpperCase()}
+										</Text>
+										: {Object.values(item).toString()}
+									</Flex>
+								))}
+								{amountDet.map((item, key) => (
+									<Flex key={key}>
+										<Text fontWeight={'bold'}>
+											{Object.keys(item)
+												.toString()
+												.toUpperCase()}
+										</Text>
+										: ₱ {''}
+										{new Intl.NumberFormat('en-US', {
 											maximumFractionDigits: 2,
 											minimumFractionDigits: 2,
-										}
-									).format(
-										Object.values(item)
-									)}
-								</Flex>
-							))}
-						</Flex>
-					}
-				/>
-				<Flex
-					border={'1px'}
-					borderColor={'w.100'}
-					bgColor={'w.100'}
-					rounded={5}
-					p={3}
-					w={'100%'}
-				>
-					<Table
-						variant='simple'
-						fontSize={12}
-					>
-						<Thead alignSelf='center'>
-							<Tr>
-								{header.map((head, key) => (
-									<Th
-										textAlign={'center'}
-										key={key}
-									>
-										{head}
-									</Th>
+										}).format(Object.values(item))}
+									</Flex>
 								))}
-							</Tr>
-						</Thead>
-						<Tbody>
-							{table.map((item, key) => {
-								if (item.status == 'Paid') {
-									deduct += parseFloat(
-										item.amountPaid.replace(
-											/,/g,
-											''
-										)
-									);
-
-									return (
-										<Tr
+							</Flex>
+						}
+					/>
+					<Flex
+						border={'1px'}
+						borderColor={'w.100'}
+						bgColor={'w.100'}
+						rounded={5}
+						p={3}
+						w={'100%'}
+					>
+						<Table
+							variant='simple'
+							fontSize={12}
+						>
+							<Thead alignSelf='center'>
+								<Tr>
+									{header.map((head, key) => (
+										<Th
+											textAlign={'center'}
 											key={key}
-											bgColor={
-												data.TransactionID ==
-													item.transactId &&
-												'w.200'
-											}
 										>
-											<CusTD
-												component={
-													item.num
+											{head}
+										</Th>
+									))}
+								</Tr>
+							</Thead>
+							<Tbody>
+								{table.map((item, key) => {
+									if (item.status == 'Paid') {
+										deduct += parseFloat(
+											item.amountPaid.replace(/,/g, '')
+										);
+
+										return (
+											<Tr
+												key={key}
+												bgColor={
+													data.TransactionID ==
+														item.transactId &&
+													'w.200'
 												}
-											/>
-											<CusTD
-												component={
-													item.transactId
-												}
-											/>
-											<CusTD
-												component={
-													item.month
-												}
-											/>
-											<CusTD
-												component={moment(
-													item.datePaid
-												).format(
-													'DD-MMM-YYYY'
-												)}
-											/>
-											<CusTD
-												component={
-													item.paymentMode
-												}
-											/>
-											<CusTD
-												component={
-													'₱ ' +
-													item.amountPaid
-												}
-											/>
-											<CusTD
-												component={
-													item.receiptNo
-												}
-											/>
-											<CusTD
-												component={`₱ ${new Intl.NumberFormat(
-													'en-US',
-													{
-														maximumFractionDigits: 2,
-														minimumFractionDigits: 2,
+											>
+												<CusTD component={item.num} />
+												<CusTD
+													component={item.transactId}
+												/>
+												<CusTD component={item.month} />
+												<CusTD
+													component={moment(
+														item.datePaid
+													).format('DD-MMM-YYYY')}
+												/>
+												<CusTD
+													component={item.paymentMode}
+												/>
+												<CusTD
+													component={
+														'₱ ' + item.amountPaid
 													}
-												).format(
-													amountDet[2]
-														.Total -
-														deduct
-												)}`}
-											/>
-										</Tr>
-									);
-								}
-							})}
-						</Tbody>
-					</Table>
-				</Flex>
-			</VStack>
-		</Flex>
-		)
-	}
+												/>
+												<CusTD
+													component={item.receiptNo}
+												/>
+												<CusTD
+													component={`₱ ${new Intl.NumberFormat(
+														'en-US',
+														{
+															maximumFractionDigits: 2,
+															minimumFractionDigits: 2,
+														}
+													).format(
+														soaGroup[0].unitAmt +
+															soaGroup[0]
+																.othersAmt -
+															item.amountPaid.replace(
+																/,/g,
+																''
+															) *
+																(key + 1)
+													)}`}
+												/>
+											</Tr>
+										);
+									}
+								})}
+							</Tbody>
+						</Table>
+					</Flex>
+				</VStack>
+			</Flex>
+		);
+	};
 	const Print = () => {
-		return(
+		return (
 			<PDFDownloadLink
 				document={
 					<CusTransactionPDF
 						personalDet={personalDet}
 						amountDet={amountDet}
 						table={table}
-						deduct={deduct}
 					/>
 				}
 				fileName={`Transaction${data.TransactionID}.pdf`}
 			>
-				<Button variant={'primary'} onClick={onClose}>Print</Button>
-		</PDFDownloadLink>
-		)
-	}
+				<Button
+					variant={'primary'}
+					onClick={onClose}
+				>
+					Print
+				</Button>
+			</PDFDownloadLink>
+		);
+	};
 
 	return (
 		<>
@@ -326,11 +313,11 @@ const CusTransactionModal = ({ data }) => {
 					<ModalHeader></ModalHeader>
 					<ModalCloseButton />
 					<ModalBody>
-						<Transactions/>
+						<Transactions />
 					</ModalBody>
 
 					<ModalFooter>
-						<Print/>
+						<Print />
 					</ModalFooter>
 				</ModalContent>
 			</Modal>

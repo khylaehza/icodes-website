@@ -267,7 +267,7 @@ const AddUnitOwner = () => {
 					Id1: downloadURLs[5],
 					Id2: downloadURLs[6],
 					CNum: ownerInfoForm.values.cNum,
-					Status: 'Active',
+					Status: true,
 					Units: ownerInfoForm.values.unit,
 				}
 			);

@@ -37,6 +37,7 @@ const AddAnncmnts = () => {
 			description: '',
 			anncmntImg: '',
 			author: '',
+			subject: '',
 		},
 		validationSchema: Yup.object({
 			towers: Yup.mixed().required(
@@ -59,6 +60,7 @@ const AddAnncmnts = () => {
 							'application/pdf',
 						].includes(value.type)
 				),
+			subject: Yup.string().required('Subject is required.'),
 		}),
 		onSubmit: (value, actions) => {
 			const storageRef = ref(
@@ -106,6 +108,7 @@ const AddAnncmnts = () => {
 										AnncmntImg: downloadURL,
 										Purpose: value.purpose,
 										Description: value.description,
+										Subject: value.subject,
 										Author: value.author,
 										Status: true,
 									}

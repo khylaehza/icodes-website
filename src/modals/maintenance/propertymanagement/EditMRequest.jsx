@@ -20,20 +20,13 @@ import {
 } from 'firebase/storage';
 import { useData } from '../../../../DataContext';
 
-const EditMRequest = ({
-    data,
-	id,
-	mainCollection,
-	tblDocUser,
-	tblUserCol,
-}) =>{
-    const { curUser } = useData();
-    const { isOpen, onOpen, onClose } = useDisclosure();
+const EditMRequest = ({ data, id, mainCollection, tblDocUser, tblUserCol }) => {
+	const { curUser } = useData();
+	const { isOpen, onOpen, onClose } = useDisclosure();
 	const storage = getStorage();
 	const toast = useToast();
 
-
-    const editForm = useFormik({
+	const editForm = useFormik({
 		initialValues: {
 			units: data.Unit,
 			createddate: data.CreatedDate,
@@ -46,80 +39,86 @@ const EditMRequest = ({
 		enableReinitialize: true,
 		onSubmit: async (value, actions) => {
 			const docRef = doc(db, mainCollection, tblDocUser, tblUserCol, id);
-			const imgs = value.requestImg
-            const folderPath = `maintenance/propertymanagement/mrequest/${data.MRequestID}`;
-            const storageRef = (imageName, ext) =>
-                ref(storage, `${folderPath}/${imageName}.${ext}`);
+			const imgs = value.requestImg;
+			const folderPath = `maintenance/propertymanagement/mrequest/${data.MRequestID}`;
+			const storageRef = (imageName, ext) =>
+				ref(storage, `${folderPath}/${imageName}.${ext}`);
 
-			try{
+			try {
 				updateDoc(docRef, {
-					editedDate: serverTimestamp(),
+					EditedDate: serverTimestamp(),
 					Unit: value.units,
 					CreatedDate: value.createddate,
 					RepairType: value.repairType,
-					// RequestImg: downloadURL,
 					Details: value.details,
-					//Others: other,
 					Status: value.status,
 				});
 
-                if(data.RequestImg !== value.requestImg){
-                    try{
-                        const uploadTasks = Object.keys(imgs).map(async (element, key) => {
-                            const uploadTask = uploadBytesResumable(
-                                storageRef(key, 'jpg'),
-                                imgs[element]
-                            );
-        
-                            uploadTask.on(
-                                'state_changed',
-                                (snapshot) => {
-                                    const progress =
-                                        (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-        
-                                    switch (snapshot.state) {
-                                        case 'paused':
-                                            console.log('Upload is paused');
-                                            break;
-                                        case 'running':
-                                            console.log('Upload is running');
-                                            break;
-                                    }
-                                },
-                                (error) => {
-                                    toast({
-                                        title: 'Error during upload',
-                                        status: 'error',
-                                        duration: 9000,
-                                        isClosable: true,
-                                    });
-                                    console.error(error);
-                                }
-                            );
-        
-                            return uploadTask;
-                        });
-        
-                        const completedUploads = await Promise.all(uploadTasks);
-        
-                        const downloadURLs = await Promise.all(
-                            completedUploads.map((uploadTask) =>
-                                getDownloadURL(uploadTask.ref)
-                            )
-                        );
+				if (
+					data.RequestImg.toString() !== value.requestImg.toString()
+				) {
+					try {
+						const uploadTasks = Object.keys(imgs).map(
+							async (element, key) => {
+								const uploadTask = uploadBytesResumable(
+									storageRef(key, 'jpg'),
+									imgs[element]
+								);
 
-                        updateDoc( docRef, {
-                            RequestImg: downloadURLs
-                        })
-                    }catch (e){
-                        toast({
+								uploadTask.on(
+									'state_changed',
+									(snapshot) => {
+										const progress =
+											(snapshot.bytesTransferred /
+												snapshot.totalBytes) *
+											100;
+
+										switch (snapshot.state) {
+											case 'paused':
+												console.log('Upload is paused');
+												break;
+											case 'running':
+												console.log(
+													'Upload is running'
+												);
+												break;
+										}
+									},
+									(error) => {
+										toast({
+											title: 'Error during upload',
+											status: 'error',
+											duration: 9000,
+											isClosable: true,
+										});
+										console.error(error);
+									}
+								);
+
+								return uploadTask;
+							}
+						);
+
+						const completedUploads = await Promise.all(uploadTasks);
+
+						const downloadURLs = await Promise.all(
+							completedUploads.map((uploadTask) =>
+								getDownloadURL(uploadTask.ref)
+							)
+						);
+
+						updateDoc(docRef, {
+							RequestImg: downloadURLs,
+						});
+					} catch (e) {
+						toast({
 							title: 'Edited failed!',
 							status: 'error',
 							duration: 9000,
 							isClosable: true,
 						});
-                    }
-                }
+					}
+				}
 
 				toast({
 					title: `${data.MRequestID}'s Details Edited!`,
@@ -127,8 +126,7 @@ const EditMRequest = ({
 					duration: 9000,
 					isClosable: true,
 				});
-				
-			}catch (e){
+			} catch (e) {
 				toast({
 					title: 'Error editing Maintenance Request',
 					status: 'error',
@@ -137,7 +135,7 @@ const EditMRequest = ({
 				});
 			}
 
-            if (curUser) {
+			if (curUser) {
 				await addDoc(
 					collection(db, 'maintenance', 'admin', 'tbl_logs'),
 					{
@@ -148,18 +146,17 @@ const EditMRequest = ({
 				);
 			}
 
-
 			actions.resetForm();
 			onClose();
 		},
 	});
 
-    const onCloseModal = () => {
+	const onCloseModal = () => {
 		editForm.resetForm();
 		onClose();
-	}
+	};
 
-    return (
+	return (
 		<CusEdit
 			header={`Edit Maintenance Request details.`}
 			isOpen={isOpen}
@@ -167,13 +164,13 @@ const EditMRequest = ({
 			onOpen={onOpen}
 			component={
 				<MaintenanceForm
-                    form={editForm}
-                    actionLabel={'Edit'}
-                    imageFiles={data.RequestImg.length}
+					form={editForm}
+					actionLabel={'Edit'}
+					imageFiles={data.RequestImg.length}
 				/>
 			}
 		/>
 	);
-}
+};
 
-export default EditMRequest
+export default EditMRequest;

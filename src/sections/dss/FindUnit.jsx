@@ -175,7 +175,6 @@ const FindUnit = ({ pref, res, setUnitPref, setUserPref }) => {
 		bestUnit.push({ units: [], stat: 'no match' });
 	}
 
-	console.log(unitPrefWithAmtSize);
 	const unitDataGen = (num) => {
 		let unitDataList = [];
 
@@ -269,7 +268,27 @@ const FindUnit = ({ pref, res, setUnitPref, setUserPref }) => {
 	return (
 		<>
 			{bestUnit[0]['stat'] == 'no match' ? (
-				<Text>Yes</Text>
+				<Flex
+					flexDir={'column'}
+					alignItems={'center'}
+					justifyContent={'center'}
+				>
+					<Text>
+						There has no unit that match your preference. Please try
+						to retake the assessment.
+					</Text>
+					<Button
+						bgColor={'b.300'}
+						color={'w.300'}
+						h={'40px'}
+						_hover={{ bgColor: 'b.400', color: 'w.300' }}
+						onClick={() => {
+							navigate('/assessment');
+						}}
+					>
+						Proceed
+					</Button>
+				</Flex>
 			) : (
 				<>
 					<Flex
