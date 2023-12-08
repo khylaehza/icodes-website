@@ -179,36 +179,36 @@ const AnnouncementTable = ({ data, search, all }) => {
 									}
 								/>
 
-                                <CusTitle component={'Actions'} />
-                                <CusTD
-                                    component={
-                                        <ButtonGroup
-                                            variant='solid'
-                                            size='sm'
-                                            spacing={3}
-                                        >
-                                            {data.id && (
-                                                <EditAnncmnts
-                                                    data={data}
-                                                    id={data.id}
-                                                    mainCollection='maintenance'
-                                                    tblDocUser='propertymanagement'
-                                                    tblUserCol='tbl_announcements'
-                                                />
-                                            )}
+								<CusTitle component={'Actions'} />
+								<CusTD
+									component={
+										<ButtonGroup
+											variant='solid'
+											size='sm'
+											spacing={3}
+										>
+											{data.id && (
+												<EditAnncmnts
+													data={data}
+													id={data.id}
+													mainCollection='maintenance'
+													tblDocUser='propertymanagement'
+													tblUserCol='tbl_announcements'
+												/>
+											)}
 
-                                            <CusDelete
-                                                id={data.id}
-                                                stor={`pm/anncmnts/${data.AnncmntID}/anncmnts.png`}
-                                                label={` ${data.AnncmntID}'s Data`}
-                                                mainCollection='maintenance'
-                                                tblDocUser='propertymanagement'
-                                                tblUserCol='tbl_announcements'
-                                                onUpdate={() => {}}
-                                            />
-                                        </ButtonGroup>
-                                    }
-                                />
+											<CusDelete
+												id={data.id}
+												stor={`pm/anncmnts/${data.AnncmntID}/anncmnts.png`}
+												label={` ${data.AnncmntID}'s Data`}
+												mainCollection='maintenance'
+												tblDocUser='propertymanagement'
+												tblUserCol='tbl_announcements'
+												onUpdate={() => {}}
+											/>
+										</ButtonGroup>
+									}
+								/>
 								<CusTD
 									component={
 										<CusAlert
@@ -229,14 +229,18 @@ const AnnouncementTable = ({ data, search, all }) => {
 																: 'green'
 														}
 													>
-														{anncmntState.statusLabel}
+														{
+															anncmntState.statusLabel
+														}
 													</Text>{' '}
-													this announcement? {' '}
+													this announcement?{' '}
 													<Text
 														as='b'
 														color='b.300'
 													>
-														(  {anncmntState.anncmntId}  )
+														({' '}
+														{anncmntState.anncmntId}{' '}
+														)
 													</Text>
 												</Text>
 											}
@@ -259,13 +263,12 @@ const AnnouncementTable = ({ data, search, all }) => {
 										/>
 									}
 								/>
-                            </React.Fragment>
-                        </Tr>
-
-                )
-            }
-        });
+							</React.Fragment>
+						</Tr>
+					</React.Fragment>
+				);
+			}
+		});
 };
-
 
 export default AnnouncementTable;
