@@ -35,218 +35,195 @@ function Components({ data, index }) {
 
 	const y = useParallax(scrollYProgress, 100);
 
-	if(data){
+	if (data) {
 		return (
-		<VisibilitySensor partialVisibility={true}>
-			{({ isVisible }) => {
-				return (
-					<Box
-						w={'100%'}
-						alignItems={'center'}
-						display={'flex'}
-						flexDir={['column', 'row']}
-						justifyContent={'center'}
-						p={10}
-						ref={ref}
-					>
-						<HStack
-							gap={20}
+			<VisibilitySensor partialVisibility={true}>
+				{({ isVisible }) => {
+					return (
+						<Box
+							w={'100%'}
+							alignItems={'center'}
+							display={'flex'}
+							flexDir={['column', 'row']}
+							justifyContent={'center'}
+							p={10}
 							ref={ref}
 						>
-							{index % 2 == 0 ? (
-								<>
-									<Box
-										w={'50%'}
-										alignItems={'flex-start'}
-										display={'flex'}
-										flexDir={'column'}
-										color={'black'}
-										ref={ref}
-									>
-										<ChakraBox style={{ y }}>
-											<Text
-												fontSize={'7xl'}
-												fontWeight={'bold'}
-											>
-												{data.TowerName?data.TowerName.slice(0, -4):''}
-											</Text>
-											<Text
-												fontSize={'md'}
-												fontWeight={'medium'}
-												textAlign={'justify'}
-											>
-												{data.TowerDesc}
-											</Text>
-										</ChakraBox>
-									</Box>
+							<HStack
+								gap={20}
+								ref={ref}
+							>
+								{index % 2 == 0 ? (
+									<>
+										<Box
+											w={'50%'}
+											alignItems={'flex-start'}
+											display={'flex'}
+											flexDir={'column'}
+											color={'black'}
+											ref={ref}
+										>
+											<ChakraBox style={{ y }}>
+												<Text
+													fontSize={'7xl'}
+													fontWeight={'bold'}
+												>
+													{data.TowerName
+														? data.TowerName.slice(
+																0,
+																-4
+														  )
+														: ''}
+												</Text>
+												<Text
+													fontSize={'md'}
+													fontWeight={'medium'}
+													textAlign={'justify'}
+												>
+													{data.TowerDesc}
+												</Text>
+											</ChakraBox>
+										</Box>
 
-									<Box
-										w={'40%'}
-										flexDir={'column'}
-										ref={ref}
-									>
 										<Box
-											shadow={'dark-lg'}
-											padding={2}
-											rounded={'lg'}
+											w={'40%'}
+											flexDir={'column'}
+											ref={ref}
 										>
-											<ScaleFade
-												in={isVisible}
-												initialScale={1.2}
+											<Box
+												shadow={'dark-lg'}
+												padding={2}
+												rounded={'lg'}
 											>
-												<Image
-													src={data.TowerImg}
-													objectFit={'cover'}
-													position={'relative'}
-													rounded={'lg'}
-												/>
-											</ScaleFade>
+												<ScaleFade
+													in={isVisible}
+													initialScale={1.2}
+												>
+													<Image
+														src={data.TowerImg}
+														objectFit={'cover'}
+														position={'relative'}
+														rounded={'lg'}
+													/>
+												</ScaleFade>
+											</Box>
 										</Box>
-									</Box>
-								</>
-							) : (
-								<>
-									<Box
-										w={'40%'}
-										flexDir={'column'}
-										ref={ref}
-									>
+									</>
+								) : (
+									<>
 										<Box
-											shadow={'dark-lg'}
-											padding={2}
-											rounded={'lg'}
+											w={'40%'}
+											flexDir={'column'}
+											ref={ref}
 										>
-											<ScaleFade
-												in={isVisible}
-												initialScale={1.2}
+											<Box
+												shadow={'dark-lg'}
+												padding={2}
+												rounded={'lg'}
 											>
-												<Image
-													src={data.TowerImg}
-													objectFit={'cover'}
-													position={'relative'}
-													rounded={'lg'}
-												/>
-											</ScaleFade>
+												<ScaleFade
+													in={isVisible}
+													initialScale={1.2}
+												>
+													<Image
+														src={data.TowerImg}
+														objectFit={'cover'}
+														position={'relative'}
+														rounded={'lg'}
+													/>
+												</ScaleFade>
+											</Box>
 										</Box>
-									</Box>
-									<Box
-										w={'50%'}
-										alignItems={'flex-start'}
-										display={'flex'}
-										flexDir={'column'}
-										color={'black'}
-										ref={ref}
-									>
-										<ChakraBox style={{ y }}>
-											<Text
-												fontSize={'7xl'}
-												fontWeight={'bold'}
-											>
-												{data.TowerName.slice(0, -4)}
-											</Text>
-											<Text
-												fontSize={'md'}
-												fontWeight={'medium'}
-												textAlign={'justify'}
-											>
-												{data.TowerDesc}
-											</Text>
-										</ChakraBox>
-									</Box>
-								</>
-							)}
-						</HStack>
-					</Box>
-				);
-			}}
-		</VisibilitySensor>
-	);
+										<Box
+											w={'50%'}
+											alignItems={'flex-start'}
+											display={'flex'}
+											flexDir={'column'}
+											color={'black'}
+											ref={ref}
+										>
+											<ChakraBox style={{ y }}>
+												<Text
+													fontSize={'7xl'}
+													fontWeight={'bold'}
+												>
+													{data.TowerName.slice(
+														0,
+														-4
+													)}
+												</Text>
+												<Text
+													fontSize={'md'}
+													fontWeight={'medium'}
+													textAlign={'justify'}
+												>
+													{data.TowerDesc}
+												</Text>
+											</ChakraBox>
+										</Box>
+									</>
+								)}
+							</HStack>
+						</Box>
+					);
+				}}
+			</VisibilitySensor>
+		);
 	}
-	
 }
 
-const TowerLayout = ({towers}) => {
+const TowerLayout = ({ towers }) => {
+	const text = [
+		{
+			TowerName: 'Tower 1 (T1)',
+			TowerDesc:
+				'Congressional Town Center Tower 1 is the first new high-rise tower in this project. The 37-story tower is designed for the discerning and those who want to leave a lasting impression for friends and family. The tower’s spacious one-bedroom and studio unit entrance flow from its foyer into the unit’s living room and kitchen, providing residents entertainment and relaxation.',
+			TowerImg:
+				'https://i.pinimg.com/736x/34/62/2d/34622d463634cfd4ed0bb3b7223043d9.jpg',
+			color: '#f5f5f5',
+		},
+		{
+			TowerName: 'Tower 2  (T2)',
+			TowerDesc:
+				'Congressional Town Center Tower 1 is the first new high-rise tower in this project. The 37-story tower is designed for the discerning and those who want to leave a lasting impression for friends and family. The tower’s spacious one-bedroom and studio unit entrance flow from its foyer into the unit’s living room and kitchen, providing residents entertainment and relaxation.',
+			towerImg:
+				'https://i.pinimg.com/736x/68/01/7f/68017ff302490318ccbf5a85802d7c56.jpg',
+			color: '#FFFFFF',
+		},
+		{
+			TowerName: 'Tower 3  (T3)',
+			TowerDesc:
+				'Congressional Town Center Tower 1 is the first new high-rise tower in this project. The 37-story tower is designed for the discerning and those who want to leave a lasting impression for friends and family. The tower’s spacious one-bedroom and studio unit entrance flow from its foyer into the unit’s living room and kitchen, providing residents entertainment and relaxation.',
+			TowerImg:
+				'https://i.pinimg.com/736x/69/18/6c/69186c081d8ede3b867bc4ab2fed71af.jpg',
+			color: '#f5f5f5',
+		},
+	];
 
-	if(towers){
-		return (
-			<Flex flexDir={'column'}>
-				{towers.map((data, index) => (
+	return (
+		<Flex flexDir={'column'}>
+			{text.map((data, index) => (
+				<Flex
+					alignContent={'center'}
+					justifyContent={'center'}
+					mb={10}
+					bg={data.color}
+					key={index}
+				>
 					<Flex
-						alignContent={'center'}
-						justifyContent={'center'}
-						mb={10}
-						bg={data.color}
-						key={index}
+						w={'50%'}
+						flexDir={'column'}
+						bgColor={data.color}
 					>
-						<Flex
-							w={'50%'}
-							flexDir={'column'}
-							bgColor={data.color}
-						>
-							<Components
-								data={data}
-								index={index}
-							/>
-						</Flex>
+						<Components
+							data={data}
+							index={index}
+						/>
 					</Flex>
-				))}
-			</Flex>
-		);
-
-	}else{
-		const text = [
-			{
-				TowerName: 'Tower 1 (T1)',
-				TowerDesc:
-					'Congressional Town Center Tower 1 is the first new high-rise tower in this project. The 37-story tower is designed for the discerning and those who want to leave a lasting impression for friends and family. The tower’s spacious one-bedroom and studio unit entrance flow from its foyer into the unit’s living room and kitchen, providing residents entertainment and relaxation.',
-				TowerImg:
-					'https://i.pinimg.com/736x/34/62/2d/34622d463634cfd4ed0bb3b7223043d9.jpg',
-				color: '#f5f5f5',
-			},
-			{
-				TowerName: 'Tower 2  (T2)',
-				TowerDesc:
-					'Congressional Town Center Tower 1 is the first new high-rise tower in this project. The 37-story tower is designed for the discerning and those who want to leave a lasting impression for friends and family. The tower’s spacious one-bedroom and studio unit entrance flow from its foyer into the unit’s living room and kitchen, providing residents entertainment and relaxation.',
-				towerImg:
-					'https://i.pinimg.com/736x/68/01/7f/68017ff302490318ccbf5a85802d7c56.jpg',
-				color: '#FFFFFF',
-			},
-			{
-				TowerName: 'Tower 3  (T3)',
-				TowerDesc:
-					'Congressional Town Center Tower 1 is the first new high-rise tower in this project. The 37-story tower is designed for the discerning and those who want to leave a lasting impression for friends and family. The tower’s spacious one-bedroom and studio unit entrance flow from its foyer into the unit’s living room and kitchen, providing residents entertainment and relaxation.',
-				TowerImg:
-					'https://i.pinimg.com/736x/69/18/6c/69186c081d8ede3b867bc4ab2fed71af.jpg',
-				color: '#f5f5f5',
-			},
-		];
-	
-		return (
-			<Flex flexDir={'column'}>
-				{text.map((data, index) => (
-					<Flex
-						alignContent={'center'}
-						justifyContent={'center'}
-						mb={10}
-						bg={data.color}
-						key={index}
-					>
-						<Flex
-							w={'50%'}
-							flexDir={'column'}
-							bgColor={data.color}
-						>
-							<Components
-								data={data}
-								index={index}
-							/>
-						</Flex>
-					</Flex>
-				))}
-			</Flex>
-		);
-	}
-	
+				</Flex>
+			))}
+		</Flex>
+	);
 };
 
 export default TowerLayout;

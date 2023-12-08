@@ -19,176 +19,123 @@ import Slider from './Slider';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import { useNavigate } from 'react-router-dom';
 
-export default function Units({unitTypes,unitData}) {
+export default function Units() {
+	const br1 = [
+		'https://i.pinimg.com/736x/a5/7e/93/a57e93e0926e5c3708799eb11ce0e1d7.jpg',
+		'https://i.pinimg.com/736x/f7/cb/b7/f7cbb7f616ca7674ecdaff3209d31319.jpg',
+		'https://i.pinimg.com/736x/30/ac/1d/30ac1d7f49e57326d769a72ec8a9f9a2.jpg',
+		'https://i.pinimg.com/736x/93/b4/51/93b451308f11dafd76060bc037d6f736.jpg',
+	];
 
-	if(unitTypes,unitData){
-		const cards = []
-		const udata = []
-		
-		
-		unitTypes.map((card, index) => {
-			
-			if(unitData){
-				console.log("units",unitData)
-				cards.push({
-					key: `card-${index}`, 
-					content: (
-					  <Cards
-						images={unitData? unitData.filter((item) =>( item.TypeName === card.TypeName + ' (' + card.TypeCode + ')')).map(itm => itm.TypeImage): ''}
-						name={card.TypeName}
-						tower={unitData ? unitData.filter((item) =>( item.TypeName === card.TypeName + ' (' + card.TypeCode + ')')).map(itm => itm.Tower)[0]: ''}
-						size={ unitData? unitData.filter((item) =>( item.TypeName === card.TypeName + ' (' + card.TypeCode + ')')).map(itm => itm.UnitSize)[0]: ''}
-						bath={card.NumOfBath}
-						bed={card.NumOfBed}
-					  />
-					),
-				});
-			}else{
-				console.log('wala')
-			}
+	const br2 = [
+		'https://i.pinimg.com/736x/e7/a5/1b/e7a51bf0fecc06551b19c7ca644bf4b4.jpg',
+		'https://i.pinimg.com/736x/6d/1d/a3/6d1da379c733cde63324adb9b4156325.jpg',
+		'https://i.pinimg.com/736x/ef/e0/c4/efe0c4725dfc223e9289255ed6d4a4b3.jpg',
+		'https://i.pinimg.com/736x/b3/2b/5c/b32b5c5f04816e5b34311863361dc657.jpg',
+	];
 
-		});
+	const studio = [
+		'https://i.pinimg.com/736x/00/ea/01/00ea012785e201a1c829223cc302a472.jpg',
+		'https://i.pinimg.com/736x/30/0c/4d/300c4db0b8933864e624b23262ce2243.jpg',
+		'https://i.pinimg.com/736x/e0/a6/aa/e0a6aa86184af964d016027834b830d7.jpg',
+		'https://i.pinimg.com/736x/95/cf/c9/95cfc96f059a85228cc5281eedc35a23.jpg',
+	];
 
-		  if(cards){
-			console.log(cards)
-			return (
-				<Flex
-					flexDir={'row'}
-					w={'100%'}
-					justify={'center'}
-					align={'center'}
-					h={'100%'}
-				>
-					<Slider
-						cards={cards}
-						offset={2}
-						showArrows={false}
-					/>
-				</Flex>
-			 );
-		}
+	const br2Big = [
+		'https://i.pinimg.com/736x/8b/f7/6d/8bf76dac483c0da0ea3a3084a57a199f.jpg',
+		'https://i.pinimg.com/736x/c5/35/1a/c5351a3b9df20ebc9060cb9cc80514c5.jpg',
+		'https://i.pinimg.com/736x/ba/85/2f/ba852fd5326030c1d5bf5cfdda5ac44f.jpg',
+		'https://i.pinimg.com/736x/7d/7a/2e/7d7a2e8852fa8d5d9506d7b817afb244.jpg',
+	];
 
-
-	}else{
-		const br1 = [
-			'https://i.pinimg.com/736x/a5/7e/93/a57e93e0926e5c3708799eb11ce0e1d7.jpg',
-			'https://i.pinimg.com/736x/f7/cb/b7/f7cbb7f616ca7674ecdaff3209d31319.jpg',
-			'https://i.pinimg.com/736x/30/ac/1d/30ac1d7f49e57326d769a72ec8a9f9a2.jpg',
-			'https://i.pinimg.com/736x/93/b4/51/93b451308f11dafd76060bc037d6f736.jpg',
-		];
-	
-		const br2 = [
-			'https://i.pinimg.com/736x/e7/a5/1b/e7a51bf0fecc06551b19c7ca644bf4b4.jpg',
-			'https://i.pinimg.com/736x/6d/1d/a3/6d1da379c733cde63324adb9b4156325.jpg',
-			'https://i.pinimg.com/736x/ef/e0/c4/efe0c4725dfc223e9289255ed6d4a4b3.jpg',
-			'https://i.pinimg.com/736x/b3/2b/5c/b32b5c5f04816e5b34311863361dc657.jpg',
-		];
-	
-		const studio = [
-			'https://i.pinimg.com/736x/00/ea/01/00ea012785e201a1c829223cc302a472.jpg',
-			'https://i.pinimg.com/736x/30/0c/4d/300c4db0b8933864e624b23262ce2243.jpg',
-			'https://i.pinimg.com/736x/e0/a6/aa/e0a6aa86184af964d016027834b830d7.jpg',
-			'https://i.pinimg.com/736x/95/cf/c9/95cfc96f059a85228cc5281eedc35a23.jpg',
-		];
-	
-		const br2Big = [
-			'https://i.pinimg.com/736x/8b/f7/6d/8bf76dac483c0da0ea3a3084a57a199f.jpg',
-			'https://i.pinimg.com/736x/c5/35/1a/c5351a3b9df20ebc9060cb9cc80514c5.jpg',
-			'https://i.pinimg.com/736x/ba/85/2f/ba852fd5326030c1d5bf5cfdda5ac44f.jpg',
-			'https://i.pinimg.com/736x/7d/7a/2e/7d7a2e8852fa8d5d9506d7b817afb244.jpg',
-		];
-	
-		const br3 = [
-			'https://i.pinimg.com/736x/93/b4/51/93b451308f11dafd76060bc037d6f736.jpg',
-			'https://i.pinimg.com/736x/93/b4/51/93b451308f11dafd76060bc037d6f736.jpg',
-			'https://i.pinimg.com/736x/dc/97/bd/dc97bd06e7c61a0b8abe132982318102.jpg',
-			'https://i.pinimg.com/736x/df/c9/fd/dfc9fd41fd60097615911daab466486f.jpg',
-		];
-		let cards = [
-			{
-				key: uuidv4(),
-				content: (
-					<Cards
-						images={br1}
-						name={'1 Bedroom'}
-						tower={'Tower 2'}
-						size={'30 sq. m'}
-						bath={1}
-						bed={1}
-					/>
-				),
-			},
-			{
-				key: uuidv4(),
-				content: (
-					<Cards
-						images={br2}
-						name={'2 Bedrooms'}
-						tower={'Tower 2'}
-						size={'52 sq. m'}
-						bath={1}
-						bed={1}
-					/>
-				),
-			},
-			{
-				key: uuidv4(),
-				content: (
-					<Cards
-						images={studio}
-						name={'Studio'}
-						tower={'Tower 2'}
-						size={'20 sq. m'}
-						bath={1}
-						bed={0}
-					/>
-				),
-			},
-			{
-				key: uuidv4(),
-				content: (
-					<Cards
-						images={br2Big}
-						name={'2 Bedrooms Bigcut'}
-						tower={'Tower 2'}
-						size={'70 sq. m'}
-						bath={2}
-						bed={2}
-					/>
-				),
-			},
-			{
-				key: uuidv4(),
-				content: (
-					<Cards
-						images={br3}
-						name={'3 Bedrooms'}
-						tower={'Tower 2'}
-						size={'79 sq. m'}
-						bath={2}
-						bed={3}
-					/>
-				),
-			},
-		];
-		return (
-			<Flex
-				flexDir={'row'}
-				w={'100%'}
-				justify={'center'}
-				align={'center'}
-				h={'100%'}
-			>
-				<Slider
-					cards={cards}
-					offset={2}
-					showArrows={false}
+	const br3 = [
+		'https://i.pinimg.com/736x/93/b4/51/93b451308f11dafd76060bc037d6f736.jpg',
+		'https://i.pinimg.com/736x/93/b4/51/93b451308f11dafd76060bc037d6f736.jpg',
+		'https://i.pinimg.com/736x/dc/97/bd/dc97bd06e7c61a0b8abe132982318102.jpg',
+		'https://i.pinimg.com/736x/df/c9/fd/dfc9fd41fd60097615911daab466486f.jpg',
+	];
+	let cards = [
+		{
+			key: uuidv4(),
+			content: (
+				<Cards
+					images={br1}
+					name={'1 Bedroom'}
+					tower={'Tower 2'}
+					size={'30 sq. m'}
+					bath={1}
+					bed={1}
 				/>
-			</Flex>
-		);
-	}
-
-	
+			),
+		},
+		{
+			key: uuidv4(),
+			content: (
+				<Cards
+					images={br2}
+					name={'2 Bedrooms'}
+					tower={'Tower 2'}
+					size={'52 sq. m'}
+					bath={1}
+					bed={1}
+				/>
+			),
+		},
+		{
+			key: uuidv4(),
+			content: (
+				<Cards
+					images={studio}
+					name={'Studio'}
+					tower={'Tower 2'}
+					size={'20 sq. m'}
+					bath={1}
+					bed={0}
+				/>
+			),
+		},
+		{
+			key: uuidv4(),
+			content: (
+				<Cards
+					images={br2Big}
+					name={'2 Bedrooms Bigcut'}
+					tower={'Tower 2'}
+					size={'70 sq. m'}
+					bath={2}
+					bed={2}
+				/>
+			),
+		},
+		{
+			key: uuidv4(),
+			content: (
+				<Cards
+					images={br3}
+					name={'3 Bedrooms'}
+					tower={'Tower 2'}
+					size={'79 sq. m'}
+					bath={2}
+					bed={3}
+				/>
+			),
+		},
+	];
+	return (
+		<Flex
+			flexDir={'row'}
+			w={'100%'}
+			justify={'center'}
+			align={'center'}
+			h={'100%'}
+		>
+			<Slider
+				cards={cards}
+				offset={2}
+				showArrows={false}
+			/>
+		</Flex>
+	);
 }
 
 const Cards = ({ images, name, tower, size, bath, bed }) => {
@@ -202,10 +149,7 @@ const Cards = ({ images, name, tower, size, bath, bed }) => {
 	}
 
 	const navigate = useNavigate();
-	if(images){
-		console.log(images)
-	}
-	
+
 	return (
 		<Center py={6}>
 			<Box

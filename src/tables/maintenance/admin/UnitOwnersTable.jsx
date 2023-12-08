@@ -197,7 +197,7 @@ const UnitOwnersTable = ({
 								<CusTD component={data.Email + '.com'} />
 								<CusTitle component={'Unit/s'} />
 								<CusTD component={data.Units} />
-								<CusTitle component={'Requirments'} />
+								<CusTitle component={'Requirements'} />
 								<CusTD
 									component={
 										<CusReqModal
@@ -208,7 +208,6 @@ const UnitOwnersTable = ({
 										/>
 									}
 								/>
-
 								{allowActions && (
 									<>
 										<CusTitle component={'Status'} />
