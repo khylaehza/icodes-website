@@ -257,50 +257,59 @@ const AmenitiesTable = ({ data, search, all }) => {
 									</ButtonGroup>
 								}
 							/>
-						</Tr>
-						<CusAlert
-							isOpen={isStatusModalOpen}
-							onClose={onStatusModalClose}
-							header={'Status Confirmation'}
-							action={handleConfirmStatusChange}
-							actionLabel={'Confirm'}
-							body={
-								<Text fontSize='md'>
-									Are you sure to{' '}
-									<Text
-										as='b'
-										color={
-											amenitiesState.statusLabel ===
-											'Disable'
-												? 'r.100'
-												: 'green'
+							<CusTD
+								component={
+									<CusAlert
+										isOpen={isStatusModalOpen}
+										onClose={onStatusModalClose}
+										header={'Status Confirmation'}
+										action={handleConfirmStatusChange}
+										actionLabel={'Confirm'}
+										body={
+											<Text fontSize='md'>
+												Are you sure to{' '}
+												<Text
+													as='b'
+													color={
+														amenitiesState.statusLabel ===
+														'Disable'
+															? 'r.100'
+															: 'green'
+													}
+												>
+													{amenitiesState.statusLabel}
+												</Text>{' '}
+												
+												this amenity?
+												<Text
+													as='b'
+													color='b.300'
+												>
+													({amenitiesState.name})
+												</Text>
+											</Text>
 										}
-									>
-										{amenitiesState.statusLabel}
-									</Text>{' '}
-									
-									this amenity?
-									<Text
-										as='b'
-										color='b.300'
-									>
-										({amenitiesState.name})
-									</Text>
-								</Text>
-							}
-						/>
-						<CusEnlargeImage
-                            isOpen={isImageModalOpen}
-                            onClose={onImageModalClose}
-                            label={nameLabel}
-                            body={
-                                <Image
-									src={selectedImage}
-									width={'680px'}
-									height={'500px'}
-								/>
-                            }
-                        />
+									/>
+								}
+							/>
+							<CusTD
+								component={
+									<CusEnlargeImage
+										isOpen={isImageModalOpen}
+										onClose={onImageModalClose}
+										label={nameLabel}
+										body={
+											<Image
+												src={selectedImage}
+												width={'680px'}
+												height={'500px'}
+											/>
+										}
+									/>
+								}
+							/>
+
+						</Tr>
 					</React.Fragment>
 				);
 			}

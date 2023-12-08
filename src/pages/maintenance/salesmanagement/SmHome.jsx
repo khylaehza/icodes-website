@@ -21,6 +21,7 @@ import { Body } from '../../../sections/maintenance';
 import { RiArrowDownSFill } from 'react-icons/ri';
 import { useData } from '../../../../DataContext';
 import { LineGraph, StackBarGraph, WeekGenerator } from '../../../utilities';
+import { TeamsTable } from '../index';
 import moment from 'moment';
 const SmHome = () => {
 	return (
@@ -689,7 +690,24 @@ const Item = () => {
 							{buyers.length}
 						</Heading>
 					</GridItem>
+					<GridItem
+						//colSpan={6}
+						colSpan={{ xl: 6, sm: 2 }}
+						bgColor={'w.300'}
+						boxShadow='0 4px 10px 0 rgba(134,149,166,0.3)'
+						borderRadius={15}
+						p={5}
+						
+					>
+						<Heading size={'md'}>Sales Teams</Heading>
+						<Divider w='100%' mb={3} />
+						<TeamsTable	data={employees}/>
+						
+						
+					</GridItem>
+	
 				</Grid>
+			
 			</ScaleFade>
 		</Flex>
 	);

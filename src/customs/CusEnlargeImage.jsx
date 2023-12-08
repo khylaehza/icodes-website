@@ -1,14 +1,5 @@
 import React from "react";
 import {
-	Image,
-	Tr,
-	Td,
-	ButtonGroup,
-	Switch,
-	useDisclosure,
-	Text,
-	useToast,
-    Box,
     Modal,
     ModalBody,
     ModalContent,

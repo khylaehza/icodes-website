@@ -115,25 +115,29 @@ const AgentsTable = ({ data, search, all }) => {
 									</ButtonGroup>
 								}
 							/>
+							<CusTD
+								component={
+									<CusEnlargeImage
+										isOpen={isOpen}
+										onClose={onClose}
+										label={
+											<NameFormat
+												fName={nameLabel.FName}
+												mName={nameLabel.MName}
+												lName={nameLabel.LName}
+											/>
+										}
+										body={
+											<Image
+												src={selectedImage}
+												width={'680px'}
+												height={'500px'}
+											/>
+										}
+									/>
+								}
+							/>
 						</Tr>
-						<CusEnlargeImage
-                            isOpen={isOpen}
-                            onClose={onClose}
-                            label={
-								<NameFormat
-									fName={nameLabel.FName}
-									mName={nameLabel.MName}
-									lName={nameLabel.LName}
-								/>
-							}
-                            body={
-                                <Image
-									src={selectedImage}
-									width={'680px'}
-									height={'500px'}
-								/>
-                            }
-                        />
 					</React.Fragment>
 				);
 			}
