@@ -413,7 +413,7 @@ const Item = () => {
 
 	const label = [];
 	const value = [];
-	const [fil, setFilter] = useState(filterOption[0]);
+	const [fil, setFilter] = useState(filterOption[2]);
 
 	if (fil == 'Weekly') {
 		value.push(weeklyData);
@@ -440,7 +440,6 @@ const Item = () => {
 		{ name: 'Pull-Ins', values: pullinsMonthlyData },
 	];
 
-	console.log(actMonthValues);
 	const actYearValues = [
 		{ name: 'Zoom', values: zoomYearData },
 		{ name: 'Tripping', values: trippingYearData },
@@ -450,7 +449,7 @@ const Item = () => {
 
 	const label1 = [];
 	const value1 = [];
-	const [fil1, setFilter1] = useState(filterOption[0]);
+	const [fil1, setFilter1] = useState(filterOption[2]);
 
 	if (fil1 == 'Weekly') {
 		value1.push(actWeekValues);
@@ -697,17 +696,15 @@ const Item = () => {
 						boxShadow='0 4px 10px 0 rgba(134,149,166,0.3)'
 						borderRadius={15}
 						p={5}
-						
 					>
 						<Heading size={'md'}>Sales Teams</Heading>
-						<Divider w='100%' mb={3} />
-						<TeamsTable	data={employees}/>
-						
-						
+						<Divider
+							w='100%'
+							mb={3}
+						/>
+						<TeamsTable data={employees} />
 					</GridItem>
-	
 				</Grid>
-			
 			</ScaleFade>
 		</Flex>
 	);

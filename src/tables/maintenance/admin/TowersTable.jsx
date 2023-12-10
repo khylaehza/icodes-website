@@ -1,6 +1,13 @@
 import { CusTitle, CusTD, CusDelete, CusAlert } from '../../../customs';
 import { DateChecker, NameFormat } from '../../../utilities';
-import { Image, Tr, Td, ButtonGroup, useDisclosure } from '@chakra-ui/react';
+import {
+	Image,
+	Tr,
+	Td,
+	ButtonGroup,
+	useDisclosure,
+	Text,
+} from '@chakra-ui/react';
 import React, { useState } from 'react';
 import moment from 'moment';
 
@@ -17,16 +24,6 @@ const TowersTable = ({ data, search, all, unitData, amounts }) => {
 	const { isOpen, onOpen, onClose } = useDisclosure();
 	const [towerLable, setTowerLabel] = useState('');
 	const [selectedImage, setSelectedImage] = useState(null);
-	// const toast = useToast();
-	// const { isOpen, onOpen, onClose } = useDisclosure();
-	// const [Id, setId] = useState('');
-	// const [towerState, setTowerState] = useState({
-	// 	towerName: '',
-	// 	statusLabel: '',
-	// 	towerId: '',
-	// 	currentStatus: boolean,
-	// 	status: boolean,
-	// });
 
 	const handleImageClick = (item) => {
 		setSelectedImage(item.TowerImg);
@@ -94,11 +91,7 @@ const TowersTable = ({ data, search, all, unitData, amounts }) => {
 								});
 						});
 
-						console.log(matchedAmt);
 						matchedAmt.map(async (uid) => {
-							console.log('gfdg', uid);
-							console.log(uid.id);
-
 							try {
 								await deleteDoc(
 									doc(
@@ -218,7 +211,6 @@ const TowersTable = ({ data, search, all, unitData, amounts }) => {
 								/>
 							}
 						/>
-
 					</Tr>
 				);
 			}

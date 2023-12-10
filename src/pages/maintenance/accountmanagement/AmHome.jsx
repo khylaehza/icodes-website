@@ -166,7 +166,7 @@ const Item = () => {
 
 	const label = [];
 	const value = [];
-	const [fil, setFilter] = useState(filterOption[0]);
+	const [fil, setFilter] = useState(filterOption[2]);
 
 	if (fil == 'Weekly') {
 		value.push(weeklyData);

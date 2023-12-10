@@ -31,7 +31,7 @@ const UnitTypesForm = ({ form }) => {
 							touch={form.touched.typeCode}
 							isRequired
 						/>
-						<CusNumInput
+						{/* <CusNumInput
 							label={'Maximum Capacity'}
 							name='maxPeople'
 							id={'maxPeople'}
@@ -43,7 +43,7 @@ const UnitTypesForm = ({ form }) => {
 							error={form.errors.maxPeople}
 							touch={form.touched.maxPeople}
 							isRequired
-						/>
+						/> */}
 					</Stack>
 					<HStack spacing={3}>
 						<CusNumInput
@@ -73,7 +73,6 @@ const UnitTypesForm = ({ form }) => {
 							touch={form.touched.noBed}
 							isRequired
 						/>
-
 					</HStack>
 					<Stack
 						direction={['column', 'row']}

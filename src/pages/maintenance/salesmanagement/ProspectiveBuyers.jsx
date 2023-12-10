@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Flex, Text, Heading, ScaleFade } from '@chakra-ui/react';
+import { Flex, Text, Heading, ScaleFade, Image } from '@chakra-ui/react';
 import { Body } from '../../../sections/maintenance';
 import { ProspectiveBuyersTable } from '../../../tables';
 import {
@@ -134,35 +134,58 @@ const Item = () => {
 									setSortType={setSortType}
 								/>
 							</Flex>
-
-							{/* <AddEmployee employees={employees} /> */}
 						</Flex>
 
 						<Flex
 							justifyContent={'space-between'}
 							flexDir={'column'}
 						>
-							<CusTable
-								header={header}
-								children={
-									<ProspectiveBuyersTable
-										data={records}
-										search={search}
-										all={buyers}
+							{records.length > 0 ? (
+								<CusTable
+									header={header}
+									children={
+										<ProspectiveBuyersTable
+											data={records}
+											search={search}
+											all={buyers}
+										/>
+									}
+								/>
+							) : (
+								<Flex
+									flexDir='column'
+									h={'100%'}
+									bg={'#EFF3F6'}
+									justifyContent={'center'}
+									align={'center'}
+									gap={2}
+								>
+									<Image
+										src={
+											'./../../../../public/gifs/maintenance/document.gif'
+										}
+										size={'md'}
+										objectFit={'contain'}
 									/>
-								}
-							/>
+
+									<Text fontWeight={'bold'}>
+										No data available.
+									</Text>
+								</Flex>
+							)}
 						</Flex>
 					</Flex>
 				</ScaleFade>
-				<CusPagination
-					page={pages}
-					currentPage={currentPage}
-					setCurrentPage={setCurrentPage}
-					lastIndex={lastIndex}
-					firstIndex={firstIndex}
-					numPage={numPage}
-				/>
+				{records.length > 0 && (
+					<CusPagination
+						page={pages}
+						currentPage={currentPage}
+						setCurrentPage={setCurrentPage}
+						lastIndex={lastIndex}
+						firstIndex={firstIndex}
+						numPage={numPage}
+					/>
+				)}
 			</Flex>
 		);
 	}
