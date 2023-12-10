@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Flex, Text, Heading, ScaleFade } from '@chakra-ui/react';
+import { Flex, Text, Heading, ScaleFade, Image } from '@chakra-ui/react';
 import { Body } from '../../../sections/maintenance';
 import {
 	CusTable,
@@ -109,9 +109,7 @@ const Item = () => {
 						>
 							Hi, {curUser.FName}!
 						</Heading>
-						<Text color={'b.300'}>
-							Manage the unit owners here.
-						</Text>
+						<Text color={'b.300'}>View the unit owners here.</Text>
 						<Flex
 							display='flex'
 							justifyContent='flex-end'
@@ -135,38 +133,61 @@ const Item = () => {
 									titleLbl='Tower'
 								/>
 							</Flex>
-
-							<AddUnitOwner />
 						</Flex>
 
 						<Flex
 							justifyContent={'space-between'}
 							flexDir={'column'}
 						>
-							<CusTable
-								header={header}
-								children={
-									<ViewOwnersTable
-										data={records}
-										search={search}
-										all={unitOwners}
-										units={units}
-										allowActions={false}
-										unitTowerID={unitTowerID}
+							{records.length >= 1 ? (
+								<CusTable
+									header={header}
+									children={
+										<ViewOwnersTable
+											data={records}
+											search={search}
+											all={unitOwners}
+											units={units}
+											allowActions={false}
+											unitTowerID={unitTowerID}
+										/>
+									}
+								/>
+							) : (
+								<Flex
+									flexDir='column'
+									h={'100%'}
+									bg={'#EFF3F6'}
+									justifyContent={'center'}
+									align={'center'}
+									gap={2}
+								>
+									<Image
+										src={
+											'./../../../../public/gifs/maintenance/document.gif'
+										}
+										size={'xl'}
+										objectFit={'contain'}
 									/>
-								}
-							/>
+
+									<Text fontWeight={'bold'}>
+										No data available.
+									</Text>
+								</Flex>
+							)}
 						</Flex>
 					</Flex>
 				</ScaleFade>
-				<CusPagination
-					page={pages}
-					currentPage={currentPage}
-					setCurrentPage={setCurrentPage}
-					lastIndex={lastIndex}
-					firstIndex={firstIndex}
-					numPage={numPage}
-				/>
+				{records.length >= 1 && (
+					<CusPagination
+						page={pages}
+						currentPage={currentPage}
+						setCurrentPage={setCurrentPage}
+						lastIndex={lastIndex}
+						firstIndex={firstIndex}
+						numPage={numPage}
+					/>
+				)}
 			</Flex>
 		);
 	}

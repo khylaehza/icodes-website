@@ -1,15 +1,5 @@
 import React, { useState } from 'react';
-import {
-	Flex,
-	Text,
-	Heading,
-	Menu,
-	MenuList,
-	MenuButton,
-	Button,
-	Divider,
-	ScaleFade,
-} from '@chakra-ui/react';
+import { Flex, Text, Heading, ScaleFade, Image } from '@chakra-ui/react';
 import { Body } from '../../../sections/maintenance';
 import {
 	CusTable,
@@ -19,8 +9,7 @@ import {
 } from '../../../customs';
 import { useData } from '../../../../DataContext';
 import moment from 'moment';
-import { RiArrowDownSFill } from 'react-icons/ri';
-import { AddAmountSet, AddDiscount, AddPaymentTerms } from '../../../modals';
+
 import { AmountSetTable, DiscountTable, PayTermTable } from '../../../tables';
 
 const ViewAmounts = () => {
@@ -142,54 +131,60 @@ const Item = () => {
 								/>
 								<CusFilter setSortType={setSortType} />
 							</Flex>
-							<Menu>
-								<MenuButton
-									as={Button}
-									rightIcon={<RiArrowDownSFill />}
-									variant={'primary'}
-								>
-									+ Add
-								</MenuButton>
-								<MenuList>
-									<AddAmountSet />
-									<Divider />
-
-									<AddDiscount />
-									<Divider />
-
-									<AddPaymentTerms />
-								</MenuList>
-							</Menu>
 						</Flex>
 						<Flex
 							justifyContent={'space-between'}
 							flexDir={'column'}
 							gap={3}
 						>
-							<CusTable
-								header={header}
-								children={
-									<AmountSetTable
-										data={records}
-										search={search}
-										all={amounts}
-										allowActions={false}
+							{records.length > 0 ? (
+								<CusTable
+									header={header}
+									children={
+										<AmountSetTable
+											data={records}
+											search={search}
+											all={amounts}
+										/>
+									}
+								/>
+							) : (
+								<Flex
+									flexDir='column'
+									h={'30%'}
+									bg={'#EFF3F6'}
+									justifyContent={'center'}
+									align={'center'}
+									gap={2}
+								>
+									<Image
+										src={
+											'./../../../../public/gifs/maintenance/document.gif'
+										}
+										size={'md'}
+										objectFit={'contain'}
+										h={150}
 									/>
-								}
-							/>
+
+									<Text fontWeight={'bold'}>
+										No data available.
+									</Text>
+								</Flex>
+							)}
 						</Flex>
 					</Flex>
 				</ScaleFade>
 
-				<CusPagination
-					page={pages}
-					currentPage={currentPage}
-					setCurrentPage={setCurrentPage}
-					lastIndex={lastIndex}
-					firstIndex={firstIndex}
-					numPage={numPage}
-				/>
-
+				{records.length > 0 && (
+					<CusPagination
+						page={pages}
+						currentPage={currentPage}
+						setCurrentPage={setCurrentPage}
+						lastIndex={lastIndex}
+						firstIndex={firstIndex}
+						numPage={numPage}
+					/>
+				)}
 				<ScaleFade
 					initialScale={0.9}
 					in='true'
@@ -210,15 +205,25 @@ const Item = () => {
 							>
 								Discounts
 							</Heading>
-							<CusTable
-								header={discountHeader}
-								children={
-									<DiscountTable
-										all={discounts}
-										allowActions={false}
-									/>
-								}
-							/>
+							{discounts.length > 0 ? (
+								<CusTable
+									header={discountHeader}
+									children={<DiscountTable all={discounts} />}
+								/>
+							) : (
+								<Flex
+									flexDir='column'
+									justifyContent={'center'}
+									align={'center'}
+									bgColor={'b.300'}
+									p={2}
+									color={'w.300'}
+								>
+									<Text fontWeight={'medium'}>
+										No data available.
+									</Text>
+								</Flex>
+							)}
 						</Flex>
 
 						<Flex
@@ -233,15 +238,25 @@ const Item = () => {
 							>
 								Payment Terms
 							</Heading>
-							<CusTable
-								header={payTermHeader}
-								children={
-									<PayTermTable
-										all={payterm}
-										allowActions={false}
-									/>
-								}
-							/>
+							{payterm.length > 0 ? (
+								<CusTable
+									header={payTermHeader}
+									children={<PayTermTable all={payterm} />}
+								/>
+							) : (
+								<Flex
+									flexDir='column'
+									justifyContent={'center'}
+									align={'center'}
+									bgColor={'b.300'}
+									p={2}
+									color={'w.300'}
+								>
+									<Text fontWeight={'medium'}>
+										No data available.
+									</Text>
+								</Flex>
+							)}
 						</Flex>
 					</Flex>
 				</ScaleFade>

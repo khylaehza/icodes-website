@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Flex, Text, Heading, ScaleFade } from '@chakra-ui/react';
+import { Flex, Text, Heading, ScaleFade, Image } from '@chakra-ui/react';
 import { Body } from '../../../sections/maintenance';
 import { MRequestTable } from '../../../tables';
 import {
@@ -12,9 +12,9 @@ import { AddMRequest } from '../../../modals';
 import { useData } from '../../../../DataContext';
 import moment from 'moment';
 
-const MRequest = () =>{
-    return (
-        <Flex
+const MRequest = () => {
+	return (
+		<Flex
 			w='full'
 			minH='100vh'
 			alignItems='stretch'
@@ -22,23 +22,20 @@ const MRequest = () =>{
 		>
 			<Body children={<Item />} />
 		</Flex>
-
-
-    );
-
-}
+	);
+};
 
 const Item = () => {
-    const { curUser , mrequest } = useData();
-    const [currentPage, setCurrentPage] = useState(1);
+	const { curUser, mrequest } = useData();
+	const [currentPage, setCurrentPage] = useState(1);
 
 	const recordsPerPage = 4;
 	const lastIndex = currentPage * recordsPerPage;
 	const firstIndex = lastIndex - recordsPerPage;
 
-    const [search, setSearch] = useState('');
+	const [search, setSearch] = useState('');
 
-    const header = [
+	const header = [
 		'Request ID',
 		'Unit',
 		'Date Request',
@@ -49,31 +46,31 @@ const Item = () => {
 		'Modify',
 	];
 
-    const [sortType, setSortType] = useState('asc');
+	const [sortType, setSortType] = useState('asc');
 
-    const filter = ['T1', 'T2', 'T3'];
+	const filter = ['T1', 'T2', 'T3'];
 
-    const [filterOnChange, setFilterOnChange] = useState(false);
+	const [filterOnChange, setFilterOnChange] = useState(false);
 	const filterPos = [];
 	const [fil, setFilter] = useState(filter);
 
-    if(mrequest){
-        fil.forEach((element) => {
-            mrequest.filter((data) => {
-                if (data.Unit) {
+	if (mrequest) {
+		fil.forEach((element) => {
+			mrequest.filter((data) => {
+				if (data.Unit) {
 					if (data.Unit.toString().includes(element)) {
 						filterPos.push(data);
 					}
 				}
-            });
-        });
+			});
+		});
 
-        const list = filterOnChange ? filterPos : mrequest;
-        const records = list.slice(firstIndex, lastIndex);
-        const numPage = Math.ceil(list.length / recordsPerPage);
-        const pages = [...Array(numPage + 1).keys()].slice(1);
+		const list = filterOnChange ? filterPos : mrequest;
+		const records = list.slice(firstIndex, lastIndex);
+		const numPage = Math.ceil(list.length / recordsPerPage);
+		const pages = [...Array(numPage + 1).keys()].slice(1);
 
-        mrequest.sort((a, b) => {
+		mrequest.sort((a, b) => {
 			if (a.CreatedDate && b.CreatedDate) {
 				return (
 					moment(
@@ -94,81 +91,108 @@ const Item = () => {
 			}
 		});
 
-        return (
-            <Flex
-                flexDir='column'
-                p={'45px'}
-                h={'100%'}
-                bg={'#EFF3F6'}
-                justifyContent={'space-between'}
-            >
-                <ScaleFade
-                    initialScale={0.9}
-                    in='true'
-                >
-                    <Flex flexDir='column'>
-                        <Heading
-                            fontSize='md'
-                            color={'b.300'}
-                        >
-                            Hi, {curUser.FName}!
-                        </Heading>
-                        <Text color={'b.300'}>Manage the maintenance here.</Text>
-                        <Flex
-                            display='flex'
-                            justifyContent='flex-end'
-                            mb={5}
-                            gap={5}
-                            flexDir={{
-                                base: 'column',
-                                md: 'row',
-                            }}
-                        >
-                            <Flex gap={5}>
-                                <CusSearch
-                                    placeholder={'Search by ID'}
-                                    onChange={(e) => setSearch(e.target.value)}
-                                />
-                            <CusFilter 
-                                    filter={filter}
-                                    setFilter={setFilter}
-                                    setFilterOnChange={setFilterOnChange}
-                                    setSortType={setSortType}
-                                    titleLbl='Tower'
-                            />
-                            </Flex>
+		return (
+			<Flex
+				flexDir='column'
+				p={'45px'}
+				h={'100%'}
+				bg={'#EFF3F6'}
+				justifyContent={'space-between'}
+			>
+				<ScaleFade
+					initialScale={0.9}
+					in='true'
+				>
+					<Flex flexDir='column'>
+						<Heading
+							fontSize='md'
+							color={'b.300'}
+						>
+							Hi, {curUser.FName}!
+						</Heading>
+						<Text color={'b.300'}>
+							Manage the maintenance here.
+						</Text>
+						<Flex
+							display='flex'
+							justifyContent='flex-end'
+							mb={5}
+							gap={5}
+							flexDir={{
+								base: 'column',
+								md: 'row',
+							}}
+						>
+							<Flex gap={5}>
+								<CusSearch
+									placeholder={'Search by ID'}
+									onChange={(e) => setSearch(e.target.value)}
+								/>
+								<CusFilter
+									filter={filter}
+									setFilter={setFilter}
+									setFilterOnChange={setFilterOnChange}
+									setSortType={setSortType}
+									titleLbl='Tower'
+								/>
+							</Flex>
 
-                            <AddMRequest />
-                        </Flex>
+							<AddMRequest />
+						</Flex>
 
-                        <Flex
-                            justifyContent={'space-between'}
-                            flexDir={'column'}
-                        >
-                            <CusTable
-                                header={header}
-                                children={
-                                    <MRequestTable
-                                        data={records}
-                                        search={search}
-                                        all={mrequest}
-                                    />
-                                }
-                            />
-                        </Flex>
-                    </Flex>
-                </ScaleFade>
-                <CusPagination
-                    page={pages}
-                    currentPage={currentPage}
-                    setCurrentPage={setCurrentPage}
-                    lastIndex={lastIndex}
-                    firstIndex={firstIndex}
-                    numPage={numPage}
-                />
-            </Flex>
-        );
-    }
-}
+						<Flex
+							justifyContent={'space-between'}
+							flexDir={'column'}
+						>
+							{records.length >= 1 ? (
+								<CusTable
+									header={header}
+									children={
+										<MRequestTable
+											data={records}
+											search={search}
+											all={mrequest}
+										/>
+									}
+								/>
+							) : (
+								<Flex
+									flexDir='column'
+									h={'100%'}
+									bg={'#EFF3F6'}
+									justifyContent={'center'}
+									align={'center'}
+									gap={2}
+								>
+									<Image
+										src={
+											'./../../../../public/gifs/maintenance/document.gif'
+										}
+										size={'xl'}
+										objectFit={'contain'}
+									/>
+
+									<Text fontWeight={'bold'}>
+										No data available.
+									</Text>
+								</Flex>
+							)}
+						</Flex>
+					</Flex>
+				</ScaleFade>
+				{records.length >= 1 && (
+					<CusPagination
+						page={pages}
+						currentPage={currentPage}
+						setCurrentPage={setCurrentPage}
+						lastIndex={lastIndex}
+						firstIndex={firstIndex}
+						numPage={numPage}
+					/>
+				)}
+			</Flex>
+		);
+	}
+};
 
 export default MRequest;

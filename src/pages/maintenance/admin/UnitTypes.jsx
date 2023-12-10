@@ -9,6 +9,7 @@ import {
 	Button,
 	Divider,
 	ScaleFade,
+	Image,
 } from '@chakra-ui/react';
 import { Body } from '../../../sections/maintenance';
 import {
@@ -236,30 +237,56 @@ const Item = () => {
 							flexDir={'column'}
 							gap={3}
 						>
-							<CusTable
-								header={header}
-								children={
-									<UnitsSetTable
-										data={records}
-										search={search}
-										all={unitData}
-										units={units}
-										unitTowerID={unitTowerID}
+							{records.length >= 1 ? (
+								<CusTable
+									header={header}
+									children={
+										<UnitsSetTable
+											data={records}
+											search={search}
+											all={unitData}
+											units={units}
+											unitTowerID={unitTowerID}
+										/>
+									}
+								/>
+							) : (
+								<Flex
+									flexDir='column'
+									h={'30%'}
+									bg={'#EFF3F6'}
+									justifyContent={'center'}
+									align={'center'}
+									gap={2}
+								>
+									<Image
+										src={
+											'./../../../../public/gifs/maintenance/document.gif'
+										}
+										size={'md'}
+										objectFit={'contain'}
+										h={150}
 									/>
-								}
-							/>
+
+									<Text fontWeight={'bold'}>
+										No data available.
+									</Text>
+								</Flex>
+							)}
 						</Flex>
 					</Flex>
 				</ScaleFade>
 
-				<CusPagination
-					page={pages}
-					currentPage={currentPage}
-					setCurrentPage={setCurrentPage}
-					lastIndex={lastIndex}
-					firstIndex={firstIndex}
-					numPage={numPage}
-				/>
+				{records.length >= 1 && (
+					<CusPagination
+						page={pages}
+						currentPage={currentPage}
+						setCurrentPage={setCurrentPage}
+						lastIndex={lastIndex}
+						firstIndex={firstIndex}
+						numPage={numPage}
+					/>
+				)}
 
 				<ScaleFade
 					initialScale={0.9}
@@ -307,24 +334,41 @@ const Item = () => {
 							justifyContent={'space-between'}
 							flexDir={'column'}
 						>
-							<CusTable
-								header={unitsHeader}
-								children={
-									<UnitsTable
-										data={recordsList}
-										searchList={searchList}
-										all={u}
+							{recordsList.length >= 1 ? (
+								<>
+									<CusTable
+										header={unitsHeader}
+										children={
+											<UnitsTable
+												data={recordsList}
+												searchList={searchList}
+												all={u}
+											/>
+										}
 									/>
-								}
-							/>
-							<CusPagination
-								page={pagesList}
-								currentPage={currentPageList}
-								setCurrentPage={setCurrentPageList}
-								lastIndex={lastIndexList}
-								firstIndex={firstIndexList}
-								numPage={numPageList}
-							/>
+									<CusPagination
+										page={pagesList}
+										currentPage={currentPageList}
+										setCurrentPage={setCurrentPageList}
+										lastIndex={lastIndexList}
+										firstIndex={firstIndexList}
+										numPage={numPageList}
+									/>
+								</>
+							) : (
+								<Flex
+									flexDir='column'
+									justifyContent={'center'}
+									align={'center'}
+									bgColor={'b.300'}
+									p={2}
+									color={'w.300'}
+								>
+									<Text fontWeight={'medium'}>
+										No data available.
+									</Text>
+								</Flex>
+							)}
 						</Flex>
 
 						<Flex
@@ -340,7 +384,7 @@ const Item = () => {
 							<Flex
 								justifyContent={'space-between'}
 								flexDir={'column'}
-								w={{ base: '100%', sm: '50%' }}
+								// w={{ base: '100%', sm: '30%' }}
 								gap={2}
 							>
 								<Heading
@@ -349,18 +393,33 @@ const Item = () => {
 								>
 									Types
 								</Heading>
-								<CusTable
-									header={typeHeader}
-									children={
-										<UnitTypesTable all={unitTypes} />
-									}
-								/>
+								{unitTypes.length > 0 ? (
+									<CusTable
+										header={typeHeader}
+										children={
+											<UnitTypesTable all={unitTypes} />
+										}
+									/>
+								) : (
+									<Flex
+										flexDir='column'
+										justifyContent={'center'}
+										align={'center'}
+										bgColor={'b.300'}
+										p={2}
+										color={'w.300'}
+									>
+										<Text fontWeight={'medium'}>
+											No data available.
+										</Text>
+									</Flex>
+								)}
 							</Flex>
 							<Flex
 								justifyContent={'space-between'}
 								flexDir={'column'}
 								gap={2}
-								w={{ base: '100%', sm: '50%' }}
+								// w={{ base: '100%', sm: '50%' }}
 							>
 								<Heading
 									fontSize='sm'
@@ -368,10 +427,27 @@ const Item = () => {
 								>
 									Size
 								</Heading>
-								<CusTable
-									header={sizeHeader}
-									children={<UnitSizesTable all={unitSize} />}
-								/>
+								{unitSize.length > 0 ? (
+									<CusTable
+										header={sizeHeader}
+										children={
+											<UnitSizesTable all={unitSize} />
+										}
+									/>
+								) : (
+									<Flex
+										flexDir='column'
+										justifyContent={'center'}
+										align={'center'}
+										bgColor={'b.300'}
+										p={2}
+										color={'w.300'}
+									>
+										<Text fontWeight={'medium'}>
+											No data available.
+										</Text>
+									</Flex>
+								)}
 							</Flex>
 						</Flex>
 					</Flex>

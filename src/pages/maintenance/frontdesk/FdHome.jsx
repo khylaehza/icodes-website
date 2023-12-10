@@ -22,6 +22,7 @@ import {
 	StepIndicator,
 	StepStatus,
 	StepNumber,
+	Image,
 } from '@chakra-ui/react';
 import { Body } from '../../../sections/maintenance';
 import { RiArrowDownSFill } from 'react-icons/ri';
@@ -45,7 +46,7 @@ const FdHome = () => {
 };
 
 const Item = () => {
-	const { mrequest, towers, visitors, bookings } = useData();
+	const { mrequest, towers, visitors, bookings, curUser } = useData();
 
 	const towerOption = [];
 	if (towers && towers[0]) {
@@ -74,7 +75,7 @@ const Item = () => {
 
 		const item = list[0];
 
-		if (visitors,bookings) {
+		if (visitors && bookings) {
 			const [sortType, setSortType] = useState('asc');
 			const totalVisitors = [];
 			const totalBookings = [];
@@ -94,14 +95,13 @@ const Item = () => {
 				totalVisitors.push(v.Visitor);
 			});
 
-		
 			const flattenedVisitors = totalVisitors.flat();
 
 			const newVisitors = [...new Set(flattenedVisitors)];
 
 			const totalNumberOfVisitors = newVisitors.length;
 
-			if (totalActiveVisitors,totalActiveBookings) {
+			if (totalActiveVisitors && totalActiveBookings) {
 				totalActiveVisitors.sort((a) => {
 					return moment(
 						new Date(
@@ -278,16 +278,14 @@ const Item = () => {
 														</Step>
 													))}
 											</Stepper>
-											{totalActiveVisitors.length == 0 
-												? 'No Visitors for today': 
-												totalActiveVisitors.length > 2 
+											{totalActiveVisitors.length == 0
+												? 'No Visitors for today'
+												: totalActiveVisitors.length > 2
 												? `${
 														totalActiveVisitors.length -
 														2
 												  }  more`
-												: null
-											}
-						
+												: null}
 										</Card>
 									</Box>
 									<Box w={'100%'}>
@@ -323,20 +321,24 @@ const Item = () => {
 
 															<Text>
 																{' '}
-																({item.NumPerson}) {item.AmenityType}
+																(
+																{item.NumPerson}
+																){' '}
+																{
+																	item.AmenityType
+																}
 															</Text>
 														</Step>
 													))}
 											</Stepper>
-											{totalActiveBookings.length == 0 
-												? 'No Bookings for today': 
-												totalActiveBookings.length > 2 
+											{totalActiveBookings.length == 0
+												? 'No Bookings for today'
+												: totalActiveBookings.length > 2
 												? `${
-													totalActiveBookings.length -
+														totalActiveBookings.length -
 														2
 												  }  more`
-												: null
-											}
+												: null}
 										</Card>
 									</Box>
 								</VStack>
@@ -384,34 +386,28 @@ const Item = () => {
 				</Flex>
 			);
 		}
+	} else {
+		return (
+			<Flex
+				flexDir='column'
+				h={'100%'}
+				bg={'#EFF3F6'}
+				justifyContent={'center'}
+				align={'center'}
+				gap={2}
+			>
+				<Image
+					src={'./gifs/maintenance/document.gif'}
+					size={'xl'}
+					objectFit={'contain'}
+				/>
+				<Heading>Welcome {curUser.FName}!</Heading>
+				<Text fontWeight={'bold'}>
+					Input data to show in your dashboard.
+				</Text>
+			</Flex>
+		);
 	}
-
-	// if (item) {
-
-	// }
-	// } else {
-	// 	return (
-	// 		<Flex
-	// 			flexDir='column'
-	// 			h={'100%'}
-	// 			bg={'#EFF3F6'}
-	// 			justifyContent={'center'}
-	// 			align={'center'}
-	// 			gap={2}
-	// 		>
-	// 			<Image
-	// 				src={'./gifs/maintenance/document.gif'}
-	// 				size={'xl'}
-	// 				objectFit={'contain'}
-	// 			/>
-	// 			<Heading>Welcome {curUser.FName}!</Heading>
-	// 			<Text fontWeight={'bold'}>
-	// 				Input data to show in your dashboard.
-	// 			</Text>
-	// 		</Flex>
-	// 	);
-	// }
-	// }
 };
 
 export default FdHome;

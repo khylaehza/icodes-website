@@ -21,15 +21,16 @@ import {
 	Step,
 	StepIndicator,
 	StepStatus,
-	StepNumber
+	StepNumber,
+	Image,
 } from '@chakra-ui/react';
 import { Body } from '../../../sections/maintenance';
 import { RiArrowDownSFill } from 'react-icons/ri';
 import { useData } from '../../../../DataContext';
-import{GiAcousticMegaphone} from 'react-icons/gi'
-import {RiToolsFill} from 'react-icons/ri'
+import { GiAcousticMegaphone } from 'react-icons/gi';
+import { RiToolsFill } from 'react-icons/ri';
 import { DateChecker } from '../../../utilities';
-import moment from 'moment'
+import moment from 'moment';
 
 const PmHome = () => {
 	return (
@@ -45,7 +46,7 @@ const PmHome = () => {
 };
 
 const Item = () => {
-	const { anncmnts , mrequest, towers } = useData();
+	const { anncmnts, mrequest, towers, curUser } = useData();
 
 	const towerOption = [];
 	if (towers && towers[0]) {
@@ -73,46 +74,41 @@ const Item = () => {
 		const list = filterOnChange ? filterTower : towers;
 
 		const item = list[0];
-		
-		if( mrequest && anncmnts){
 
+		if (mrequest && anncmnts) {
 			const [sortType, setSortType] = useState('asc');
 
-			const totalActiveAnncmnts = anncmnts.filter((items)=>(items.Status == true && items.For.includes(item.TowerName)))
-			const totalActiveMaintenance = mrequest.filter((items)=>(items.Status == 'Active' && items.Unit.includes(item.TowerNum)))
+			const totalActiveAnncmnts = anncmnts.filter(
+				(items) =>
+					items.Status == true && items.For.includes(item.TowerName)
+			);
+			const totalActiveMaintenance = mrequest.filter(
+				(items) =>
+					items.Status == 'Active' &&
+					items.Unit.includes(item.TowerNum)
+			);
 
-			
-			if (totalActiveAnncmnts && totalActiveMaintenance){
-				totalActiveAnncmnts.sort((a)=>{
-
-					return(
-						moment(
-							new Date(
-								sortType == 'asc'
-									? a.CreatedDate.seconds * 1000
-									: b.CreatedDate.seconds * 1000
-							)
+			if (totalActiveAnncmnts && totalActiveMaintenance) {
+				totalActiveAnncmnts.sort((a) => {
+					return moment(
+						new Date(
+							sortType == 'asc'
+								? a.CreatedDate.seconds * 1000
+								: b.CreatedDate.seconds * 1000
 						)
-					)
-				})
+					);
+				});
 
-
-				totalActiveMaintenance.sort((a)=>{
-
-					return(
-						moment(
-							new Date(
-								sortType == 'asc'
-									? a.CreatedDate.seconds * 1000
-									: b.CreatedDate.seconds * 1000
-							)
+				totalActiveMaintenance.sort((a) => {
+					return moment(
+						new Date(
+							sortType == 'asc'
+								? a.CreatedDate.seconds * 1000
+								: b.CreatedDate.seconds * 1000
 						)
-					)
-				})
-
-
+					);
+				});
 			}
-
 
 			return (
 				<Flex
@@ -141,7 +137,7 @@ const Item = () => {
 							>
 								Tower {fil ? fil : item.TowerNum}
 							</MenuButton>
-	
+
 							<MenuList w='110px'>
 								<MenuOptionGroup
 									defaultValue='Tower 1'
@@ -191,27 +187,32 @@ const Item = () => {
 								w={'100%'}
 							>
 								<HStack alignContent={'center'}>
-									<Flex boxSize={'50%'} justifyContent={'center'}>
+									<Flex
+										boxSize={'50%'}
+										justifyContent={'center'}
+									>
 										<GiAcousticMegaphone
-											size={"70%"}
+											size={'70%'}
 											color={'green'}
 										/>
 									</Flex>
-									<Box boxSize={'60%'} justifyContent={'center'}>
+									<Box
+										boxSize={'60%'}
+										justifyContent={'center'}
+									>
 										<Heading
 											fontSize={'105px'}
 											alignItems={'center'}
 											textAlign={'center'}
 											p={3}
 										>
-										
-										{totalActiveAnncmnts.length}
-										
+											{totalActiveAnncmnts.length}
 										</Heading>
-										<Heading size={'md'}>Active Announcement</Heading>
+										<Heading size={'md'}>
+											Active Announcement
+										</Heading>
 									</Box>
-								</HStack>							
-								
+								</HStack>
 							</GridItem>
 							<GridItem
 								bgColor={'w.300'}
@@ -220,80 +221,121 @@ const Item = () => {
 								p={5}
 								rowSpan={{ base: 5, xl: 2 }}
 								colSpan={3}
-								
 							>
-								<VStack boxSize={'100%'} p={3}>
+								<VStack
+									boxSize={'100%'}
+									p={3}
+								>
 									<Box w={'100%'}>
-										<Heading size={'md'}>Latest Announcements</Heading>
+										<Heading size={'md'}>
+											Latest Announcements
+										</Heading>
 										<Divider
 											w='100%'
 											mt={3}
 											mb={3}
-										/>	
+										/>
 
-										<Card size={'100%'} p={5} borderRadius={15}>
-											
-											<Stepper orientation='vertical'  gap='3'>
-												{totalActiveAnncmnts.slice(0,2).map((item, index) => (
-													<Step key={index}>
-														<StepIndicator>
-															<StepStatus
-																active={<StepNumber />}
-															/>
-														</StepIndicator>
+										<Card
+											size={'100%'}
+											p={5}
+											borderRadius={15}
+										>
+											<Stepper
+												orientation='vertical'
+												gap='3'
+											>
+												{totalActiveAnncmnts
+													.slice(0, 2)
+													.map((item, index) => (
+														<Step key={index}>
+															<StepIndicator>
+																<StepStatus
+																	active={
+																		<StepNumber />
+																	}
+																/>
+															</StepIndicator>
 
-														<Text>
-															{item.Description} ( <DateChecker dateToCheck={ new Date(
-																item.CreatedDate.seconds *1000
-															)}/> )
-														</Text>
-														
-													</Step>
-												))}
+															<Text>
+																{
+																	item.Description
+																}{' '}
+																({' '}
+																<DateChecker
+																	dateToCheck={
+																		new Date(
+																			item
+																				.CreatedDate
+																				.seconds *
+																				1000
+																		)
+																	}
+																/>{' '}
+																)
+															</Text>
+														</Step>
+													))}
 											</Stepper>
-											{totalActiveAnncmnts.length == 0 
-												? 'No Bookings for today': 
-												totalActiveAnncmnts.length > 2 
+											{totalActiveAnncmnts.length == 0
+												? 'No Bookings for today'
+												: totalActiveAnncmnts.length > 2
 												? `${
-													totalActiveAnncmnts.length -
+														totalActiveAnncmnts.length -
 														2
 												  }  more`
-												: null
-											}
+												: null}
 										</Card>
 									</Box>
 									<Box w={'100%'}>
-									<Heading size={'md'}>Latest Maintenance Request</Heading>
+										<Heading size={'md'}>
+											Latest Maintenance Request
+										</Heading>
 										<Divider
 											w='100%'
 											mt={3}
 											mb={3}
-										/>	
+										/>
 
-										<Card size={'100%'} p={5} borderRadius={15}>
-											
-											<Stepper orientation='vertical'  gap='3'>
-												{totalActiveMaintenance.slice(0,2).map((item, index) => (
-													<Step key={index}>
-														<StepIndicator>
-															<StepStatus
-																active={<StepNumber />}
-															/>
-														</StepIndicator>
+										<Card
+											size={'100%'}
+											p={5}
+											borderRadius={15}
+										>
+											<Stepper
+												orientation='vertical'
+												gap='3'
+											>
+												{totalActiveMaintenance
+													.slice(0, 2)
+													.map((item, index) => (
+														<Step key={index}>
+															<StepIndicator>
+																<StepStatus
+																	active={
+																		<StepNumber />
+																	}
+																/>
+															</StepIndicator>
 
-														<Text>{item.RepairType} ( {item.Unit} )</Text>														
-													</Step>
-												))}
+															<Text>
+																{
+																	item.RepairType
+																}{' '}
+																( {item.Unit} )
+															</Text>
+														</Step>
+													))}
 											</Stepper>
-											{totalActiveMaintenance.length == 0 
-												? 'No Bookings for today': 
-												totalActiveMaintenance.length > 2 
+											{totalActiveMaintenance.length == 0
+												? 'No Bookings for today'
+												: totalActiveMaintenance.length >
+												  2
 												? `${
-													totalActiveMaintenance.length -
+														totalActiveMaintenance.length -
 														2
 												  }  more`
-												: null
-											}
+												: null}
 										</Card>
 									</Box>
 								</VStack>
@@ -309,13 +351,19 @@ const Item = () => {
 								w={'100%'}
 							>
 								<HStack>
-									<Flex boxSize={'50%'} justifyContent={'center'}>
+									<Flex
+										boxSize={'50%'}
+										justifyContent={'center'}
+									>
 										<RiToolsFill
 											size={'65%'}
 											color={'0D2B4D'}
 										/>
 									</Flex>
-									<Box boxSize={'60%'} justifyContent={'center'}>
+									<Box
+										boxSize={'60%'}
+										justifyContent={'center'}
+									>
 										<Heading
 											fontSize={'105px'}
 											alignItems={'center'}
@@ -324,48 +372,39 @@ const Item = () => {
 										>
 											{totalActiveMaintenance.length}
 										</Heading>
-										<Heading size={'md'}>Active Maintenance</Heading>	
+										<Heading size={'md'}>
+											Active Maintenance
+										</Heading>
 									</Box>
-								</HStack>			
+								</HStack>
 							</GridItem>
 						</Grid>
 					</ScaleFade>
 				</Flex>
 			);
 		}
-
-
-
-		
-
+	} else {
+		return (
+			<Flex
+				flexDir='column'
+				h={'100%'}
+				bg={'#EFF3F6'}
+				justifyContent={'center'}
+				align={'center'}
+				gap={2}
+			>
+				<Image
+					src={'./gifs/maintenance/document.gif'}
+					size={'xl'}
+					objectFit={'contain'}
+				/>
+				<Heading>Welcome {curUser.FName}!</Heading>
+				<Text fontWeight={'bold'}>
+					Input data to show in your dashboard.
+				</Text>
+			</Flex>
+		);
 	}
-
-	// if (item) {
-
-	// }
-	// } else {
-	// 	return (
-	// 		<Flex
-	// 			flexDir='column'
-	// 			h={'100%'}
-	// 			bg={'#EFF3F6'}
-	// 			justifyContent={'center'}
-	// 			align={'center'}
-	// 			gap={2}
-	// 		>
-	// 			<Image
-	// 				src={'./gifs/maintenance/document.gif'}
-	// 				size={'xl'}
-	// 				objectFit={'contain'}
-	// 			/>
-	// 			<Heading>Welcome {curUser.FName}!</Heading>
-	// 			<Text fontWeight={'bold'}>
-	// 				Input data to show in your dashboard.
-	// 			</Text>
-	// 		</Flex>
-	// 	);
-	// }
-	// }
 };
 
 export default PmHome;

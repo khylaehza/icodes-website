@@ -9,6 +9,7 @@ import {
 	Button,
 	Divider,
 	ScaleFade,
+	Image,
 } from '@chakra-ui/react';
 import { Body } from '../../../sections/maintenance';
 import {
@@ -168,28 +169,54 @@ const Item = () => {
 							flexDir={'column'}
 							gap={3}
 						>
-							<CusTable
-								header={header}
-								children={
-									<AmountSetTable
-										data={records}
-										search={search}
-										all={amounts}
+							{records.length > 0 ? (
+								<CusTable
+									header={header}
+									children={
+										<AmountSetTable
+											data={records}
+											search={search}
+											all={amounts}
+										/>
+									}
+								/>
+							) : (
+								<Flex
+									flexDir='column'
+									h={'30%'}
+									bg={'#EFF3F6'}
+									justifyContent={'center'}
+									align={'center'}
+									gap={2}
+								>
+									<Image
+										src={
+											'./../../../../public/gifs/maintenance/document.gif'
+										}
+										size={'md'}
+										objectFit={'contain'}
+										h={150}
 									/>
-								}
-							/>
+
+									<Text fontWeight={'bold'}>
+										No data available.
+									</Text>
+								</Flex>
+							)}
 						</Flex>
 					</Flex>
 				</ScaleFade>
 
-				<CusPagination
-					page={pages}
-					currentPage={currentPage}
-					setCurrentPage={setCurrentPage}
-					lastIndex={lastIndex}
-					firstIndex={firstIndex}
-					numPage={numPage}
-				/>
+				{records.length > 0 && (
+					<CusPagination
+						page={pages}
+						currentPage={currentPage}
+						setCurrentPage={setCurrentPage}
+						lastIndex={lastIndex}
+						firstIndex={firstIndex}
+						numPage={numPage}
+					/>
+				)}
 
 				<ScaleFade
 					initialScale={0.9}
@@ -211,10 +238,25 @@ const Item = () => {
 							>
 								Discounts
 							</Heading>
-							<CusTable
-								header={discountHeader}
-								children={<DiscountTable all={discounts} />}
-							/>
+							{discounts.length > 0 ? (
+								<CusTable
+									header={discountHeader}
+									children={<DiscountTable all={discounts} />}
+								/>
+							) : (
+								<Flex
+									flexDir='column'
+									justifyContent={'center'}
+									align={'center'}
+									bgColor={'b.300'}
+									p={2}
+									color={'w.300'}
+								>
+									<Text fontWeight={'medium'}>
+										No data available.
+									</Text>
+								</Flex>
+							)}
 						</Flex>
 
 						<Flex
@@ -229,10 +271,26 @@ const Item = () => {
 							>
 								Payment Terms
 							</Heading>
-							<CusTable
-								header={payTermHeader}
-								children={<PayTermTable all={payterm} />}
-							/>
+
+							{payterm.length > 0 ? (
+								<CusTable
+									header={payTermHeader}
+									children={<PayTermTable all={payterm} />}
+								/>
+							) : (
+								<Flex
+									flexDir='column'
+									justifyContent={'center'}
+									align={'center'}
+									bgColor={'b.300'}
+									p={2}
+									color={'w.300'}
+								>
+									<Text fontWeight={'medium'}>
+										No data available.
+									</Text>
+								</Flex>
+							)}
 						</Flex>
 					</Flex>
 				</ScaleFade>

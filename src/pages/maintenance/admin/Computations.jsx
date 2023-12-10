@@ -133,13 +133,7 @@ const Item = () => {
 								md: 'row',
 							}}
 						>
-							<Flex gap={5}>
-								{/* <CusSearch
-									placeholder={'Search by Unit Name'}
-									onChange={(e) => setSearch(e.target.value)}
-								/>
-								<CusFilter setSortType={setSortType} /> */}
-							</Flex>
+							<Flex gap={5}></Flex>
 							<Menu>
 								<MenuButton
 									as={Button}
@@ -165,15 +159,6 @@ const Item = () => {
 					</Flex>
 				</ScaleFade>
 
-				{/* <CusPagination
-					page={pages}
-					currentPage={currentPage}
-					setCurrentPage={setCurrentPage}
-					lastIndex={lastIndex}
-					firstIndex={firstIndex}
-					numPage={numPage}
-				/> */}
-
 				<ScaleFade
 					initialScale={0.9}
 					in='true'
@@ -193,10 +178,27 @@ const Item = () => {
 							>
 								Unit Values
 							</Heading>
-							<CusTable
-								header={valueHeader}
-								children={<UnitValueTable all={unitValues} />}
-							/>
+							{unitValues.length > 0 ? (
+								<CusTable
+									header={valueHeader}
+									children={
+										<UnitValueTable all={unitValues} />
+									}
+								/>
+							) : (
+								<Flex
+									flexDir='column'
+									justifyContent={'center'}
+									align={'center'}
+									bgColor={'b.300'}
+									p={2}
+									color={'w.300'}
+								>
+									<Text fontWeight={'medium'}>
+										No data available.
+									</Text>
+								</Flex>
+							)}
 						</Flex>
 						<Flex
 							justifyContent={'space-between'}
@@ -210,10 +212,25 @@ const Item = () => {
 							>
 								Loans
 							</Heading>
-							<CusTable
-								header={loanHeader}
-								children={<LoanTable all={loans} />}
-							/>
+							{loans.length > 0 ? (
+								<CusTable
+									header={loanHeader}
+									children={<LoanTable all={loans} />}
+								/>
+							) : (
+								<Flex
+									flexDir='column'
+									justifyContent={'center'}
+									align={'center'}
+									bgColor={'b.300'}
+									p={2}
+									color={'w.300'}
+								>
+									<Text fontWeight={'medium'}>
+										No data available.
+									</Text>
+								</Flex>
+							)}
 						</Flex>
 
 						<Flex
@@ -228,10 +245,25 @@ const Item = () => {
 							>
 								Rent-To-Own
 							</Heading>
-							<CusTable
-								header={rentToOwnHeader}
-								children={<PayTermTable all={payterm} />}
-							/>
+							{payterm.length > 0 ? (
+								<CusTable
+									header={rentToOwnHeader}
+									children={<PayTermTable all={payterm} />}
+								/>
+							) : (
+								<Flex
+									flexDir='column'
+									justifyContent={'center'}
+									align={'center'}
+									bgColor={'b.300'}
+									p={2}
+									color={'w.300'}
+								>
+									<Text fontWeight={'medium'}>
+										No data available.
+									</Text>
+								</Flex>
+							)}
 						</Flex>
 					</Flex>
 				</ScaleFade>

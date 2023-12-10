@@ -272,11 +272,12 @@ const FindUnit = ({ pref, res, setUnitPref, setUserPref }) => {
 					flexDir={'column'}
 					alignItems={'center'}
 					justifyContent={'center'}
+					gap={5}
 				>
-					<Text>
-						There has no unit that match your preference. Please try
-						to retake the assessment.
-					</Text>
+					<Heading size={'sm'}>
+						There is no unit that matches your preference. Please
+						try to retake the assessment.
+					</Heading>
 					<Button
 						bgColor={'b.300'}
 						color={'w.300'}
@@ -286,7 +287,7 @@ const FindUnit = ({ pref, res, setUnitPref, setUserPref }) => {
 							navigate('/assessment');
 						}}
 					>
-						Proceed
+						Retry
 					</Button>
 				</Flex>
 			) : (
