@@ -90,7 +90,9 @@ const AddEmployee = ({ employees }) => {
 					'Invalid Email.'
 				),
 			empPos: Yup.string().required('Position is required.'),
-			empId: Yup.string().required('Employee ID is required.'),
+			empId: Yup.string()
+				.required('Employee ID is required.'),
+				// .matches(/^[0-9]{6}$/, 'Employee ID must be exactly 6 digits.'),
 			dStart: Yup.string().required('Date Start is required.'),
 		}),
 		onSubmit: (value, actions) => {

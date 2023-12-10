@@ -47,20 +47,6 @@ const UnitTypesForm = ({ form }) => {
 					</Stack>
 					<HStack spacing={3}>
 						<CusNumInput
-							label={'Maximum Capacity'}
-							name='maxPeople'
-							id={'maxPeople'}
-							value={form.values.maxPeople}
-							onChange={(e) => {
-								form.setFieldValue('maxPeople', e);
-							}}
-							onBlur={form.handleBlur}
-							error={form.errors.maxPeople}
-							touch={form.touched.maxPeople}
-							isRequired
-						/>
-
-						<CusNumInput
 							label={'No. of Bathroom'}
 							name='noBath'
 							id={'noBath'}
