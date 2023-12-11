@@ -5,10 +5,6 @@ import {
 	ModalHeader,
 	ModalBody,
 	ModalCloseButton,
-	Button,
-	IconButton,
-	useDisclosure,
-	ModalFooter,
 } from '@chakra-ui/react';
 
 function CusModalClear({ body, header, button, isOpen, onClose }) {
@@ -22,10 +18,7 @@ function CusModalClear({ body, header, button, isOpen, onClose }) {
 				size={'3xl'}
 			>
 				<ModalOverlay />
-				<ModalContent
-					// maxW='40%'
-					id={'form'}
-				>
+				<ModalContent id={'form'}>
 					<ModalCloseButton />
 					<ModalHeader>{header}</ModalHeader>
 					<ModalBody pb={5}>{body}</ModalBody>

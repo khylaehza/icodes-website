@@ -49,7 +49,6 @@ import {
 	ViewUnitOwner,
 	BookAmenities,
 } from '../pages/maintenance';
-import { FinderHome } from '../pages/finder';
 import NotFoundPage from './NotFoundPage';
 
 const RoutesNav = () => {

@@ -303,9 +303,7 @@ const Item = () => {
 											>
 												<FaBed size={25} />
 												<Text fontWeight={'bold'}>
-													{unitOwn == ''
-														? 0
-														: unitOwn.length}{' '}
+													{u == '' ? 0 : u.length}{' '}
 													UNITS
 												</Text>
 											</Flex>

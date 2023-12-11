@@ -1556,3 +1556,69 @@ export const CusPaymentStatus = ({
 		</FormControl>
 	);
 };
+
+export const CusSelectAllTower = ({
+	label,
+	name,
+	onChange,
+	value,
+	error,
+	onBlur,
+	touch,
+	variant = 'outline',
+	icon,
+	bgColor = 'w.300',
+	isRequired,
+}) => {
+	const { towers } = useData();
+
+	var byName = towers.slice(0);
+
+	if (byName) {
+		byName.sort(function (a, b) {
+			var x = a.TowerName.toLowerCase();
+			var y = b.TowerName.toLowerCase();
+			return x < y ? -1 : x > y ? 1 : 0;
+		});
+	}
+
+	let currentValue = value || 'Select';
+	return (
+		<FormControl
+			isInvalid={error && touch}
+			isRequired={isRequired}
+		>
+			<FormLabel fontSize={'xs'}>{label}</FormLabel>
+
+			<Select
+				name={name}
+				variant={variant}
+				bgColor={bgColor}
+				onChange={onChange}
+				onBlur={onBlur}
+				value={currentValue}
+				fontSize={'xs'}
+				icon={icon}
+			>
+				<option
+					value='Select'
+					disabled
+				>
+					Select
+				</option>
+
+				{byName.map((item, key) => {
+					return (
+						<option
+							key={key}
+							value={item.TowerName}
+						>
+							{item.TowerName}
+						</option>
+					);
+				})}
+			</Select>
+			<FormErrorMessage fontSize={'xs'}>{error}</FormErrorMessage>
+		</FormControl>
+	);
+};

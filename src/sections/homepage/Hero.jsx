@@ -1,6 +1,6 @@
 import { Flex, Heading, Text, Image } from '@chakra-ui/react';
 import { Units, Tower } from '.';
-const Hero = () => {
+const Hero = ({ unitData }) => {
 	return (
 		<>
 			<Flex
@@ -24,7 +24,7 @@ const Hero = () => {
 					Live a Life of Convenience
 				</Text>
 			</Flex>
-			<Units />
+			<Units unitData={unitData} />
 
 			<Image
 				objectFit={'cover'}

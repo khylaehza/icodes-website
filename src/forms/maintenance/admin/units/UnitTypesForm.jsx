@@ -11,7 +11,7 @@ const UnitTypesForm = ({ form }) => {
 							label={'Unit Type'}
 							name='typeName'
 							id={'typeName'}
-							placeholder={'e.g. 1-Bedroom'}
+							placeholder={'e.g. 1 Bedroom'}
 							onChange={form.handleChange}
 							onBlur={form.handleBlur}
 							value={form.values.typeName}

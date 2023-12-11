@@ -10,6 +10,7 @@ import {
 	Models,
 	FurnitureChoices,
 	FurnitureInfo,
+	Guide,
 } from '../../sections/interactive';
 import { useCustomization } from '../../../FurnitureContext';
 import { TopNav } from '../../sections/navigation';
@@ -313,6 +314,7 @@ const UnitCanvasPage = () => {
 				}
 			})}
 
+			<Guide />
 			<CusAlert
 				button={
 					<IconButton

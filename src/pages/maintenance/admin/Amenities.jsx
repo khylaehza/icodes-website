@@ -147,15 +147,10 @@ const Item = () => {
 								<CusTable
 									header={header}
 									children={
-										<CusTable
-											header={header}
-											children={
-												<AmenitiesTable
-													data={records}
-													search={search}
-													all={amenities}
-												/>
-											}
+										<AmenitiesTable
+											data={records}
+											search={search}
+											all={amenities}
 										/>
 									}
 								/>

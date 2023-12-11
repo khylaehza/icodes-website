@@ -123,6 +123,7 @@ export function DataProvider({ children }) {
 
 	const [towers, setTowers] = useState([{}]);
 	useEffect(() => {
+		setLoading(true);
 		const q = query(collection(db, 'maintenance', 'admin', 'tbl_towers'));
 		const unsubscribe = onSnapshot(q, (querySnapshot) => {
 			const towers = [];
@@ -135,6 +136,7 @@ export function DataProvider({ children }) {
 				}
 			);
 			setTowers(towers);
+			setLoading(false);
 		});
 		return () => unsubscribe();
 	}, []);

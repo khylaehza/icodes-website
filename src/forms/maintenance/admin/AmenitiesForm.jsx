@@ -4,7 +4,7 @@ import {
 	CusInputRegular,
 	CusTextArea,
 	CusNumInput,
-	CusSelectTower,
+	CusSelectAllTower,
 	CusUpload,
 } from '../../../customs';
 
@@ -26,7 +26,7 @@ const AmenitiesForm = ({
 						direction={['column', 'row']}
 						spacing={6}
 					>
-						<CusSelectTower
+						<CusSelectAllTower
 							label={'Tower'}
 							name='tower'
 							id='tower'

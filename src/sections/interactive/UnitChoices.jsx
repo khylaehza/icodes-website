@@ -11,8 +11,11 @@ import {
 } from '@chakra-ui/react';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useCustomization } from '../../../FurnitureContext';
 const UnitChoices = () => {
 	const navigate = useNavigate();
+
+	const { setActiveFurn } = useCustomization();
 
 	const units = [
 		{
@@ -159,6 +162,7 @@ const UnitChoices = () => {
 					color={'w.300'}
 					_hover={{ bgColor: 'b.400', color: 'w.300' }}
 					onClick={() => {
+						setActiveFurn([]);
 						navigate('/unitcanvas', {
 							state: { unit: proceed, size: size },
 						});

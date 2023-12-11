@@ -51,6 +51,7 @@ const FinderQuestions = () => {
 
 	let setAnswerVal = [];
 
+	console.log(currentCard, questionLength, currentCard < questionLength - 3);
 	return (
 		<Fade
 			initialScale={0.9}
@@ -137,7 +138,7 @@ const FinderQuestions = () => {
 										</>
 									)}
 
-								{currentCard >= 14 && (
+								{currentCard >= questionLength - 3 && (
 									<Button
 										onClick={handleNext}
 										variant={'solid'}

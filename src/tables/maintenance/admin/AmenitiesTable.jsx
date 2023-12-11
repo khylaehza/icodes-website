@@ -11,7 +11,7 @@ import {
 	useToast,
 	UnorderedList,
 	ListItem,
-	Flex
+	Flex,
 } from '@chakra-ui/react';
 import React from 'react';
 
@@ -21,7 +21,7 @@ import { useState } from 'react';
 
 import { db } from '../../../../firebase-config';
 import { updateDoc, serverTimestamp, doc } from 'firebase/firestore';
-import { CusEnlargeImage } from '../../../customs/index'
+import { CusEnlargeImage } from '../../../customs/index';
 const AmenitiesTable = ({ data, search, all }) => {
 	const toast = useToast();
 	const ret = search ? all : data;
@@ -34,9 +34,9 @@ const AmenitiesTable = ({ data, search, all }) => {
 		isOpen: isStatusModalOpen,
 		onOpen: onStatusModalOpen,
 		onClose: onStatusModalClose,
-	} = useDisclosure()
+	} = useDisclosure();
 	const [Id, setId] = useState('');
-	const [nameLabel, setNameLabel] = useState('')
+	const [nameLabel, setNameLabel] = useState('');
 	const [selectedImage, setSelectedImage] = useState(null);
 	const [amenitiesState, setAmenitiesState] = useState({
 		name: '',
@@ -48,7 +48,7 @@ const AmenitiesTable = ({ data, search, all }) => {
 
 	const handleImageClick = (item) => {
 		setSelectedImage(item.AmenityImg);
-		setNameLabel(item.AmenityName)
+		setNameLabel(item.AmenityName);
 		onImageModalOpen();
 	};
 
@@ -146,9 +146,7 @@ const AmenitiesTable = ({ data, search, all }) => {
 									<Image
 										src={data.AmenityImg}
 										width={{ base: '100px', xl: '100px' }}
-										onClick={() =>
-											handleImageClick(data)
-										}
+										onClick={() => handleImageClick(data)}
 									/>
 								</Td>
 								<CusTitle component={'Amenity ID'} />
@@ -216,8 +214,7 @@ const AmenitiesTable = ({ data, search, all }) => {
 												isChecked={data.Status}
 												onChange={(e) => {
 													statusConfirmation(
-														e.target
-															.checked,
+														e.target.checked,
 														data
 													);
 													setId(data.id);
@@ -248,7 +245,7 @@ const AmenitiesTable = ({ data, search, all }) => {
 										<CusDelete
 											id={data.id}
 											stor={`admin/amenities/${data.AmenityID}/profile.png`}
-											label={` ${data.name}'s Data`}
+											label={` ${data.AmenityName}'s Data`}
 											mainCollection='maintenance'
 											tblDocUser='admin'
 											tblUserCol='tbl_amenities'
@@ -279,7 +276,6 @@ const AmenitiesTable = ({ data, search, all }) => {
 												>
 													{amenitiesState.statusLabel}
 												</Text>{' '}
-												
 												this amenity?
 												<Text
 													as='b'
@@ -308,7 +304,6 @@ const AmenitiesTable = ({ data, search, all }) => {
 									/>
 								}
 							/>
-
 						</Tr>
 					</React.Fragment>
 				);

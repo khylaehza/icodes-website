@@ -33,6 +33,7 @@ const AnnouncementForm = ({ form, options, setOptions, imgFileName }) => {
 							onBlur={form.handleBlur}
 							error={form.errors.towers}
 							touch={form.touched.towers}
+							isRequired={true}
 						/>
 						<CusSelectAnnouncement
 							label={'Type'}
@@ -44,44 +45,8 @@ const AnnouncementForm = ({ form, options, setOptions, imgFileName }) => {
 							value={form.values.purpose}
 							error={form.errors.purpose}
 							touch={form.touched.purpose}
+							isRequired={true}
 						/>
-
-						{/* <CusAnncmntSubject
-                            label={'For'}
-                            name='for'
-                            id={'for'}
-                            placeholder={'Select Announcement subject'}
-                            value={subject}
-                            onChange={(e) => {
-                                form.setFieldValue('for', e);
-                                setOptions(e);
-                                setSubject(e)
-                                setShowSecondMultiSelect(e.some((option) => option.value === 'Unit Owners'));
-                            }}
-                            onBlur={form.handleBlur}
-                        /> */}
-						{/* <CusInputRegular
-							label={'Purpose'}
-							name='purpose'
-							id='purpose'
-							placeholder={'Enter purpose'}
-							onChange={form.handleChange}
-							onBlur={form.handleBlur}
-							value={form.values.purpose}
-							error={form.errors.purpose}
-							touch={form.touched.purpose}
-						/> */}
-
-						{/* <CusSelectStatus
-							label={'Status'}
-							name='status'
-							id='status'
-							onChange={form.handleChange}
-							onBlur={form.handleBlur}
-							value={form.values.status}
-							error={form.errors.status}
-							touch={form.touched.status}
-						/> */}
 					</Stack>
 					<Stack
 						direction={['column', 'row']}
@@ -98,6 +63,7 @@ const AnnouncementForm = ({ form, options, setOptions, imgFileName }) => {
 							value={form.values.subject}
 							error={form.errors.subject}
 							touch={form.touched.subject}
+							isRequired={true}
 						/>
 						<CusInputRegular
 							label={'Author'}
@@ -109,28 +75,9 @@ const AnnouncementForm = ({ form, options, setOptions, imgFileName }) => {
 							value={form.values.author}
 							error={form.errors.author}
 							touch={form.touched.author}
+							isRequired={true}
 						/>
 					</Stack>
-					{/* {showSecondMultiSelect && (
-                            <CusMultiSelectUnit
-                            label={'Unit'}
-                            name='units'
-                            id={'units'}
-                            placeholder={'Select Condo Name'}
-                            value={unit}
-                            onChange={(e) => {
-                                form.setFieldValue('units', e);
-                                setOptions(e)
-                                setUnit(e);
-                            }}
-                            onBlur={form.handleBlur}
-                        />
-                        )} */}
-
-					{/* <Stack
-						direction={['column', 'row']}
-						spacing={6}
-					> */}
 
 					<Stack
 						direction={['column', 'row']}
@@ -149,6 +96,7 @@ const AnnouncementForm = ({ form, options, setOptions, imgFileName }) => {
 							value={form.values.description}
 							error={form.errors.description}
 							touch={form.touched.description}
+							isRequired={true}
 						/>
 
 						<CusUpload
@@ -169,9 +117,10 @@ const AnnouncementForm = ({ form, options, setOptions, imgFileName }) => {
 							onBlur={form.handleBlur}
 							error={form.errors.anncmntImg}
 							touched={form.touched.anncmntImg}
+							isRequired={true}
 						/>
 					</Stack>
-					{/* </Stack> */}
+
 					<Stack
 						direction={['column', 'row']}
 						justify={'flex-end'}

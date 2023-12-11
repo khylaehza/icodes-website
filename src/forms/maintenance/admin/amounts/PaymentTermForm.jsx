@@ -115,7 +115,7 @@ const PaymentTermForm = ({ form }) => {
 							type={'number'}
 						/>
 
-						{showType == 'Ready for Occupancy (RFO)' && (
+						{/* {showType == 'Ready for Occupancy (RFO)' && (
 							<>
 								<CusNumInputLeftAdd
 									name='dpPercent'
@@ -163,7 +163,7 @@ const PaymentTermForm = ({ form }) => {
 									touch={form.touched.moveInFees}
 								/>
 							</>
-						)}
+						)} */}
 					</Stack>
 					<Stack
 						direction={['column', 'row']}

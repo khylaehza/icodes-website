@@ -7,16 +7,16 @@ const questions = [
 	// space
 	{
 		questionText: 'What is this unit for?',
-		file: 'https://i.imgur.com/krzxKh4.gif',
+		file: './gifs/dss/mortgage.gif',
 		answerOptions: [
-			{ answerText: 'Own Property', category: 'larger' },
+			{ answerText: 'Personal Use', category: 'larger' },
 			{ answerText: 'Investment', category: 'smaller' },
 		],
 	},
 
 	{
-		questionText: 'Do you want a big Space in your unit?',
-		file: 'https://i.imgur.com/RgP6hhS.gif',
+		questionText: 'Are you more interested in having more living space?',
+		file: './gifs/dss/responsive.gif',
 		answerOptions: [
 			{ answerText: 'Yes', category: 'larger' },
 			{ answerText: 'No', category: 'smaller' },
@@ -25,7 +25,7 @@ const questions = [
 
 	{
 		questionText: 'Are you a minimalist or maximalist person?',
-		file: 'https://i.imgur.com/PYw7DeR.gif',
+		file: './gifs/dss/space.gif',
 		answerOptions: [
 			{ answerText: 'Minimalist', category: 'smaller' },
 			{ answerText: 'Maximalist', category: 'larger' },
@@ -33,8 +33,9 @@ const questions = [
 	},
 
 	{
-		questionText: 'Do you have a lot of personal things? ',
-		file: 'https://i.imgur.com/rWQ5n8j.gif',
+		questionText:
+			'Do you have a significant amount of furniture or possessions that would require a larger living space?',
+		file: './gifs/dss/storage.gif',
 		answerOptions: [
 			{ answerText: 'Yes', category: 'larger' },
 			{ answerText: 'No', category: 'smaller' },
@@ -44,7 +45,7 @@ const questions = [
 	{
 		questionText:
 			'Do you prefer a modern or traditional interior design style?',
-		file: 'https://i.imgur.com/gTwhxL4.gif',
+		file: './gifs/dss/modern-house.gif',
 		answerOptions: [
 			{ answerText: 'Modern', category: 'smaller' },
 			{ answerText: 'Traditional', category: 'larger' },
@@ -52,8 +53,8 @@ const questions = [
 	},
 
 	{
-		questionText: 'Do you want your unit also a work place',
-		file: 'https://i.imgur.com/NFG4pcC.gif',
+		questionText: 'Would you also use your unit as a work place?',
+		file: './gifs/dss/presentation.gif',
 		answerOptions: [
 			{ answerText: 'Yes', category: 'larger' },
 			{ answerText: 'No', category: 'smaller' },
@@ -63,7 +64,7 @@ const questions = [
 	{
 		questionText:
 			'Is having a smaller utility and maintenance cost a priority for you?',
-		file: 'https://i.imgur.com/XECVfs1.gif',
+		file: './gifs/dss/cost.gif',
 		answerOptions: [
 			{ answerText: 'Yes', category: 'smaller' },
 			{ answerText: "I don't mind", category: 'larger' },
@@ -71,17 +72,45 @@ const questions = [
 	},
 
 	{
-		questionText: 'Do you have pet included',
-		file: 'https://i.imgur.com/z3Br1WN.gif',
+		questionText: 'Do you tend to host parties in your house?',
+		file: './gifs/dss/party.gif',
 		answerOptions: [
 			{ answerText: 'Yes', category: 'larger' },
 			{ answerText: 'No', category: 'smaller' },
 		],
 	},
+
+	{
+		questionText: 'Do you have a pet?',
+		file: './gifs/dss/pawprint.gif',
+		answerOptions: [
+			{ answerText: 'Yes', category: 'larger' },
+			{ answerText: 'No', category: 'smaller' },
+		],
+	},
+
+	{
+		questionText: 'Are you an adventurous and outgoing person?',
+		file: './gifs/dss/backpack.gif',
+		answerOptions: [
+			{ answerText: 'Yes', category: 'smaller' },
+			{ answerText: 'No', category: 'larger' },
+		],
+	},
+
+	{
+		questionText:
+			'Are you prepared for the responsibilities of cleaning and maintaining a larger space?',
+		file: './gifs/dss/housekeeping.gif',
+		answerOptions: [
+			{ answerText: 'Yes', category: 'smaller' },
+			{ answerText: 'No', category: 'larger' },
+		],
+	},
 	//level
 	{
-		questionText: 'Do you want to have a City view in your unit?',
-		file: 'https://i.imgur.com/oLlxYpM.gif',
+		questionText: 'Do you want to see the view of city from your unit?',
+		file: './gifs/dss/skyline.gif',
 		answerOptions: [
 			{ answerText: 'Yes', category: 'higher' },
 			{ answerText: 'No', category: 'lower' },
@@ -90,9 +119,8 @@ const questions = [
 	},
 
 	{
-		questionText:
-			'Do you want a balcony or other outdoor area in your unit?',
-		file: 'https://i.imgur.com/eL3cfwQ.gif',
+		questionText: 'Do you prefer living in quiet floors?',
+		file: './gifs/dss/silence.gif',
 		answerOptions: [
 			{ answerText: 'Yes', category: 'higher' },
 			{ answerText: 'No', category: 'lower' },
@@ -101,9 +129,8 @@ const questions = [
 	},
 
 	{
-		questionText:
-			'Do you want to have a Palm trees and Pools view in your unit?',
-		file: 'https://i.imgur.com/4BdFYoF.gif',
+		questionText: 'Do you have fear in heights?',
+		file: './gifs/dss/scared.gif',
 		answerOptions: [
 			{ answerText: 'Yes', category: 'lower' },
 			{ answerText: 'No', category: 'higher' },
@@ -112,8 +139,9 @@ const questions = [
 	},
 
 	{
-		questionText: 'Do you want your unit is close to parking floor',
-		file: 'https://i.imgur.com/TfCCFfl.gif',
+		questionText:
+			'Are you more inclined in living near the parking floors?',
+		file: './gifs/dss/parking.gif',
 		answerOptions: [
 			{ answerText: 'Yes', category: 'lower' },
 			{ answerText: 'No', category: 'higher' },
@@ -121,8 +149,8 @@ const questions = [
 		],
 	},
 	{
-		questionText: 'Do you want to have easy access on lobby?',
-		file: 'https://i.imgur.com/UgSyqtL.gif',
+		questionText: 'Are you comfortable of using stairs?',
+		file: './gifs/dss/stairs.gif',
 		answerOptions: [
 			{ answerText: 'Yes', category: 'lower' },
 			{ answerText: 'No', category: 'higher' },
@@ -132,7 +160,7 @@ const questions = [
 	{
 		questionText:
 			'Do you have a senior citizen or a person with a disabilities in your family?',
-		file: 'https://i.imgur.com/WKdfKi4.gif',
+		file: './gifs/dss/wheelchair.gif',
 		answerOptions: [
 			{ answerText: 'Yes', category: 'lower' },
 			{ answerText: 'No', category: 'higher' },
@@ -148,11 +176,11 @@ const questions = [
 				<CusSliderCheckbox form={form} />
 			</>
 		),
-		file: 'https://i.imgur.com/njtHf0q.gif',
+		file: './gifs/dss/selfie.gif',
 	},
 
 	{
-		questionText: 'Family Size',
+		questionText: 'What is your family size?',
 		component: (form) => (
 			<>
 				<CusNumSpinner
@@ -165,11 +193,11 @@ const questions = [
 				/>
 			</>
 		),
-		file: 'https://i.imgur.com/m6sGdjY.gif',
+		file: './gifs/dss/inclusion.gif',
 	},
 
 	{
-		questionText: 'Price',
+		questionText: 'What is your budget range for purchasing a condo unit?',
 		component: (form) => (
 			<>
 				<VStack
@@ -237,7 +265,7 @@ const questions = [
 				</VStack>
 			</>
 		),
-		file: 'https://i.imgur.com/TSPoGjS.gif',
+		file: './gifs/dss/real-estate.gif',
 	},
 ];
 

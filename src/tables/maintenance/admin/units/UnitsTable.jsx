@@ -41,7 +41,13 @@ const UnitsTable = ({ data, searchList, all }) => {
 						<CusTitle component={'Type'} />
 						<CusTD component={data.typeName} />
 						<CusTitle component={'Size'} />
-						<CusTD component={`${data.typeSize} sq. meters`} />
+						<CusTD
+							component={`${
+								data.typeSize == '------'
+									? '------'
+									: `${data.typeSize} sq. meters`
+							} `}
+						/>
 						<CusTitle component={'Status'} />
 						<CusTD component={data.status} />
 					</React.Fragment>

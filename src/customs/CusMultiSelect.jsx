@@ -246,7 +246,7 @@ export const CusMultiSelectTower = ({
 	touch,
 	label,
 	onBlur,
-	name,
+	isRequired,
 }) => {
 	const { towers } = useData();
 
@@ -267,6 +267,7 @@ export const CusMultiSelectTower = ({
 		<FormControl
 			isInvalid={error && touch}
 			fontSize={'xs'}
+			isRequired={isRequired}
 		>
 			<FormLabel fontSize={'xs'}>{label}</FormLabel>
 
