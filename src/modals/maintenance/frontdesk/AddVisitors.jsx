@@ -42,7 +42,7 @@ const AddVisitors = () => {
 			status: Yup.mixed().required('Status is required.'),
 		}),
 		onSubmit: async (value, actions) => {
-			console.log(value.dateStart);
+			
 			try {
 				acqUnit.push(value.units);
 

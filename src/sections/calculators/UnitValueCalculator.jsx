@@ -16,7 +16,7 @@ const UnitValueCalculator = () => {
 	});
 
 	const { unitValues } = useData();
-	console.log(unitValues);
+
 	const form = useFormik({
 		initialValues: {
 			tower: '',

@@ -34,7 +34,7 @@ const LoanPaymentCalculator = () => {
 		currency: 'PHP',
 	});
 
-	console.log(formattedResult);
+
 
 	const form = useFormik({
 		initialValues: {

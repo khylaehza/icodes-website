@@ -181,7 +181,7 @@ const FindUnit = ({ pref, res, setUnitPref, setUserPref }) => {
 		unitData.filter((data) => {
 			if (data.Units && bestUnit[0]['units'][num]) {
 				if (data.Units.includes(bestUnit[0]['units'][num]['name'])) {
-					console.log(data);
+				
 					unitDataList = {
 						'Unit Type': data.TypeName,
 						'Unit Size': `${data.UnitSize} sq. meters`,

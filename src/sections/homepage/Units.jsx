@@ -62,7 +62,6 @@ export default function Units() {
 			}
 		});
 
-		console.log(cards);
 		if (cards.length > 0) {
 			return (
 				<Flex

@@ -145,6 +145,7 @@ const Item = () => {
 											data={records}
 											search={search}
 											all={amounts}
+											allowActions={false}
 										/>
 									}
 								/>
@@ -208,7 +209,12 @@ const Item = () => {
 							{discounts.length > 0 ? (
 								<CusTable
 									header={discountHeader}
-									children={<DiscountTable all={discounts} />}
+									children={
+										<DiscountTable
+											all={discounts}
+											allowActions={false}
+										/>
+									}
 								/>
 							) : (
 								<Flex
@@ -241,7 +247,12 @@ const Item = () => {
 							{payterm.length > 0 ? (
 								<CusTable
 									header={payTermHeader}
-									children={<PayTermTable all={payterm} />}
+									children={
+										<PayTermTable
+											all={payterm}
+											allowActions={false}
+										/>
+									}
 								/>
 							) : (
 								<Flex

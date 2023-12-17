@@ -167,9 +167,7 @@ const Item = () => {
 									gap={2}
 								>
 									<Image
-										src={
-											'./../../../../public/gifs/maintenance/document.gif'
-										}
+										src={'https://i.imgur.com/KOOp170.gif'}
 										size={'xl'}
 										objectFit={'contain'}
 									/>

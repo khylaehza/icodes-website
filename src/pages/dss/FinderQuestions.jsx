@@ -51,7 +51,6 @@ const FinderQuestions = () => {
 
 	let setAnswerVal = [];
 
-	console.log(currentCard, questionLength, currentCard < questionLength - 3);
 	return (
 		<Fade
 			initialScale={0.9}

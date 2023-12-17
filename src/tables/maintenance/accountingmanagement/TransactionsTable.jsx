@@ -59,7 +59,6 @@ const TransactionsTable = ({ data, search, all, soa }) => {
 					});
 
 					soa.map((data, id) => {
-						console.log(data.id);
 						const collectionRef = doc(
 							db,
 							'maintenance',

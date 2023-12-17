@@ -236,7 +236,7 @@ const AddUnitSet = () => {
 											`${TowerIdentifier(tower)}`
 										);
 
-										console.log('dsds', actualImg);
+									
 										let type = {};
 										// let actual = {};
 										// let layout = {};
@@ -260,11 +260,7 @@ const AddUnitSet = () => {
 											`Units.${x.floor}.${x.no}.status`
 										] = 'Pending Amount';
 
-										console.log(
-											parseFloat(form.values.unitSize),
-											aveUnitSize
-										);
-
+									
 										if (
 											parseFloat(form.values.unitSize) <=
 											aveUnitSize

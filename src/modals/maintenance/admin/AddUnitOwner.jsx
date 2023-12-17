@@ -41,6 +41,7 @@ const AddUnitOwner = () => {
 		}
 	});
 
+	
 	let u = [];
 	const length = Object.keys(units).length;
 
@@ -101,6 +102,7 @@ const AddUnitOwner = () => {
 		return id;
 	}
 
+
 	const [showImage, setShowImage] = useState('');
 	const reqForm = useFormik({
 		initialValues: {
@@ -145,7 +147,6 @@ const AddUnitOwner = () => {
 			id2: Yup.mixed().required('Valid ID is required.'),
 		}),
 		onSubmit: (values, actions) => {
-			console.log('filteredUnit');
 			handleNext();
 		},
 	});
@@ -154,7 +155,7 @@ const AddUnitOwner = () => {
 
 	const ownerInfoForm = useFormik({
 		initialValues: {
-			unit: filteredUnit[0] ? filteredUnit[0].name : '',
+			units: filteredUnit[0] ? filteredUnit[0].name : '',
 			email: filteredOwner[0] ? filteredOwner[0].Email.slice(0, -4) : '',
 			cNum: filteredOwner[0] ? filteredOwner[0].CNum.substring(2) : '  ',
 		},
@@ -169,7 +170,7 @@ const AddUnitOwner = () => {
 					/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])$/,
 					'Invalid Email.'
 				),
-			unit: Yup.string().required('Unit is required.'),
+			units: Yup.string().required('Unit is required.'),
 		}),
 		onSubmit: (values, actions) => {
 			actions.resetForm();
@@ -268,7 +269,7 @@ const AddUnitOwner = () => {
 					Id2: downloadURLs[6],
 					CNum: ownerInfoForm.values.cNum,
 					Status: true,
-					Units: ownerInfoForm.values.unit,
+					Units: ownerInfoForm.values.units,
 				}
 			);
 
@@ -342,7 +343,7 @@ const AddUnitOwner = () => {
 				isClosable: true,
 			});
 		} catch (e) {
-			console.log(e);
+		
 			toast({
 				title: 'Error adding new unit owner',
 				status: 'error',

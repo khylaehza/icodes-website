@@ -71,7 +71,7 @@ const ViewOwnersTable = ({
 				: item.UID.toString().toLowerCase().includes(search);
 		})
 		.map((data, id) => {
-			console.log(data.Status);
+		
 			const statusConfirmation = (value, data) => {
 				onStatusModalOpen();
 				setUnitOwnerState({
@@ -122,7 +122,7 @@ const ViewOwnersTable = ({
 				}
 			};
 			if (data.CreatedDate) {
-				console.log(data.Status);
+			
 
 				const firstName = data.FName.charAt(0).toUpperCase() + data.FName.slice(1);
 				const middleName = data.MName.charAt(0).toUpperCase();
@@ -133,7 +133,7 @@ const ViewOwnersTable = ({
 						: `${firstName} ${middleName}. ${lastName}`;
 			
 		
-				console.log(fullName);
+			
 				return (
 					<React.Fragment key={id}>
 						<Tr

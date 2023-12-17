@@ -51,7 +51,7 @@ const Form = () => {
 		onSubmit: (values, action) => {
 			const email = values.email;
 			const emailExists = emailRef.includes(email);
-			console.log(emailExists);
+			
 
 			if (emailExists) {
 				const emp = employees.filter(

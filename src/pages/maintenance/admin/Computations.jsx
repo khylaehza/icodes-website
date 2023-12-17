@@ -58,6 +58,7 @@ const Item = () => {
 		'Created At',
 		'Payment Term ID',
 		'Name',
+		'Type',
 		'Reservation Fee',
 		'Monthly %',
 		'No. of Months',

@@ -29,7 +29,8 @@ const Hero = ({ unitData }) => {
 			<Image
 				objectFit={'cover'}
 				w={'100vw'}
-				src={'/imgs/bg/homepage-bg.png'}
+				// src={'/imgs/bg/homepage-bg.png'}
+				src={'https://i.imgur.com/aVqeVj3.png'}
 				position={'absolute'}
 				top={'-0px'}
 				h={'100vh'}

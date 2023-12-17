@@ -74,7 +74,8 @@ const Blur = (props) => {
 			objectFit={'cover'}
 			w={'100vw'}
 			h={'100vh'}
-			src={'/imgs/bg/login-bg.jpg'}
+			// src={'/imgs/bg/login-bg.jpg'}
+			src={'https://i.imgur.com/1FZbaqg.jpg'}
 			{...props}
 		></Image>
 	);

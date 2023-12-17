@@ -75,7 +75,6 @@ const UnitOwnersTable = ({
 				: item.UID.toString().toLowerCase().includes(search);
 		})
 		.map((data, id) => {
-			console.log(data.Status);
 			const statusConfirmation = (value, data) => {
 				onStatusModalOpen();
 				setUnitOwnerState({
@@ -126,8 +125,6 @@ const UnitOwnersTable = ({
 				}
 			};
 			if (data.CreatedDate) {
-				console.log(data.Status);
-
 				const firstName =
 					data.FName.charAt(0).toUpperCase() + data.FName.slice(1);
 				const middleName = data.MName.charAt(0).toUpperCase();
@@ -138,7 +135,6 @@ const UnitOwnersTable = ({
 						? `${firstName} ${middleName} ${lastName}`
 						: `${firstName} ${middleName}. ${lastName}`;
 
-				console.log(fullName);
 				return (
 					<React.Fragment key={id}>
 						<Tr
@@ -275,7 +271,9 @@ const UnitOwnersTable = ({
 												isOpen={isStatusModalOpen}
 												onClose={onStatusModalClose}
 												header={'Status Confirmation'}
-												action={handleConfirmStatusChange}
+												action={
+													handleConfirmStatusChange
+												}
 												actionLabel={'Confirm'}
 												body={
 													<Text fontSize='md'>
@@ -289,13 +287,17 @@ const UnitOwnersTable = ({
 																	: 'green'
 															}
 														>
-															{unitOwnerState.statusLabel}
+															{
+																unitOwnerState.statusLabel
+															}
 														</Text>{' '}
 														<Text
 															as='b'
 															color='b.300'
 														>
-															{unitOwnerState.fName}
+															{
+																unitOwnerState.fName
+															}
 														</Text>
 														's account?
 													</Text>

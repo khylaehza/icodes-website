@@ -167,7 +167,7 @@ const ContactForm = () => {
 			contact: '',
 		},
 		onSubmit: (value, action) => {
-			console.log(value);
+		
 			try {
 				addDoc(
 					collection(
