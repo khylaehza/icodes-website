@@ -35,3 +35,4 @@ export { default as EditVisitors } from './maintenance/frontdesk/EditVisitors';
 export { default as AddBookings } from './maintenance/frontdesk/AddBookings';
 export { default as EditBookings } from './maintenance/frontdesk/EditBookings';
 export { default as EditTransactions } from './maintenance/accountingmanagement/EditTransactions';
+export { default as ViewArchivedBuyers } from './maintenance/salesmanagement/ViewArchivedBuyers';

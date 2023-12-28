@@ -2,7 +2,6 @@ import { CusModal } from '../../../customs';
 import { Flex, useDisclosure, useToast } from '@chakra-ui/react';
 import { ManningSchedForm } from '../../../forms';
 import { IdGenerator } from '../../../utilities';
-import { useState } from 'react';
 
 import { useFormik } from 'formik';
 import * as Yup from 'yup';

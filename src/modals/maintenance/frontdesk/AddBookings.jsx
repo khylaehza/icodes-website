@@ -22,7 +22,8 @@ const AddBookings = () => {
 			amenityType: '',
 			date: '',
 			numPerson: '',
-			status: 'Confirmed',
+			status: 'Approved',
+			reason: '',
 		},
 		validationSchema: Yup.object({
 			tower: Yup.string().required('Tower is required.'),
@@ -44,6 +45,7 @@ const AddBookings = () => {
 						Date: value.date,
 						NumPerson: value.numPerson,
 						Status: value.status,
+						Reason: value.reason,
 					}
 				);
 

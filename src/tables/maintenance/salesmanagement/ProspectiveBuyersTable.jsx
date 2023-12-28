@@ -1,9 +1,10 @@
-import { CusTitle, CusTD } from '../../../customs';
+import { CusTitle, CusTD, CusArchive } from '../../../customs';
 import { NameFormat, DateChecker } from '../../../utilities';
 import { Image, Tr, Td, ButtonGroup, Text } from '@chakra-ui/react';
 import React from 'react';
 import moment from 'moment';
 import { EditProspectiveBuyer } from '../../../modals';
+
 const ProspectiveBuyersTable = ({ data, search, all }) => {
 	const ret = search ? all : data;
 
@@ -95,6 +96,15 @@ const ProspectiveBuyersTable = ({ data, search, all }) => {
 												tblUserCol='tbl_prosBuyers'
 											/>
 										)}
+
+										<CusArchive
+											data={data}
+											id={data.id}
+											buyer={`${data.FName} ${data.LName}`}
+											mainCollection='maintenance'
+											tblDocUser='salesmanagement'
+											tblUserCol='tbl_prosBuyers'
+										/>
 									</ButtonGroup>
 								}
 							/>

@@ -23,3 +23,4 @@ export { default as TransactionsTable } from './maintenance/accountingmanagement
 export { default as VisitorTable } from './maintenance/frontdesk/VisitorsTable';
 export { default as BookingsTable } from './maintenance/frontdesk/BookingsTable';
 export { default as ViewOwnersTable } from './maintenance/frontdesk/ViewOwnersTable';
+export { default as ArchivedProsTable } from './maintenance/salesmanagement/ArchivedProsTable';

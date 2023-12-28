@@ -9,6 +9,7 @@ import {
 	CusPagination,
 } from '../../../customs';
 import { useData } from '../../../../DataContext';
+import { ViewArchivedBuyers } from '../../../modals';
 import moment from 'moment';
 const ProspectiveBuyers = () => {
 	return (
@@ -133,6 +134,7 @@ const Item = () => {
 									setFilterOnChange={setFilterOnChange}
 									setSortType={setSortType}
 								/>
+								<ViewArchivedBuyers />
 							</Flex>
 						</Flex>
 

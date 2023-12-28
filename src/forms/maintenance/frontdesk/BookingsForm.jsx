@@ -101,6 +101,22 @@ const BookingsForm = ({ form }) => {
 							error={form.errors.status}
 							touch={form.touched.status}
 						/>
+
+						{form.values.status == 'Declined' && (
+							<CusInputRegular
+								isRequired
+								label={'Reason for Declining'}
+								type={'reason'}
+								name='reason'
+								id='reason'
+								onChange={form.handleChange}
+								value={form.values.reason}
+								error={form.errors.reason}
+								onBlur={form.handleBlur}
+								touch={form.touched.reason}
+								placeholder={'E.g. Full Capacity'}
+							/>
+						)}
 					</Stack>
 					<Stack
 						direction={['column', 'row']}

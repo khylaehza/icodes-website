@@ -179,7 +179,6 @@ const EmployeesForm = ({ form, setEmpPos, imgValue }) => {
 							name='empId'
 							label={'Employee ID'}
 							id={'empId'}
-							type={'number'}
 							placeholder={'XXXXXX'}
 							isRequired
 							value={form.values.empId}

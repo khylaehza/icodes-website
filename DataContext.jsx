@@ -616,6 +616,28 @@ export function DataProvider({ children }) {
 		});
 		return () => unsubscribe();
 	}, []);
+
+	const [archivedBuyers, setArchivedBuyers] = useState([{}]);
+	useEffect(() => {
+		setLoading(true);
+		const q = query(
+			collection(db, 'maintenance', 'salesmanagement', 'tbl_archivedPros')
+		);
+		const unsubscribe = onSnapshot(q, (querySnapshot) => {
+			const archived = [];
+			querySnapshot.forEach(
+				(doc) => {
+					archived.push({ ...doc.data(), id: doc.id });
+				},
+				(error) => {
+					console.log(error);
+				}
+			);
+			setLoading(false);
+			setArchivedBuyers(archived);
+		});
+		return () => unsubscribe();
+	}, []);
 	const value = {
 		logout,
 		login,
@@ -646,6 +668,7 @@ export function DataProvider({ children }) {
 		visitors,
 		bookings,
 		loading,
+		archivedBuyers,
 	};
 
 	return (

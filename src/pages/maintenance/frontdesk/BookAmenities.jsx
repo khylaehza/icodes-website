@@ -81,6 +81,11 @@ const Item = () => {
 		const [filterOnChange, setFilterOnChange] = useState(false);
 		const filterAmenity = [];
 		const [fil, setFilter] = useState(amenities[0].AmenityName);
+		amenities.filter((data) => {
+			if (fil == data.AmenityName) {
+				filterAmenity.push(data);
+			}
+		});
 
 		const list = filterOnChange ? filterAmenity : amenities;
 		const item = list[0];
@@ -92,12 +97,6 @@ const Item = () => {
 		const pages = [...Array(numPage + 1).keys()].slice(1);
 
 		if (bookings && item) {
-			amenities.filter((data) => {
-				if (fil == data.AmenityName) {
-					filterAmenity.push(data);
-				}
-			});
-
 			bookings.sort((a, b) => {
 				if (a.CreatedDate && b.CreatedDate) {
 					return (

@@ -18,6 +18,7 @@ const EditBookings = ({ data, id, mainCollection, tblDocUser, tblUserCol }) => {
 	const toast = useToast();
 	const { curUser } = useData();
 
+	console.log(data);
 	const editForm = useFormik({
 		initialValues: {
 			tower: data.TNum,
@@ -26,8 +27,9 @@ const EditBookings = ({ data, id, mainCollection, tblDocUser, tblUserCol }) => {
 			date: data.Date,
 			numPerson: data.NumPerson,
 			status: data.Status,
+			reason: data.Reason ? data.Reason : '',
 		},
-
+		enableReinitialize: true,
 		onSubmit: async (value, actions) => {
 			const docRef = doc(db, mainCollection, tblDocUser, tblUserCol, id);
 			try {
@@ -39,6 +41,7 @@ const EditBookings = ({ data, id, mainCollection, tblDocUser, tblUserCol }) => {
 					Date: value.date,
 					NumPerson: value.numPerson,
 					Status: value.status,
+					Reason: value.reason,
 				});
 
 				if (curUser) {

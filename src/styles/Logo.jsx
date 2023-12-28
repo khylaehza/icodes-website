@@ -5,7 +5,8 @@ function Logo({ w = '50px' }) {
 	return (
 		<Box w={w}>
 			<img
-				src={logo}
+				// src={logo}
+				src={'https://i.imgur.com/eY5C6Ei.png'}
 				alt='logo'
 			></img>
 		</Box>

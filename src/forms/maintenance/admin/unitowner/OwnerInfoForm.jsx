@@ -8,7 +8,6 @@ import {
 	CusInputRegular,
 } from '../../../../customs';
 const OwnerInfoForm = ({ form }) => {
-	console.log(form.values);
 	return (
 		<Stack w={'100%'}>
 			<form id='formDiv'>

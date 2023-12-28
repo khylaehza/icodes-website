@@ -14,7 +14,7 @@ import {
 	addDoc,
 } from 'firebase/firestore';
 import { useNavigate } from 'react-router-dom';
-import { InterestedForm } from './index'
+import { InterestedForm } from './index';
 const AddInterested = ({ unit }) => {
 	const { isOpen, onOpen, onClose } = useDisclosure();
 	const pbID = IdGenerator(6);
@@ -28,7 +28,7 @@ const AddInterested = ({ unit }) => {
 			mName: '',
 			cNum: '',
 			email: '',
-            inquiry: ''
+			inquiry: '',
 		},
 		validationSchema: Yup.object({
 			lName: Yup.string().required('Last Name is required.'),
@@ -49,18 +49,25 @@ const AddInterested = ({ unit }) => {
 			const mName = value.mName;
 			const fName = value.fName;
 			const cNum = value.cNum;
-            const inquiry = value.inquiry
+			const inquiry = value.inquiry;
 			const docRef = addDoc(
-				collection(db, 'maintenance', 'salesmanagement', 'tbl_prosBuyers'),
+				collection(
+					db,
+					'maintenance',
+					'salesmanagement',
+					'tbl_prosBuyers'
+				),
 				{
-                    CreatedDate: serverTimestamp(),
-					BuyersID : pbID,
+					CreatedDate: serverTimestamp(),
+					BuyersID: pbID,
 					LName: lName,
 					MName: mName,
 					FName: fName,
 					CNum: cNum,
 					Email: email,
 					Inquiry: inquiry,
+					Type: 'From Online',
+					Agent: 'N/A',
 				}
 			);
 

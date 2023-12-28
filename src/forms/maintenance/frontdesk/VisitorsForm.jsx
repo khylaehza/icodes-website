@@ -1,15 +1,14 @@
 import React from 'react';
 import { Stack, Button } from '@chakra-ui/react';
 import {
-    CusBookingStatus,
-    CusSelectOccupiedUnit,
+	CusVisitorStatus,
+	CusSelectOccupiedUnit,
 	CusInputRegular,
-    CusTextArea,
+	CusTextArea,
 } from '../../../customs';
 
-const VisitorForm = ({ form, units,setUnits, visitors, setVisitors }) => {
-
-    return (
+const VisitorForm = ({ form, units, setUnits, visitors, setVisitors }) => {
+	return (
 		<Stack w={'100%'}>
 			<form id='formDiv'>
 				<Stack>
@@ -31,29 +30,28 @@ const VisitorForm = ({ form, units,setUnits, visitors, setVisitors }) => {
 							touch={form.touched.units}
 						/>
 					</Stack>
-						<CusTextArea
-							label={"Visitor/s (Press ';' to add new line)"}
-							name='visitors'
-							id='visitors'
-							placeholder={"Enter Visitor/s name"}
-							onChange={(e)=>{
-								const value = e.target.value;
-								const modified = value.replace(/;/g, ',\n')
-								const vArray = modified.split(',');
-								form.setFieldValue('visitors', vArray);
-								setVisitors(vArray)
-							}}
-							onBlur={form.handleBlur}
-							value={visitors.join(',') || form.values.visitors}
-							error={form.errors.visitors}
-							touch={form.touched.visitors}
-						/>
+					<CusTextArea
+						label={"Visitor/s (Press ';' to add new line)"}
+						name='visitors'
+						id='visitors'
+						placeholder={'Enter Visitor/s name'}
+						onChange={(e) => {
+							const value = e.target.value;
+							const modified = value.replace(/;/g, ',\n');
+							const vArray = modified.split(',');
+							form.setFieldValue('visitors', vArray);
+							setVisitors(vArray);
+						}}
+						onBlur={form.handleBlur}
+						value={visitors.join(',') || form.values.visitors}
+						error={form.errors.visitors}
+						touch={form.touched.visitors}
+					/>
 					<Stack
 						direction={['column', 'row']}
 						spacing={6}
 						mb={3}
 					>
-
 						<CusInputRegular
 							label={'Date Start'}
 							name='dateStart'
@@ -94,7 +92,7 @@ const VisitorForm = ({ form, units,setUnits, visitors, setVisitors }) => {
 							error={form.errors.purpose}
 							touch={form.touched.purpose}
 						/>
-						<CusBookingStatus
+						<CusVisitorStatus
 							label={'Status'}
 							name='status'
 							id='status'
@@ -120,6 +118,6 @@ const VisitorForm = ({ form, units,setUnits, visitors, setVisitors }) => {
 			</form>
 		</Stack>
 	);
-}
+};
 
-export default VisitorForm
+export default VisitorForm;

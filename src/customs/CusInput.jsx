@@ -105,7 +105,6 @@ export const CusInputLeftAdd = ({
 	onBlur,
 	touch,
 	add,
-
 	isRequired,
 	maxLength,
 	disabled = false,

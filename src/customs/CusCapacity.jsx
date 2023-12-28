@@ -23,21 +23,26 @@ import {
 	Flex,
 	Divider,
 } from '@chakra-ui/react';
+import moment from 'moment';
 import { useData } from '../../DataContext';
 
 function CusCapacity({ date, stats }) {
 	const { amenities, bookings } = useData();
 	const [selectedAmenity, setSelectedAmenity] = useState(null);
 
+	let capacity = [];
 	const cap = amenities.map((ame) => {
 		if (stats == ame.AmenityName) {
-			return Number(ame.Capacity);
+			capacity.push(Number(ame.Capacity));
 		}
 	});
 
 	const filteredBookings = bookings.filter((booking) => {
 		if (stats == booking.AmenityType && booking.Status == 'Confirmed') {
-			return booking.Date === date;
+			return (
+				moment(booking.Date).format('MM/DD/YYYY') ===
+				moment(date).format('MM/DD/YYYY')
+			);
 		}
 	});
 
@@ -50,9 +55,7 @@ function CusCapacity({ date, stats }) {
 		0
 	);
 
-	console.log(filteredBookings, totalBookings);
-
-	const percentage = (totalBookings / cap[0]) * 100;
+	const percentage = (totalBookings / capacity[0]) * 100;
 	let bgColor = 'green';
 	if (percentage >= 75) {
 		bgColor = 'red';
@@ -70,7 +73,7 @@ function CusCapacity({ date, stats }) {
 				<Box textAlign='center'>
 					{/* <Text as='b'>{amenity.AmenityName}</Text> */}
 					<Text>
-						Total bookings: {totalBookings} / {cap[0]}
+						Total bookings: {totalBookings} / {capacity[0]}
 					</Text>
 				</Box>
 				<Box>

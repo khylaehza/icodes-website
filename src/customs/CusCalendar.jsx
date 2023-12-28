@@ -14,9 +14,6 @@ const CusCalendar = ({ stats }) => {
 	// });
 
 	const bookedDates = bookings.map((booking) => {
-		console.log(
-			stats == booking.AmenityType && booking.Status == 'Confirmed'
-		);
 		if (stats == booking.AmenityType && booking.Status == 'Confirmed') {
 			return new Date(booking.Date);
 		} else {
